@@ -1,1 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Creative365</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&family=Oswald:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    /* Universal Box-sizing and Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      background-color: #f7f7f7;
+      color: #222;
+      line-height: 1.6;
+      font-size: 1.15rem;
+      text-align: center;
+      /* Removed scroll-behavior: smooth as there's no anchor to scroll to */
+    }
 
+    /* Header Styles */
+    header {
+      background-color: #000;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+    .logo img {
+      height: 30px;
+    }
+
+    /* Desktop Navigation */
+    nav.desktop-nav {
+      display: block;
+    }
+    nav.desktop-nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 2rem;
+      font-family: 'Roboto', sans-serif;
+      text-transform: uppercase;
+    }
+
+    /* Hamburger Menu (Hidden by default on desktop) */
+    .hamburger-menu {
+      display: none;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 20;
+    }
+    .hamburger-menu .bar {
+      height: 3px;
+      background-color: #fff;
+      width: 100%;
+    }
+
+    /* Mobile Navigation (Hidden by default, shown with JS) */
+    nav.mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #000;
+      z-index: 15;
+      text-align: right;
+    }
+    nav.mobile-nav.open {
+      display: block;
+    }
+    nav.mobile-nav a {
+      color: #fff;
+      display: block;
+      padding: 1rem;
+      text-transform: uppercase;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Hero Section Styles */
+    .hero {
+      max-width: 800px;
+      margin: 3rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      animation: slideUp 0.8s ease forwards;
+    }
+
+    /* --- Styles for the Scrolling Text Hero Section --- */
+    .scroll-wrapper {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      color: #000;
+      user-select: none;
+      text-align: center;
+    }
+
+    /* Desktop Hero Text Lines */
+    .desktop-line1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      display: block;
+    }
+    .desktop-line2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 2.5rem;
+      line-height: 1.2;
+      white-space: nowrap;
+      margin-top: 0.5rem;
+    }
+    .desktop-line2 span:first-child {
+      flex-shrink: 0;
+    }
+
+    .scroll-container {
+      position: relative;
+      overflow: hidden;
+      height: 48px;
+      width: 290px;
+      min-width: 290px;
+      flex-shrink: 0;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .scroll-text {
+      position: absolute;
+      animation: scrollUp 10s linear infinite;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      line-height: 48px;
+      color: #000;
+      width: 100%;
+    }
+    .scroll-text div {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      white-space: nowrap;
+    }
+    @keyframes scrollUp {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+    /* Hide mobile specific elements by default on desktop */
+    .mobile-line1, .mobile-line2, .mobile-scroll {
+      display: none;
+    }
+    /* --- End Styles for the Scrolling Text Hero Section --- */
+
+    /* Hero Paragraph Styling */
+    .hero p {
+      font-size: 1.3rem; /* All hero paragraphs will be this size */
+      color: #333;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Hero Button Styles */
+    .hero-button {
+      background-color: #78C976;
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      font-size: 1.3rem; /* Consistent with hero paragraphs */
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      animation: slideInLeft 1s ease forwards;
+      display: inline-block; /* Essential for padding/sizing on anchor tags */
+      text-decoration: none; /* Remove underline if it were an anchor */
+    }
+    .hero-button:hover {
+      background-color: #5fae60;
+    }
+
+    /* Panel and CTA Section Styles */
+    .panel, .cta {
+      max-width: 800px;
+      margin: 3rem auto;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      text-align: center;
+      animation: slideUp 0.8s ease forwards;
+    }
+
+    /* H2 styles for Panel and CTA */
+    .panel h2, .cta h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.5rem;
+      color: #000;
+      margin-bottom: 1rem;
+      animation: slideInLeft 1s ease forwards;
+    }
+
+    /* Paragraph and List Item styles */
+    .panel p, .cta p, .cta ul li {
+      font-size: 1.3rem;
+      color: #000;
+      animation: slideInLeft 1s ease forwards;
+    }
+
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li::before {
+      content: '✔️ ';
+      margin-right: 5px;
+    }
+
+    /* Keyframe Animations */
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Removed .booking-section specific styles as it's not present */
+
+    /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
+    @media (max-width: 767px) {
+      .hero,
+      .panel,
+      .cta {
+        width: 90%;
+        margin: 2rem auto;
+        padding: 1.5rem;
+      }
+
+      .desktop-line1, .desktop-line2 {
+        display: none;
+      }
+
+      .mobile-line1, .mobile-line2, .mobile-scroll {
+        display: block;
+        font-family: 'Oswald', sans-serif;
+        font-weight: 700;
+        color: #000;
+        text-align: center;
+        user-select: none;
+      }
+      .mobile-line1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 0.25rem;
+      }
+      .mobile-line2 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+      }
+
+      .mobile-scroll {
+        position: relative;
+        overflow: hidden;
+        height: 48px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .scroll-container {
+        display: none;
+      }
+
+      .mobile-scroll .scroll-text {
+        width: 100%;
+        text-align: center;
+        font-size: 2.2rem;
+        animation: scrollUpMobile 10s linear infinite;
+      }
+
+      .mobile-scroll .scroll-text div {
+        justify-content: center;
+        height: 48px;
+      }
+
+      @keyframes scrollUpMobile {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-50%); }
+      }
+
+      .hamburger-menu {
+        display: flex;
+      }
+      nav.desktop-nav {
+        display: none;
+      }
+
+      .hero h1, .panel h2, .cta h2 {
+        font-size: 2.2rem;
+      }
+      .hero .subtext, .panel p, .cta p, .cta ul li {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#" class="logo">
+      <img src="https://github.com/mmp03patane/creative/blob/main/Creative%20logo.JPG?raw=true" alt="Creative365 Logo" />
+    </a>
+    <div class="hamburger-menu" onclick="toggleMobileMenu()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav class="desktop-nav">
+      <a href="#">Contact</a>
+    </nav>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="scroll-wrapper desktop-hero">
+      <span class="desktop-line1">LET'S GROW YOUR BUSINESS</span>
+      <div class="desktop-line2">
+        <span>WITH</span>
+        <div class="scroll-container">
+          <div class="scroll-text">
+            <div>INSTAGRAM ADS</div>
+            <div>FACEBOOK ADS</div>
+            <div>GOOGLE ADS</div>
+            <div>A NEW WEBSITE</div>
+            <div>FACEBOOK ADS</div>
+            <div>INSTAGRAM ADS</div>
+            <div>GOOGLE ADS</div>
+            <div>A NEW WEBSITE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-wrapper mobile-hero">
+      <span class="mobile-line1">LET'S GROW YOUR</span>
+      <span class="mobile-line2">BUSINESS WITH</span>
+      <div class="mobile-scroll">
+        <div class="scroll-text">
+          <div>INSTAGRAM ADS</div>
+          <div>FACEBOOK ADS</div>
+          <div>GOOGLE ADS</div>
+          <div>A NEW WEBSITE</div>
+          <div>FACEBOOK ADS</div>
+          <div>INSTAGRAM ADS</div>
+          <div>GOOGLE ADS</div>
+          <div>A NEW WEBSITE</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-style: italic;">🚀 Are you looking for more leads? More repeat customers?
+Then let’s build a system that keeps the phone ringing and the cashflow steady.</p>
+
+    <p><strong>Book a FREE 30-minute chat</strong></p>
+
+    <p>👇 Pick a time that suits!</p>
+
+    <button class="hero-button">Let's Chat</button>
+
+  </section>
+
+  <section class="panel">
+    <img src="https://github.com/mmp03patane/creative/blob/main/PROFILE%20PHOTO%203.PNG?raw=true" alt="Your Photo" class="profile-photo" />
+
+    <p>Hey everyone, <br><br>
+
+I'm <b>Michael Patane</b>, and I run <b>Creative365:</b>
+
+      <i>A business consultancy that helps residential service businesses grow.</i><br><br>
+
+I’ve worked with some of the biggest companies in Australia:<br><br>
+
+At <b>GLG</b>, I clocked up <b>hundreds of consulting hours</b> helping service based businesses with anything from franchising advice to lead generation. Electricians, plumbers, gardeners, painters, and general trades.
+      <br>
+      I've seen it all...
+<br><br>
+At <b>Jim’s Group</b>, I helped streamline onboarding operations for franchisees.
+      <br>
+      I hosted a monthly lecture teaching mowing franchisees how to use technology to <b>quote</b>, <b>schedule</b> and <b>invoice</b> clients.
+<br><br>
+At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive adoption through education. I focused on <b>internal efficiencies</b> to <b>elevate customer success experiences</b>.</p>
+
+  </section>
+
+  <section class="cta">
+    <h2>WHAT YOU GET</h2>
+
+    <p>How we work together is <b>completely up to you</b>. <br><br>
+      My engagement can be purely advisory: <i>I offer you the advice and the steps you need to take, but implementation will be your responsibility</i>. <br><br>
+      Alternatively, you can retain me on a <b>"done-for-you"</b> basis where I build the strategy and execute the work for you, <i>freeing you up to focus on running your business</i>.<br><br>
+      <u>Areas of expertise</u>:<br><br>
+      <b>MARKETING</b><br>
+      Website building, Lead generation, Email marketing, Google ads, Facebook ads, Instagram ads, Linkedin Ads, Youtube Ads, Sales training, Sales process improvement, Conversion optimization, Competitor analysis.<br><br>
+      <b>OPERATIONS</b><br>
+      Internal processes optimization, business coaching, mindset coaching, time and cost saving strategies.<br><br>
+      <b>RETENTION</b><br>
+      Customer success, Retention strategies, Repeat customer and loyalty strategies, Advocacy planning.
+
+    </p>
+  </section>
+
+  <script>
+    function toggleMobileMenu() {
+      document.getElementById("mobileNav").classList.toggle("open");
+    }
+  </script>
+</body>
+</html>
