@@ -19,7 +19,7 @@
       line-height: 1.6;
       font-size: 1.15rem;
       text-align: center;
-      scroll-behavior: smooth; /* Kept this for future use if an anchor is added */
+      scroll-behavior: smooth;
     }
 
     /* Header Styles */
@@ -168,7 +168,7 @@
 
     /* Hero Paragraph Styling */
     .hero p {
-      font-size: 1.3rem; /* All hero paragraphs will be this size */
+      font-size: 1.3rem;
       color: #333;
       margin-top: 1.5rem;
       margin-bottom: 1.5rem;
@@ -180,15 +180,15 @@
       color: #fff;
       border: none;
       padding: 0.9rem 2rem;
-      font-size: 1.3rem; /* Consistent with hero paragraphs */
+      font-size: 1.3rem;
       font-family: 'Oswald', sans-serif;
       text-transform: uppercase;
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s ease;
       animation: slideInLeft 1s ease forwards;
-      display: inline-block; /* Essential for padding/sizing on anchor tags */
-      text-decoration: none; /* Remove underline if it were an anchor */
+      display: inline-block;
+      text-decoration: none;
     }
     .hero-button:hover {
       background-color: #5fae60;
@@ -206,16 +206,18 @@
       animation: slideUp 0.8s ease forwards;
     }
 
-    /* H2 styles for Panel and CTA */
-    .panel h2, .cta h2 {
+    /* Heading for sections outside panels */
+    .section-heading {
       font-family: 'Oswald', sans-serif;
       font-size: 2.5rem;
       color: #000;
+      margin-top: 3rem; /* Space above the heading */
       margin-bottom: 1rem;
+      text-align: center;
       animation: slideInLeft 1s ease forwards;
     }
 
-    /* Paragraph and List Item styles */
+    /* Paragraph and List Item styles (within panels) */
     .panel p, .cta p, .cta ul li {
       font-size: 1.3rem;
       color: #000;
@@ -251,33 +253,27 @@
       to { transform: translateX(0); opacity: 1; }
     }
 
-    /* NEW: Google Calendar Section Styles */
+    /* Google Calendar Section Styles */
     .google-calendar-section {
-      background-color: #fff; /* White background */
+      background-color: #fff;
       padding: 3rem 1rem;
       margin-top: 3rem;
       text-align: center;
-      box-shadow: 0px 10px 20px rgba(0,0,0,0.1); /* Matching shadow */
-      border-radius: 12px; /* Matching border-radius */
-      max-width: 800px; /* Max width like other sections */
+      box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      max-width: 800px;
       margin-left: auto;
       margin-right: auto;
-      animation: slideUp 0.8s ease forwards; /* Apply animation */
+      animation: slideUp 0.8s ease forwards;
     }
-    .google-calendar-section h2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 2.5rem;
-      color: #000;
-      margin-bottom: 2rem;
-      animation: slideInLeft 1s ease forwards; /* Apply animation */
-    }
+    /* Removed h2 specific styling from .google-calendar-section as it's now outside */
     .google-calendar-section iframe {
       max-width: 100%;
       width: 100%;
-      height: 600px; /* Set a default height, can be responsive */
+      height: 600px;
       border: 0;
-      border-radius: 8px; /* Slightly smaller border-radius for the iframe itself */
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Lighter shadow for the iframe */
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
@@ -285,10 +281,15 @@
       .hero,
       .panel,
       .cta,
-      .google-calendar-section { /* Include calendar section for mobile adjustments */
+      .google-calendar-section {
         width: 90%;
         margin: 2rem auto;
         padding: 1.5rem;
+      }
+
+      .section-heading {
+        font-size: 2.2rem; /* Adjust heading size for mobile */
+        margin-top: 2rem;
       }
 
       .desktop-line1, .desktop-line2 {
@@ -358,11 +359,8 @@
       }
 
       /* Mobile adjustments for calendar section */
-      .google-calendar-section h2 {
-        font-size: 2rem; /* Smaller heading on mobile */
-      }
       .google-calendar-section iframe {
-        height: 400px; /* Adjust iframe height for better mobile viewing */
+        height: 400px;
       }
     }
   </style>
@@ -454,9 +452,8 @@ At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive
 
   </section>
 
+  <h2 class="section-heading">WHAT YOU GET</h2>
   <section class="cta">
-    <h2>WHAT YOU GET</h2>
-
     <p>How we work together is <b>completely up to you</b>. <br><br>
       My engagement can be purely advisory: <i>I offer you the advice and the steps you need to take, but implementation will be your responsibility</i>. <br><br>
       Alternatively, you can retain me on a <b>"done-for-you"</b> basis where I build the strategy and execute the work for you, <i>freeing you up to focus on running your business</i>.<br><br>
@@ -471,8 +468,8 @@ At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive
     </p>
   </section>
 
+  <h2 class="section-heading">BOOK YOUR CHAT</h2>
   <section class="google-calendar-section" id="google-calendar-section">
-    <h2>Book Your Free 30-Minute Chat Below!</h2>
     <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3AgJLV95DsanjqZg-EruNwyU4GBaNJPOcxtvDgDUeLV8qOmTaQIuKAh5WT2BRZtIVv0iWXd59u?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
   </section>
 
