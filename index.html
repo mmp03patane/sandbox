@@ -222,8 +222,6 @@
       animation: slideInLeft 1s ease forwards;
     }
 
-    /* li::before styling remains removed */
-
     .profile-photo {
       width: 140px;
       height: 140px;
@@ -238,52 +236,61 @@
       padding: 0;
     }
 
-    ---
-
-    /* NEW: Google Calendar Section Styles */
+    /* Google Calendar Section Styles */
     .google-calendar-section {
       background-color: #fff; /* Changed to White */
       padding: 3rem 1rem;
       margin-top: 3rem;
       text-align: center;
-      box-shadow: 0px 10px 20px rgba(0,0,0,0.1); /* Added box-shadow to match other sections */
-      border-radius: 12px; /* Added border-radius to match other sections */
-      max-width: 800px; /* Constrain width of the section */
-      margin-left: auto; /* Center the section */
-      margin-right: auto; /* Center the section */
+      box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .google-calendar-section h2 {
       font-family: 'Oswald', sans-serif;
       font-size: 2.5rem;
-      color: #000; /* Changed heading color to black for contrast on white background */
+      color: #000;
       margin-bottom: 2rem;
     }
     .google-calendar-section iframe {
-      max-width: 100%; /* Constrain width of the calendar to fit its parent section */
-      width: 100%; /* Make it responsive within max-width */
-      border-radius: 8px; /* Slightly smaller border-radius for the iframe itself */
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Lighter shadow for the iframe on white background */
+      max-width: 100%;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     ---
 
     /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
     @media (max-width: 767px) {
-      .hero,
+      /* Apply width, margin, and padding to general section classes */
       .panel,
       .cta,
-      .google-calendar-section { /* Apply mobile styles to calendar section too */
+      .google-calendar-section {
         width: 90%;
         margin: 2rem auto;
         padding: 1.5rem;
       }
+      /* Specifically target the hero section for its own mobile adjustments */
+      .hero {
+        width: 90%;
+        margin: 2rem auto;
+        padding: 1.5rem;
+        /* Ensure the mobile hero content displays as intended */
+        display: block; /* Make sure it's a block element */
+      }
 
+
+      /* Hide desktop hero content on mobile */
       .desktop-line1, .desktop-line2 {
         display: none;
       }
 
+      /* Show mobile hero content on mobile */
       .mobile-line1, .mobile-line2, .mobile-scroll {
-        display: block;
+        display: block; /* Ensure these are block elements for separate lines */
         font-family: 'Oswald', sans-serif;
         font-weight: 700;
         color: #000;
@@ -293,12 +300,12 @@
       .mobile-line1 {
         font-size: 2.2rem;
         line-height: 1.2;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.25rem; /* Space after "LET'S GROW YOUR" */
       }
       .mobile-line2 {
         font-size: 2.2rem;
         line-height: 1.2;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.5rem; /* Space after "BUSINESS WITH" */
       }
 
       .mobile-scroll {
@@ -306,10 +313,11 @@
         overflow: hidden;
         height: 48px;
         width: 100%;
-        margin: 0 auto;
+        margin: 0 auto; /* Center the scrolling container */
+        min-width: unset; /* Remove desktop min-width */
       }
 
-      .scroll-container {
+      .scroll-container { /* Hide desktop scrolling container on mobile */
         display: none;
       }
 
