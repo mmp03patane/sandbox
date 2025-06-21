@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Creative365</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&family=Oswald:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <style>
     /* Universal Box-sizing and Base Styles */
     * {
@@ -174,25 +175,7 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Hero Button Styles */
-    .hero-button {
-      background-color: #78C976;
-      color: #fff;
-      border: none;
-      padding: 0.9rem 2rem;
-      font-size: 1.3rem; /* Consistent with hero paragraphs */
-      font-family: 'Oswald', sans-serif;
-      text-transform: uppercase;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      animation: slideInLeft 1s ease forwards;
-      display: inline-block; /* Essential for padding/sizing on anchor tags */
-      text-decoration: none; /* Remove underline if it were an anchor */
-    }
-    .hero-button:hover {
-      background-color: #5fae60;
-    }
+    /* Removed .hero-button styles as it's being replaced */
 
     /* Panel and CTA Section Styles */
     .panel, .cta {
@@ -251,10 +234,50 @@
       to { transform: translateX(0); opacity: 1; }
     }
 
-    /* Removed .booking-section specific styles as it's not present */
+    /* NEW: Styles for the Calendly clickable "input" */
+    .hero-calendly-input-container {
+        margin-top: 1.5rem; /* Space above the element */
+        text-align: center; /* Ensures the inline-block 'a' tag is centered */
+        max-width: 400px; /* Limit the width, similar to postcode input */
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-    /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
+    .hero-calendly-trigger {
+      background-color: #fff; /* White background for the input look */
+      color: #333; /* Darker text */
+      border: 1px solid #ccc; /* Subtle border */
+      padding: 1rem 2rem; /* Generous padding for a good clickable area */
+      font-size: 1.3rem; /* Good size for readability */
+      font-family: 'Oswald', sans-serif; /* Keep Oswald for strong CTA */
+      text-transform: uppercase;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease; /* Smooth transitions for hover */
+      display: inline-block; /* Essential to apply padding and width */
+      width: 100%; /* Make it take full width of its container */
+      text-decoration: none; /* Remove underline from link */
+      box-sizing: border-box; /* Include padding and border in the element's total width/height */
+      line-height: 1.2; /* Adjust line height if needed for vertical centering of text */
+    }
+
+    .hero-calendly-trigger:hover {
+      background-color: #f0f0f0; /* Light gray on hover */
+      border-color: #999; /* Darker border on hover */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Slightly larger shadow */
+    }
+
+    /* Media query for mobile adjustments */
     @media (max-width: 767px) {
+      .hero-calendly-input-container {
+        max-width: 90%; /* Allow container to be narrower on small screens */
+      }
+      .hero-calendly-trigger {
+        font-size: 1.15rem; /* Slightly smaller font for mobile */
+        padding: 0.8rem 1.5rem; /* Smaller padding for mobile */
+      }
+
+      /* Existing mobile styles */
       .hero,
       .panel,
       .cta {
@@ -393,7 +416,11 @@ Then let’s build a system that keeps the phone ringing and the cashflow steady
 
     <p>👇 Pick a time that suits!</p>
 
-    <button class="hero-button">Let's Chat</button>
+    <div class="hero-calendly-input-container">
+        <a class="hero-calendly-trigger" href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/michael-creative365/30min'}); return false;">
+            Select Your Free Call Time
+        </a>
+    </div>
 
   </section>
 
@@ -442,5 +469,6 @@ At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive
       document.getElementById("mobileNav").classList.toggle("open");
     }
   </script>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
