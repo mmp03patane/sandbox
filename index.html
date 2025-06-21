@@ -238,7 +238,7 @@
 
     /* Google Calendar Section Styles */
     .google-calendar-section {
-      background-color: #fff; /* Changed to White */
+      background-color: #fff;
       padding: 3rem 1rem;
       margin-top: 3rem;
       text-align: center;
@@ -265,7 +265,8 @@
 
     /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
     @media (max-width: 767px) {
-      /* Apply width, margin, and padding to general section classes */
+      /* Adjust general section padding/width for mobile */
+      .hero,
       .panel,
       .cta,
       .google-calendar-section {
@@ -273,46 +274,41 @@
         margin: 2rem auto;
         padding: 1.5rem;
       }
-      /* Specifically target the hero section for its own mobile adjustments */
-      .hero {
-        width: 90%;
-        margin: 2rem auto;
-        padding: 1.5rem;
-        /* Ensure the mobile hero content displays as intended */
-        display: block; /* Make sure it's a block element */
-      }
-
 
       /* Hide desktop hero content on mobile */
       .desktop-line1, .desktop-line2 {
         display: none;
       }
 
-      /* Show mobile hero content on mobile */
-      .mobile-line1, .mobile-line2, .mobile-scroll {
-        display: block; /* Ensure these are block elements for separate lines */
+      /* Show mobile hero content on mobile and ensure correct line breaks */
+      .mobile-hero {
+        display: flex; /* Use flexbox for vertical stacking */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center horizontally */
+        text-align: center; /* Ensure text inside is centered */
+      }
+      .mobile-line1, .mobile-line2 {
+        display: block; /* Ensure they take their own line */
         font-family: 'Oswald', sans-serif;
         font-weight: 700;
         color: #000;
-        text-align: center;
-        user-select: none;
-      }
-      .mobile-line1 {
         font-size: 2.2rem;
         line-height: 1.2;
+        white-space: nowrap; /* Prevent breaking in the middle of a line */
+      }
+      .mobile-line1 {
         margin-bottom: 0.25rem; /* Space after "LET'S GROW YOUR" */
       }
       .mobile-line2 {
-        font-size: 2.2rem;
-        line-height: 1.2;
         margin-bottom: 0.5rem; /* Space after "BUSINESS WITH" */
       }
 
       .mobile-scroll {
         position: relative;
         overflow: hidden;
-        height: 48px;
-        width: 100%;
+        height: 48px; /* Fixed height for scrolling area */
+        width: 100%; /* Take full width of parent */
+        max-width: 290px; /* Constrain width if needed, matching desktop scroll-container */
         margin: 0 auto; /* Center the scrolling container */
         min-width: unset; /* Remove desktop min-width */
       }
@@ -322,15 +318,25 @@
       }
 
       .mobile-scroll .scroll-text {
-        width: 100%;
-        text-align: center;
-        font-size: 2.2rem;
+        position: absolute; /* Needed for animation */
         animation: scrollUpMobile 10s linear infinite;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Oswald', sans-serif;
+        font-weight: 700;
+        font-size: 2.2rem; /* Adjusted font size for mobile */
+        line-height: 48px;
+        color: #000;
+        width: 100%;
+        text-align: center; /* Center text within each scrolling div */
       }
 
       .mobile-scroll .scroll-text div {
-        justify-content: center;
         height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center content within each scrolling div */
+        white-space: nowrap; /* Prevent text wrapping within a scrolling item */
       }
 
       @keyframes scrollUpMobile {
