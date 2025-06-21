@@ -90,7 +90,7 @@
     .hero {
       max-width: 800px;
       margin: 3rem auto;
-      background: white;
+      background: #333; /* Changed to dark grey */
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -101,7 +101,7 @@
     .scroll-wrapper {
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
-      color: #000;
+      color: #fff; /* Changed to white */
       user-select: none;
       text-align: center;
     }
@@ -145,7 +145,7 @@
       font-weight: 700;
       font-size: 2.5rem;
       line-height: 48px;
-      color: #000;
+      color: #fff; /* Changed to white */
       width: 100%;
     }
     .scroll-text div {
@@ -169,13 +169,13 @@
     /* Hero Paragraph Styling */
     .hero p {
       font-size: 1.3rem;
-      color: #333;
+      color: #fff; /* Changed to white */
       margin-top: 1.5rem;
       margin-bottom: 1.5rem;
     }
 
-    /* Hero Button Styles */
-    .hero-button {
+    /* Hero Button Styles & General Action Button */
+    .hero-button, .action-button {
       background-color: #78C976;
       color: #fff;
       border: none;
@@ -189,13 +189,14 @@
       animation: slideInLeft 1s ease forwards;
       display: inline-block;
       text-decoration: none;
+      margin-top: 1.5rem;
     }
-    .hero-button:hover {
+    .hero-button:hover, .action-button:hover {
       background-color: #5fae60;
     }
 
     /* Panel and CTA Section Styles */
-    .panel, .cta {
+    .panel, .cta-panel {
       max-width: 800px;
       margin: 3rem auto;
       background: #fff;
@@ -206,19 +207,40 @@
       animation: slideUp 0.8s ease forwards;
     }
 
-    /* Heading for sections outside panels */
+    /* Headings for sections outside panels */
     .section-heading {
       font-family: 'Oswald', sans-serif;
       font-size: 2.5rem;
       color: #000;
-      margin-top: 3rem; /* Space above the heading */
+      margin-top: 3rem;
       margin-bottom: 1rem;
       text-align: center;
       animation: slideInLeft 1s ease forwards;
     }
 
+    /* Dark Heading Section */
+    .dark-heading-section {
+      background-color: #333; /* Dark grey background */
+      color: #fff; /* White text */
+      padding: 1.5rem 1rem;
+      margin-top: 3rem;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      animation: slideUp 0.8s ease forwards;
+    }
+    .dark-heading-section h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.5rem;
+      color: #fff; /* White text for heading */
+      margin: 0;
+    }
+
     /* Paragraph and List Item styles (within panels) */
-    .panel p, .cta p, .cta ul li {
+    .panel p, .cta-panel p, .cta-panel ul li {
       font-size: 1.3rem;
       color: #000;
       animation: slideInLeft 1s ease forwards;
@@ -236,11 +258,20 @@
     ul {
       list-style: none;
       padding: 0;
+      text-align: left;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      animation: slideInLeft 1s ease forwards;
     }
 
     li::before {
       content: '✔️ ';
       margin-right: 5px;
+      color: #78C976;
     }
 
     /* Keyframe Animations */
@@ -266,7 +297,6 @@
       margin-right: auto;
       animation: slideUp 0.8s ease forwards;
     }
-    /* Removed h2 specific styling from .google-calendar-section as it's now outside */
     .google-calendar-section iframe {
       max-width: 100%;
       width: 100%;
@@ -280,27 +310,24 @@
     @media (max-width: 767px) {
       .hero,
       .panel,
-      .cta,
-      .google-calendar-section {
+      .cta-panel,
+      .google-calendar-section,
+      .dark-heading-section {
         width: 90%;
         margin: 2rem auto;
         padding: 1.5rem;
       }
 
-      .section-heading {
-        font-size: 2.2rem; /* Adjust heading size for mobile */
+      .section-heading, .dark-heading-section h2 {
+        font-size: 2.2rem;
         margin-top: 2rem;
-      }
-
-      .desktop-line1, .desktop-line2 {
-        display: none;
       }
 
       .mobile-line1, .mobile-line2, .mobile-scroll {
         display: block;
         font-family: 'Oswald', sans-serif;
         font-weight: 700;
-        color: #000;
+        color: #fff; /* Changed to white for mobile hero */
         text-align: center;
         user-select: none;
       }
@@ -332,6 +359,7 @@
         text-align: center;
         font-size: 2.2rem;
         animation: scrollUpMobile 10s linear infinite;
+        color: #fff; /* Changed to white for mobile hero scrolling text */
       }
 
       .mobile-scroll .scroll-text div {
@@ -351,10 +379,10 @@
         display: none;
       }
 
-      .hero h1, .panel h2, .cta h2 {
+      .hero h1, .panel h2, .cta-panel h2 {
         font-size: 2.2rem;
       }
-      .hero .subtext, .panel p, .cta p, .cta ul li {
+      .hero .subtext, .panel p, .cta-panel p, .cta-panel ul li {
         font-size: 1.3rem;
       }
 
@@ -448,27 +476,60 @@ At <b>Jim’s Group</b>, I helped streamline onboarding operations for franchise
       <br>
       I hosted a monthly lecture teaching mowing franchisees how to use technology to <b>quote</b>, <b>schedule</b> and <b>invoice</b> clients.
 <br><br>
-At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive adoption through education. I focused on <b>internal efficiencies</b> to <b>elevate customer success experiences</b>.</p>
+At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive adoption through education. I focused on <b>internal efficiencies</b> to <b>elevate customer success experiences</b>.
+    
+    <br><br>
+    And now, with <b>Creative365,</b> I focus on solving the two biggest issues that all businesses face: <b>Inconsistent cashflow</b> <i>and</i> <b>Unpredictable customers</b></p>
 
   </section>
 
-  <h2 class="section-heading">WHAT YOU GET</h2>
-  <section class="cta">
-    <p>How we work together is <b>completely up to you</b>. <br><br>
-      My engagement can be purely advisory: <i>I offer you the advice and the steps you need to take, but implementation will be your responsibility</i>. <br><br>
-      Alternatively, you can retain me on a <b>"done-for-you"</b> basis where I build the strategy and execute the work for you, <i>freeing you up to focus on running your business</i>.<br><br>
-      <u>Areas of expertise</u>:<br><br>
-      <b>MARKETING</b><br>
-      Website building, Lead generation, Email marketing, Google ads, Facebook ads, Instagram ads, Linkedin Ads, Youtube Ads, Sales training, Sales process improvement, Conversion optimization, Competitor analysis.<br><br>
-      <b>OPERATIONS</b><br>
-      Internal processes optimization, business coaching, mindset coaching, time and cost saving strategies.<br><br>
-      <b>RETENTION</b><br>
-      Customer success, Retention strategies, Repeat customer and loyalty strategies, Advocacy planning.
+  <h2 class="section-heading">SERVICES</h2>
+  <p>I have the following areas of expertise:</p>
 
-    </p>
+  <section class="cta-panel">
+    <h2>MARKETING</h2>
+    <ul>
+      <li>Website building</li>
+      <li>Lead generation</li>
+      <li>Email marketing</li>
+      <li>Google ads</li>
+      <li>Facebook ads</li>
+      <li>Instagram ads</li>
+      <li>Linkedin Ads</li>
+      <li>Youtube Ads</li>
+      <li>Sales training</li>
+      <li>Sales process improvement</li>
+      <li>Conversion optimization</li>
+      <li>Competitor analysis</li>
+    </ul>
+    <a href="#google-calendar-section" class="action-button">Let's Chat</a>
   </section>
 
-  <h2 class="section-heading">BOOK YOUR CHAT</h2>
+  <section class="cta-panel">
+    <h2>OPERATIONS</h2>
+    <ul>
+      <li>Internal processes optimization</li>
+      <li>Business coaching</li>
+      <li>Mindset coaching</li>
+      <li>Time and cost saving strategies</li>
+    </ul>
+    <a href="#google-calendar-section" class="action-button">Let's Chat</a>
+  </section>
+
+  <section class="cta-panel">
+    <h2>RETENTION</h2>
+    <ul>
+      <li>Customer success</li>
+      <li>Retention strategies</li>
+      <li>Repeat customer and loyalty strategies</li>
+      <li>Advocacy planning</li>
+    </ul>
+    <a href="#google-calendar-section" class="action-button">Let's Chat</a>
+  </section>
+
+  <div class="dark-heading-section">
+    <h2>BOOK YOUR CHAT</h2>
+  </div>
   <section class="google-calendar-section" id="google-calendar-section">
     <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3AgJLV95DsanjqZg-EruNwyU4GBaNJPOcxtvDgDUeLV8qOmTaQIuKAh5WT2BRZtIVv0iWXd59u?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
   </section>
