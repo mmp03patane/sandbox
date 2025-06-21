@@ -6,8 +6,8 @@
   <title>Creative365</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&family=Oswald:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet" />
   <style>
-   
-     {
+    /* Universal Box-sizing and Base Styles */
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -22,7 +22,7 @@
       scroll-behavior: smooth; /* Added back for smooth scrolling to anchor */
     }
 
-  
+    /* Header Styles */
     header {
       background-color: #000;
       color: #fff;
@@ -36,7 +36,7 @@
       height: 30px;
     }
 
-    
+    /* Desktop Navigation */
     nav.desktop-nav {
       display: block;
     }
@@ -48,7 +48,7 @@
       text-transform: uppercase;
     }
 
-    
+    /* Hamburger Menu (Hidden by default on desktop) */
     .hamburger-menu {
       display: none;
       width: 30px;
@@ -64,7 +64,7 @@
       width: 100%;
     }
 
-   
+    /* Mobile Navigation (Hidden by default, shown with JS) */
     nav.mobile-nav {
       display: none;
       position: absolute;
@@ -269,6 +269,7 @@
       width: 100%; /* Make it responsive within max-width */
       border-radius: 12px; /* Match other sections' border-radius */
       box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Add shadow for depth */
+      /* Note: You cannot directly change the internal color of the Google Calendar embed */
     }
 
     /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
@@ -417,7 +418,7 @@ Then let’s build a system that keeps the phone ringing and the cashflow steady
 
     <p><strong>Book a FREE 30-minute chat</strong></p>
 
-    <a href="#google-calendar-section" class="hero-button">Lock in a time</a>
+    <a href="#google-calendar-section" class="hero-button">👇 Pick a time</a>
 
   </section>
 
