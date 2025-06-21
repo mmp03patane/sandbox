@@ -90,7 +90,7 @@
     .hero {
       max-width: 800px;
       margin: 3rem auto;
-      background: #333; /* Changed to dark grey */
+      background: white; /* Reverted to white */
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -101,7 +101,7 @@
     .scroll-wrapper {
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
-      color: #fff; /* Changed to white */
+      color: #000; /* Reverted to black */
       user-select: none;
       text-align: center;
     }
@@ -145,7 +145,7 @@
       font-weight: 700;
       font-size: 2.5rem;
       line-height: 48px;
-      color: #fff; /* Changed to white */
+      color: #000; /* Reverted to black */
       width: 100%;
     }
     .scroll-text div {
@@ -161,15 +161,18 @@
     }
 
     /* Hide mobile specific elements by default on desktop */
-    .mobile-line1, .mobile-line2, .mobile-scroll {
-      display: none;
+    .mobile-hero {
+        display: none; /* Hide mobile hero on desktop */
+    }
+    .desktop-hero {
+        display: block; /* Show desktop hero on desktop */
     }
     /* --- End Styles for the Scrolling Text Hero Section --- */
 
     /* Hero Paragraph Styling */
     .hero p {
       font-size: 1.3rem;
-      color: #fff; /* Changed to white */
+      color: #333; /* Reverted to dark grey for readability on white background */
       margin-top: 1.5rem;
       margin-bottom: 1.5rem;
     }
@@ -240,7 +243,7 @@
     }
 
     /* Paragraph and List Item styles (within panels) */
-    .panel p, .cta-panel p, .cta-panel ul li {
+    .panel p, .cta-panel p { /* Removed .cta-panel ul li */
       font-size: 1.3rem;
       color: #000;
       animation: slideInLeft 1s ease forwards;
@@ -255,6 +258,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
+    /* Removed UL and LI specific styling as lists are no longer intended in CTA panel */
     ul {
       list-style: none;
       padding: 0;
@@ -267,6 +271,7 @@
       margin-bottom: 0.5rem;
       animation: slideInLeft 1s ease forwards;
     }
+    /* Removed li::before entirely */
 
     /* Keyframe Animations */
     @keyframes slideUp {
@@ -282,7 +287,7 @@
     .google-calendar-section {
       background-color: #fff;
       padding: 3rem 1rem;
-      margin-top: 3rem;
+      margin-top: 3rem; /* Adjusted margin to provide space below dark heading */
       text-align: center;
       box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
       border-radius: 12px;
@@ -317,11 +322,19 @@
         margin-top: 2rem;
       }
 
+      /* Mobile Hero Section Specifics */
+      .desktop-hero {
+          display: none; /* Hide desktop hero on mobile */
+      }
+      .mobile-hero {
+          display: block; /* Show mobile hero on mobile */
+      }
+
       .mobile-line1, .mobile-line2, .mobile-scroll {
         display: block;
         font-family: 'Oswald', sans-serif;
         font-weight: 700;
-        color: #fff; /* Changed to white for mobile hero */
+        color: #000; /* Reverted to black for readability on white mobile hero */
         text-align: center;
         user-select: none;
       }
@@ -344,16 +357,12 @@
         margin: 0 auto;
       }
 
-      .scroll-container {
-        display: none;
-      }
-
       .mobile-scroll .scroll-text {
         width: 100%;
         text-align: center;
         font-size: 2.2rem;
         animation: scrollUpMobile 10s linear infinite;
-        color: #fff; /* Changed to white for mobile hero scrolling text */
+        color: #000; /* Reverted to black for mobile hero scrolling text */
       }
 
       .mobile-scroll .scroll-text div {
@@ -376,7 +385,7 @@
       .hero h1, .panel h2, .cta-panel h2 {
         font-size: 2.2rem;
       }
-      .hero .subtext, .panel p, .cta-panel p, .cta-panel ul li {
+      .hero .subtext, .panel p, .cta-panel p { /* Removed .cta-panel ul li */
         font-size: 1.3rem;
       }
 
@@ -471,54 +480,24 @@ At <b>Jim’s Group</b>, I helped streamline onboarding operations for franchise
       I hosted a monthly lecture teaching mowing franchisees how to use technology to <b>quote</b>, <b>schedule</b> and <b>invoice</b> clients.
 <br><br>
 At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive adoption through education. I focused on <b>internal efficiencies</b> to <b>elevate customer success experiences</b>.
-    
-    <br><br>
-    And now, with <b>Creative365,</b> I focus on solving the two biggest issues that all businesses face: <b>Inconsistent cashflow</b> <i>and</i> <b>Unpredictable customers</b></p>
+      <br><br>
+      And now, with <b>Creative365,</b> I focus on solving the two biggest issues that all businesses face: <b>Inconsistent cashflow</b> <i>and</i> <b>Unpredictable customers</b></p>
 
   </section>
 
   <h2 class="section-heading">SERVICES</h2>
-  <p>I have the following areas of expertise:</p>
-
   <section class="cta-panel">
-    <h2>MARKETING</h2>
-    <ul>
-      <li>Website building</li>
-      <li>Lead generation</li>
-      <li>Email marketing</li>
-      <li>Google ads</li>
-      <li>Facebook ads</li>
-      <li>Instagram ads</li>
-      <li>Linkedin Ads</li>
-      <li>Youtube Ads</li>
-      <li>Sales training</li>
-      <li>Sales process improvement</li>
-      <li>Conversion optimization</li>
-      <li>Competitor analysis</li>
-    </ul>
-    <a href="#google-calendar-section" class="action-button">Let's Chat</a>
-  </section>
-
-  <section class="cta-panel">
-    <h2>OPERATIONS</h2>
-    <ul>
-      <li>Internal processes optimization</li>
-      <li>Business coaching</li>
-      <li>Mindset coaching</li>
-      <li>Time and cost saving strategies</li>
-    </ul>
-    <a href="#google-calendar-section" class="action-button">Let's Chat</a>
-  </section>
-
-  <section class="cta-panel">
-    <h2>RETENTION</h2>
-    <ul>
-      <li>Customer success</li>
-      <li>Retention strategies</li>
-      <li>Repeat customer and loyalty strategies</li>
-      <li>Advocacy planning</li>
-    </ul>
-    <a href="#google-calendar-section" class="action-button">Let's Chat</a>
+    <p>How we work together is <b>completely up to you</b>.<br><br>
+      My engagement can be purely advisory: <i>I offer you the advice and the steps you need to take, but implementation will be your responsibility</i>.<br><br>
+      Alternatively, you can retain me on a <b>"done-for-you"</b> basis where I build the strategy and execute the work for you, <i>freeing you up to focus on running your business</i>.<br><br>
+      <u>Areas of expertise</u>:<br><br>
+      <b>MARKETING</b><br>
+      Website building, Lead generation, Email marketing, Google ads, Facebook ads, Instagram ads, Linkedin Ads, Youtube Ads, Sales training, Sales process improvement, Conversion optimization, Competitor analysis.<br><br>
+      <b>OPERATIONS</b><br>
+      Internal processes optimization, business coaching, mindset coaching, time and cost saving strategies.<br><br>
+      <b>RETENTION</b><br>
+      Customer success, Retention strategies, Repeat customer and loyalty strategies, Advocacy planning.
+    </p>
   </section>
 
   <div class="dark-heading-section">
