@@ -19,7 +19,7 @@
       line-height: 1.6;
       font-size: 1.15rem;
       text-align: center;
-      scroll-behavior: smooth; /* Added back for smooth scrolling to anchor */
+      scroll-behavior: smooth;
     }
 
     /* Header Styles */
@@ -168,7 +168,7 @@
 
     /* Hero Paragraph Styling */
     .hero p {
-      font-size: 1.3rem; /* All hero paragraphs will be this size */
+      font-size: 1.3rem;
       color: #333;
       margin-top: 1.5rem;
       margin-bottom: 1.5rem;
@@ -180,15 +180,15 @@
       color: #fff;
       border: none;
       padding: 0.9rem 2rem;
-      font-size: 1.3rem; /* Consistent with hero paragraphs */
+      font-size: 1.3rem;
       font-family: 'Oswald', sans-serif;
       text-transform: uppercase;
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s ease;
       animation: slideInLeft 1s ease forwards;
-      display: inline-block; /* Essential for padding/sizing on anchor tags */
-      text-decoration: none; /* Remove underline for link */
+      display: inline-block;
+      text-decoration: none;
     }
     .hero-button:hover {
       background-color: #5fae60;
@@ -222,6 +222,8 @@
       animation: slideInLeft 1s ease forwards;
     }
 
+    /* li::before styling remains removed */
+
     .profile-photo {
       width: 140px;
       height: 140px;
@@ -236,47 +238,41 @@
       padding: 0;
     }
 
-    li::before {
-      content: '✔️ ';
-      margin-right: 5px;
-    }
-
-    /* Keyframe Animations */
-    @keyframes slideUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes slideInLeft {
-      from { transform: translateX(-50px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
+    ---
 
     /* NEW: Google Calendar Section Styles */
     .google-calendar-section {
-      background-color: #333; /* Dark grey background */
+      background-color: #fff; /* Changed to White */
       padding: 3rem 1rem;
-      margin-top: 3rem; /* Space from the CTA section */
+      margin-top: 3rem;
       text-align: center;
+      box-shadow: 0px 10px 20px rgba(0,0,0,0.1); /* Added box-shadow to match other sections */
+      border-radius: 12px; /* Added border-radius to match other sections */
+      max-width: 800px; /* Constrain width of the section */
+      margin-left: auto; /* Center the section */
+      margin-right: auto; /* Center the section */
     }
     .google-calendar-section h2 {
       font-family: 'Oswald', sans-serif;
       font-size: 2.5rem;
-      color: #fff; /* White text for heading */
+      color: #000; /* Changed heading color to black for contrast on white background */
       margin-bottom: 2rem;
     }
     .google-calendar-section iframe {
-      max-width: 800px; /* Constrain width of the calendar */
+      max-width: 100%; /* Constrain width of the calendar to fit its parent section */
       width: 100%; /* Make it responsive within max-width */
-      border-radius: 12px; /* Match other sections' border-radius */
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Add shadow for depth */
-      /* Note: You cannot directly change the internal color of the Google Calendar embed */
+      border-radius: 8px; /* Slightly smaller border-radius for the iframe itself */
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Lighter shadow for the iframe on white background */
     }
+
+    ---
 
     /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
     @media (max-width: 767px) {
       .hero,
       .panel,
-      .cta {
+      .cta,
+      .google-calendar-section { /* Apply mobile styles to calendar section too */
         width: 90%;
         margin: 2rem auto;
         padding: 1.5rem;
@@ -416,9 +412,9 @@
     <p style="font-style: italic;">🚀 Are you looking for more leads? More repeat customers?<br>
 Then let’s build a system that keeps the phone ringing and the cashflow steady!</p>
 
-    <p><strong>Book a FREE 30-minute chat</strong></p>
+    <p><strong>Book your FREE 30-minute chat below 👇</strong></p>
 
-    <a href="#google-calendar-section" class="hero-button">👇 Pick a time</a>
+    <a href="#google-calendar-section" class="hero-button">Lock in a time</a>
 
   </section>
 
