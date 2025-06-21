@@ -238,35 +238,33 @@
 
     /* Google Calendar Section Styles */
     .google-calendar-section {
-      background-color: #fff;
+      background-color: #fff; /* Changed to White */
       padding: 3rem 1rem;
       margin-top: 3rem;
       text-align: center;
-      box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
-      border-radius: 12px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+      box-shadow: 0px 10px 20px rgba(0,0,0,0.1); /* Added box-shadow to match other sections */
+      border-radius: 12px; /* Added border-radius to match other sections */
+      max-width: 800px; /* Constrain width of the section */
+      margin-left: auto; /* Center the section */
+      margin-right: auto; /* Center the section */
     }
     .google-calendar-section h2 {
       font-family: 'Oswald', sans-serif;
       font-size: 2.5rem;
-      color: #000;
+      color: #000; /* Changed heading color to black for contrast on white background */
       margin-bottom: 2rem;
     }
     .google-calendar-section iframe {
-      max-width: 100%;
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 100%; /* Constrain width of the calendar to fit its parent section */
+      width: 100%; /* Make it responsive within max-width */
+      border-radius: 8px; /* Slightly smaller border-radius for the iframe itself */
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Lighter shadow for the iframe on white background */
     }
-
-    ---
 
     /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
     @media (max-width: 767px) {
-      /* Adjust general section padding/width for mobile */
-      .hero,
+      /* Apply width, margin, and padding to general section classes */
+      .hero, /* Kept hero in this list for general padding/margin */
       .panel,
       .cta,
       .google-calendar-section {
@@ -275,75 +273,7 @@
         padding: 1.5rem;
       }
 
-      /* Hide desktop hero content on mobile */
-      .desktop-line1, .desktop-line2 {
-        display: none;
-      }
-
-      /* Show mobile hero content on mobile and ensure correct line breaks */
-      .mobile-hero {
-        display: flex; /* Use flexbox for vertical stacking */
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Center horizontally */
-        text-align: center; /* Ensure text inside is centered */
-      }
-      .mobile-line1, .mobile-line2 {
-        display: block; /* Ensure they take their own line */
-        font-family: 'Oswald', sans-serif;
-        font-weight: 700;
-        color: #000;
-        font-size: 2.2rem;
-        line-height: 1.2;
-        white-space: nowrap; /* Prevent breaking in the middle of a line */
-      }
-      .mobile-line1 {
-        margin-bottom: 0.25rem; /* Space after "LET'S GROW YOUR" */
-      }
-      .mobile-line2 {
-        margin-bottom: 0.5rem; /* Space after "BUSINESS WITH" */
-      }
-
-      .mobile-scroll {
-        position: relative;
-        overflow: hidden;
-        height: 48px; /* Fixed height for scrolling area */
-        width: 100%; /* Take full width of parent */
-        max-width: 290px; /* Constrain width if needed, matching desktop scroll-container */
-        margin: 0 auto; /* Center the scrolling container */
-        min-width: unset; /* Remove desktop min-width */
-      }
-
-      .scroll-container { /* Hide desktop scrolling container on mobile */
-        display: none;
-      }
-
-      .mobile-scroll .scroll-text {
-        position: absolute; /* Needed for animation */
-        animation: scrollUpMobile 10s linear infinite;
-        display: flex;
-        flex-direction: column;
-        font-family: 'Oswald', sans-serif;
-        font-weight: 700;
-        font-size: 2.2rem; /* Adjusted font size for mobile */
-        line-height: 48px;
-        color: #000;
-        width: 100%;
-        text-align: center; /* Center text within each scrolling div */
-      }
-
-      .mobile-scroll .scroll-text div {
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center; /* Center content within each scrolling div */
-        white-space: nowrap; /* Prevent text wrapping within a scrolling item */
-      }
-
-      @keyframes scrollUpMobile {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(-50%); }
-      }
-
+      /* Hamburger menu and mobile nav display */
       .hamburger-menu {
         display: flex;
       }
@@ -351,6 +281,67 @@
         display: none;
       }
 
+      /* Mobile Hero Section Specifics (Reverted to original setup) */
+      .desktop-line1, .desktop-line2 {
+        display: none; /* Hide desktop specific lines on mobile */
+      }
+
+      .mobile-line1, .mobile-line2, .mobile-scroll {
+        display: block; /* Show mobile specific elements */
+        font-family: 'Oswald', sans-serif;
+        font-weight: 700;
+        color: #000;
+        text-align: center;
+        user-select: none;
+      }
+      .mobile-line1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 0.25rem; /* Original spacing */
+      }
+      .mobile-line2 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 0.5rem; /* Original spacing */
+      }
+
+      .mobile-scroll {
+        position: relative;
+        overflow: hidden;
+        height: 48px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      
+      .scroll-container { /* Ensure desktop scroll is hidden */
+        display: none;
+      }
+
+      .mobile-scroll .scroll-text {
+        position: absolute;
+        animation: scrollUpMobile 10s linear infinite;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Oswald', sans-serif;
+        font-weight: 700;
+        font-size: 2.2rem;
+        line-height: 48px;
+        color: #000;
+        width: 100%;
+      }
+      .mobile-scroll .scroll-text div {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center content within each scrolling div */
+        white-space: nowrap; /* Prevent text wrapping */
+      }
+      @keyframes scrollUpMobile {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-50%); }
+      }
+
+      /* General font size adjustments for mobile */
       .hero h1, .panel h2, .cta h2 {
         font-size: 2.2rem;
       }
