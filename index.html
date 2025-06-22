@@ -340,14 +340,14 @@
 
     /* --- NEW CONTACT SECTION STYLES (full screen based on JUNK's section, form based on ELECTRIC's elements) --- */
     .contact-section {
-      background-color: #78C976; /* Creative's green accent color */
+      background-color: #f7f7f7; /* Changed from green to light grey */
       padding: 4rem 1rem;
       text-align: center;
-      color: #fff; /* White text for section heading */
+      color: #222; /* Changed from white to dark text for heading */
     }
 
     .contact-section .section-title {
-        color: #ffffff; /* White heading color */
+        color: #000000; /* Changed from white to black heading color */
     }
 
     .contact-form-container { /* This will act like the "panel" within the full-width section */
@@ -366,72 +366,16 @@
         margin-bottom: 25px;
         text-align: center; /* Center align subtext */
     }
-    .contact-form-container form {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Two columns for desktop */
-        gap: 20px;
+    /* Removed .contact-form-container form, .form-group, label, input, textarea, select, button styles */
+    /* Added iframe specific styles for responsiveness */
+    .contact-form-container iframe {
+        display: block; /* Ensure iframe behaves like a block element */
+        margin: 0 auto; /* Center the iframe */
+        max-width: 100%; /* Ensure it's responsive */
+        height: 600px; /* Keep the requested height */
+        border-radius: 8px; /* Match form container's border-radius */
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow for iframe */
     }
-    .contact-form-container .form-group {
-        display: flex;
-        flex-direction: column;
-    }
-    .contact-form-container .full-width {
-        grid-column: 1 / -1; /* Spans all columns */
-    }
-    .contact-form-container label {
-        font-weight: 700;
-        margin-bottom: 8px;
-        font-size: 1rem;
-        color: #444;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-    }
-    .contact-form-container input,
-    .contact-form-container textarea,
-    .contact-form-container select {
-        padding: 12px 15px;
-        font-size: 1.1rem;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-family: 'Nunito Sans', sans-serif;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        width: 100%;
-    }
-    .contact-form-container textarea {
-        resize: vertical;
-        min-height: 120px;
-    }
-    .contact-form-container input:focus,
-    .contact-form-container textarea:focus,
-    .contact-form-container select:focus {
-        border-color: #78C976; /* Creative's green */
-        outline: none;
-        box-shadow: 0 0 8px rgba(120, 201, 118, 0.4); /* Green glow */
-    }
-    .contact-form-container button[type="submit"] {
-        grid-column: 1 / -1;
-        padding: 1rem 2.5rem; /* Similar to existing hero button */
-        font-size: 1.3rem; /* Consistent with hero button */
-        background-color: #78C976;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 700;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        margin-top: 15px;
-        width: fit-content; /* Make button fit content */
-        margin-left: auto; /* Center button */
-        margin-right: auto; /* Center button */
-        display: block; /* Ensure margin auto works */
-    }
-    .contact-form-container button[type="submit"]:hover {
-        background-color: #5fae60;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-    }
-
 
     /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
     @media (max-width: 767px) {
@@ -543,22 +487,9 @@
         padding: 2rem 1.5rem;
         max-width: 90%; /* Take up more width on small mobile screens */
       }
-      .contact-form-container form {
-        grid-template-columns: 1fr; /* Single column on mobile */
-        gap: 15px;
-      }
-      .contact-form-container label {
-        font-size: 0.9rem;
-      }
-      .contact-form-container input,
-      .contact-form-container textarea,
-      .contact-form-container select {
-        padding: 0.8rem;
-        font-size: 1rem;
-      }
-      .contact-form-container button[type="submit"] {
-        padding: 0.8rem 2rem;
-        font-size: 1.15rem; /* Consistent with mobile hero button */
+      /* Added iframe specific styles for responsiveness on mobile */
+      .contact-form-container iframe {
+          height: 500px; /* Slightly reduce height on mobile if needed for better fit */
       }
     }
   </style>
@@ -654,7 +585,6 @@ At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive
 <br><br>
 And now, with <b>Creative365</b>, I help service based business grow by designing <b>customer acquisition</b> and <b>retention</b> strategies that generate <b>predictable revenue</b>.</p>
 
-    
   </section>
 
   <section class="cta">
@@ -662,7 +592,7 @@ And now, with <b>Creative365</b>, I help service based business grow by designin
 
     <p>
 As your business consultant, I can help you grow your business via the following:<br><br>
-     
+      
       <b><u>MARKETING</u></b><br>
       Website building, Lead generation, Email marketing, Google ads, Facebook ads, Instagram ads, Linkedin Ads, Youtube Ads, Sales training, Sales process improvement, Conversion optimization, Competitor analysis.<br><br>
       <b><u>OPERATIONS</u></b><br>
@@ -704,41 +634,8 @@ As your business consultant, I can help you grow your business via the following
   <section class="contact-section" id="contact-section">
     <h2 class="section-title">GET IN TOUCH WITH CREATIVE365</h2>
     <div class="contact-form-container">
-        <p class="quote-subtext">Have a question or ready to discuss your business growth? Fill out the form below and we'll get back to you promptly!</p>
-        <form action="#" method="POST"> <!-- Placeholder action, ideally a backend endpoint -->
-            <div class="form-group">
-                <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" name="fullName" placeholder="Your full name" required />
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone (Optional)</label>
-                <input type="tel" id="phone" name="phone" placeholder="+61 4XX XXX XXX" />
-            </div>
-            <div class="form-group">
-                <label for="businessName">Business Name</label>
-                <input type="text" id="businessName" name="businessName" placeholder="Your business name" required />
-            </div>
-            <div class="form-group full-width">
-                <label for="inquiryType">Type of Inquiry</label>
-                <select id="inquiryType" name="inquiryType" required>
-                    <option value="">-- Select type of inquiry --</option>
-                    <option value="marketing">Marketing Services</option>
-                    <option value="operations">Operations Consultancy</option>
-                    <option value="retention">Retention Strategies</option>
-                    <option value="general">General Inquiry</option>
-                    <option value="free-chat">Book Free 30-min Chat</option>
-                </select>
-            </div>
-            <div class="form-group full-width">
-                <label for="message">Your Message</label>
-                <textarea id="message" name="message" rows="6" placeholder="Tell us more about your business needs..." required></textarea>
-            </div>
-            <button type="submit">SEND MESSAGE</button>
-        </form>
+        <!-- Replaced the form with the Google Calendar Appointment Scheduling iframe -->
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3AgJLV95DsanjqZg-EruNwyU4GBaNJPOcxtvDgDUeLV8qOmTaQIuKAh5WT2BRZtIVv0iWXd59u?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
     </div>
   </section>
 
