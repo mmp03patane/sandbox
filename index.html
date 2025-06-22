@@ -19,7 +19,7 @@
       line-height: 1.6;
       font-size: 1.15rem;
       text-align: center;
-      scroll-behavior: smooth;
+      /* Removed scroll-behavior: smooth as there's no anchor to scroll to */
     }
 
     /* Header Styles */
@@ -90,7 +90,7 @@
     .hero {
       max-width: 800px;
       margin: 3rem auto;
-      background: white; /* Reverted to white */
+      background: white;
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -101,7 +101,7 @@
     .scroll-wrapper {
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
-      color: #000; /* Reverted to black */
+      color: #000;
       user-select: none;
       text-align: center;
     }
@@ -145,7 +145,7 @@
       font-weight: 700;
       font-size: 2.5rem;
       line-height: 48px;
-      color: #000; /* Reverted to black */
+      color: #000;
       width: 100%;
     }
     .scroll-text div {
@@ -161,45 +161,41 @@
     }
 
     /* Hide mobile specific elements by default on desktop */
-    .mobile-hero {
-        display: none; /* Hide mobile hero on desktop */
-    }
-    .desktop-hero {
-        display: block; /* Show desktop hero on desktop */
+    .mobile-line1, .mobile-line2, .mobile-scroll {
+      display: none;
     }
     /* --- End Styles for the Scrolling Text Hero Section --- */
 
     /* Hero Paragraph Styling */
     .hero p {
-      font-size: 1.3rem;
-      color: #333; /* Reverted to dark grey for readability on white background */
+      font-size: 1.3rem; /* All hero paragraphs will be this size */
+      color: #333;
       margin-top: 1.5rem;
       margin-bottom: 1.5rem;
     }
 
-    /* Hero Button Styles & General Action Button */
-    .hero-button, .action-button {
+    /* Hero Button Styles */
+    .hero-button {
       background-color: #78C976;
       color: #fff;
       border: none;
       padding: 0.9rem 2rem;
-      font-size: 1.3rem;
+      font-size: 1.3rem; /* Consistent with hero paragraphs */
       font-family: 'Oswald', sans-serif;
       text-transform: uppercase;
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s ease;
       animation: slideInLeft 1s ease forwards;
-      display: inline-block;
-      text-decoration: none;
-      margin-top: 1.5rem;
+      display: inline-block; /* Essential for padding/sizing on anchor tags */
+      text-decoration: none; /* Remove underline if it were an anchor */
     }
-    .hero-button:hover, .action-button:hover {
+    .hero-button:hover {
       background-color: #5fae60;
     }
 
     /* Panel and CTA Section Styles */
-    .panel, .cta-panel {
+    .panel, .cta {
       max-width: 800px;
       margin: 3rem auto;
       background: #fff;
@@ -210,40 +206,17 @@
       animation: slideUp 0.8s ease forwards;
     }
 
-    /* Headings for sections outside panels */
-    .section-heading {
+    /* H2 styles for Panel and CTA */
+    .panel h2, .cta h2 {
       font-family: 'Oswald', sans-serif;
       font-size: 2.5rem;
       color: #000;
-      margin-top: 3rem;
       margin-bottom: 1rem;
-      text-align: center;
       animation: slideInLeft 1s ease forwards;
     }
 
-    /* Dark Heading Section */
-    .dark-heading-section {
-      background-color: #333; /* Dark grey background */
-      color: #fff; /* White text */
-      padding: 1.5rem 1rem;
-      margin-top: 3rem;
-      text-align: center;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      border-radius: 12px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      animation: slideUp 0.8s ease forwards;
-    }
-    .dark-heading-section h2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 2.5rem;
-      color: #fff; /* White text for heading */
-      margin: 0;
-    }
-
-    /* Paragraph and List Item styles (within panels) */
-    .panel p, .cta-panel p { /* Removed .cta-panel ul li */
+    /* Paragraph and List Item styles */
+    .panel p, .cta p, .cta ul li {
       font-size: 1.3rem;
       color: #000;
       animation: slideInLeft 1s ease forwards;
@@ -258,20 +231,15 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    /* Removed UL and LI specific styling as lists are no longer intended in CTA panel */
     ul {
       list-style: none;
       padding: 0;
-      text-align: left;
-      max-width: 90%;
-      margin: 0 auto;
     }
 
-    li {
-      margin-bottom: 0.5rem;
-      animation: slideInLeft 1s ease forwards;
+    li::before {
+      content: '✔️ ';
+      margin-right: 5px;
     }
-    /* Removed li::before entirely */
 
     /* Keyframe Animations */
     @keyframes slideUp {
@@ -283,58 +251,27 @@
       to { transform: translateX(0); opacity: 1; }
     }
 
-    /* Google Calendar Section Styles */
-    .google-calendar-section {
-      background-color: #fff;
-      padding: 3rem 1rem;
-      margin-top: 3rem; /* Adjusted margin to provide space below dark heading */
-      text-align: center;
-      box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
-      border-radius: 12px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      animation: slideUp 0.8s ease forwards;
-    }
-    .google-calendar-section iframe {
-      max-width: 100%;
-      width: 100%;
-      height: 600px;
-      border: 0;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
+    /* Removed .booking-section specific styles as it's not present */
 
     /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
     @media (max-width: 767px) {
       .hero,
       .panel,
-      .cta-panel,
-      .google-calendar-section,
-      .dark-heading-section {
+      .cta {
         width: 90%;
         margin: 2rem auto;
         padding: 1.5rem;
       }
 
-      .section-heading, .dark-heading-section h2 {
-        font-size: 2.2rem;
-        margin-top: 2rem;
-      }
-
-      /* Mobile Hero Section Specifics */
-      .desktop-hero {
-          display: none; /* Hide desktop hero on mobile */
-      }
-      .mobile-hero {
-          display: block; /* Show mobile hero on mobile */
+      .desktop-line1, .desktop-line2 {
+        display: none;
       }
 
       .mobile-line1, .mobile-line2, .mobile-scroll {
         display: block;
         font-family: 'Oswald', sans-serif;
         font-weight: 700;
-        color: #000; /* Reverted to black for readability on white mobile hero */
+        color: #000;
         text-align: center;
         user-select: none;
       }
@@ -357,12 +294,15 @@
         margin: 0 auto;
       }
 
+      .scroll-container {
+        display: none;
+      }
+
       .mobile-scroll .scroll-text {
         width: 100%;
         text-align: center;
         font-size: 2.2rem;
         animation: scrollUpMobile 10s linear infinite;
-        color: #000; /* Reverted to black for mobile hero scrolling text */
       }
 
       .mobile-scroll .scroll-text div {
@@ -382,16 +322,11 @@
         display: none;
       }
 
-      .hero h1, .panel h2, .cta-panel h2 {
+      .hero h1, .panel h2, .cta h2 {
         font-size: 2.2rem;
       }
-      .hero .subtext, .panel p, .cta-panel p { /* Removed .cta-panel ul li */
+      .hero .subtext, .panel p, .cta p, .cta ul li {
         font-size: 1.3rem;
-      }
-
-      /* Mobile adjustments for calendar section */
-      .google-calendar-section iframe {
-        height: 400px;
       }
     }
   </style>
@@ -451,12 +386,14 @@
       </div>
     </div>
 
-    <p style="font-style: italic;">🚀 Are you looking for more leads? More repeat customers?<br>
-Then let’s build a system that keeps the phone ringing and the cashflow steady!</p>
+    <p style="font-style: italic;">🚀 Are you looking for more leads? More repeat customers?
+Then let’s build a system that keeps the phone ringing and the cashflow steady.</p>
 
-    <p><strong>Book your FREE 30-minute chat below 👇</strong></p>
+    <p><strong>Book a FREE 30-minute chat</strong></p>
 
-    <a href="#google-calendar-section" class="hero-button">Lock in a time</a>
+    <p>👇 Pick a time that suits!</p>
+
+    <button class="hero-button">Let's Chat</button>
 
   </section>
 
@@ -479,16 +416,15 @@ At <b>Jim’s Group</b>, I helped streamline onboarding operations for franchise
       <br>
       I hosted a monthly lecture teaching mowing franchisees how to use technology to <b>quote</b>, <b>schedule</b> and <b>invoice</b> clients.
 <br><br>
-At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive adoption through education. I focused on <b>internal efficiencies</b> to <b>elevate customer success experiences</b>.
-      <br><br>
-      And now, with <b>Creative365,</b> I focus on solving the two biggest issues that all businesses face: <b>Inconsistent cashflow</b> <i>and</i> <b>Unpredictable customers</b></p>
+At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive adoption through education. I focused on <b>internal efficiencies</b> to <b>elevate customer success experiences</b>.</p>
 
   </section>
 
-  <h2 class="section-heading">SERVICES</h2>
-  <section class="cta-panel">
-    <p>How we work together is <b>completely up to you</b>.<br><br>
-      My engagement can be purely advisory: <i>I offer you the advice and the steps you need to take, but implementation will be your responsibility</i>.<br><br>
+  <section class="cta">
+    <h2>WHAT YOU GET</h2>
+
+    <p>How we work together is <b>completely up to you</b>. <br><br>
+      My engagement can be purely advisory: <i>I offer you the advice and the steps you need to take, but implementation will be your responsibility</i>. <br><br>
       Alternatively, you can retain me on a <b>"done-for-you"</b> basis where I build the strategy and execute the work for you, <i>freeing you up to focus on running your business</i>.<br><br>
       <u>Areas of expertise</u>:<br><br>
       <b>MARKETING</b><br>
@@ -497,14 +433,8 @@ At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive
       Internal processes optimization, business coaching, mindset coaching, time and cost saving strategies.<br><br>
       <b>RETENTION</b><br>
       Customer success, Retention strategies, Repeat customer and loyalty strategies, Advocacy planning.
-    </p>
-  </section>
 
-  <div class="dark-heading-section">
-    <h2>BOOK YOUR CHAT</h2>
-  </div>
-  <section class="google-calendar-section" id="google-calendar-section">
-    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3AgJLV95DsanjqZg-EruNwyU4GBaNJPOcxtvDgDUeLV8qOmTaQIuKAh5WT2BRZtIVv0iWXd59u?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+    </p>
   </section>
 
   <script>
