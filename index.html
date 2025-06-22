@@ -30,9 +30,19 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative;
+      position: fixed; /* Changed from relative to fixed */
+      width: 100%; /* Ensure it spans the full width */
+      top: 0; /* Position at the top */
+      left: 0;
       z-index: 100; /* Ensure header is above other content for mobile menu */
+      transition: top 0.3s ease-in-out; /* Added transition for smooth hide/show */
     }
+
+    /* Class to hide the header */
+    header.hidden {
+      top: -100px; /* Adjust this value if your header height is different */
+    }
+
     .logo img {
       height: 30px;
     }
@@ -101,6 +111,12 @@
     nav.mobile-nav a:hover {
       background-color: rgba(255, 255, 255, 0.1); /* Hover effect */
     }
+
+    /* Adjust main content to not be hidden by fixed header */
+    body {
+      padding-top: 56px; /* Adjust this value to match your header's height */
+    }
+
 
     /* Hero Section Styles */
     .hero {
@@ -387,6 +403,11 @@
 
     
     @media (max-width: 767px) {
+      /* Adjust body padding for mobile too */
+      body {
+        padding-top: 56px; /* Adjust for mobile header height if different */
+      }
+
       .hero,
       .panel,
       .cta {
@@ -530,23 +551,23 @@
   </header>
 
   <section class="hero" id="hero-section"> <div class="scroll-wrapper desktop-hero">
-      <span class="desktop-line1">LET'S GROW YOUR BUSINESS</span>
-      <div class="desktop-line2">
-        <span>WITH</span>
-        <div class="scroll-container">
-          <div class="scroll-text">
-            <div>INSTAGRAM ADS</div>
-            <div>FACEBOOK ADS</div>
-            <div>GOOGLE ADS</div>
-            <div>A NEW WEBSITE</div>
-            <div>FACEBOOK ADS</div>
-            <div>INSTAGRAM ADS</div>
-            <div>GOOGLE ADS</div>
-            <div>A NEW WEBSITE</div>
-          </div>
+    <span class="desktop-line1">LET'S GROW YOUR BUSINESS</span>
+    <div class="desktop-line2">
+      <span>WITH</span>
+      <div class="scroll-container">
+        <div class="scroll-text">
+          <div>INSTAGRAM ADS</div>
+          <div>FACEBOOK ADS</div>
+          <div>GOOGLE ADS</div>
+          <div>A NEW WEBSITE</div>
+          <div>FACEBOOK ADS</div>
+          <div>INSTAGRAM ADS</div>
+          <div>GOOGLE ADS</div>
+          <div>A NEW WEBSITE</div>
         </div>
       </div>
     </div>
+  </div>
 
     <div class="scroll-wrapper mobile-hero">
       <span class="mobile-line1">LET'S GROW YOUR</span>
@@ -654,7 +675,7 @@ Or book a quick phone call via my Google Calendar below — whatever works best 
       document.getElementById("mobileNav").classList.toggle("open");
     }
 
-    // FAQ Toggle Functionality (Copied from JUNK)
+    // FAQ Toggle Functionality
     document.addEventListener('DOMContentLoaded', () => {
       const faqQuestions = document.querySelectorAll('.faq-question');
 
@@ -671,7 +692,7 @@ Or book a quick phone call via my Google Calendar below — whatever works best 
         });
       });
 
-      // Smooth scroll for navigation links (added for all anchor links)
+      // Smooth scroll for navigation links
       document.querySelectorAll('nav a[href^="#"], .hero-button[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -685,6 +706,23 @@ Or book a quick phone call via my Google Calendar below — whatever works best 
             }
         });
       });
+
+      // --- Header Scroll Behavior ---
+      let lastScrollY = window.scrollY;
+      const header = document.querySelector('header');
+      const headerHeight = header.offsetHeight; // Get the header's actual height
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > lastScrollY && window.scrollY > headerHeight) {
+          // Scrolling down and past the header height
+          header.classList.add('hidden');
+        } else if (window.scrollY < lastScrollY) {
+          // Scrolling up
+          header.classList.remove('hidden');
+        }
+        lastScrollY = window.scrollY;
+      });
+      // --- End Header Scroll Behavior ---
     });
   </script>
 </body>
