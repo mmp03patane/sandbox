@@ -19,7 +19,7 @@
       line-height: 1.6;
       font-size: 1.15rem;
       text-align: center;
-      /* Removed scroll-behavior: smooth as there's no anchor to scroll to */
+      scroll-behavior: smooth; /* Re-added for smooth scrolling to sections */
     }
 
     /* Header Styles */
@@ -31,6 +31,7 @@
       justify-content: space-between;
       align-items: center;
       position: relative;
+      z-index: 100; /* Ensure header is above other content for mobile menu */
     }
     .logo img {
       height: 30px;
@@ -46,6 +47,10 @@
       margin-left: 2rem;
       font-family: 'Roboto', sans-serif;
       text-transform: uppercase;
+      transition: color 0.3s ease; /* Added transition for hover */
+    }
+    nav.desktop-nav a:hover {
+      color: #78C976; /* Hover color for consistency with main button */
     }
 
     /* Hamburger Menu (Hidden by default on desktop) */
@@ -71,9 +76,12 @@
       top: 100%;
       left: 0;
       width: 100%;
-      background-color: #000;
-      z-index: 15;
+      background-color: rgba(0, 0, 0, 0.95); /* Slightly transparent black */
+      z-index: 90; /* Below header, above content */
       text-align: right;
+      padding-top: 1rem; /* Added some padding */
+      padding-bottom: 1rem; /* Added some padding */
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Added shadow */
     }
     nav.mobile-nav.open {
       display: block;
@@ -81,9 +89,17 @@
     nav.mobile-nav a {
       color: #fff;
       display: block;
-      padding: 1rem;
+      padding: 0.8rem 1.5rem; /* Adjusted padding */
       text-transform: uppercase;
       font-family: 'Roboto', sans-serif;
+      transition: background-color 0.3s ease; /* Added transition */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator */
+    }
+    nav.mobile-nav a:last-child {
+      border-bottom: none; /* No border for the last item */
+    }
+    nav.mobile-nav a:hover {
+      background-color: rgba(255, 255, 255, 0.1); /* Hover effect */
     }
 
     /* Hero Section Styles */
@@ -189,6 +205,7 @@
       animation: slideInLeft 1s ease forwards;
       display: inline-block; /* Essential for padding/sizing on anchor tags */
       text-decoration: none; /* Remove underline if it were an anchor */
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Added shadow */
     }
     .hero-button:hover {
       background-color: #5fae60;
@@ -214,6 +231,16 @@
       margin-bottom: 1rem;
       animation: slideInLeft 1s ease forwards;
     }
+    /* General section title style for new sections */
+    .section-title {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2.5rem;
+        color: #000; /* Default black for section titles */
+        margin-bottom: 2.5rem; /* Consistent with JUNK's h2 margin */
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
 
     /* Paragraph and List Item styles */
     .panel p, .cta p, .cta ul li {
@@ -236,11 +263,6 @@
       padding: 0;
     }
 
-    li::before {
-      content: '✔️ ';
-      margin-right: 5px;
-    }
-
     /* Keyframe Animations */
     @keyframes slideUp {
       from { transform: translateY(50px); opacity: 0; }
@@ -251,7 +273,165 @@
       to { transform: translateX(0); opacity: 1; }
     }
 
-    /* Removed .booking-section specific styles as it's not present */
+    /* --- NEW FAQ SECTION STYLES (based on JUNK/ELECTRIC, adapted to CREATIVE palette) --- */
+    .faq-section {
+      background-color: #ffffff; /* White background */
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    .faq-section .section-title {
+      color: #000000; /* Black heading color */
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Subtle shadow */
+    }
+
+    .faq-question {
+      background-color: #f0f0f0; /* Light grey, similar to JUNK */
+      padding: 1rem 1.5rem;
+      font-family: 'Roboto', sans-serif;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.3s ease;
+      color: #222; /* Dark text for question */
+    }
+
+    .faq-question:hover {
+      background-color: #e0e0e0;
+    }
+
+    .faq-question::after {
+      content: '+';
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-question.active::after {
+      content: '-';
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 1rem 1.5rem;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 1.2rem; /* Consistent with JUNK */
+      background-color: #fff;
+      border-top: 1px solid #eee;
+      display: none; /* Hidden by default */
+      overflow: hidden;
+      color: #555; /* Slightly lighter text for answer */
+    }
+
+    /* --- NEW CONTACT SECTION STYLES (full screen based on JUNK's section, form based on ELECTRIC's elements) --- */
+    .contact-section {
+      background-color: #78C976; /* Creative's green accent color */
+      padding: 4rem 1rem;
+      text-align: center;
+      color: #fff; /* White text for section heading */
+    }
+
+    .contact-section .section-title {
+        color: #ffffff; /* White heading color */
+    }
+
+    .contact-form-container { /* This will act like the "panel" within the full-width section */
+        max-width: 700px; /* Based on ELECTRIC's form width */
+        margin: 0 auto;
+        padding: 3rem 2rem; /* Similar to JUNK's form panel padding */
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        color: #222; /* Dark text inside form panel */
+    }
+    .contact-form-container .quote-subtext {
+        font-size: 1.15rem; /* Consistent with CREATIVE body font size */
+        color: #666;
+        margin-bottom: 25px;
+        text-align: center; /* Center align subtext */
+    }
+    .contact-form-container form {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns for desktop */
+        gap: 20px;
+    }
+    .contact-form-container .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+    .contact-form-container .full-width {
+        grid-column: 1 / -1; /* Spans all columns */
+    }
+    .contact-form-container label {
+        font-weight: 700;
+        margin-bottom: 8px;
+        font-size: 1rem;
+        color: #444;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+    }
+    .contact-form-container input,
+    .contact-form-container textarea,
+    .contact-form-container select {
+        padding: 12px 15px;
+        font-size: 1.1rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-family: 'Nunito Sans', sans-serif;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        width: 100%;
+    }
+    .contact-form-container textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+    .contact-form-container input:focus,
+    .contact-form-container textarea:focus,
+    .contact-form-container select:focus {
+        border-color: #78C976; /* Creative's green */
+        outline: none;
+        box-shadow: 0 0 8px rgba(120, 201, 118, 0.4); /* Green glow */
+    }
+    .contact-form-container button[type="submit"] {
+        grid-column: 1 / -1;
+        padding: 1rem 2.5rem; /* Similar to existing hero button */
+        font-size: 1.3rem; /* Consistent with hero button */
+        background-color: #78C976;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        margin-top: 15px;
+        width: fit-content; /* Make button fit content */
+        margin-left: auto; /* Center button */
+        margin-right: auto; /* Center button */
+        display: block; /* Ensure margin auto works */
+    }
+    .contact-form-container button[type="submit"]:hover {
+        background-color: #5fae60;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
 
     /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
     @media (max-width: 767px) {
@@ -322,18 +502,70 @@
         display: none;
       }
 
+      header {
+        padding: 0.8rem 1.5rem; /* Adjusted for smaller header */
+      }
+      .logo img {
+        height: 25px; /* Smaller logo for mobile */
+      }
+
       .hero h1, .panel h2, .cta h2 {
         font-size: 2.2rem;
       }
-      .hero .subtext, .panel p, .cta p, .cta ul li {
-        font-size: 1.3rem;
+      .hero p, .panel p, .cta p, .cta ul li {
+        font-size: 1.15rem; /* Consistent with body font size */
+      }
+      .hero-button {
+        font-size: 1.15rem; /* Adjusted for mobile */
+        padding: 0.7rem 1.8rem;
+      }
+
+      /* Mobile adjustments for new sections */
+      .section-title {
+        font-size: 1.8rem; /* Smaller H2 for mobile */
+        margin-bottom: 1.5rem;
+      }
+      .faq-section {
+        padding: 3rem 1rem;
+      }
+      .faq-question {
+        font-size: 1.1rem;
+        padding: 0.8rem 1rem;
+      }
+      .faq-answer {
+        font-size: 1.05rem;
+        padding: 0.8rem 1rem;
+      }
+      .contact-section {
+        padding: 3rem 1rem;
+      }
+      .contact-form-container {
+        padding: 2rem 1.5rem;
+        max-width: 90%; /* Take up more width on small mobile screens */
+      }
+      .contact-form-container form {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 15px;
+      }
+      .contact-form-container label {
+        font-size: 0.9rem;
+      }
+      .contact-form-container input,
+      .contact-form-container textarea,
+      .contact-form-container select {
+        padding: 0.8rem;
+        font-size: 1rem;
+      }
+      .contact-form-container button[type="submit"] {
+        padding: 0.8rem 2rem;
+        font-size: 1.15rem; /* Consistent with mobile hero button */
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <a href="#" class="logo">
+    <a href="#hero-section" class="logo">
       <img src="https://github.com/mmp03patane/creative/blob/main/Creative%20logo.JPG?raw=true" alt="Creative365 Logo" />
     </a>
     <div class="hamburger-menu" onclick="toggleMobileMenu()">
@@ -342,14 +574,16 @@
       <div class="bar"></div>
     </div>
     <nav class="desktop-nav">
-      <a href="#">Contact</a>
+      <a href="#faq-section">FAQ</a>
+      <a href="#contact-section">Contact</a>
     </nav>
     <nav class="mobile-nav" id="mobileNav">
-      <a href="#">Contact</a>
+      <a href="#faq-section" onclick="toggleMobileMenu()">FAQ</a>
+      <a href="#contact-section" onclick="toggleMobileMenu()">Contact</a>
     </nav>
   </header>
 
-  <section class="hero">
+  <section class="hero" id="hero-section"> <!-- Added ID for navigation -->
     <div class="scroll-wrapper desktop-hero">
       <span class="desktop-line1">LET'S GROW YOUR BUSINESS</span>
       <div class="desktop-line2">
@@ -393,7 +627,7 @@ Then let’s build a system that keeps the phone ringing and the cashflow steady
 
     <p>👇 Pick a time that suits!</p>
 
-    <button class="hero-button">Let's Chat</button>
+    <button class="hero-button" onclick="window.location.href='#contact-section'">Let's Chat</button> <!-- Button now links to contact section -->
 
   </section>
 
@@ -421,7 +655,7 @@ At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive
   </section>
 
   <section class="cta">
-    <h2>WHAT YOU GET</h2>
+    <h2 class="section-title">WHAT YOU GET</h2> <!-- Added section-title class for consistency -->
 
     <p>How we work together is <b>completely up to you</b>. <br><br>
       My engagement can be purely advisory: <i>I offer you the advice and the steps you need to take, but implementation will be your responsibility</i>. <br><br>
@@ -437,10 +671,112 @@ At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive
     </p>
   </section>
 
+  <!-- NEW FAQ SECTION -->
+  <section class="faq-section" id="faq-section">
+    <h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question">What services does Creative365 offer?</div>
+        <div class="faq-answer">Creative365 offers business consultancy focusing on marketing (website building, lead generation, various ad types), operations (internal process optimization, coaching), and retention (customer success, loyalty strategies).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">What's the difference between advisory and "done-for-you" services?</div>
+        <div class="faq-answer">With advisory services, I provide the strategy and steps, but implementation is your responsibility. With "done-for-you," I build the strategy and execute the work for you, allowing you to focus on your core business.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Who is Michael Patane?</div>
+        <div class="faq-answer">Michael Patane is the founder of Creative365. He is a business consultant with experience from GLG, Jim's Group, and MYOB, specializing in helping residential service businesses grow.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How do I book a free chat?</div>
+        <div class="faq-answer">You can book a free 30-minute chat by using the "Let's Chat" button on the hero section or by filling out the contact form below.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">What types of businesses do you work with?</div>
+        <div class="faq-answer">Creative365 primarily helps residential service businesses, including but not limited to electricians, plumbers, gardeners, and general trades.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW CONTACT SECTION -->
+  <section class="contact-section" id="contact-section">
+    <h2 class="section-title">GET IN TOUCH WITH CREATIVE365</h2>
+    <div class="contact-form-container">
+        <p class="quote-subtext">Have a question or ready to discuss your business growth? Fill out the form below and we'll get back to you promptly!</p>
+        <form action="#" method="POST"> <!-- Placeholder action, ideally a backend endpoint -->
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Your full name" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone (Optional)</label>
+                <input type="tel" id="phone" name="phone" placeholder="+61 4XX XXX XXX" />
+            </div>
+            <div class="form-group">
+                <label for="businessName">Business Name</label>
+                <input type="text" id="businessName" name="businessName" placeholder="Your business name" required />
+            </div>
+            <div class="form-group full-width">
+                <label for="inquiryType">Type of Inquiry</label>
+                <select id="inquiryType" name="inquiryType" required>
+                    <option value="">-- Select type of inquiry --</option>
+                    <option value="marketing">Marketing Services</option>
+                    <option value="operations">Operations Consultancy</option>
+                    <option value="retention">Retention Strategies</option>
+                    <option value="general">General Inquiry</option>
+                    <option value="free-chat">Book Free 30-min Chat</option>
+                </select>
+            </div>
+            <div class="form-group full-width">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="6" placeholder="Tell us more about your business needs..." required></textarea>
+            </div>
+            <button type="submit">SEND MESSAGE</button>
+        </form>
+    </div>
+  </section>
+
   <script>
     function toggleMobileMenu() {
       document.getElementById("mobileNav").classList.toggle("open");
     }
+
+    // FAQ Toggle Functionality (Copied from JUNK)
+    document.addEventListener('DOMContentLoaded', () => {
+      const faqQuestions = document.querySelectorAll('.faq-question');
+
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+          const answer = question.nextElementSibling;
+          question.classList.toggle('active');
+
+          if (answer.style.display === 'block') {
+            answer.style.display = 'none';
+          } else {
+            answer.style.display = 'block';
+          }
+        });
+      });
+
+      // Smooth scroll for navigation links (added for all anchor links)
+      document.querySelectorAll('nav a[href^="#"], .hero-button[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+            // Close mobile menu if open
+            if (document.getElementById("mobileNav").classList.contains("open")) {
+                toggleMobileMenu();
+            }
+        });
+      });
+    });
   </script>
 </body>
 </html>
