@@ -460,6 +460,9 @@
       .logo img {
         height: 25px; 
       }
+      .logo { /* Rule for logo position on mobile */
+        margin-right: auto; /* Pushes the logo to the left */
+      }
 
       .hero h1, .panel h2, .cta h2 {
         font-size: 2.2rem;
@@ -513,17 +516,20 @@
       <div class="bar"></div>
     </div>
     <nav class="desktop-nav">
+      <a href="#about-section">About</a>
+      <a href="#expertise-section">Expertise</a>
       <a href="#faq-section">FAQ</a>
       <a href="#contact-section">Contact</a>
     </nav>
     <nav class="mobile-nav" id="mobileNav">
+      <a href="#about-section" onclick="toggleMobileMenu()">About</a>
+      <a href="#expertise-section" onclick="toggleMobileMenu()">Expertise</a>
       <a href="#faq-section" onclick="toggleMobileMenu()">FAQ</a>
       <a href="#contact-section" onclick="toggleMobileMenu()">Contact</a>
     </nav>
   </header>
 
-  <section class="hero" id="hero-section"> <!-- Added ID for navigation -->
-    <div class="scroll-wrapper desktop-hero">
+  <section class="hero" id="hero-section"> <div class="scroll-wrapper desktop-hero">
       <span class="desktop-line1">LET'S GROW YOUR BUSINESS</span>
       <div class="desktop-line2">
         <span>WITH</span>
@@ -566,12 +572,9 @@ Then let’s build a system that keeps the phone ringing and the cashflow steady
 
     <p>Choose a time or get in touch via email 👇</p>
 
-    <button class="hero-button" onclick="window.location.href='#contact-section'">Let's Chat</button> <!-- Button now links to contact section -->
+    <button class="hero-button" onclick="window.location.href='#contact-section'">Let's Chat</button> </section>
 
-  </section>
-
-  <section class="panel">
-    <img src="https://github.com/mmp03patane/creative/blob/main/PROFILE%20PHOTO%203.PNG?raw=true" alt="Your Photo" class="profile-photo" />
+  <section class="panel" id="about-section"> <img src="https://github.com/mmp03patane/creative/blob/main/PROFILE%20PHOTO%203.PNG?raw=true" alt="Your Photo" class="profile-photo" />
 
     <p>Hey everyone, <br><br>
 
@@ -595,10 +598,7 @@ And now, with <b>Creative365</b>, I help service based business grow by designin
 
   </section>
 
-  <section class="cta">
-    <h2 class="section-title">EXPERTISE</h2> <!-- Added section-title class for consistency -->
-
-    <p>
+  <section class="cta" id="expertise-section"> <h2 class="section-title">EXPERTISE</h2> <p>
 As your business consultant, I can help you grow your business via the following:<br><br>
       
       <b><u>MARKETING</u></b><br>
@@ -611,7 +611,6 @@ As your business consultant, I can help you grow your business via the following
     </p>
   </section>
 
-  <!-- NEW FAQ SECTION -->
   <section class="faq-section" id="faq-section">
     <h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
     <div class="faq-container">
@@ -638,16 +637,14 @@ As your business consultant, I can help you grow your business via the following
     </div>
   </section>
 
-  <!-- NEW CONTACT SECTION -->
   <section class="contact-section" id="contact-section">
     <h2 class="section-title">CONTACT</h2>
     <p>If you've got any questions feel free to reach out.<br><br>
 E: <a href="mailto:michael@creative365.info"><b>michael@creative365.info</b></a><br>
 Connect with me on <a href="https://www.linkedin.com/in/patane-michael/" target="_blank">LinkedIn</a>.<br><br>
-Or book a quick phone call via my Google Calendar below — whatever works best for you.<br><br>  
+Or book a quick phone call via my Google Calendar below — whatever works best for you.<br><br>    
     </p>
     <div class="contact-form-container">
-        <!-- Replaced the form with the Google Calendar Appointment Scheduling iframe -->
         <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3AgJLV95DsanjqZg-EruNwyU4GBaNJPOcxtvDgDUeLV8qOmTaQIuKAh5WT2BRZtIVv0iWXd59u?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
     </div>
   </section>
