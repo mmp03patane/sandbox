@@ -1,752 +1,1094 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Creative365</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&family=Oswald:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet" />
-  <style>
-    /* Universal Box-sizing and Base Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Nunito Sans', sans-serif;
-      background-color: #f7f7f7;
-      color: #222;
-      line-height: 1.6;
-      font-size: 1.15rem;
-      text-align: center;
-      scroll-behavior: smooth; /* Re-added for smooth scrolling to sections */
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Creative365 - Websites That Convert for Melbourne Tradies</title>
+    <!-- Google Fonts - Oswald and Nunito Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&family=Oswald:wght@700&display=swap" rel="stylesheet" />
+    <style>
+        /* Universal Box-sizing and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: #f7f7f7;
+            color: #222;
+            line-height: 1.6;
+            font-size: 1.15rem;
+            text-align: center;
+            scroll-behavior: smooth;
+        }
 
-    /* Header Styles */
-    header {
-      background-color: #000;
-      color: #fff;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed; /* Changed from relative to fixed */
-      width: 100%; /* Ensure it spans the full width */
-      top: 0; /* Position at the top */
-      left: 0;
-      z-index: 100; /* Ensure header is above other content for mobile menu */
-      transition: top 0.3s ease-in-out; /* Added transition for smooth hide/show */
-    }
+        /* Header Styles */
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            transition: top 0.3s ease-in-out;
+        }
 
-    /* Class to hide the header */
-    header.hidden {
-      top: -100px; /* Adjust this value if your header height is different */
-    }
+        header.hidden {
+            top: -100px;
+        }
 
-    .logo img {
-      height: 30px;
-    }
+        .logo img {
+            height: 30px;
+        }
 
-    /* Desktop Navigation */
-    nav.desktop-nav {
-      display: block;
-    }
-    nav.desktop-nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 2rem;
-      font-family: 'Roboto', sans-serif;
-      text-transform: uppercase;
-      transition: color 0.3s ease; /* Added transition for hover */
-    }
-    nav.desktop-nav a:hover {
-      color: #78C976; /* Hover color for consistency with main button */
-    }
+        /* Desktop Navigation */
+        nav.desktop-nav {
+            display: block;
+        }
+        nav.desktop-nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-family: 'Oswald', sans-serif; /* Changed to Oswald as per user request for headings */
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        nav.desktop-nav a:hover {
+            color: #78C976;
+        }
 
-    /* Hamburger Menu (Hidden by default on desktop) */
-    .hamburger-menu {
-      display: none;
-      width: 30px;
-      height: 21px;
-      cursor: pointer;
-      flex-direction: column;
-      justify-content: space-between;
-      z-index: 20;
-    }
-    .hamburger-menu .bar {
-      height: 3px;
-      background-color: #fff;
-      width: 100%;
-    }
+        /* Hamburger Menu (Hidden by default on desktop) */
+        .hamburger-menu {
+            display: none;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 20;
+        }
+        .hamburger-menu .bar {
+            height: 3px;
+            background-color: #fff;
+            width: 100%;
+        }
 
-    /* Mobile Navigation (Hidden by default, shown with JS) */
-    nav.mobile-nav {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.95); /* Slightly transparent black */
-      z-index: 90; /* Below header, above content */
-      text-align: right;
-      padding-top: 1rem; /* Added some padding */
-      padding-bottom: 1rem; /* Added some padding */
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Added shadow */
-    }
-    nav.mobile-nav.open {
-      display: block;
-    }
-    nav.mobile-nav a {
-      color: #fff;
-      display: block;
-      padding: 0.8rem 1.5rem; /* Adjusted padding */
-      text-transform: uppercase;
-      font-family: 'Roboto', sans-serif;
-      transition: background-color 0.3s ease; /* Added transition */
-      border-bottom: 1px solid transparent; /* Changed from rgba to transparent */
-    }
-    nav.mobile-nav a:last-child {
-      border-bottom: none; /* No border for the last item */
-    }
-    nav.mobile-nav a:hover {
-      background-color: rgba(255, 255, 255, 0.1); /* Hover effect */
-    }
+        /* Mobile Navigation (Hidden by default, shown with JS) */
+        nav.mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 90;
+            text-align: right;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        nav.mobile-nav.open {
+            display: block;
+        }
+        nav.mobile-nav a {
+            color: #fff;
+            display: block;
+            padding: 0.8rem 1.5rem;
+            text-transform: uppercase;
+            font-family: 'Oswald', sans-serif; /* Changed to Oswald */
+            transition: background-color 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+        nav.mobile-nav a:last-child {
+            border-bottom: none;
+        }
+        nav.mobile-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-    /* Adjust main content to not be hidden by fixed header */
-    body {
-      padding-top: 56px; /* Adjust this value to match your header's height */
-    }
+        /* Adjust main content to not be hidden by fixed header */
+        body {
+            padding-top: 56px;
+        }
 
+        /* Hero Section Styles */
+        .hero {
+            max-width: 900px; /* Slightly wider for impact */
+            margin: 3rem auto;
+            background: white;
+            padding: 2.5rem 2rem; /* Adjusted padding */
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            animation: slideUp 0.8s ease forwards;
+            min-height: 350px; /* Ensure a decent height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-    /* Hero Section Styles */
-    .hero {
-      max-width: 800px;
-      margin: 3rem auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      animation: slideUp 0.8s ease forwards;
-    }
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 3rem; /* Larger for impact */
+            line-height: 1.2;
+            color: #000;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-    /* --- Styles for the Scrolling Text Hero Section --- */
-    .scroll-wrapper {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      color: #000;
-      user-select: none;
-      text-align: center;
-    }
+        .hero p {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1.3rem;
+            color: #333;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
 
-    /* Desktop Hero Text Lines */
-    .desktop-line1 {
-      font-size: 2.5rem;
-      line-height: 1.2;
-      display: block;
-    }
-    .desktop-line2 {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 2.5rem;
-      line-height: 1.2;
-      white-space: nowrap;
-      margin-top: 0.5rem;
-    }
-    .desktop-line2 span:first-child {
-      flex-shrink: 0;
-    }
+        /* Hero Button Styles */
+        .hero-button {
+            background-color: #78C976;
+            color: #fff;
+            border: none;
+            padding: 0.9rem 2.5rem; /* More generous padding */
+            font-size: 1.4rem; /* Larger for prominence */
+            font-family: 'Oswald', sans-serif; /* Oswald for buttons */
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: slideInLeft 1s ease forwards;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            margin-top: 1rem;
+        }
+        .hero-button:hover {
+            background-color: #5fae60;
+            transform: translateY(-2px);
+        }
 
-    .scroll-container {
-      position: relative;
-      overflow: hidden;
-      height: 48px;
-      width: 290px;
-      min-width: 290px;
-      flex-shrink: 0;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .scroll-text {
-      position: absolute;
-      animation: scrollUp 10s linear infinite;
-      display: flex;
-      flex-direction: column;
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 2.5rem;
-      line-height: 48px;
-      color: #000;
-      width: 100%;
-    }
-    .scroll-text div {
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      white-space: nowrap;
-    }
-    @keyframes scrollUp {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-50%); }
-    }
+        /* Panel and CTA Section Styles */
+        .panel, .cta {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: #fff;
+            padding: 2.5rem; /* Consistent padding */
+            box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            text-align: center;
+            animation: slideUp 0.8s ease forwards;
+        }
 
-    /* Hide mobile specific elements by default on desktop */
-    .mobile-line1, .mobile-line2, .mobile-scroll {
-      display: none;
-    }
-    /* --- End Styles for the Scrolling Text Hero Section --- */
-
-    /* Hero Paragraph Styling */
-    .hero p {
-      font-size: 1.3rem; /* All hero paragraphs will be this size */
-      color: #333;
-      margin-top: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Hero Button Styles */
-    .hero-button {
-      background-color: #78C976;
-      color: #fff;
-      border: none;
-      padding: 0.9rem 2rem;
-      font-size: 1.3rem; /* Consistent with hero paragraphs */
-      font-family: 'Oswald', sans-serif;
-      text-transform: uppercase;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      animation: slideInLeft 1s ease forwards;
-      display: inline-block; /* Essential for padding/sizing on anchor tags */
-      text-decoration: none; /* Remove underline if it were an anchor */
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Added shadow */
-    }
-    .hero-button:hover {
-      background-color: #5fae60;
-    }
-
-    /* Panel and CTA Section Styles */
-    .panel, .cta {
-      max-width: 800px;
-      margin: 3rem auto;
-      background: #fff;
-      padding: 2rem;
-      box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
-      border-radius: 12px;
-      text-align: center;
-      animation: slideUp 0.8s ease forwards;
-    }
-
-    /* H2 styles for Panel and CTA */
-    .panel h2, .cta h2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 2.5rem;
-      color: #000;
-      margin-bottom: 1rem;
-      animation: slideInLeft 1s ease forwards;
-    }
-    /* General section title style for new sections */
-    .section-title {
-        font-family: 'Oswald', sans-serif;
-        font-size: 2.5rem;
-        color: #000; /* Default black for section titles */
-        margin-bottom: 2.5rem; /* Consistent with JUNK's h2 margin */
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-    }
+        /* H2 styles for Panel and CTA */
+        .panel h2, .cta h2 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: #000;
+            margin-bottom: 1.5rem; /* More spacing below headings */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        /* General section title style for new sections */
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            color: #000;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        /* SPECIFIC STYLE FOR CONTACT SECTION TITLE TO MATCH HERO H1 */
+        .contact-section .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
 
 
-    /* Paragraph and List Item styles */
-    .panel p, .cta p, .cta ul li {
-      font-size: 1.3rem;
-      color: #000;
-      animation: slideInLeft 1s ease forwards;
-    }
+        /* Paragraph and List Item styles */
+        .panel p, .cta p, .cta ul li, .section-content p {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1.3rem;
+            color: #000;
+            margin-bottom: 1rem; /* Consistent paragraph spacing */
+            line-height: 1.7; /* Improved readability */
+        }
+        .section-content strong {
+            font-weight: bold;
+            color: #000; /* Ensure strong text is black for emphasis */
+        }
+        .section-content ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+        .section-content ul li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
 
-    .profile-photo {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
+        .profile-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
 
-    ul {
-      list-style: none;
-      padding: 0;
-    }
+        /* Keyframe Animations */
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
 
-    /* Keyframe Animations */
-    @keyframes slideUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes slideInLeft {
-      from { transform: translateX(-50px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
+        /* FAQ SECTION STYLES */
+        .faq-section {
+            background-color: #ffffff;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+        .faq-section .section-title {
+            color: #000000;
+        }
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .faq-question {
+            background-color: #f0f0f0;
+            padding: 1rem 1.5rem;
+            font-family: 'Oswald', sans-serif; /* Changed to Oswald for consistency with headings */
+            font-weight: bold;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            color: #222;
+        }
+        .faq-question:hover {
+            background-color: #e0e0e0;
+        }
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .faq-question.active::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding: 1rem 1.5rem;
+            font-family: 'Nunito Sans', sans-serif; /* Nunito Sans for answers */
+            font-size: 1.3rem;
+            background-color: #fff;
+            border-top: 1px solid #eee;
+            display: none;
+            overflow: hidden;
+            color: #555;
+        }
 
-    /* --- NEW FAQ SECTION STYLES (based on JUNK/ELECTRIC, adapted to CREATIVE palette) --- */
-    .faq-section {
-      background-color: #ffffff; /* White background */
-      padding: 4rem 1rem;
-      text-align: center;
-    }
+        /* Contact Section Styles - MODIFIED */
+        .contact-section {
+            background-color: #f7f7f7;
+            padding: 4rem 1rem;
+            text-align: center;
+            color: #222;
+        }
+        .contact-section p {
+            font-family: 'Nunito Sans', sans-serif; /* Nunito Sans for paragraphs */
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .contact-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            color: #222;
+            position: relative;
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        /* New form-group styling for input fields */
+        .form-group-creative {
+            margin-bottom: 1.5rem;
+            text-align: left;
+            width: 100%;
+        }
+        .form-group-creative label {
+            display: block;
+            font-family: 'Oswald', sans-serif; /* Oswald for labels */
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-size: 1.15rem;
+        }
+        .form-group-creative input[type="text"],
+        .form-group-creative input[type="email"],
+        .form-group-creative input[type="tel"],
+        .form-group-creative input[type="date"],
+        .form-group-creative select,
+        .form-group-creative textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1.15rem;
+            font-family: 'Nunito Sans', sans-serif; /* Nunito Sans for input text */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-group-creative input:focus,
+        .form-group-creative select:focus,
+        .form-group-creative textarea:focus {
+            border-color: #78C976;
+            box-shadow: 0 0 0 3px rgba(120, 201, 118, 0.3);
+            outline: none;
+        }
+        .form-group-creative textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-submit-button {
+            background-color: #78C976;
+            color: #fff;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            font-size: 1.3rem;
+            font-family: 'Oswald', sans-serif; /* Oswald for buttons */
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: auto;
+            display: block;
+            margin: 1rem auto;
+        }
+        .form-submit-button:hover {
+            background-color: #5fae60;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        .form-error-message {
+            color: #dc3545;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            display: block;
+        }
 
-    .faq-section .section-title {
-      color: #000000; /* Black heading color */
-    }
+        /* Thank You Panel Styling */
+        .thank-you-panel {
+            background-color: #ffffff;
+            border-radius: 12px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out;
+            height: 100%;
+            width: 100%;
+        }
+        .thank-you-panel.show {
+            display: flex;
+            opacity: 1;
+            visibility: visible;
+        }
+        .thank-you-panel h3 {
+            font-family: 'Oswald', sans-serif; /* Oswald for thank you heading */
+            font-size: 2rem;
+            color: #78C976;
+            margin-bottom: 1rem;
+        }
+        .thank-you-panel p {
+            font-family: 'Nunito Sans', sans-serif; /* Nunito Sans for thank you text */
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        .thank-you-panel strong {
+            color: #000;
+        }
+        /* Style for the "Prefer to reach out directly?" text below the form */
+        .contact-alternatives {
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: #555;
+            text-align: center;
+        }
+        .contact-alternatives a {
+            color: #78C976;
+            text-decoration: none;
+            font-weight: bold; /* Make the email/LinkedIn stand out */
+        }
 
-    .faq-container {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: left;
-    }
+        /* Tooltip for CMS */
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip-icon {
+            cursor: pointer;
+            color: #78C976; /* Match brand green */
+            font-weight: bold;
+            margin-left: 4px;
+        }
+        .tooltip-popup {
+            visibility: hidden;
+            background-color: #333; /* Darker background */
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%; /* Position above the icon */
+            left: 50%;
+            margin-left: -150px; /* Center the popup */
+            opacity: 0;
+            transition: opacity 0.3s;
+            width: 300px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem; /* Smaller font for tooltip */
+            font-family: 'Nunito Sans', sans-serif; /* Nunito Sans for tooltip text */
+        }
+        .tooltip-container:hover .tooltip-popup {
+            visibility: visible;
+            opacity: 1;
+        }
+        .tooltip-popup::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
 
-    .faq-item {
-      margin-bottom: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Subtle shadow */
-    }
 
-    .faq-question {
-      background-color: #f0f0f0; /* Light grey, similar to JUNK */
-      padding: 1rem 1.5rem;
-      font-family: 'Roboto', sans-serif;
-      font-weight: bold;
-      font-size: 1.3rem; /* Adjusted from 1.2rem to 1.3rem as per user's preference for this group */
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background-color 0.3s ease;
-      color: #222; /* Dark text for question */
-    }
-
-    .faq-question:hover {
-      background-color: #e0e0e0;
-    }
-
-    .faq-question::after {
-      content: '+';
-      font-size: 1.5rem;
-      transition: transform 0.3s ease;
-    }
-
-    .faq-question.active::after {
-      content: '-';
-      transform: rotate(180deg);
-    }
-
-    .faq-answer {
-      padding: 1rem 1.5rem;
-      font-family: 'Nunito Sans', sans-serif;
-      font-size: 1.3rem; /* Adjusted from 1.2rem to 1.3rem as per user's preference for this group */
-      background-color: #fff;
-      border-top: 1px solid #eee;
-      display: none; /* Hidden by default */
-      overflow: hidden;
-      color: #555; /* Slightly lighter text for answer */
-    }
-
-    
-    .contact-section {
-      background-color: #f7f7f7; /* Changed from green to light grey */
-      padding: 4rem 1rem;
-      text-align: center;
-      color: #222; /* Changed from white to dark text for heading */
-    }
-
-    .contact-section .section-title {
-        color: #000000; /* Changed from white to black heading color */
-        margin-bottom: 1.5rem; /* Adjusted for less space */
-    }
-
-    /* Added this rule to make the paragraph font size consistent */
-    .contact-section p {
-        font-size: 1.3rem;
-        color: #333; /* Consistent with other main paragraphs */
-        margin-bottom: 1rem; /* Adjust margin as needed */
-    }
-
-    .contact-form-container { /* This will act like the "panel" within the full-width section */
-        max-width: 700px; /* Based on ELECTRIC's form width */
-        margin: 0 auto;
-        padding: 3rem 2rem; /* Similar to JUNK's form panel padding */
-        background-color: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        text-align: left;
-        color: #222; /* Dark text inside form panel */
-    }
-    .contact-form-container .quote-subtext {
-        font-size: 1.3rem; /* Maintained at 1.3rem as it was */
-        color: #666;
-        margin-bottom: 25px;
-        text-align: center; /* Center align subtext */
-    }
-    
-    
-    .contact-form-container iframe {
-        display: block; /* Ensure iframe behaves like a block element */
-        margin: 0 auto; /* Center the iframe */
-        max-width: 100%; /* Ensure it's responsive */
-        height: 600px; /* Keep the requested height */
-        border-radius: 8px; /* Match form container's border-radius */
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow for iframe */
-    }
-
-    
-    @media (max-width: 767px) {
-      /* Adjust body padding for mobile too */
-      body {
-        padding-top: 70px; /* Adjust for mobile header height if different */
-      }
-
-      .hero,
-      .panel,
-      .cta {
-        width: 90%;
-        margin: 2rem auto;
-        padding: 1.5rem;
-      }
-
-      .desktop-line1, .desktop-line2 {
-        display: none;
-      }
-
-      .mobile-line1, .mobile-line2, .mobile-scroll {
-        display: block;
-        font-family: 'Oswald', sans-serif;
-        font-weight: 700;
-        color: #000;
-        text-align: center;
-        user-select: none;
-      }
-      .mobile-line1 {
-        font-size: 2.2rem;
-        line-height: 1.2;
-        margin-bottom: 0.25rem;
-      }
-      .mobile-line2 {
-        font-size: 2.2rem;
-        line-height: 1.2;
-        margin-bottom: 0.5rem;
-      }
-
-      .mobile-scroll {
-        position: relative;
-        overflow: hidden;
-        height: 48px;
-        width: 100%;
-        margin: 0 auto;
-      }
-
-      .scroll-container {
-        display: none;
-      }
-
-      .mobile-scroll .scroll-text {
-        width: 100%;
-        text-align: center;
-        font-size: 2.2rem;
-        animation: scrollUpMobile 10s linear infinite;
-      }
-
-      .mobile-scroll .scroll-text div {
-        justify-content: center;
-        height: 48px;
-      }
-
-      @keyframes scrollUpMobile {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(-50%); }
-      }
-
-      .hamburger-menu {
-        display: flex;
-      }
-      nav.desktop-nav {
-        display: none;
-      }
-
-      header {
-        padding: 0.8rem 1.5rem; 
-      }
-      .logo img {
-        height: 30px; 
-      }
-      .logo { /* Rule for logo position on mobile */
-        margin-right: auto; /* Pushes the logo to the left */
-      }
-
-      .hero h1, .panel h2, .cta h2 {
-        font-size: 2.2rem;
-      }
-      .hero p, .panel p, .cta p, .cta ul li {
-        font-size: 1.3rem; /* Consistent with desktop body font size */
-      }
-      .hero-button {
-        font-size: 1.25rem; 
-        padding: 0.7rem 1.8rem;
-      }
-
-      
-      .section-title {
-        font-size: 2.2rem; 
-        margin-bottom: 1.5rem;
-      }
-      .faq-section {
-        padding: 3rem 1rem;
-      }
-      .faq-question {
-        font-size: 1.2rem;
-        padding: 0.8rem 1rem;
-      }
-      .faq-answer {
-        font-size: 1.2rem;
-        padding: 0.8rem 1rem;
-      }
-      .contact-section {
-        padding: 3rem 1rem;
-      }
-      .contact-form-container {
-        padding: 2rem 1.5rem;
-        max-width: 90%; 
-      }
-      
-      .contact-form-container iframe {
-          height: 500px; 
-      }
-    }
-  </style>
+        @media (max-width: 767px) {
+            body {
+                padding-top: 70px;
+            }
+            .hero,
+            .panel,
+            .cta,
+            .section-content { /* Apply to general content sections */
+                width: 90%;
+                margin: 2rem auto;
+                padding: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p, .panel p, .cta p, .cta ul li, .section-content p {
+                font-size: 1.15rem; /* Match body font size */
+            }
+            .hero-button {
+                font-size: 1.25rem;
+                padding: 0.7rem 1.8rem;
+            }
+            .hamburger-menu {
+                display: flex;
+            }
+            nav.desktop-nav {
+                display: none;
+            }
+            header {
+                padding: 0.8rem 1.5rem;
+            }
+            .logo img {
+                height: 30px;
+            }
+            .logo {
+                margin-right: auto;
+            }
+            .panel h2, .cta h2 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 1.5rem;
+            }
+            .contact-section .section-title {
+                font-size: 2.2rem;
+            }
+            .faq-section {
+                padding: 3rem 1rem;
+            }
+            .faq-question {
+                font-size: 1.2rem;
+                padding: 0.8rem 1rem;
+            }
+            .faq-answer {
+                font-size: 1.2rem;
+                padding: 0.8rem 1rem;
+            }
+            .contact-section {
+                padding: 3rem 1rem;
+            }
+            .contact-form-container {
+                padding: 2rem 1.5rem;
+                max-width: 90%;
+            }
+            .form-submit-button {
+                padding: 0.8rem 2rem;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <a href="#" class="logo">      <img src="https://github.com/mmp03patane/creative/blob/main/Creative%20logo.JPG?raw=true" alt="Creative365 Logo" />
-    </a>
-    <div class="hamburger-menu" onclick="toggleMobileMenu()">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <nav class="desktop-nav">
-      <a href="#about-section">About</a>
-      <a href="#expertise-section">Expertise</a>
-      <a href="#faq-section">FAQ</a>
-      <a href="#contact-section">Contact</a>
-    </nav>
-    <nav class="mobile-nav" id="mobileNav">
-      <a href="#about-section" onclick="toggleMobileMenu()">About</a>
-      <a href="#expertise-section" onclick="toggleMobileMenu()">Expertise</a>
-      <a href="#faq-section" onclick="toggleMobileMenu()">FAQ</a>
-      <a href="#contact-section" onclick="toggleMobileMenu()">Contact</a>
-    </nav>
-  </header>
-
-  <section class="hero" id="hero-section"> <div class="scroll-wrapper desktop-hero">
-    <span class="desktop-line1">LET'S GROW YOUR BUSINESS</span>
-    <div class="desktop-line2">
-      <span>WITH</span>
-      <div class="scroll-container">
-        <div class="scroll-text">
-          <div>INSTAGRAM ADS</div>
-          <div>FACEBOOK ADS</div>
-          <div>GOOGLE ADS</div>
-          <div>A NEW WEBSITE</div>
-          <div>FACEBOOK ADS</div>
-          <div>INSTAGRAM ADS</div>
-          <div>GOOGLE ADS</div>
-          <div>A NEW WEBSITE</div>
+    <header>
+        <a href="#" class="logo">
+            <img src="https://github.com/mmp03patane/creative/blob/main/Creative%20logo.JPG?raw=true" alt="Creative365 Logo" />
+        </a>
+        <div class="hamburger-menu" onclick="toggleMobileMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
         </div>
-      </div>
-    </div>
-  </div>
+        <nav class="desktop-nav">
+            <a href="#problem-section">Why a Website?</a>
+            <a href="#creative365-difference">Our Difference</a>
+            <a href="#contact-section">Get a Quote</a>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="#problem-section" onclick="toggleMobileMenu()">Why a Website?</a>
+            <a href="#creative365-difference" onclick="toggleMobileMenu()">Our Difference</a>
+            <a href="#contact-section" onclick="toggleMobileMenu()">Get a Quote</a>
+        </nav>
+    </header>
 
-    <div class="scroll-wrapper mobile-hero">
-      <span class="mobile-line1">LET'S GROW YOUR</span>
-      <span class="mobile-line2">BUSINESS WITH</span>
-      <div class="mobile-scroll">
-        <div class="scroll-text">
-          <div>INSTAGRAM ADS</div>
-          <div>FACEBOOK ADS</div>
-          <div>GOOGLE ADS</div>
-          <div>A NEW WEBSITE</div>
-          <div>FACEBOOK ADS</div>
-          <div>INSTAGRAM ADS</div>
-          <div>GOOGLE ADS</div>
-          <div>A NEW WEBSITE</div>
+    <section class="hero" id="hero-section">
+        <h1>ATTENTION MELBOURNE TRADIES & SERVICE BUSINESSES!</h1>
+        <p><strong>Are you tired of relying solely on word-of-mouth?</strong></p>
+        <p><strong>Is your website an afterthought, or worse, non-existent?</strong></p>
+        <p>It's time to stop leaving money on the table. We build websites that don't just look good, they get you booked!</p>
+        <a href="#contact-section" class="hero-button">Get Your Free Website Quote!</a>
+    </section>
+
+    <!-- Problem & Solution Narrative Section -->
+    <section class="panel section-content" id="problem-section">
+        <h2 class="section-title">Why Aren't You Getting More Leads Online?</h2>
+        <p>Let's be honest. In today's market, if potential customers can't find you online, you might as well be invisible. Many tradies and service businesses face these frustrating challenges:</p>
+        <p><strong>&#x2022; Relying on Referrals Only?</strong> While great, word-of-mouth can be slow and unpredictable, especially when you need consistent work.</p>
+        <p><strong>&#x2022; Invisible to New Customers?</strong> Over <strong>78% of local service searches start online.</strong> If you don't have a professional, easy-to-find website, you're missing out on a massive stream of potential clients actively looking for your services.</p>
+        <p><strong>&#x2022; Losing to Competitors?</strong> If your competitors have a strong online presence and you don't, they're winning the jobs you could be getting. They're establishing credibility and trust before you even get a call.</p>
+        <p><strong>&#x2022; Drowning in Admin, Not on the Tools?</strong> Manual lead capture, quoting, and scheduling eat into your valuable time. An efficient website can significantly reduce this burden, freeing you up to do what you do best.</p>
+        <p><strong>&#x2022; Your Website is Just a Digital Brochure?</strong> A pretty website is an absolute waste of time if it doesn't bring you business. An overly complex site? Another waste. If your customer can't find what they're looking for in under 3 seconds, you may as well call up your competitor, ask them for their BSB and account details, and transfer your monthly revenue to them.</p>
+
+        <h2 class="section-title" style="margin-top: 3rem;">Imagine This: Your Website, Your Hardest Worker.</h2>
+        <p>A well-built, conversion-focused website is your most powerful tool. It transforms these pain points into pure profit:</p>
+        <p><strong>&#x2022; 24/7 Lead Generation:</strong> Your website works for you around the clock, answering questions, showcasing your work, and capturing leads even while you're asleep or on a job. It's your always-on sales and marketing engine.</p>
+        <p><strong>&#x2022; Instant Credibility & Trust:</strong> A professional website instantly builds confidence with potential clients. Did you know <strong>85% of consumers judge a business's credibility based on its website design?</strong> (Source: Illustrative industry finding). Show you're legitimate and reliable.</p>
+        <p><strong>&#x2022; Dominate Local Search:</strong> We build sites optimised for Google, so when someone in Melbourne searches for a "plumber near me" or "electrician," you show up at the top. <strong>53% of all web traffic is driven by organic search.</strong> (Source: Illustrative industry finding)</p>
+        <p><strong>&#x2022; Showcase Your Expertise:</strong> Easily display your portfolio, customer testimonials, licenses, and detailed service offerings. Let your work speak for itself!</p>
+        <p><strong>&#x2022; Streamlined Operations:</strong> With integrated forms and clear calls to action, your website simplifies lead capture and booking inquiries, saving you admin time and getting you more pre-qualified leads.</p>
+        <p><strong>&#x2022; Higher Conversion Rates:</strong> Dedicated landing pages can achieve <strong>conversion rates from 8.8% to over 18.2%</strong>, significantly higher than generic sites. (Source: Illustrative industry finding). Every element we design is geared towards turning visitors into paying customers.</p>
+    </section>
+
+    <!-- The Creative365 Difference Section -->
+    <section class="cta section-content" id="creative365-difference">
+        <h2 class="section-title">The Creative365 Difference: Websites Built for Profit.</h2>
+        <p>I'm Michael Patane, owner of Creative365. I've spent years understanding how businesses grow, from GLG to Jim's Group and MYOB. Now, I apply that knowledge to build *your* online success.</p>
+        <p>Here's how Creative365 ensures your website is a true conversion machine:</p>
+        <ul>
+            <li><strong>1. Smart Domain Setup:</strong> We guide you through purchasing your custom domain and handle all the tech setup. You own it, we connect it seamlessly.</li>
+            <li><strong>2. Free, Fast, Reliable Hosting:</strong> Forget monthly bills. Your website includes secure, lightning-fast hosting, ensuring you're always online.</li>
+            <li><strong>3. Free SSL Certificate:</strong> Your site gets a secure 'https://' connection for trust and better Google rankings, at no extra cost.</li>
+            <li><strong>4. Obsessive UX Design:</strong> Every design choice is about your customer. Easy navigation, clear paths to booking, and a seamless experience on any device.</li>
+            <li><strong>5. Functional & High-Converting:</strong> We don't build digital brochures. Our sites are engineered to turn visitors into leads, and leads into booked jobs.</li>
+            <li><strong>6. Seamless CRM Integration:</strong> Forms can connect directly with your existing CRM (like Jobber, ServiceM8) for effortless lead capture and management.</li>
+            <li><strong>7. Built for Google (SEO Optimised):</strong> Your site is constructed with search engines in mind from day one, helping you rank higher and get found.</li>
+            <li><strong>8. Google Reviews Front & Centre:</strong> We integrate a Google plugin to showcase your 5-star reviews, instantly building social proof and trust.</li>
+            <li><strong>9. Tailored Solutions (1-7 Pages):</strong> Whether you need a powerful single-page landing site or a comprehensive 7-page business hub, we build to your exact needs for maximum impact.</li>
+        </ul>
+        <p>We focus on what matters: <strong>getting you more business.</strong></p>
+    </section>
+
+    <!-- About Section (Michael's Profile - kept as per user's original site structure) -->
+    <section class="panel" id="about-section">
+        <img src="https://github.com/mmp03patane/creative/blob/main/PROFILE%20PHOTO%203.PNG?raw=true" alt="Michael Patane Photo" class="profile-photo" />
+        <p>Hey everyone,</p>
+        <p>I'm <b>Michael Patane</b>, and I run <b>Creative365:</b> <i>A business consultancy that helps residential service businesses grow.</i></p>
+        <p>I’ve worked with some of the biggest companies in Australia:</p>
+        <p>At <b>GLG</b>, I clocked up <b>hundreds of consulting hours</b> helping service-based businesses with anything from franchising advice to lead generation. Electricians, plumbers, gardeners, painters, and general trades. I've seen it all...</p>
+        <p>At <b>Jim’s Group</b>, I helped streamline onboarding operations for franchisees. I hosted a monthly lecture teaching mowing franchisees how to use technology to <b>quote</b>, <b>schedule</b> and <b>invoice</b> clients.</p>
+        <p>At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive adoption through education. I focused on <b>internal efficiencies</b> to <b>elevate customer success experiences</b>.</p>
+        <p>And now, with <b>Creative365</b>, I help service-based business grow by designing <b>customer acquisition</b> and <b>retention</b> strategies that generate <b>predictable revenue</b>.</p>
+    </section>
+
+    <!-- FAQ Section (Kept as per user's original site structure) -->
+    <section class="faq-section" id="faq-section">
+        <h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">What services does Creative365 offer?</div>
+                <div class="faq-answer">Creative365 offers business consultancy focusing on marketing (website building, lead generation, various ad types), operations (internal process optimization, coaching), and retention (customer success, loyalty strategies).</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How can we work together?</div>
+                <div class="faq-answer">You have two main options. 1. Advisory Only: I provide strategic advice and a clear action plan, but you handle the implementation.2. Done-For-You: I handle both the strategy and execution, so you can stay focused on running your business.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What does “advisory only” mean?</div>
+                <div class="faq-answer">In this arrangement, I guide you through what needs to be done and how to do it. You're responsible for putting the plan into action.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What is included in the “done-for-you” service?</div>
+                <div class="faq-answer">I take care of both planning and implementing the strategy. You get a turnkey solution without having to manage the day-to-day details.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What types of businesses do you work with?</div>
+                <div class="faq-answer">Creative365 primarily helps residential service businesses, including but not limited to electricians, plumbers, gardeners, and general trades.</div>
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <p style="font-style: italic;">🚀 Looking for more leads? <br> More predictable revenue? <br> 
-Then let’s build a system that keeps the phone ringing and the cashflow steady.</p>
+    <!-- Contact Section with Form -->
+    <section class="contact-section" id="contact-section">
+        <h2 class="section-title">Ready to Stop Guessing & Start Growing?</h2>
+        <p>It's time to transform your online presence into a predictable lead machine.</p>
+        <p>Fill out the form below for your <strong>FREE, no-obligation discovery call or custom website quote.</strong> I'll get back to you within 1 business hour to confirm!</p>
 
-    <p><strong>Book a FREE chat now</strong></p>
+        <div class="contact-form-container">
+            <!-- Form Submission Message -->
+            <div id="formStatusMessage" class="form-error-message" style="display: none; text-align: center; margin-bottom: 1.5rem;"></div>
 
-    <p>Pick a time that suits 👇</p>
+            <!-- The main contact form -->
+            <form id="creative365ContactForm" method="POST" action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT_HERE">
+                <div class="form-group-creative">
+                    <label for="fullName">Your Full Name<span style="color:red;">*</span></label>
+                    <input type="text" id="fullName" name="Name" placeholder="John Smith" required>
+                    <span class="form-error-message" id="nameError" style="display: none;"></span>
+                </div>
 
-    <button class="hero-button" onclick="window.location.href='#contact-section'">Let's Chat</button> </section>
+                <div class="form-group-creative">
+                    <label for="emailAddress">Your Email Address<span style="color:red;">*</span></label>
+                    <input type="email" id="emailAddress" name="Email" placeholder="john.smith@example.com" required>
+                    <span class="form-error-message" id="emailError" style="display: none;"></span>
+                </div>
 
-  <section class="panel" id="about-section"> <img src="https://github.com/mmp03patane/creative/blob/main/PROFILE%20PHOTO%203.PNG?raw=true" alt="Your Photo" class="profile-photo" />
+                <div class="form-group-creative">
+                    <label for="phoneNumber">Your Phone Number<span style="color:red;">*</span></label>
+                    <input type="tel" id="phoneNumber" name="Phone" placeholder="e.g., 04XX XXX XXX" required>
+                    <span class="form-error-message" id="phoneError" style="display: none;"></span>
+                </div>
 
-    <p>Hey everyone, <br><br>
+                <div class="form-group-creative">
+                    <label for="preferredDate">Preferred Date for a Call<span style="color:red;">*</span></label>
+                    <input type="date" id="preferredDate" name="Preferred_Date" required>
+                    <span class="form-error-message" id="dateError" style="display: none;"></span>
+                    <p style="font-size: 0.9rem; color: #555; margin-top: 0.5rem; text-align: left;">Please select a date at least 24 hours in the future.</p>
+                </div>
 
-I'm <b>Michael Patane</b>, and I run <b>Creative365:</b>
+                <div class="form-group-creative">
+                    <label for="preferredTimeSlot">Preferred Time Slot<span style="color:red;">*</span></label>
+                    <select id="preferredTimeSlot" name="Preferred_Time_Slot" required>
+                        <option value="">Select a time slot</option>
+                        <option value="Morning (9 AM - 12 PM AEST)">Morning (9 AM - 12 PM AEST)</option>
+                        <option value="Afternoon (1 PM - 4 PM AEST)">Afternoon (1 PM - 4 PM AEST)</option>
+                        <option value="Late Afternoon (4 PM - 5 PM AEST)">Late Afternoon (4 PM - 5 PM AEST)</option>
+                        <option value="Other">Other (Please specify in message)</option>
+                    </select>
+                    <span class="form-error-message" id="timeSlotError" style="display: none;"></span>
+                    <p style="font-size: 0.9rem; color: #555; margin-top: 0.5rem; text-align: left;">This is a request; we will confirm exact availability.</p>
+                </div>
 
-      <i>A business consultancy that helps residential service businesses grow.</i><br><br>
+                <!-- Custom Domain Question -->
+                <div class="form-group-creative">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2">Do you have your own custom domain?<span style="color:red;">*</span></label>
+                    <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="hasDomain" value="Yes" required>
+                            <span style="margin-left: 0.5rem; font-family: 'Nunito Sans', sans-serif; font-size: 1.15rem; color: #333;">Yes</span>
+                        </label>
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="hasDomain" value="No">
+                            <span style="margin-left: 0.5rem; font-family: 'Nunito Sans', sans-serif; font-size: 1.15rem; color: #333;">No</span>
+                        </label>
+                    </div>
+                </div>
 
-I’ve worked with some of the biggest companies in Australia:<br><br>
+                <!-- CMS Question -->
+                <div class="form-group-creative">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2">
+                        Do you currently use a Customer Management System (CMS)?<span style="color:red;">*</span>
+                        <span class="tooltip-container">
+                            <span class="tooltip-icon">?</span>
+                            <div class="tooltip-popup">
+                                A CMS (Content Management System) helps you manage your website content. For tradies and service businesses, a CRM (Customer Relationship Management) system often has CMS-like features or integrations for managing jobs, clients, and scheduling. Popular ones include:
+                                <ul style="list-style: disc; padding-left: 20px; margin-top: 8px;">
+                                    <li>Jobber</li>
+                                    <li>ServiceM8</li>
+                                    <li>Tradify</li>
+                                    <li>Simpro</li>
+                                    <li>Connecteam (for team management)</li>
+                                    <li>Workiz</li>
+                                </ul>
+                            </div>
+                        </span>
+                    </label>
+                    <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="usesCMS" value="Yes" required>
+                            <span style="margin-left: 0.5rem; font-family: 'Nunito Sans', sans-serif; font-size: 1.15rem; color: #333;">Yes</span>
+                        </label>
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="usesCMS" value="No">
+                            <span style="margin-left: 0.5rem; font-family: 'Nunito Sans', sans-serif; font-size: 1.15rem; color: #333;">No</span>
+                        </label>
+                    </div>
+                </div>
 
-At <b>GLG</b>, I clocked up <b>hundreds of consulting hours</b> helping service based businesses with anything from franchising advice to lead generation. Electricians, plumbers, gardeners, painters, and general trades.
-      <br>
-      I've seen it all...
-<br><br>
-At <b>Jim’s Group</b>, I helped streamline onboarding operations for franchisees.
-      <br>
-      I hosted a monthly lecture teaching mowing franchisees how to use technology to <b>quote</b>, <b>schedule</b> and <b>invoice</b> clients.
-<br><br>
-At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive adoption through education. I focused on <b>internal efficiencies</b> to <b>elevate customer success experiences</b>.
-<br><br>
-And now, with <b>Creative365</b>, I help service based business grow by designing <b>customer acquisition</b> and <b>retention</b> strategies that generate <b>predictable revenue</b>.</p>
+                <div class="form-group-creative">
+                    <label for="projectNeeds">Tell us about your website needs (briefly):<span style="color:red;">*</span></label>
+                    <textarea id="projectNeeds" name="Project_Needs" rows="4" placeholder="e.g., I need a new website to get more leads for my plumbing business. I'm looking for 3-4 pages covering services and contact info." required></textarea>
+                </div>
 
-  </section>
+                <div class="form-group-creative">
+                    <label for="howHear">How did you hear about us?</label>
+                    <select id="howHear" name="How_Heard">
+                        <option value="">Select an option (optional)</option>
+                        <option value="Google Search">Google Search</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Referral">Referral</option>
+                        <option value="Online Ad">Online Ad</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
 
-  <section class="cta" id="expertise-section"> <h2 class="section-title">EXPERTISE</h2> <p>
-As your business consultant, I can help you grow your business via the following:<br><br>
-      
-      <b><u>MARKETING</u></b><br>
-      Website building, Lead generation, Email marketing, Google ads, Facebook ads, Instagram ads, Linkedin Ads, Youtube Ads, Sales training, Sales process improvement, Conversion optimization, Competitor analysis.<br><br>
-      <b><u>OPERATIONS</u></b><br>
-      Internal processes optimization, business coaching, mindset coaching, time and cost saving strategies.<br><br>
-      <b><u>RETENTION</u></b><br>
-      Customer success, Retention strategies, Repeat customer and loyalty strategies, Advocacy planning.
+                <button type="submit" class="form-submit-button">Book My Free Chat</button>
+            </form>
 
-    </p>
-  </section>
+            <!-- Thank You Panel - Initially hidden -->
+            <div id="thankYouPanel" class="thank-you-panel">
+                <h3>Thank You!</h3>
+                <p>Hi <strong><span id="thankYouName"></span></strong>,</p>
+                <p>Your request has been successfully submitted. I will be in touch to discuss <strong><span id="thankYouInterest"></span></strong> on <strong><span id="thankYouDate"></span></strong> at <strong><span id="thankYouTime"></span></strong>.</p>
+                <p>I'm excited to connect and help your business grow!</p>
+            </div>
 
-  <section class="faq-section" id="faq-section">
-    <h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <div class="faq-question">What services does Creative365 offer?</div>
-        <div class="faq-answer">Creative365 offers business consultancy focusing on marketing (website building, lead generation, various ad types), operations (internal process optimization, coaching), and retention (customer success, loyalty strategies).</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">How can we work together?</div>
-        <div class="faq-answer">You have two main options. 1. Advisory Only: I provide strategic advice and a clear action plan, but you handle the implementation.
-2. Done-For-You: I handle both the strategy and execution, so you can stay focused on running your business.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">What does “advisory only” mean?</div>
-        <div class="faq-answer">In this arrangement, I guide you through what needs to be done and how to do it. You're responsible for putting the plan into action.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">What is included in the “done-for-you” service?</div>
-        <div class="faq-answer">I take care of both planning and implementing the strategy. You get a turnkey solution without having to manage the day-to-day details.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">What types of businesses do you work with?</div>
-        <div class="faq-answer">Creative365 primarily helps residential service businesses, including but not limited to electricians, plumbers, gardeners, and general trades.</div>
-      </div>
-    </div>
-  </section>
+            <p class="contact-alternatives">
+                Prefer to reach out directly?<br>
+                E: <a href="mailto:michael@creative365.info"><b>michael@creative365.info</b></a>
+                <br>Or connect on <a href="https://www.linkedin.com/in/patane-michael/" target="_blank">LinkedIn</a>.
+            </p>
+        </div>
+    </section>
 
-  <section class="contact-section" id="contact-section">
-    <h2 class="section-title">CONTACT</h2>
-    <p>If you've got any questions feel free to reach out.<br><br>
-E: <a href="mailto:michael@creative365.info"><b>michael@creative365.info</b></a><br>
-Connect with me on <a href="https://www.linkedin.com/in/patane-michael/" target="_blank">LinkedIn</a>.<br><br>
-Or book a quick phone call via my Google Calendar below — whatever works best for you.<br><br>     
-    </p>
-    <div class="contact-form-container">
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3AgJLV95DsanjqZg-EruNwyU4GBaNJPOcxtvDgDUeLV8qOmTaQIuKAh5WT2BRZtIVv0iWXd59u?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
-    </div>
-  </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Creative365. All rights reserved.</p>
+        </div>
+    </footer>
 
-  <script>
-    function toggleMobileMenu() {
-      document.getElementById("mobileNav").classList.toggle("open");
-    }
-
-    // FAQ Toggle Functionality
-    document.addEventListener('DOMContentLoaded', () => {
-      // --- FIX 1: Force scroll to top on initial page load/refresh ---
-      window.scrollTo(0, 0);
-
-      const faqQuestions = document.querySelectorAll('.faq-question');
-
-      faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-          const answer = question.nextElementSibling;
-          question.classList.toggle('active');
-
-          if (answer.style.display === 'block') {
-            answer.style.display = 'none';
-          } else {
-            answer.style.display = 'block';
-          }
-        });
-      });
-
-      // --- FIX 2: Adjust smooth scroll for navigation links, especially the logo ---
-      document.querySelectorAll('nav a[href^="#"], .hero-button[href^="#"], .logo[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            const targetId = this.getAttribute('href');
-
-            // If the target is just "#" (or "#top" if you use it), scroll to (0,0)
-            if (targetId === '#') {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            } else {
-                // For other section links, scroll to them with an offset for the fixed header
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const headerOffset = document.querySelector('header').offsetHeight; // Get current header height
-                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-
-            // Close mobile menu if open
-            if (document.getElementById("mobileNav").classList.contains("open")) {
-                toggleMobileMenu();
-            }
-        });
-      });
-
-      // --- Header Scroll Behavior ---
-      let lastScrollY = window.scrollY;
-      const header = document.querySelector('header');
-      const headerHeight = header.offsetHeight; // Get the header's actual height
-
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > lastScrollY && window.scrollY > headerHeight) {
-          // Scrolling down and past the header height
-          header.classList.add('hidden');
-        } else if (window.scrollY < lastScrollY) {
-          // Scrolling up
-          header.classList.remove('hidden');
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById("mobileNav").classList.toggle("open");
         }
-        lastScrollY = window.scrollY;
-      });
-      // --- End Header Scroll Behavior ---
-    });
-  </script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.scrollTo(0, 0); // Force scroll to top on initial page load/refresh
+
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    question.classList.toggle('active');
+
+                    if (answer.style.display === 'block') {
+                        answer.style.display = 'none';
+                    } else {
+                        answer.style.display = 'block';
+                    }
+                });
+            });
+
+            // Adjust smooth scroll for navigation links
+            document.querySelectorAll('nav a[href^="#"], .hero-button[href^="#"], .logo[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') { // For the logo linking to top
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            const headerOffset = document.querySelector('header').offsetHeight;
+                            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                            const offsetPosition = elementPosition - headerOffset;
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                    if (document.getElementById("mobileNav").classList.contains("open")) {
+                        toggleMobileMenu(); // Close mobile menu after clicking a link
+                    }
+                });
+            });
+
+            // Header Scroll Behavior
+            let lastScrollY = window.scrollY;
+            const header = document.querySelector('header');
+            const headerHeight = header.offsetHeight;
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > lastScrollY && window.scrollY > headerHeight) {
+                    header.classList.add('hidden');
+                } else if (window.scrollY < lastScrollY) {
+                    header.classList.remove('hidden');
+                }
+                lastScrollY = window.scrollY;
+            });
+
+            // FORM BUFFER AND VALIDATION (CLIENT-SIDE)
+            const contactForm = document.getElementById('creative365ContactForm');
+            const preferredDateInput = document.getElementById('preferredDate');
+            const preferredTimeSlotSelect = document.getElementById('preferredTimeSlot');
+            const formStatusMessage = document.getElementById('formStatusMessage');
+            const thankYouPanel = document.getElementById('thankYouPanel');
+            const thankYouName = document.getElementById('thankYouName');
+            const thankYouDate = document.getElementById('thankYouDate');
+            const thankYouTime = document.getElementById('thankYouTime');
+            const thankYouInterest = document.getElementById('thankYouInterest');
+            const projectNeedsInput = document.getElementById('projectNeeds');
+
+
+            function formatIsoDate(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+
+            function updateMinDate() {
+                const now = new Date();
+                const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+                preferredDateInput.min = formatIsoDate(tomorrow);
+            }
+
+            function validateFormFields() {
+                let isValid = true;
+                // Clear previous errors
+                document.querySelectorAll('.form-error-message').forEach(el => el.style.display = 'none');
+                formStatusMessage.style.display = 'none';
+
+                const requiredFields = [
+                    { id: 'fullName', name: 'Your Full Name', errorId: 'nameError' },
+                    { id: 'emailAddress', name: 'Your Email Address', errorId: 'emailError', type: 'email' },
+                    { id: 'phoneNumber', name: 'Your Phone Number', errorId: 'phoneError', type: 'tel' },
+                    { id: 'preferredDate', name: 'Preferred Date for a Call', errorId: 'dateError', type: 'date' },
+                    { id: 'preferredTimeSlot', name: 'Preferred Time Slot', errorId: 'timeSlotError' },
+                    { id: 'projectNeeds', name: 'Your Website Needs', errorId: 'projectNeedsError' }, // Added projectNeeds validation
+                    { id: 'interestArea', name: 'Interest Area', errorId: 'interestAreaError' }
+                ];
+
+                requiredFields.forEach(field => {
+                    const input = document.getElementById(field.id);
+                    const errorSpan = document.getElementById(field.errorId);
+                    if (input) { // Check if element exists
+                        if (!input.value.trim()) {
+                            errorSpan.textContent = `${field.name} is required.`;
+                            errorSpan.style.display = 'block';
+                            isValid = false;
+                        } else if (field.type === 'email' && !/\S+@\S+\.\S+/.test(input.value)) {
+                            errorSpan.textContent = `Please enter a valid email address.`;
+                            errorSpan.style.display = 'block';
+                            isValid = false;
+                        } else if (field.type === 'tel' && input.value.trim() && !/^\+?[0-9\s\-()]{7,20}$/.test(input.value.trim())) {
+                            errorSpan.textContent = `Please enter a valid phone number.`;
+                            errorSpan.style.display = 'block';
+                            isValid = false;
+                        }
+                    }
+                });
+
+                // Validate radio buttons for custom domain and CMS
+                const hasDomainRadios = document.querySelectorAll('input[name="hasDomain"]');
+                const usesCMSRadios = document.querySelectorAll('input[name="usesCMS"]');
+                let domainSelected = Array.from(hasDomainRadios).some(radio => radio.checked);
+                let cmsSelected = Array.from(usesCMSRadios).some(radio => radio.checked);
+
+                if (!domainSelected) {
+                    formStatusMessage.textContent = 'Please select if you have your own custom domain.';
+                    formStatusMessage.style.color = '#dc3545';
+                    formStatusMessage.style.display = 'block';
+                    isValid = false;
+                }
+                if (!cmsSelected) {
+                    formStatusMessage.textContent = (formStatusMessage.textContent ? formStatusMessage.textContent + ' ' : '') + 'Please select if you currently use a CMS.';
+                    formStatusMessage.style.color = '#dc3545';
+                    formStatusMessage.style.display = 'block';
+                    isValid = false;
+                }
+
+
+                const selectedDateStr = preferredDateInput.value;
+                const selectedTimeSlotVal = preferredTimeSlotSelect.value;
+                const dateErrorSpan = document.getElementById('dateError');
+
+                if (selectedDateStr && selectedTimeSlotVal && selectedTimeSlotVal !== 'Other') {
+                    const selectedDate = new Date(selectedDateStr);
+                    let startHour;
+                    if (selectedTimeSlotVal.includes('Morning')) {
+                        startHour = 9;
+                    } else if (selectedTimeSlotVal.includes('Afternoon')) {
+                        startHour = 13;
+                    } else if (selectedTimeSlotVal.includes('Late Afternoon')) {
+                        startHour = 16;
+                    }
+                    selectedDate.setHours(startHour, 0, 0, 0);
+
+                    const now = new Date();
+                    // Allow submission if the selected date is at least 24 hours from now
+                    const minAllowedTime = new Date(now.getTime() + (24 * 60 * 60 * 1000) - (60 * 1000)); // Adjusted to be slightly less than 24h to avoid edge case issues
+
+                    if (selectedDate < minAllowedTime) {
+                        dateErrorSpan.textContent = 'Selected date/time must be at least 24 hours in advance.';
+                        dateErrorSpan.style.display = 'block';
+                        isValid = false;
+                    }
+                }
+
+                return isValid;
+            }
+
+            updateMinDate();
+
+            contactForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+
+                if (!validateFormFields()) {
+                    // Scroll to the error message if validation fails
+                    if (formStatusMessage.style.display === 'block') {
+                        formStatusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
+
+                const submittedName = document.getElementById('fullName').value.split(' ')[0];
+                const submittedDate = new Date(preferredDateInput.value).toLocaleDateString('en-AU', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                const submittedTime = preferredTimeSlotSelect.value;
+                const submittedInterest = document.getElementById('interestArea').value;
+
+                const form = event.target;
+                const formData = new FormData(form);
+
+                // Add values for radio buttons manually to formData for Formspree
+                const hasDomainValue = document.querySelector('input[name="hasDomain"]:checked');
+                if (hasDomainValue) {
+                    formData.append('Has_Custom_Domain', hasDomainValue.value);
+                }
+                const usesCMSValue = document.querySelector('input[name="usesCMS"]:checked');
+                if (usesCMSValue) {
+                    formData.append('Uses_CMS', usesCMSValue.value);
+                }
+
+                const submitButton = form.querySelector('.form-submit-button');
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Hide the form and the static message below it
+                        contactForm.style.display = 'none';
+                        document.querySelector('.contact-alternatives').style.display = 'none';
+                        formStatusMessage.style.display = 'none';
+
+                        // Populate and show the thank you panel
+                        thankYouName.textContent = submittedName;
+                        thankYouDate.textContent = submittedDate;
+                        thankYouTime.textContent = submittedTime;
+                        thankYouInterest.textContent = submittedInterest;
+
+                        thankYouPanel.style.display = 'flex';
+                        thankYouPanel.classList.add('show');
+
+                        document.getElementById('contact-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                    } else {
+                        const errorData = await response.json();
+                        let errorMessage = 'There was an issue submitting your form. Please try again.';
+                        if (errorData.errors) {
+                            errorMessage += ' ' + errorData.errors.map(err => err.message).join(' ');
+                        }
+                        formStatusMessage.textContent = errorMessage;
+                        formStatusMessage.style.color = '#dc3545';
+                        formStatusMessage.style.display = 'block';
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Book My Free Chat';
+                        formStatusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    formStatusMessage.textContent = 'A network error occurred. Please check your internet connection and try again.';
+                    formStatusMessage.style.color = '#dc3545';
+                    formStatusMessage.style.display = 'block';
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Book My Free Chat';
+                    formStatusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
