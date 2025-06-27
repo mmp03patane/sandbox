@@ -195,6 +195,19 @@
             font-size: 1.5rem;
         }
 
+        /* Mobile menu specific styles */
+        .mobile-menu {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .mobile-menu.active {
+            max-height: 500px; /* Adjust as needed for menu content */
+            opacity: 1;
+        }
+
         /* Ensure form labels and inputs are aligned for desktop */
         @media (min-width: 768px) {
             .form-group-creative label {
@@ -208,7 +221,8 @@
     <header class="bg-white shadow-sm py-4">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <a href="#" class="text-3xl font-bold text-f97316">Creative<span class="text-gray-700">365.</span></a>
-            <nav>
+            
+            <nav class="hidden md:block">
                 <ul class="flex space-x-6">
                     <li><a href="#samples" class="text-gray-600 hover:text-f97316 font-medium">Our Work</a></li>
                     <li><a href="#about" class="text-gray-600 hover:text-f97316 font-medium">About</a></li>
@@ -217,7 +231,23 @@
                     <li><a href="#contact" class="text-gray-600 hover:text-f97316 font-medium">Get a Quote</a></li>
                 </ul>
             </nav>
+
+            <button id="mobileMenuButton" class="md:hidden p-2 text-gray-700 hover:text-f97316 focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
         </div>
+
+        <nav id="mobileMenu" class="mobile-menu md:hidden bg-white shadow-inner pt-2 pb-4">
+            <ul class="flex flex-col items-center space-y-4">
+                <li><a href="#samples" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">Our Work</a></li>
+                <li><a href="#about" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">About</a></li>
+                <li><a href="#how-it-works" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">How it Works</a></li>
+                <li><a href="#faq" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">FAQ</a></li>
+                <li><a href="#contact" class="text-f97316 hover:text-ea580c font-bold text-lg block py-2">Get a Quote</a></li>
+            </ul>
+        </nav>
     </header>
 
     <section class="gradient-bg text-white py-20 md:py-32 rounded-b-3xl shadow-xl bounce-animation">
@@ -347,7 +377,7 @@
                 </div>
 
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <button class="accordion-button w-full flex justify-between items- G items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
+                    <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
                         <span>Do you use a CMS, or just templates?</span>
                         <span class="transform transition-transform duration-300">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -534,6 +564,24 @@
             });
         });
 
+        // --- Mobile Menu Functionality (NEW JAVASCRIPT) ---
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuItems = mobileMenu.querySelectorAll('a'); // Get all links in the mobile menu
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        // --- END Mobile Menu Functionality ---
+
+
         // Quote Modal Functionality
         const openQuoteModalBtn = document.getElementById('openQuoteModal');
         const closeQuoteModalBtn = document.getElementById('closeQuoteModal');
@@ -715,7 +763,7 @@
             }
         });
 
-        // Live Site iFrame Modal Functionality (NEW JAVASCRIPT)
+        // Live Site iFrame Modal Functionality
         const liveSiteModal = document.getElementById('liveSiteModal');
         const liveSiteModalContent = document.getElementById('liveSiteModalContent');
         const closeLiveSiteModalBtn = document.getElementById('closeLiveSiteModal');
