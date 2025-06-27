@@ -216,7 +216,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body>
 
     <header class="bg-white shadow-sm py-4">
         <div class="container mx-auto px-4 flex justify-between items-center">
@@ -276,7 +276,7 @@
                     <img src="https://placehold.co/400x250/F97316/FFFFFF?text=Plumber+Website" alt="Plumber Website Sample" class="rounded-lg mb-4 w-full h-auto object-cover">
                     <h3 class="text-2xl font-semibold mb-2">Ace Plumbing Solutions</h3>
                     <p class="text-gray-600 mb-4">A sleek, mobile-first design focused on lead generation for a local plumber.</p>
-                    <a href="#" data-site-url="https://mmp03patane.github.io/JUNK/" data-site-title="Junk - GitHub Pages Example" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center open-live-site-modal">
+                    <a href="#" data-site-url="https://mmp03patane.github.io/JUNK/" data-site-title="Ace Plumbing Solutions" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center open-live-site-modal">
                         View Live Site
                         <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4m-4 0h6m0 0l-6-6m6 6L14 10"></path></svg>
                     </a>
@@ -286,7 +286,7 @@
                     <img src="https://placehold.co/400x250/F97316/FFFFFF?text=Electrician+Website" alt="Electrician Website Sample" class="rounded-lg mb-4 w-full h-auto object-cover">
                     <h3 class="text-2xl font-semibold mb-2">Sparky's Electrics</h3>
                     <p class="text-gray-600 mb-4">Fast loading and easy navigation to book electrical services instantly.</p>
-                    <a href="https://example.com/electrician-site" target="_blank" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center">
+                    <a href="#" data-site-url="https://mmp03patane.github.io/ELECTRIC/" data-site-title="Sparky's Electrics Site" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center open-live-site-modal">
                         View Live Site
                         <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4m-4 0h6m0 0l-6-6m6 6L14 10"></path></svg>
                     </a>
@@ -296,7 +296,7 @@
                     <img src="https://placehold.co/400x250/F97316/FFFFFF?text=Landscaper+Website" alt="Landscaper Website Sample" class="rounded-lg mb-4 w-full h-auto object-cover">
                     <h3 class="text-2xl font-semibold mb-2">GreenThumb Landscaping</h3>
                     <p class="text-gray-600 mb-4">Beautiful galleries and clear service offerings for a landscaping business.</p>
-                    <a href="https://example.com/landscaper-site" target="_blank" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center">
+                    <a href="#" data-site-url="https://mmp03patane.github.io/PLUMBING/" data-site-title="GreenThumb Landscaping Site" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center open-live-site-modal">
                         View Live Site
                         <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4m-4 0h6m0 0l-6-6m6 6L14 10"></path></svg>
                     </a>
@@ -432,7 +432,6 @@
     <div id="liveSiteModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
         <div class="bg-white p-2 rounded-lg shadow-xl max-w-5xl w-full h-[90vh] relative transform transition-all duration-300 scale-95 opacity-0" id="liveSiteModalContent">
             <button id="closeLiveSiteModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold leading-none z-10">&times;</button>
-            
             <iframe id="liveSiteIframe" src="" frameborder="0" class="w-full h-[calc(100%-10px)] mt-0 rounded-md" allowfullscreen></iframe>
             <p id="iframeError" class="text-red-600 text-center mt-4 hidden">This website cannot be displayed directly here due to security restrictions.</p>
         </div>
@@ -542,9 +541,8 @@
                 const accordionContent = button.nextElementSibling;
                 const icon = button.querySelector('svg');
 
-                button.classList.toggle('bg-gray-100'); // Toggle background on click
+                button.classList.toggle('bg-gray-100'); 
 
-                // Close other open accordions
                 document.querySelectorAll('.accordion-button').forEach(otherButton => {
                     if (otherButton !== button && otherButton.classList.contains('bg-gray-100')) {
                         otherButton.classList.remove('bg-gray-100');
@@ -740,12 +738,11 @@
             }
         });
 
-        // Live Site iFrame Modal Functionality (UPDATED)
+        // Live Site iFrame Modal Functionality
         const liveSiteModal = document.getElementById('liveSiteModal');
         const liveSiteModalContent = document.getElementById('liveSiteModalContent');
         const closeLiveSiteModalBtn = document.getElementById('closeLiveSiteModal');
         const liveSiteIframe = document.getElementById('liveSiteIframe');
-        // Removed modalSiteTitle and modalOpenInNewTab as they are no longer needed
         const iframeError = document.getElementById('iframeError');
 
         document.querySelectorAll('.open-live-site-modal').forEach(button => {
@@ -753,7 +750,7 @@
                 e.preventDefault(); 
 
                 const siteUrl = button.getAttribute('data-site-url');
-                // Removed data-site-title as it's no longer used
+                const siteTitle = button.getAttribute('data-site-title'); // Still useful for console.warn/debugging if needed
 
                 liveSiteIframe.src = siteUrl;
                 iframeError.style.display = 'none';
@@ -762,7 +759,7 @@
                     try {
                         const iframeDoc = liveSiteIframe.contentWindow.document;
                     } catch (e) {
-                        console.warn("iFrame loading issue, possibly security restrictions:", e);
+                        console.warn(`iFrame loading issue for ${siteTitle} at ${siteUrl}, possibly security restrictions:`, e);
                         iframeError.style.display = 'block'; 
                         liveSiteIframe.src = 'about:blank'; 
                     }
