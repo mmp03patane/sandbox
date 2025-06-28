@@ -214,6 +214,97 @@
                 text-align: left;
             }
         }
+
+        /* Styles for the new "Site Inclusions" section */
+        .inclusions-list li {
+            position: relative;
+            padding-left: 1.75rem; /* Space for the checkmark */
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem; /* text-lg */
+            color: #333;
+        }
+
+        .inclusions-list li::before {
+            content: '✔'; /* Heavy Check Mark emoji */
+            position: absolute;
+            left: 0;
+            color: #f97316; /* Changed to your orange color */
+        }
+
+        .added-features-list li {
+            padding-left: 2rem; /* Indent for added features */
+            margin-bottom: 0.5rem;
+            font-size: 1rem; /* text-base */
+            color: #555;
+            position: relative;
+        }
+
+        .added-features-list li::before {
+            content: '+';
+            position: absolute;
+            left: 0.75rem;
+            color: #f97316;
+            font-weight: bold;
+        }
+
+        /* Modal styles for "Add More Features" */
+        .feature-modal {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            z-index: 60; /* Higher than quote modal */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .feature-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .feature-modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 28rem; /* Equivalent to max-w-md */
+            width: 100%;
+            position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .feature-modal.active .feature-modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .feature-checkbox-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .feature-checkbox-group input[type="checkbox"] {
+            margin-right: 0.75rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: #f97316;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -299,52 +390,28 @@
         </div>
     </section>
 
-    <section id="about" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4 text-center max-w-3xl">
-            <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">About Creative365</h2>
-            <div class="bg-white rounded-lg shadow-md p-8">
-                <img src="https://github.com/mmp03patane/creative/blob/main/PROFILE%20PHOTO%203.PNG?raw=true" alt="Michael Patane Photo" class="profile-photo" />
-                <p class="mb-4">Hey everyone,</p>
-                <p class="mb-4">I'm <b>Michael Patane</b>, and I run <b>Creative365:</b> <i>A business consultancy that helps residential service businesses grow.</i></p>
-                <p class="mb-4">I’ve worked with some of the biggest companies in Australia:</p>
-                <p class="mb-4">At <b>GLG</b>, I clocked up <b>hundreds of consulting hours</b> helping service-based businesses with anything from franchising advice to lead generation. Electricians, plumbers, gardeners, painters, and general trades. I've seen it all...</p>
-                <p class="mb-4">At <b>Jim’s Group</b>, I helped streamline onboarding operations for franchisees. I hosted a monthly lecture teaching mowing franchisees how to use technology to <b>quote</b>, <b>schedule</b> and <b>invoice</b> clients.</p>
-                <p class="mb-4">At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive adoption through education. I focused on <b>internal efficiencies</b> to <b>elevate customer success experiences</b>.</p>
-                <p>And now, with <b>Creative365</b>, I help service-based business grow by designing <b>customer acquisition</b> and <b>retention</b> strategies that generate <b>predictable revenue</b>.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="how-it-works" class="py-16 bg-white">
+    <section id="site-inclusions" class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">How We Build Your Online Presence</h2>
-            <p class="text-center text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-                Getting a powerful, lead-generating website is simpler than you think. Here’s our straightforward process:
-            </p>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Your Initial Quote Request</h3>
-                    <p class="text-gray-700">Fill out our quick online form. Tell us a bit about your business and what you're looking for in a website. This helps us understand your unique needs.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Let's Have a Chat</h3>
-                    <p class="text-gray-700">We'll schedule a brief phone call to discuss your goals in detail. This is where we answer your questions and ensure we're aligned on your vision.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Crafting Your Custom Site</h3>
-                    <p class="text-gray-700">Our team gets to work, meticulously coding and designing a custom website tailored specifically for your tradie business. We focus on speed, user experience, and lead conversion.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Launch & Lead Generation</h3>
-                    <p class="text-gray-700">Once you're thrilled with the result, we launch your new website! Within days, you'll have a high-performing digital asset ready to attract more quotes and book more jobs.</p>
+            <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">Site Inclusions</h2>
+            <p class="text-center text-lg text-gray-600 mb-6">Below are your standard inclusions:</p>
+            <div class="max-w-2xl mx-auto bg-gray-100 p-8 rounded-lg shadow-md">
+                <ul class="inclusions-list mb-6">
+                    <li>SEO Optimisation</li>
+                    <li>FREE Hosting</li>
+                    <li>SSL Certificate and Securities</li>
+                    <li>Site Speed Optimized</li>
+                    <li>Custom Quote Form / Integration of CMS Form</li>
+                    <li>NO ONGOING COSTS</li>
+                </ul>
+                <a href="#" id="addMoreFeaturesLink" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center text-lg">
+                    Add More Features <span class="ml-1 text-2xl font-bold">+</span>
+                </a>
+                <ul id="addedFeaturesDisplay" class="added-features-list mt-6 space-y-2 hidden">
+                    </ul>
+                <div class="text-center mt-10">
+                    <button id="getPriceButton" class="btn-primary text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:transform hover:scale-105 transition duration-300">
+                        Get Price
+                    </button>
                 </div>
             </div>
         </div>
@@ -405,6 +472,57 @@
                         <p class="pt-2">Yes, it's one of our core promises! Traditional CMS platforms are notorious for being bloated with unnecessary features, plugins, and code that slow them down. Because we code from scratch, we include only what's absolutely essential for your business. This results in incredibly fast loading times, superior SEO performance, and a smoother experience for your potential customers. Our websites are built to perform, not to bloat.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">How We Build Your Online Presence</h2>
+            <p class="text-center text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
+                Getting a powerful, lead-generating website is simpler than you think. Here’s our straightforward process:
+            </p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Your Initial Quote Request</h3>
+                    <p class="text-gray-700">Fill out our quick online form. Tell us a bit about your business and what you're looking for in a website. This helps us understand your unique needs.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Let's Have a Chat</h3>
+                    <p class="text-gray-700">We'll schedule a brief phone call to discuss your goals in detail. This is where we answer your questions and ensure we're aligned on your vision.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Crafting Your Custom Site</h3>
+                    <p class="text-gray-700">Our team gets to work, meticulously coding and designing a custom website tailored specifically for your tradie business. We focus on speed, user experience, and lead conversion.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Launch & Lead Generation</h3>
+                    <p class="text-gray-700">Once you're thrilled with the result, we launch your new website! Within days, you'll have a high-performing digital asset ready to attract more quotes and book more jobs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 text-center max-w-3xl">
+            <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">About Creative365</h2>
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <img src="https://github.com/mmp03patane/creative/blob/main/PROFILE%20PHOTO%203.PNG?raw=true" alt="Michael Patane Photo" class="profile-photo" />
+                <p class="mb-4">Hey everyone,</p>
+                <p class="mb-4">I'm <b>Michael Patane</b>, and I run <b>Creative365:</b> <i>A business consultancy that helps residential service businesses grow.</i></p>
+                <p class="mb-4">I’ve worked with some of the biggest companies in Australia:</p>
+                <p class="mb-4">At <b>GLG</b>, I clocked up <b>hundreds of consulting hours</b> helping service-based businesses with anything from franchising advice to lead generation. Electricians, plumbers, gardeners, painters, and general trades. I've seen it all...</p>
+                <p class="mb-4">At <b>Jim’s Group</b>, I helped streamline onboarding operations for franchisees. I hosted a monthly lecture teaching mowing franchisees how to use technology to <b>quote</b>, <b>schedule</b> and <b>invoice</b> clients.</p>
+                <p class="mb-4">At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive adoption through education. I focused on <b>internal efficiencies</b> to <b>elevate customer success experiences</b>.</p>
+                <p>And now, with <b>Creative365</b>, I help service-based business grow by designing <b>customer acquisition</b> and <b>retention</b> strategies that generate <b>predictable revenue</b>.</p>
             </div>
         </div>
     </section>
@@ -518,6 +636,37 @@
                 </button>
                 <p id="formMessage" class="text-center text-sm mt-4 text-gray-600"></p>
             </form>
+        </div>
+    </div>
+
+    <div id="addFeaturesModal" class="feature-modal">
+        <div class="feature-modal-content">
+            <button id="closeFeaturesModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold leading-none">&times;</button>
+            <h3 class="text-2xl font-bold text-center text-f97316 mb-6">Add More Features</h3>
+            <p class="text-center text-gray-600 mb-6">Select additional features for your website:</p>
+            
+            <div class="feature-checkbox-group">
+                <label>
+                    <input type="checkbox" name="feature" value="Additional Revisions" data-display-text="Additional Revisions">
+                    Additional Revisions
+                </label>
+                <label>
+                    <input type="checkbox" name="feature" value="Additional Pages" data-display-text="Additional Pages">
+                    Additional Pages
+                </label>
+                <label>
+                    <input type="checkbox" name="feature" value="Special Functions (e.g., Calendar, Calculator)" data-display-text="Special Functions (Calendar, Calculator)">
+                    Special Functions (e.g., Calendar, Calculator)
+                </label>
+                <label>
+                    <input type="checkbox" name="feature" value="Link to Google Reviews" data-display-text="Link to Google Reviews">
+                    Link to Google Reviews
+                </label>
+            </div>
+            
+            <button id="saveFeaturesButton" class="w-full btn-primary text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transform hover:scale-105 transition duration-300">
+                Save Features
+            </button>
         </div>
     </div>
 
@@ -691,6 +840,11 @@
             }
 
             const formData = new FormData(creative365ContactForm); 
+            
+            // Append selected features to form data
+            document.querySelectorAll('#addedFeaturesDisplay li').forEach(item => {
+                formData.append('Added_Feature[]', item.textContent.trim());
+            });
 
             try {
                 const response = await fetch(creative365ContactForm.action, {
@@ -706,6 +860,9 @@
                     formMessage.classList.remove('text-gray-600', 'text-red-600');
                     formMessage.classList.add('text-green-600');
                     creative365ContactForm.reset(); 
+                    // Optionally clear added features display after submission
+                    document.getElementById('addedFeaturesDisplay').innerHTML = '';
+                    document.getElementById('addedFeaturesDisplay').classList.add('hidden');
                 } else {
                     const data = await response.json();
                     if (data.errors) {
@@ -787,6 +944,55 @@
                     liveSiteIframe.onload = null; 
                 }, 300);
             }
+        });
+
+        // New "Add More Features" Modal Functionality
+        const addMoreFeaturesLink = document.getElementById('addMoreFeaturesLink');
+        const addFeaturesModal = document.getElementById('addFeaturesModal');
+        const closeFeaturesModalBtn = document.getElementById('closeFeaturesModal');
+        const saveFeaturesButton = document.getElementById('saveFeaturesButton');
+        const addedFeaturesDisplay = document.getElementById('addedFeaturesDisplay');
+        const featureCheckboxes = document.querySelectorAll('#addFeaturesModal input[name="feature"]');
+
+        addMoreFeaturesLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            addFeaturesModal.classList.add('active');
+            // Reset checkboxes state when opening the modal
+            featureCheckboxes.forEach(checkbox => {
+                const featureText = checkbox.dataset.displayText;
+                checkbox.checked = Array.from(addedFeaturesDisplay.children).some(li => li.textContent.trim() === featureText);
+            });
+        });
+
+        closeFeaturesModalBtn.addEventListener('click', () => {
+            addFeaturesModal.classList.remove('active');
+        });
+
+        addFeaturesModal.addEventListener('click', (e) => {
+            if (e.target === addFeaturesModal) {
+                addFeaturesModal.classList.remove('active');
+            }
+        });
+
+        saveFeaturesButton.addEventListener('click', () => {
+            addedFeaturesDisplay.innerHTML = ''; // Clear previous selections
+            let hasAddedFeatures = false;
+            featureCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = checkbox.dataset.displayText;
+                    addedFeaturesDisplay.appendChild(listItem);
+                    hasAddedFeatures = true;
+                }
+            });
+
+            if (hasAddedFeatures) {
+                addedFeaturesDisplay.classList.remove('hidden');
+            } else {
+                addedFeaturesDisplay.classList.add('hidden');
+            }
+
+            addFeaturesModal.classList.remove('active');
         });
     </script>
 </body>
