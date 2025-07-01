@@ -12,9 +12,8 @@
             background-color: #f8f8f8;
             color: #333;
         }
-        .container {
-            max-width: 1200px;
-        }
+        /* The .container class is already defined with a max-width of 1200px,
+           but for the body content, we'll introduce new classes for narrower width. */
         .section-title {
             position: relative;
             display: inline-block;
@@ -37,11 +36,14 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-out;
-            padding: 0 1.5rem; /* Add horizontal padding */
+            padding: 0; /* Reset padding directly on accordion-content */
+        }
+        .accordion-content p {
+            padding-top: 0.5rem; /* Equivalent to Tailwind's pt-2 */
+            padding-bottom: 1.5rem; /* Equivalent to Tailwind's pb-6 */
         }
         .accordion-content.active {
             max-height: 500px; /* Adjust as needed for content length */
-            padding: 0 1.5rem 1.5rem 1.5rem; /* Add bottom padding when active */
         }
         .sample-item {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -378,6 +380,7 @@
             display: inline-block; /* Ensure it respects transform */
             width: 1em; /* Make it square to center the + / - */
             text-align: center;
+            transition: transform 0.3s ease; /* Add transition for smoothness if needed */
         }
     </style>
 </head>
@@ -418,7 +421,7 @@
     <section class="gradient-bg text-white py-20 md:py-32 rounded-b-3xl shadow-xl bounce-animation">
         <div class="container mx-auto px-4 text-center">
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-                Websites That Turn Quotes Into Jobs Without Paying For Ads – Ready In Just 7 Days.
+                Websites That Turn Quotes Into Jobs. <br>Ready In Just 7 Days.
             </h1>
             <p class="text-xl md:text-2xl mb-10 opacity-90 max-w-3xl mx-auto">
                 <b>Sick of inconsistent punters?</b> <br><br>Get a high-converting website and start booking more jobs this week!
@@ -429,160 +432,655 @@
         </div>
     </section>
 
-    <section id="samples" class="py-16 gray-50">
-    <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">Site Examples</h2>
-        <p class="text-left text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-            Think all websites are built the same? <br><br> Think again...
-            <br><br>
-            Below are mockups of high-performing websites that I've built from scratch. Click the links to open the live site, use the X in the top right to exit.
-        </p>
+    <div class="max-w-4xl mx-auto"> <section id="samples" class="py-16 gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">Site Examples</h2>
 
-        <div class="flex flex-col space-y-8"> 
-            <div class="text-left"> 
-                <h3 class="text-2xl font-bold text-gray-800 mb-2">
-                    <a href="https://mmp03patane.github.io/ELECTRIC/" class="site-title-link" data-url="https://mmp03patane.github.io/ELECTRIC/">
-                        Electrician Website
-                        <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                    </a>
-                </h3>
-                <a href="https://mmp03patane.github.io/ELECTRIC/" class="view-site-text-link" data-url="https://mmp03patane.github.io/ELECTRIC/">
-                    View site
-                </a>
-            </div>
+                <div class="flex flex-col space-y-8"> 
+                    <div class="text-left"> 
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                            <a href="https://mmp03patane.github.io/ELECTRIC/" class="site-title-link" data-url="https://mmp03patane.github.io/ELECTRIC/">
+                                Electrician Website
+                                <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </h3>
+                        <a href="https://mmp03patane.github.io/ELECTRIC/" class="view-site-text-link" data-url="https://mmp03patane.github.io/ELECTRIC/">
+                            View site
+                        </a>
+                    </div>
 
-            <div class="text-left"> 
-                <h3 class="text-2xl font-bold text-gray-800 mb-2">
-                    <a href="https://mmp03patane.github.io/JUNK/" class="site-title-link" data-url="https://mmp03patane.github.io/JUNK/">
-                        Junk Removal Website
-                        <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                    </a>
-                </h3>
-                <a href="https://mmp03patane.github.io/JUNK/" class="view-site-text-link" data-url="https://mmp03patane.github.io/JUNK/">
-                    View site
-                </a>
-            </div>
+                    <div class="text-left"> 
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                            <a href="https://mmp03patane.github.io/JUNK/" class="site-title-link" data-url="https://mmp03patane.github.io/JUNK/">
+                                Junk Removal Website
+                                <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </h3>
+                        <a href="https://mmp03patane.github.io/JUNK/" class="view-site-text-link" data-url="https://mmp03patane.github.io/JUNK/">
+                            View site
+                        </a>
+                    </div>
 
-            <div class="text-left"> 
-                <h3 class="text-2xl font-bold text-gray-800 mb-2">
-                    <a href="https://mmp03patane.github.io/PLUMBING/" class="site-title-link" data-url="https://mmp03patane.github.io/PLUMBING/">
-                        Plumbing Website
-                        <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                    </a>
-                </h3>
-                <a href="https://mmp03patane.github.io/PLUMBING/" class="view-site-text-link" data-url="https://mmp03patane.github.io/PLUMBING/">
-                    View site
-                </a>
+                    <div class="text-left"> 
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                            <a href="https://mmp03patane.github.io/PLUMBING/" class="site-title-link" data-url="https://mmp03patane.github.io/PLUMBING/">
+                                Plumbing Website
+                                <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </h3>
+                        <a href="https://mmp03patane.github.io/PLUMBING/" class="view-site-text-link" data-url="https://mmp03patane.github.io/PLUMBING/">
+                            View site
+                        </a>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <section id="site-inclusions" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">Website Inclusions</h2>
+                
+                <div class="max-w-2xl mx-auto bg-gray-100 p-8 rounded-lg shadow-md">
+                    <ul class="inclusions-list mb-6">
+                        <li>SEO Friendly On-Page Content</li>
+                        <li>FREE Hosting</li>
+                        <li>SSL Certificate and Securities</li>
+                        <li>Site Speed Optimized</li>
+                        <li>Custom Form Integration</li>
+                        <li>No Ongoing Costs</li>
+                    </ul>
+                    <a href="#" id="addMoreFeaturesLink" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center text-lg">
+                        Add More Features <span class="ml-1 text-2xl font-bold">+</span>
+                    </a>
+                    <ul id="addedFeaturesDisplay" class="added-features-list mt-6 space-y-2 hidden">
+                        </ul>
+                    <div class="text-center mt-10">
+                        <button id="getPriceButton" class="btn-primary text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:transform hover:scale-105 transition duration-300">
+                            Get Price
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-left mb-12 section-title mx-auto">FAQs.</h2>
+
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
+                            <span>Do I own the IP once the site is done?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Absolutely, 100%! <br> When I build your website, it's <b>your</b> website. You own all the intellectual property, including the code, design, and content. I simply build it for you. There are no ongoing licensing fees or proprietary systems locking you in. <br>Complete transparency, complete ownership.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
+                            <span>Do you use a CMS or generic templates?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p><strong>Neither!</strong> <br>I craft unique, high-performance digital assets. I don't use bullshit Content Management Systems (CMS) like WordPress, Wix, or Squarespace. Every single website I deliver is coded from the ground up and managed with Git (like GitHub) for version control and deployment. <br>This means zero unnecessary code, ultimate flexibility, and blazing-fast speeds. <br>No templates, no half arsed offshore team, just me and bespoke code.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
+                            <span>I've tried to build my own site on a CMS, can you save my DIY disaster?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>You're not alone! <br>Heaps of people attempt DIY websites only to find them slow, inflexible, or just not professional enough. <br>I can absolutely help. I'll assess what's salvageable from your existing efforts (content, branding assets etc.) and then use that as a foundation to build a completely new, high-performance, custom website from the ground up. I'll turn your 'disaster' into a digital asset that works for you.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
+                            <span>How much does it cost?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Everything is built from scratch and all prices are dependant on the website breif, functionality and number of pages. Reach out via the quote form and we can have a chat over the phone.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-left mb-12 section-title mx-auto">How It Works</h2>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Your Initial Quote Request</h3>
+                        <p class="text-gray-700">Fill out the online form. Tell me a bit about your business and what you're looking for in a website.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Let's Have a Chat</h3>
+                        <p class="text-gray-700">We'll schedule a brief phone call to discuss your goals in detail. This is an open forum to discuss questions and ensure we're aligned with your vision.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Crafting Your Custom Site</h3>
+                        <p class="text-gray-700">Time to get to work! I will begin meticulously coding and designing your custom website. I focus focus on speed, user experience, and lead conversion.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Launch & Lead Generation</h3>
+                        <p class="text-gray-700">Once you're thrilled with the result, we launch your new website! Within days, you'll have a high-performing digital asset ready to attract more quotes and book more jobs.</p>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="#contact" class="inline-block btn-primary text-white px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:transform hover:scale-105 transition duration-300">
+                        Get Your FREE Quote!
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 text-center max-w-3xl">
+                <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">About Creative365</h2>
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <img src="https://github.com/mmp03patane/creative/blob/main/PROFILE%20PHOTO%203.PNG?raw=true" alt="Michael Patane Photo" class="profile-photo" />
+                    <p class="mb-4">Hey everyone,</p>
+                    <p class="mb-4">I'm <b>Michael Patane</b>, and I run <b>Creative365:</b> <i>A business consultancy that helps residential service businesses grow.</i></p>
+                    <p class="mb-4">I’ve worked with some of the biggest companies in Australia:</p>
+                    <p class="mb-4">At <b>GLG</b>, I clocked up <b>hundreds of consulting hours</b> helping service-based businesses with anything from franchising advice to lead generation. Electricians, plumbers, gardeners, painters, and general trades. I've seen it all...</p>
+                    <p class="mb-4">At <b>Jim’s Group</b>, I helped streamline onboarding operations for franchisees. I hosted a monthly lecture teaching mowing franchisees how to use technology to <b>quote</b>, <b>schedule</b> and <b>invoice</b> clients.</p>
+                    <p class="mb-4">At <b>MYOB</b>, I assisted medium sized businesses to engage digitally and drive adoption through education. I focused on <b>internal efficiencies</b> to <b>elevate customer success experiences</b>.</p>
+                    <p>And now, with <b>Creative365</b>, I help service-based business grow by designing <b>customer acquisition</b> and <b>retention</b> strategies that generate <b>predictable revenue</b>.</p>
+                </div>
+            </div>
+        </section>
+
+    </div> <section id="contact" class="gradient-bg text-white py-20 rounded-t-3xl shadow-xl">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                Ready for a Website That Generates Leads?
+            </h2>
+            <p class="text-xl md:text-2xl mb-10 opacity-90 max-w-3xl mx-auto">
+                Let's build a website the turns clicks into quotes. 
+            </p>
+            <button id="openQuoteModal" class="inline-block bg-white text-black px-12 py-5 rounded-full text-xl font-bold shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300">
+                Get Your Custom Quote!
+            </button>
+        </div>
+    </section>
+
+    <div id="liveSiteModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white p-2 rounded-lg shadow-xl max-w-5xl w-full h-[90vh] relative transform transition-all duration-300 scale-95 opacity-0" id="liveSiteModalContent">
+            <button id="closeLiveSiteModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold leading-none z-10">&times;</button>
+            <iframe id="liveSiteIframe" src="" frameborder="0" class="w-full h-[calc(100%-10px)] mt-0 rounded-md" allowfullscreen></iframe>
+            <p id="iframeError" class="text-red-600 text-center mt-4 hidden">This website cannot be displayed directly here due to security restrictions.</p>
         </div>
     </div>
-</section>
 
-    <section id="site-inclusions" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">Website Inclusions</h2>
-            <p class="text-left text-lg text-gray-600 mb-6">Below are some standard inclusions. To add additional features click on "Add More Features"</p>
-            <div class="max-w-2xl mx-auto bg-gray-100 p-8 rounded-lg shadow-md">
-                <ul class="inclusions-list mb-6">
-                    <li>SEO Optimisation</li>
-                    <li>FREE Hosting</li>
-                    <li>SSL Certificate and Securities</li>
-                    <li>Site Speed Optimized</li>
-                    <li>Custom Quote Form / Integration of CMS Form</li>
-                    <li>NO ONGOING COSTS</li>
-                </ul>
-                <a href="#" id="addMoreFeaturesLink" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center text-lg">
-                    Add More Features <span class="ml-1 text-2xl font-bold">+</span>
-                </a>
-                <ul id="addedFeaturesDisplay" class="added-features-list mt-6 space-y-2 hidden">
-                    </ul>
-                <div class="text-center mt-10">
-                    <button id="getPriceButton" class="btn-primary text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:transform hover:scale-105 transition duration-300">
-                        Get Price
-                    </button>
+
+    <div id="quoteModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full relative transform transition-all duration-300 scale-95 opacity-0" id="modalContent">
+            <button id="closeQuoteModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold leading-none">&times;</button>
+            <h3 class="text-3xl font-bold text-center text-f97316 mb-6">Let's Get You More Leads!</h3>
+            <p class="text-center text-gray-600 mb-6">Fill out the form below to schedule a call with Michael and discuss your project. We'll confirm the exact time via email.</p>
+
+            <form id="creative365ContactForm" method="POST" action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT_HERE" class="space-y-4">
+                <div class="form-group-creative">
+                    <label for="fullName">Your Full Name<span style="color:red;">*</span></label>
+                    <input type="text" id="fullName" name="Name" placeholder="John Smith" required>
+                    <span class="form-error-message" id="nameError" style="display: none;"></span>
                 </div>
-            </div>
+
+                <div class="form-group-creative">
+                    <label for="emailAddress">Your Email Address<span style="color:red;">*</span></label>
+                    <input type="email" id="emailAddress" name="Email" placeholder="john.smith@example.com" required>
+                    <span class="form-error-message" id="emailError" style="display: none;"></span>
+                </div>
+
+                <div class="form-group-creative">
+                    <label for="phoneNumber">Your Phone Number<span style="color:red;">*</span></label>
+                    <input type="tel" id="phoneNumber" name="Phone" placeholder="e.g., 04XX XXX XXX" required>
+                    <span class="form-error-message" id="phoneError" style="display: none;"></span>
+                </div>
+
+                <div class="form-group-creative">
+                    <label for="preferredDate">Preferred Date for a Call<span style="color:red;">*</span></label>
+                    <input type="date" id="preferredDate" name="Preferred_Date" required>
+                    <span class="form-error-message" id="dateError" style="display: none;"></span>
+                    <p style="font-size: 0.9rem; color: #555; margin-top: 0.5rem; text-align: left;">Please select a date at least 24 hours in the future.</p>
+                </div>
+
+                <div class="form-group-creative">
+                    <label for="preferredTimeSlot">Preferred Time Slot<span style="color:red;">*</span></label>
+                    <select id="preferredTimeSlot" name="Preferred_Time_Slot" required>
+                        <option value="">Select a time slot</option>
+                        <option value="Morning (9 AM - 12 PM AEST)">Morning (9 AM - 12 PM AEST)</option>
+                        <option value="Afternoon (1 PM - 4 PM AEST)">Afternoon (1 PM - 4 PM AEST)</option>
+                        <option value="Late Afternoon (4 PM - 5 PM AEST)">Late Afternoon (4 PM - 5 PM AEST)</option>
+                        <option value="Other">Other (Please specify in message)</option>
+                    </select>
+                    <span class="form-error-message" id="timeSlotError" style="display: none;"></span>
+                    <p style="font-size: 0.9rem; color: #555; margin-top: 0.5rem; text-align: left;">This is a request; we will confirm exact availability.</p>
+                </div>
+
+                <div class="form-group-creative">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2">Do you have your own custom domain?<span style="color:red;">*</span></label>
+                    <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="hasDomain" value="Yes" required>
+                            <span style="margin-left: 0.5rem; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">Yes</span>
+                        </label>
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="hasDomain" value="No">
+                            <span style="margin-left: 0.5rem; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group-creative">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2">
+                        Do you currently use a Customer Management System (CMS)?<span style="color:red;">*</span>
+                    </label>
+                    <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="usesCMS" value="Yes" required>
+                            <span style="margin-left: 0.5rem; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">Yes</span>
+                        </label>
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="usesCMS" value="No">
+                            <span style="margin-left: 0.5rem; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group-creative">
+                    <label for="message">Your Message / Project Details<span style="color:red;">*</span></label>
+                    <textarea id="message" name="Message" rows="5" placeholder="Tell us about your business and website needs..." required></textarea>
+                    <span class="form-error-message" id="messageError" style="display: none;"></span>
+                </div>
+
+                <button type="submit" class="w-full btn-primary text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transform hover:scale-105 transition duration-300">
+                    Get My Custom Quote!
+                </button>
+                <p id="formMessage" class="text-center text-sm mt-4 text-gray-600"></p>
+            </form>
         </div>
-    </section>
+    </div>
 
-    <section id="faq" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-left mb-12 section-title mx-auto">FAQs.</h2>
-            <p class="text-left text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-                Here are some common questions and answers. If there's anything specfic you would like to discuss get in contact via the quote form and we can chat about it on the phone.
-            </p>
-
-            <div class="max-w-3xl mx-auto space-y-4">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
-                        <span>Do I own the IP once the site is done?</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content text-gray-700">
-                        <p class="pt-2">Absolutely, 100%! When we build your website, it's *your* website. You own all the intellectual property, including the code, design, and content. We simply build it for you. There are no ongoing licensing fees or proprietary systems locking you in. Complete transparency, complete ownership.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
-                        <span>Do you use a CMS, or just templates?</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content text-gray-700">
-                        <p class="pt-2"><strong>Hell no!</strong> We believe in crafting unique, high-performance digital assets. We don't use bloated Content Management Systems (CMS) like WordPress, Wix, or Shopify for our core builds. Every single website we deliver is coded from the ground up, typically managed with Git (like GitHub) for version control and deployment. This means zero unnecessary code, ultimate flexibility, and blazing-fast speeds. No templates, no hacks, just bespoke code.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
-                        <span>I've tried to build my own site on a CMS, can you save my DIY disaster?</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content text-gray-700">
-                        <p class="pt-2">You're not alone! Many tradies attempt DIY websites only to find them slow, inflexible, or just not professional enough. We can absolutely help. We'll assess what's salvageable from your existing efforts (content, branding assets etc.) and then use that as a foundation to build a completely new, high-performance, custom website from the ground up. We turn your 'disaster' into a digital asset that works for you.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
-                        <span>Are your websites fast and not bloated like a CMS?</span>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content text-gray-700">
-                        <p class="pt-2">Yes, it's one of our core promises! Traditional CMS platforms are notorious for being bloated with unnecessary features, plugins, and code that slow them down. Because we code from scratch, we include only what's absolutely essential for your business. This results in incredibly fast loading times, superior SEO performance, and a smoother experience for your potential customers. Our websites are built to perform, not to bloat.</p>
-                    </div>
-                </div>
+    <div id="addFeaturesModal" class="feature-modal">
+        <div class="feature-modal-content">
+            <button id="closeFeaturesModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold leading-none">&times;</button>
+            <h3 class="text-2xl font-bold text-center text-f97316 mb-6">Add More Features</h3>
+            <p class="text-center text-gray-600 mb-6">Select additional features for your website:</p>
+            
+            <div class="feature-checkbox-group">
+                <label>
+                    <input type="checkbox" name="feature" value="Additional Revisions" data-display-text="Additional Revisions">
+                    Additional Revisions
+                </label>
+                <label>
+                    <input type="checkbox" name="feature" value="Additional Pages" data-display-text="Additional Pages">
+                    Additional Pages
+                </label>
+                <label>
+                    <input type="checkbox" name="feature" value="Special Functions (e.g., Calendar, Calculator)" data-display-text="Special Functions (Calendar, Calculator)">
+                    Special Functions (e.g., Calendar, Calculator)
+                </label>
+                <label>
+                    <input type="checkbox" name="feature" value="Link to Google Reviews" data-display-text="Link to Google Reviews">
+                    Link to Google Reviews
+                </label>
             </div>
+            
+            <button id="saveFeaturesButton" class="w-full btn-primary text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transform hover:scale-105 transition duration-300">
+                Save Features
+            </button>
         </div>
-    </section>
+    </div>
 
-    <section id="how-it-works" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-left mb-12 section-title mx-auto">How It Works</h2>
-            <p class="text-left text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-                Getting a powerful, lead-generating website is simpler than you think. Here's the straightforward process:
-            </p>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Your Initial Quote Request</h3>
-                    <p class="text-gray-700">Fill out the online form. Tell me a bit about your business and what you're looking for in a website.</p>
-                </div>
+    <footer class="bg-gray-900 text-white py-10">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Creative365 Business Consultancy ABN: 77 956 342 498. All rights reserved. </p>
+        </div>
+    </footer>
 
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Let's Have a Chat</h3>
-                    <p class="text-gray-700">We'll schedule a brief phone call to discuss your goals in detail. This is an open forum to discuss questions and ensure we're aligned with your vision.</p>
-                </div>
+    <script>
+        // Accordion Functionality
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const accordionContent = button.nextElementSibling;
+                const icon = button.querySelector('.accordion-icon');
 
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Crafting Your Custom Site</h3>
-                    <p class="text-gray-700">Time to get to work! I will begin meticulously coding and designing your custom website. I focus focus on speed, user experience, and lead conversion.</p>
-                </div>
+                // Check if the clicked accordion is currently active
+                const isActive = accordionContent.classList.contains('active');
 
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">Launch & Lead Generation</h3>
-                    <p class="text-gray-700">Once you're thrilled with the result, we launch your new website! Within days, you'll have a high-performing digital asset ready to attract more quotes and book
+                // Close all other open accordion contents and reset their icons
+                document.querySelectorAll('.accordion-content').forEach(otherContent => {
+                    if (otherContent !== accordionContent && otherContent.classList.contains('active')) {
+                        otherContent.classList.remove('active');
+                        otherContent.previousElementSibling.classList.remove('bg-gray-100');
+                        otherContent.previousElementSibling.querySelector('.accordion-icon').textContent = '+';
+                    }
+                });
+
+                // Toggle the clicked accordion's content and icon
+                if (isActive) {
+                    accordionContent.classList.remove('active');
+                    button.classList.remove('bg-gray-100');
+                    icon.textContent = '+';
+                } else {
+                    accordionContent.classList.add('active');
+                    button.classList.add('bg-gray-100');
+                    icon.textContent = '-';
+                }
+            });
+        });
+
+        // --- Mobile Menu Functionality ---
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuItems = mobileMenu.querySelectorAll('a'); 
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        mobileMenuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        // --- END Mobile Menu Functionality ---
+
+
+        // Quote Modal Functionality
+        const openQuoteModalBtn = document.getElementById('openQuoteModal');
+        const closeQuoteModalBtn = document.getElementById('closeQuoteModal');
+        const quoteModal = document.getElementById('quoteModal');
+        const modalContent = document.getElementById('modalContent');
+        const creative365ContactForm = document.getElementById('creative365ContactForm'); 
+        const formMessage = document.getElementById('formMessage');
+
+        openQuoteModalBtn.addEventListener('click', () => {
+            quoteModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        });
+
+        closeQuoteModalBtn.addEventListener('click', () => {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                quoteModal.classList.add('hidden');
+            }, 300);
+        });
+
+        quoteModal.addEventListener('click', (e) => {
+            if (e.target === quoteModal) {
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    quoteModal.classList.add('hidden');
+                }, 300);
+            }
+        });
+
+        // Form validation and submission for the new form
+        creative365ContactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            formMessage.textContent = 'Sending your request...';
+            formMessage.classList.remove('text-green-600', 'text-red-600');
+            formMessage.classList.add('text-gray-600');
+
+            let isValid = true;
+            const fullName = document.getElementById('fullName');
+            const emailAddress = document.getElementById('emailAddress');
+            const phoneNumber = document.getElementById('phoneNumber');
+            const preferredDate = document.getElementById('preferredDate');
+            const preferredTimeSlot = document.getElementById('preferredTimeSlot');
+            const message = document.getElementById('message');
+
+            if (fullName.value.trim() === '') {
+                document.getElementById('nameError').textContent = 'Full Name is required.';
+                document.getElementById('nameError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('nameError').style.display = 'none';
+            }
+
+            if (emailAddress.value.trim() === '' || !emailAddress.value.includes('@')) {
+                document.getElementById('emailError').textContent = 'A valid Email Address is required.';
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+
+            if (phoneNumber.value.trim() === '') {
+                document.getElementById('phoneError').textContent = 'Phone Number is required.';
+                document.getElementById('phoneError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('phoneError').style.display = 'none';
+            }
+
+            const selectedDate = new Date(preferredDate.value);
+            const now = new Date();
+            now.setHours(0, 0, 0, 0); 
+            const tomorrow = new Date(now);
+            tomorrow.setDate(now.getDate() + 1);
+
+            if (preferredDate.value === '' || selectedDate < tomorrow) {
+                document.getElementById('dateError').textContent = 'Please select a date at least 24 hours in the future.';
+                document.getElementById('dateError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('dateError').style.display = 'none';
+            }
+
+            if (preferredTimeSlot.value === '') {
+                document.getElementById('timeSlotError').textContent = 'Please select a preferred time slot.';
+                document.getElementById('timeSlotError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('timeSlotError').style.display = 'none';
+            }
+
+            const hasDomainRadios = document.querySelectorAll('input[name="hasDomain"]');
+            const usesCMSRadios = document.querySelectorAll('input[name="usesCMS"]');
+            
+            let isDomainSelected = Array.from(hasDomainRadios).some(radio => radio.checked);
+            let isCmsSelected = Array.from(usesCMSRadios).some(radio => radio.checked);
+
+            if (!isDomainSelected) {
+                isValid = false;
+            }
+            if (!isCmsSelected) {
+                isValid = false;
+            }
+
+            if (message.value.trim() === '') {
+                document.getElementById('messageError').textContent = 'Please tell us about your project.';
+                document.getElementById('messageError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('messageError').style.display = 'none';
+            }
+
+            if (!isValid) {
+                formMessage.textContent = 'Please correct the errors in the form.';
+                formMessage.classList.remove('text-gray-600');
+                formMessage.classList.add('text-red-600');
+                return;
+            }
+
+            const formData = new FormData(creative365ContactForm); 
+            
+            // Append selected features to form data
+            document.querySelectorAll('#addedFeaturesDisplay li').forEach(item => {
+                formData.append('Added_Feature[]', item.textContent.trim());
+            });
+
+            try {
+                const response = await fetch(creative365ContactForm.action, {
+                    method: creative365ContactForm.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    formMessage.textContent = "Awesome! Your request has been sent. Michael will be in touch within 24-48 hours to discuss how we can get your quote-generating machine built!";
+                    formMessage.classList.remove('text-gray-600', 'text-red-600');
+                    formMessage.classList.add('text-green-600');
+                    creative365ContactForm.reset(); 
+                    // Optionally clear added features display after submission
+                    document.getElementById('addedFeaturesDisplay').innerHTML = '';
+                    document.getElementById('addedFeaturesDisplay').classList.add('hidden');
+                } else {
+                    const data = await response.json();
+                    if (data.errors) {
+                        formMessage.textContent = data.errors.map(error => error.message).join(', ');
+                    } else {
+                        formMessage.textContent = 'There was an error sending your request. Please try again.';
+                    }
+                    formMessage.classList.remove('text-gray-600', 'text-green-600');
+                    formMessage.classList.add('text-red-600');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                formMessage.textContent = 'There was an error sending your request. Please try again or contact us directly.';
+                formMessage.classList.remove('text-gray-600', 'text-green-600');
+                formMessage.classList.add('text-red-600');
+            }
+        });
+
+        // Initialize accordion state on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroSection = document.querySelector('.gradient-bg'); 
+            if (heroSection) {
+                heroSection.classList.add('bounce-animation');
+            }
+        });
+
+        // Live Site iFrame Modal Functionality
+        const liveSiteModal = document.getElementById('liveSiteModal');
+        const liveSiteModalContent = document.getElementById('liveSiteModalContent');
+        const closeLiveSiteModalBtn = document.getElementById('closeLiveSiteModal');
+        const liveSiteIframe = document.getElementById('liveSiteIframe');
+        const iframeError = document.getElementById('iframeError');
+
+        // This event listener needs to be updated to target the new "View Site" links.
+        document.querySelectorAll('#samples .site-title-link, #samples .view-site-text-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); 
+
+                const siteUrl = link.dataset.url; // Get URL from data-url attribute
+
+                liveSiteIframe.src = siteUrl;
+                iframeError.style.display = 'none';
+
+                liveSiteIframe.onload = function() {
+                    try {
+                        const iframeDoc = liveSiteIframe.contentWindow.document;
+                    } catch (e) {
+                        console.warn(`iFrame loading issue for ${siteUrl}, possibly security restrictions:`, e);
+                        iframeError.style.display = 'block'; 
+                        liveSiteIframe.src = 'about:blank'; 
+                    }
+                };
+
+                liveSiteModal.classList.remove('hidden');
+                setTimeout(() => {
+                    liveSiteModalContent.classList.remove('scale-95', 'opacity-0');
+                    liveSiteModalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            });
+        });
+
+        closeLiveSiteModalBtn.addEventListener('click', () => {
+            liveSiteModalContent.classList.remove('scale-100', 'opacity-100');
+            liveSiteModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                liveSiteModal.classList.add('hidden');
+                liveSiteIframe.src = ''; 
+                liveSiteIframe.onload = null; 
+            }, 300);
+        });
+
+        liveSiteModal.addEventListener('click', (e) => {
+            if (e.target === liveSiteModal) {
+                liveSiteModalContent.classList.remove('scale-100', 'opacity-100');
+                liveSiteModalContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    liveSiteModal.classList.add('hidden');
+                    liveSiteIframe.src = ''; 
+                    liveSiteIframe.onload = null; 
+                }, 300);
+            }
+        });
+
+        // New "Add More Features" Modal Functionality
+        const addMoreFeaturesLink = document.getElementById('addMoreFeaturesLink');
+        const addFeaturesModal = document.getElementById('addFeaturesModal');
+        const closeFeaturesModalBtn = document.getElementById('closeFeaturesModal');
+        const saveFeaturesButton = document.getElementById('saveFeaturesButton');
+        const addedFeaturesDisplay = document.getElementById('addedFeaturesDisplay');
+        const featureCheckboxes = document.querySelectorAll('#addFeaturesModal input[name="feature"]');
+
+        addMoreFeaturesLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            addFeaturesModal.classList.add('active');
+            // Reset checkboxes state when opening the modal
+            featureCheckboxes.forEach(checkbox => {
+                const featureText = checkbox.dataset.displayText;
+                checkbox.checked = Array.from(addedFeaturesDisplay.children).some(li => li.textContent.trim() === featureText);
+            });
+        });
+
+        closeFeaturesModalBtn.addEventListener('click', () => {
+            addFeaturesModal.classList.remove('active');
+        });
+
+        addFeaturesModal.addEventListener('click', (e) => {
+            if (e.target === addFeaturesModal) {
+                addFeaturesModal.classList.remove('active');
+            }
+        });
+
+        saveFeaturesButton.addEventListener('click', () => {
+            addedFeaturesDisplay.innerHTML = ''; // Clear previous selections
+            let hasAddedFeatures = false;
+            featureCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = checkbox.dataset.displayText;
+                    addedFeaturesDisplay.appendChild(listItem);
+                    hasAddedFeatures = true;
+                }
+            });
+
+            if (hasAddedFeatures) {
+                addedFeaturesDisplay.classList.remove('hidden');
+            } else {
+                addedFeaturesDisplay.classList.add('hidden');
+            }
+
+            addFeaturesModal.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
