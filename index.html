@@ -12,20 +12,6 @@
             background-color: #f8f8f8;
             color: #333;
         }
-        /* Semi-locked header styles */
-        .semi-locked-header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 50; /* Ensure header is above other content */
-            transform: translateY(0);
-            transition: transform 0.3s ease-out;
-        }
-
-        .semi-locked-header.hidden {
-            transform: translateY(-100%);
-        }
-
         /* The .container class is already defined with a max-width of 1200px,
             but for the body content, we'll introduce new classes for narrower width. */
         .section-title {
@@ -401,11 +387,10 @@
     </style>
 </head>
 <body>
-    <a id="top"></a>
 
-    <header class="bg-white shadow-sm py-4 semi-locked-header">
+    <header class="bg-white shadow-sm py-4">
         <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="#top" class="text-3xl font-bold text-f97316">Creative<span class="text-gray-700">365.</span></a>
+            <a href="#" class="text-3xl font-bold text-f97316">Creative<span class="text-gray-700">365.</span></a>
             
             <nav class="hidden md:block">
                 <ul class="flex space-x-6">
@@ -414,7 +399,7 @@
                     <li><a href="#faq" class="text-gray-600 hover:text-f97316 font-medium">FAQs</a></li>
                     <li><a href="#how-it-works" class="text-gray-600 hover:text-f97316 font-medium">How it Works</a></li>
                     <li><a href="#about" class="text-gray-600 hover:text-f97316 font-medium">About Creative365</a></li>
-                    <li><a href="#contact" class="text-gray-600 hover:text-f97316 font-medium">Get a Quote</a></li>
+                    <li><a href="#" id="navGetQuote" class="text-gray-600 hover:text-f97316 font-medium">Get a Quote</a></li>
                 </ul>
             </nav>
 
@@ -432,12 +417,12 @@
                 <li><a href="#faq" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">FAQs</a></li>
                 <li><a href="#how-it-works" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">How it Works</a></li>
                 <li><a href="#about" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">About Creative365</a></li>
-                <li><a href="#contact" class="text-f97316 hover:text-ea580c font-bold text-lg block py-2">Get a Quote</a></li>
+                <li><a href="#" id="mobileGetQuote" class="text-f97316 hover:text-ea580c font-bold text-lg block py-2">Get a Quote</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="gradient-bg text-white py-20 md:py-32 rounded-b-3xl shadow-xl bounce-animation" style="margin-top: 6rem;">
+    <section class="gradient-bg text-white py-20 md:py-32 rounded-b-3xl shadow-xl bounce-animation">
         <div class="container mx-auto px-4 text-center">
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
                 Websites That Turn Quotes Into Jobs. <br>Ready In Just 7 Days.
@@ -445,89 +430,89 @@
             <p class="text-xl md:text-2xl mb-10 opacity-90 max-w-3xl mx-auto">
                 <b>Sick of inconsistent punters?</b> <br><br>Get a high-converting website and start booking more jobs this week!
             </p>
-            <a href="#contact" class="inline-block bg-white text-gray-900 px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300">
+            <button id="heroGetQuote" class="inline-block bg-white text-gray-900 px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300">
                 Get Your FREE Quote!
-            </a>
+            </button>
         </div>
     </section>
 
     <div class="max-w-4xl mx-auto"> <section id="samples" class="py-16 gray-50">
-                <div class="container mx-auto px-4">
-                    <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">Site Examples</h2>
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">Site Examples</h2>
 
-                    <div class="flex flex-col space-y-8"> 
-                        <div class="text-left"> 
-                            <h3 class="text-2xl font-bold text-gray-800 mb-2">
-                                <a href="https://mmp03patane.github.io/ELECTRIC/" class="site-title-link" data-url="https://mmp03patane.github.io/ELECTRIC/">
-                                    Electrician Website
-                                    <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                </a>
-                            </h3>
-                            <a href="https://mmp03patane.github.io/ELECTRIC/" class="view-site-text-link" data-url="https://mmp03patane.github.io/ELECTRIC/">
-                                View site
+                <div class="flex flex-col space-y-8"> 
+                    <div class="text-left"> 
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                            <a href="https://mmp03patane.github.io/ELECTRIC/" class="site-title-link" data-url="https://mmp03patane.github.io/ELECTRIC/">
+                                Electrician Website
+                                <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                             </a>
-                        </div>
-
-                        <div class="text-left"> 
-                            <h3 class="text-2xl font-bold text-gray-800 mb-2">
-                                <a href="https://mmp03patane.github.io/JUNK/" class="site-title-link" data-url="https://mmp03patane.github.io/JUNK/">
-                                    Junk Removal Website
-                                    <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                </a>
-                            </h3>
-                            <a href="https://mmp03patane.github.io/JUNK/" class="view-site-text-link" data-url="https://mmp03patane.github.io/JUNK/">
-                                View site
-                            </a>
-                        </div>
-
-                        <div class="text-left"> 
-                            <h3 class="text-2xl font-bold text-gray-800 mb-2">
-                                <a href="https://mmp03patane.github.io/PLUMBING/" class="site-title-link" data-url="https://mmp03patane.github.io/PLUMBING/">
-                                    Plumbing Website
-                                    <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                </a>
-                            </h3>
-                            <a href="https://mmp03patane.github.io/PLUMBING/" class="view-site-text-link" data-url="https://mmp03patane.github.io/PLUMBING/">
-                                View site
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="site-inclusions" class="py-16 bg-white">
-                <div class="container mx-auto px-4">
-                    <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">Website Inclusions</h2>
-                    
-                    <div class="max-w-2xl mx-auto bg-gray-100 p-8 rounded-lg shadow-md">
-                        <ul class="inclusions-list mb-6">
-                            <li>SEO Friendly On-Page Content</li>
-                            <li>FREE Hosting</li>
-                            <li>SSL Certificate and Securities</li>
-                            <li>Site Speed Optimized</li>
-                            <li>Custom Form Integration</li>
-                            <li>No Ongoing Costs</li>
-                        </ul>
-                        <a href="#" id="addMoreFeaturesLink" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center text-lg">
-                            Add More Features <span class="ml-1 text-2xl font-bold">+</span>
+                        </h3>
+                        <a href="https://mmp03patane.github.io/ELECTRIC/" class="view-site-text-link" data-url="https://mmp03patane.github.io/ELECTRIC/">
+                            View site
                         </a>
-                        <ul id="addedFeaturesDisplay" class="added-features-list mt-6 space-y-2 hidden">
-                            </ul>
-                        <div class="text-center mt-10">
-                            <button id="getPriceButton" class="btn-primary text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:transform hover:scale-105 transition duration-300">
-                                Get Price
-                            </button>
-                        </div>
+                    </div>
+
+                    <div class="text-left"> 
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                            <a href="https://mmp03patane.github.io/JUNK/" class="site-title-link" data-url="https://mmp03patane.github.io/JUNK/">
+                                Junk Removal Website
+                                <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </h3>
+                        <a href="https://mmp03patane.github.io/JUNK/" class="view-site-text-link" data-url="https://mmp03patane.github.io/JUNK/">
+                            View site
+                        </a>
+                    </div>
+
+                    <div class="text-left"> 
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                            <a href="https://mmp03patane.github.io/PLUMBING/" class="site-title-link" data-url="https://mmp03patane.github.io/PLUMBING/">
+                                Plumbing Website
+                                <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </h3>
+                        <a href="https://mmp03patane.github.io/PLUMBING/" class="view-site-text-link" data-url="https://mmp03patane.github.io/PLUMBING/">
+                            View site
+                        </a>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="faq" class="py-16 bg-gray-50">
-                <div class="container mx-auto px-4">
-                    <h2 class="text-4xl font-bold text-left mb-12 section-title mx-auto">FAQs.</h2>
+        <section id="site-inclusions" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">Website Inclusions</h2>
+                
+                <div class="max-w-2xl mx-auto bg-gray-100 p-8 rounded-lg shadow-md">
+                    <ul class="inclusions-list mb-6">
+                        <li>SEO Friendly On-Page Content</li>
+                        <li>FREE Hosting</li>
+                        <li>SSL Certificate and Securities</li>
+                        <li>Site Speed Optimized</li>
+                        <li>Custom Form Integration</li>
+                        <li>No Ongoing Costs</li>
+                    </ul>
+                    <a href="#" id="addMoreFeaturesLink" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center text-lg">
+                        Add More Features <span class="ml-1 text-2xl font-bold">+</span>
+                    </a>
+                    <ul id="addedFeaturesDisplay" class="added-features-list mt-6 space-y-2 hidden">
+                        </ul>
+                    <div class="text-center mt-10">
+                        <button id="getPriceButton" class="btn-primary text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:transform hover:scale-105 transition duration-300">
+                            Get Price
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                    <div class="max-w-3xl mx-auto space-y-4">
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <section id="faq" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-left mb-12 section-title mx-auto">FAQs.</h2>
+
+                <div class="max-w-3xl mx-auto space-y-4">
+ <div class="bg-white rounded-lg shadow-md overflow-hidden">
                         <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
                             <span>How do I accept quotes through my website?</span>
                             <span class="accordion-icon">+</span>
@@ -626,57 +611,58 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="how-it-works" class="py-16 bg-white">
-                <div class="container mx-auto px-4">
-                    <h2 class="text-4xl font-bold text-left mb-12 section-title mx-auto">How It Works</h2>
+        <section id="how-it-works" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-left mb-12 section-title mx-auto">How It Works</h2>
 
-                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div class="step-card">
-                            <div class="step-number">1</div>
-                            <h3 class="text-2xl font-semibold mb-3 text-gray-800">Your Initial Quote Request</h3>
-                            <p class="text-gray-700">Fill out the online form. Tell me a bit about your business and what you're looking for in a website.</p>
-                        </div>
-
-                        <div class="step-card">
-                            <div class="step-number">2</div>
-                            <h3 class="text-2xl font-semibold mb-3 text-gray-800">Let's Have a Chat</h3>
-                            <p class="text-gray-700">We'll schedule a brief phone call to discuss your goals in detail. This is an open forum to discuss questions and ensure we're aligned with your vision.</p>
-                        </div>
-
-                        <div class="step-card">
-                            <div class="step-number">3</div>
-                            <h3 class="text-2xl font-semibold mb-3 text-gray-800">Crafting Your Custom Site</h3>
-                            <p class="text-gray-700">Time to get to work! I will begin meticulously coding and designing your custom website. I focus focus on speed, user experience, and lead conversion.</p>
-                        </div>
-
-                        <div class="step-card">
-                            <div class="step-number">4</div>
-                            <h3 class="text-2xl font-semibold mb-3 text-gray-800">Launch & Lead Generation</h3>
-                            <p class="text-gray-700">Once you're thrilled with the result, we launch your new website! Within days, you'll have a high-performing digital asset ready to attract more quotes and book more jobs.</p>
-                        </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Your Initial Quote Request</h3>
+                        <p class="text-gray-700">Fill out the online form. Tell me a bit about your business and what you're looking for in a website.</p>
                     </div>
-                    <div class="text-center mt-12">
-                        <a href="#contact" class="inline-block btn-primary text-white px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:transform hover:scale-105 transition duration-300">
-                            Get Your FREE Quote!
-                        </a>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Let's Have a Chat</h3>
+                        <p class="text-gray-700">We'll schedule a brief phone call to discuss your goals in detail. This is an open forum to discuss questions and ensure we're aligned with your vision.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Crafting Your Custom Site</h3>
+                        <p class="text-gray-700">Time to get to work! I will begin meticulously coding and designing your custom website. I focus focus on speed, user experience, and lead conversion.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Launch & Lead Generation</h3>
+                        <p class="text-gray-700">Once you're thrilled with the result, we launch your new website! Within days, you'll have a high-performing digital asset ready to attract more quotes and book more jobs.</p>
                     </div>
                 </div>
-            </section>
-
-            <section id="about" class="py-16 bg-gray-50">
-                <div class="container mx-auto px-4 text-center max-w-3xl">
-                    <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">About Creative365</h2>
-                    <div class="bg-white rounded-lg shadow-md p-8">
-                        <img src="https://github.com/mmp03patane/creative/blob/main/PROFILE%20PHOTO%203.PNG?raw=true" alt="Michael Patane Photo" class="profile-photo" />
-                        <p class="mb-4">Hey everyone,</p>
-                        <p class="mb-4">I'm <b>Michael Patane</b>, founder of <b>Creative365</b>. I help tradies and residential service businesses grow with websites that attract leads, build trust, and turn visitors into paying customers.</p>
-                        <p class="mb-4">I’ve worked with some of Australia’s biggest names — <b>GLG</b>, <b>Jim's Group</b>, and <b>MYOB</b> — helping electricians, plumbers, gardeners, painters, cleaners and more streamline and scale with smart digital strategies.</p>
-                        <p>Now, I bring that big-brand experience to local businesses like yours. Whether you need a new website or a better way to win work online, I’ll help you build a system that brings in jobs — not just clicks.</p>
-                    </div>
+                <div class="text-center mt-12">
+                    <button id="howItWorksGetQuote" class="inline-block btn-primary text-white px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:transform hover:scale-105 transition duration-300">
+                        Get Your FREE Quote!
+                    </button>
                 </div>
-            </section>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 text-center max-w-3xl">
+                <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">About Creative365</h2>
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <img src="https://github.com/mmp03patane/creative/blob/main/PROFILE%20PHOTO%203.PNG?raw=true" alt="Michael Patane Photo" class="profile-photo" />
+                    <p class="mb-4">Hey everyone,</p>
+                    <p class="mb-4">I'm <b>Michael Patane</b>, founder of <b>Creative365</b>. I help tradies and residential service businesses grow with websites that attract leads, build trust, and turn visitors into paying customers.</p>
+                    <p class="mb-4">I’ve worked with some of Australia’s biggest names — <b>GLG</b>, <b>Jim's Group</b>, and <b>MYOB</b> — helping electricians, plumbers, gardeners, painters, cleaners and more streamline and scale with smart digital strategies.</p>
+                    <p>Now, I bring that big-brand experience to local businesses like yours. Whether you need a new website or a better way to win work online, I’ll help you build a system that brings in jobs — not just clicks.</p>
+                </div>
+            </div>
+        </section>
 
     </div> <section id="contact" class="gradient-bg text-white py-20 rounded-t-3xl shadow-xl">
         <div class="container mx-auto px-4 text-center">
@@ -744,42 +730,6 @@
                     </select>
                     <span class="form-error-message" id="timeSlotError" style="display: none;"></span>
                     <p style="font-size: 0.9rem; color: #555; margin-top: 0.5rem; text-align: left;">This is a request; we will confirm exact availability.</p>
-                </div>
-
-                <div class="form-group-creative">
-                    <label class="block text-gray-700 text-sm font-semibold mb-2">Do you have your own custom domain?<span style="color:red;">*</span></label>
-                    <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
-                        <label style="display: flex; align-items: center;">
-                            <input type="radio" name="hasDomain" value="Yes" required>
-                            <span style="margin-left: 0.5rem; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                            <input type="radio" name="hasDomain" value="No">
-                            <span style="margin-left: 0.5rem; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">No</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group-creative">
-                    <label class="block text-gray-700 text-sm font-semibold mb-2">
-                        Do you currently use a Customer Management System (CMS)?<span style="color:red;">*</span>
-                    </label>
-                    <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
-                        <label style="display: flex; align-items: center;">
-                            <input type="radio" name="usesCMS" value="Yes" required>
-                            <span style="margin-left: 0.5rem; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                            <input type="radio" name="usesCMS" value="No">
-                            <span style="margin-left: 0.5rem; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">No</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group-creative">
-                    <label for="message">Your Message / Project Details<span style="color:red;">*</span></label>
-                    <textarea id="message" name="Message" rows="5" placeholder="Tell us about your business and website needs..." required></textarea>
-                    <span class="form-error-message" id="messageError" style="display: none;"></span>
                 </div>
 
                 <button type="submit" class="w-full btn-primary text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transform hover:scale-105 transition duration-300">
@@ -878,19 +828,22 @@
 
 
         // Quote Modal Functionality
-        const openQuoteModalBtn = document.getElementById('openQuoteModal');
+        const getQuoteButtons = document.querySelectorAll('#openQuoteModal, #heroGetQuote, #howItWorksGetQuote, #navGetQuote, #mobileGetQuote, #getPriceButton');
         const closeQuoteModalBtn = document.getElementById('closeQuoteModal');
         const quoteModal = document.getElementById('quoteModal');
         const modalContent = document.getElementById('modalContent');
         const creative365ContactForm = document.getElementById('creative365ContactForm'); 
         const formMessage = document.getElementById('formMessage');
 
-        openQuoteModalBtn.addEventListener('click', () => {
-            quoteModal.classList.remove('hidden');
-            setTimeout(() => {
-                modalContent.classList.remove('scale-95', 'opacity-0');
-                modalContent.classList.add('scale-100', 'opacity-100');
-            }, 10);
+        getQuoteButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior for #contact and other buttons
+                quoteModal.classList.remove('hidden');
+                setTimeout(() => {
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            });
         });
 
         closeQuoteModalBtn.addEventListener('click', () => {
@@ -924,30 +877,30 @@
             const phoneNumber = document.getElementById('phoneNumber');
             const preferredDate = document.getElementById('preferredDate');
             const preferredTimeSlot = document.getElementById('preferredTimeSlot');
-            const message = document.getElementById('message');
+
+            // Reset error messages
+            document.getElementById('nameError').style.display = 'none';
+            document.getElementById('emailError').style.display = 'none';
+            document.getElementById('phoneError').style.display = 'none';
+            document.getElementById('dateError').style.display = 'none';
+            document.getElementById('timeSlotError').style.display = 'none';
 
             if (fullName.value.trim() === '') {
                 document.getElementById('nameError').textContent = 'Full Name is required.';
                 document.getElementById('nameError').style.display = 'block';
                 isValid = false;
-            } else {
-                document.getElementById('nameError').style.display = 'none';
             }
 
             if (emailAddress.value.trim() === '' || !emailAddress.value.includes('@')) {
                 document.getElementById('emailError').textContent = 'A valid Email Address is required.';
                 document.getElementById('emailError').style.display = 'block';
                 isValid = false;
-            } else {
-                document.getElementById('emailError').style.display = 'none';
             }
 
             if (phoneNumber.value.trim() === '') {
                 document.getElementById('phoneError').textContent = 'Phone Number is required.';
                 document.getElementById('phoneError').style.display = 'block';
                 isValid = false;
-            } else {
-                document.getElementById('phoneError').style.display = 'none';
             }
 
             const selectedDate = new Date(preferredDate.value);
@@ -960,37 +913,12 @@
                 document.getElementById('dateError').textContent = 'Please select a date at least 24 hours in the future.';
                 document.getElementById('dateError').style.display = 'block';
                 isValid = false;
-            } else {
-                document.getElementById('dateError').style.display = 'none';
             }
 
             if (preferredTimeSlot.value === '') {
                 document.getElementById('timeSlotError').textContent = 'Please select a preferred time slot.';
                 document.getElementById('timeSlotError').style.display = 'block';
                 isValid = false;
-            } else {
-                document.getElementById('timeSlotError').style.display = 'none';
-            }
-
-            const hasDomainRadios = document.querySelectorAll('input[name="hasDomain"]');
-            const usesCMSRadios = document.querySelectorAll('input[name="usesCMS"]');
-            
-            let isDomainSelected = Array.from(hasDomainRadios).some(radio => radio.checked);
-            let isCmsSelected = Array.from(usesCMSRadios).some(radio => radio.checked);
-
-            if (!isDomainSelected) {
-                isValid = false;
-            }
-            if (!isCmsSelected) {
-                isValid = false;
-            }
-
-            if (message.value.trim() === '') {
-                document.getElementById('messageError').textContent = 'Please tell us about your project.';
-                document.getElementById('messageError').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('messageError').style.display = 'none';
             }
 
             if (!isValid) {
@@ -1002,10 +930,10 @@
 
             const formData = new FormData(creative365ContactForm); 
             
-            // Append selected features to form data
-            document.querySelectorAll('#addedFeaturesDisplay li').forEach(item => {
-                formData.append('Added_Feature[]', item.textContent.trim());
-            });
+            // Removed appended features as per simplification request
+            // document.querySelectorAll('#addedFeaturesDisplay li').forEach(item => {
+            //     formData.append('Added_Feature[]', item.textContent.trim());
+            // });
 
             try {
                 const response = await fetch(creative365ContactForm.action, {
@@ -1021,9 +949,9 @@
                     formMessage.classList.remove('text-gray-600', 'text-red-600');
                     formMessage.classList.add('text-green-600');
                     creative365ContactForm.reset(); 
-                    // Optionally clear added features display after submission
-                    document.getElementById('addedFeaturesDisplay').innerHTML = '';
-                    document.getElementById('addedFeaturesDisplay').classList.add('hidden');
+                    // Optionally clear added features display after submission if it was still relevant
+                    // document.getElementById('addedFeaturesDisplay').innerHTML = '';
+                    // document.getElementById('addedFeaturesDisplay').classList.add('hidden');
                 } else {
                     const data = await response.json();
                     if (data.errors) {
@@ -1047,12 +975,6 @@
             const heroSection = document.querySelector('.gradient-bg'); 
             if (heroSection) {
                 heroSection.classList.add('bounce-animation');
-            }
-
-            // Set the initial margin-top for the hero section to prevent content overlap
-            const header = document.querySelector('header');
-            if (header) {
-                document.querySelector('.gradient-bg').style.marginTop = header.offsetHeight + 'px';
             }
         });
 
@@ -1160,27 +1082,6 @@
             }
 
             addFeaturesModal.classList.remove('active');
-        });
-
-        // Semi-lock header script
-        let lastScrollY = window.scrollY;
-        const header = document.querySelector('.semi-locked-header');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > lastScrollY && window.scrollY > header.offsetHeight) {
-                // Scrolling down and past header height
-                header.classList.add('hidden');
-            } else if (window.scrollY < lastScrollY || window.scrollY <= header.offsetHeight) {
-                // Scrolling up or at the top
-                header.classList.remove('hidden');
-            }
-            lastScrollY = window.scrollY;
-        });
-
-        // Adjust initial body padding to prevent content from being hidden behind the fixed header
-        document.addEventListener('DOMContentLoaded', () => {
-            const headerHeight = document.querySelector('.semi-locked-header').offsetHeight;
-            document.body.style.paddingTop = headerHeight + 'px';
         });
     </script>
 </body>
