@@ -1,1087 +1,1530 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website - Custom Web Solutions for Melbourne Tradies</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VoltWorks Electrical - Melbourne Electrician</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet" />
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f8f8;
-            color: #333;
+        /* Reset and base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        /* The .container class is already defined with a max-width of 1200px,
-            but for the body content, we'll introduce new classes for narrower width. */
-        .section-title {
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background: #f9f9f9;
+            color: #333;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #2c3e50; /* Dark blue/grey */
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: relative;
+            z-index: 200;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .logo svg {
+            margin-right: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .logo:hover svg {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        /* Desktop Navigation */
+        nav.desktop-nav {
+            display: block;
+        }
+        nav.desktop-nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-family: 'Roboto', sans-serif;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        nav.desktop-nav a:hover {
+            color: #f39c12; /* Orange accent */
+            transform: translateY(-2px);
+        }
+
+        /* Hamburger Menu (Hidden by default on desktop) */
+        .hamburger-menu {
+            display: none;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 20;
+            transition: transform 0.3s ease;
+        }
+        .hamburger-menu.active {
+            transform: rotate(90deg);
+        }
+        .hamburger-menu .bar {
+            height: 3px;
+            background-color: #fff;
+            width: 100%;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .hamburger-menu.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-menu.active .bar:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .hamburger-menu.active .bar:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Mobile Navigation (Hidden by default, shown with JS) */
+        nav.mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: rgba(44, 62, 80, 0.98); /* Slightly less transparent */
+            z-index: 15;
+            text-align: right;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        nav.mobile-nav.open {
+            display: block;
+            animation: slideDown 0.3s ease-out forwards;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        nav.mobile-nav a {
+            color: #fff;
+            display: block;
+            padding: 0.8rem 1.5rem;
+            text-transform: uppercase;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease, padding-right 0.2s ease;
+        }
+        nav.mobile-nav a:last-child {
+            border-bottom: none;
+        }
+        nav.mobile-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding-right: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #34495e; /* A slightly lighter, more inviting dark blue */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            color: white;
+            position: relative;
+            overflow: hidden; /* For particles */
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2); /* Lighter overlay */
+            z-index: 0; /* Keep text on top */
+        }
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            line-height: 1.1;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(0,0,0,0.7); /* Stronger shadow */
+            user-select: none;
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 1s ease-out;
+        }
+        .hero .subtext {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.8rem;
+            max-width: 700px;
+            margin-bottom: 40px; /* More space */
+            text-shadow: 0 0 10px rgba(0,0,0,0.6);
+            user-select: none;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        .cta-button {
+            background-color: #f39c12; /* Orange accent */
+            color: #fff;
+            padding: 20px 45px; /* Larger button */
+            border: none;
+            border-radius: 10px; /* More rounded */
+            font-size: 1.7rem; /* Larger font */
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            user-select: none;
             display: inline-block;
-            padding-bottom: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4); /* More pronounced shadow */
+            position: relative;
+            z-index: 1;
+            animation: bounceIn 1.5s ease-out;
+        }
+        .cta-button:hover,
+        .cta-button:focus {
+            background-color: #e67e22; /* Darker orange on hover */
+            transform: translateY(-5px) scale(1.02); /* More dynamic hover */
+            outline: none;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Hero animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+            0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+            20% { transform: scale3d(1.1, 1.1, 1.1); }
+            40% { transform: scale3d(0.9, 0.9, 0.9); }
+            60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+            80% { transform: scale3d(0.97, 0.97, 0.97); }
+            100% { opacity: 1; transform: scale3d(1, 1, 1); }
+        }
+
+
+        /* Scrolling Marquee */
+        .marquee-container {
+            background-color: #2c3e50; /* Dark blue/grey */
+            color: #f39c12; /* Orange accent */
+            padding: 1rem 0; /* Slightly more padding */
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.2rem; /* Slightly larger */
+            font-weight: bold;
+            box-shadow: inset 0 3px 8px rgba(0,0,0,0.3); /* Stronger shadow */
+            animation: borderPulse 3s infinite alternate; /* New animation */
+        }
+        .marquee-content {
+            display: inline-block;
+            padding-left: 100%; /* Start off-screen */
+            animation: marquee 20s linear infinite; /* Adjust duration for speed, longer for more text */
+        }
+        @keyframes marquee {
+            0%   { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+        @keyframes borderPulse {
+            0% { box-shadow: inset 0 3px 8px rgba(0,0,0,0.3), 0 0 0 rgba(243,156,18,0); }
+            100% { box-shadow: inset 0 3px 8px rgba(0,0,0,0.3), 0 0 15px rgba(243,156,18,0.7); }
+        }
+
+        /* General Section Styles */
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem; /* Larger titles */
+            color: #2c3e50; /* Dark blue/grey for section headings */
+            margin-bottom: 40px; /* More space */
+            text-transform: uppercase;
+            letter-spacing: 2px; /* More spacing */
+            user-select: none;
+            position: relative;
+            text-align: center;
+            padding-bottom: 10px;
         }
         .section-title::after {
             content: '';
             position: absolute;
-            left: 0;
             bottom: 0;
-            width: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
             height: 4px;
-            background-color: #f97316; /* Orange-500 */
+            background-color: #f39c12; /* Orange accent underline */
             border-radius: 2px;
         }
-        .accordion-button {
-            transition: all 0.3s ease-in-out;
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-            padding: 0; /* Reset padding directly on accordion-content */
-        }
-        .accordion-content p {
-            padding-top: 0.5rem; /* Equivalent to Tailwind's pt-2 */
-            padding-bottom: 1.5rem; /* Equivalent to Tailwind's pb-6 */
-            padding-left: 1.5rem; /* Added for left margin */
-            padding-right: 1.5rem; /* Added for right margin */
-        }
-        .accordion-content.active {
-            max-height: 500px; /* Adjust as needed for content length */
-        }
-        .sample-item {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .sample-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .gradient-bg {
-            background-image: linear-gradient(to right, #fb923c, #f97316); /* Orange-400 to Orange-500 */
-        }
-        .btn-primary {
-            background-color: #f97316; /* Orange-500 */
-            transition: background-color 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #ea580c; /* Orange-600 */
-        }
-        .bounce-animation {
-            animation: bounce-in 0.8s ease-out;
-        }
-        @keyframes bounce-in {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            60% {
-                opacity: 1;
-                transform: translateY(-5px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-        /* Custom scrollbar for demo purposes if content overflows */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
+
+        /* Why Choose Us Section */
+        .why-choose-us-section {
+            padding: 80px 20px; /* More padding */
+            max-width: 1000px; /* Wider section */
+            margin: 0 auto;
             text-align: center;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        /* Styles for the new contact form */
-        .form-group-creative {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group-creative label {
-            display: block;
-            color: #333;
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group-creative input[type="text"],
-        .form-group-creative input[type="email"],
-        .form-group-creative input[type="tel"],
-        .form-group-creative input[type="date"],
-        .form-group-creative select,
-        .form-group-creative textarea {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            border: 1px solid #ccc;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            color: #333;
             background-color: #fff;
-            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
-
-        .form-group-creative input[type="text"]:focus,
-        .form-group-creative input[type="email"]:focus,
-        .form-group-creative input[type="tel"]:focus,
-        .form-group-creative input[type="date"]:focus,
-        .form-group-creative select:focus,
-        .form-group-creative textarea:focus {
-            border-color: #f97316;
-            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
-            outline: none;
+        .why-choose-us-section p {
+            font-size: 1.35rem; /* Larger text */
+            font-weight: 400;
+            margin: 20px 0; /* More margin */
+            color: #555;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        .form-group-creative textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .form-group-creative input[type="radio"] {
-            margin-right: 0.5rem;
-            accent-color: #f97316; /* Changes the color of the radio button itself */
-        }
-
-        .form-error-message {
-            color: #dc2626; /* Red-600 */
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-            display: block;
-        }
-
-        /* Profile photo for about section */
-        .profile-photo {
-            width: 150px; /* Adjust size as needed */
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 1.5rem auto; /* Center and add space below */
-            display: block;
-            border: 4px solid #f97316;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* How it works steps styling */
-        .step-card {
-            background-color: #fff;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .step-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        .step-card .step-icon {
-            font-size: 3rem;
-            color: #f97316;
-            margin-bottom: 1rem;
-        }
-
-        .step-card .step-number {
-            display: inline-block;
-            background-color: #f97316;
-            color: white;
-            font-weight: bold;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem auto;
+        .why-choose-us-section .highlight {
+            font-style: italic;
+            margin: 40px 0; /* More margin */
+            font-weight: 600; /* Bolder highlight */
+            color: #333;
             font-size: 1.5rem;
         }
+        .why-choose-us-section .punchline {
+            margin-top: 0;
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #f39c12; /* Orange accent */
+            font-size: 2rem; /* Even larger */
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
-        /* Mobile menu specific styles */
-        .mobile-menu {
-            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        /* Feature Lockup Section */
+        .feature-lockup-section {
+            padding: 80px 20px;
+            background-color: #ecf0f1;
+            text-align: center;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px; /* Increased gap */
+            max-width: 1200px;
+            margin: 40px auto 0;
+        }
+        .feature-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .feature-card img {
+            width: 120px; /* Larger icons/images */
+            height: 120px;
+            margin-bottom: 20px;
+            border-radius: 50%; /* Make images circular */
+            object-fit: cover;
+            border: 4px solid #f39c12; /* Orange border */
+            padding: 5px;
+            animation: rotateIn 0.8s ease-out;
+        }
+        .feature-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem; /* Larger heading */
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .feature-card p {
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.6;
+            flex-grow: 1; /* Allow text to grow */
+        }
+        @keyframes rotateIn {
+            from { transform: rotateY(90deg) scale(0.8); opacity: 0; }
+            to { transform: rotateY(0deg) scale(1); opacity: 1; }
+        }
+
+        /* Services Section */
+        .services-section {
+            background-color: #f9f9f9; /* Changed to lighter for contrast */
+            padding: 100px 20px; /* More padding */
+            text-align: center;
+            color: #333;
+        }
+        .services-section .section-title {
+            color: #2c3e50;
+        }
+
+        .service-panel {
+            background-color: #ffffff;
+            border-radius: 15px; /* More rounded */
+            max-width: 400px; /* Slightly wider */
+            margin: 0 auto 30px;
+            padding: 35px 30px; /* More padding */
+            text-align: left;
+            color: #333;
+            font-weight: 400;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.18); /* Stronger shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .service-panel:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        .panels-container {
+            display: grid; /* Use grid for services */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            justify-content: center;
+            gap: 40px; /* Increased gap */
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .service-panel h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem; /* Larger */
+            color: #2c3e50;
+            margin-bottom: 20px; /* More space */
+            text-align: center;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        .service-panel h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: #f39c12;
+            border-radius: 1.5px;
+        }
+        .service-panel p {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 25px; /* More space */
+            flex-grow: 1;
+            text-align: center;
+        }
+        .service-panel .cta-button {
+            padding: 14px 30px; /* Larger button */
+            font-size: 1.2rem;
+            border-radius: 8px;
+            background-color: #f39c12;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-top: auto;
+        }
+        .service-panel .cta-button:hover {
+            background-color: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background-color: #2c3e50; /* Dark blue/grey background */
+            color: #fff;
+            padding: 100px 20px; /* More padding */
+            text-align: center;
+            position: relative;
             overflow: hidden;
-            max-height: 0;
-            opacity: 0;
         }
-
-        .mobile-menu.active {
-            max-height: 500px; /* Adjust as needed for menu content */
+        .testimonials-section .section-title {
+            color: #fff;
+        }
+        .testimonials-carousel-container {
+            position: relative;
+            max-width: 900px; /* Wider carousel */
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .testimonials-carousel {
+            display: flex;
+            transition: transform 0.6s ease-in-out; /* Slower transition */
+        }
+        .testimonial-card {
+            flex: 0 0 100%;
+            background-color: #ffffff;
+            padding: 3.5rem; /* More padding */
+            border-radius: 15px; /* More rounded */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            color: #333;
+            margin: 0 20px; /* More spacing */
+            transform: scale(0.9); /* More pronounced scaling */
+            opacity: 0.7;
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+        }
+        .testimonial-card.active-slide {
+            transform: scale(1);
             opacity: 1;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Stronger shadow on active */
         }
 
-        /* Ensure form labels and inputs are aligned for desktop */
-        @media (min-width: 768px) {
-            .form-group-creative label {
-                text-align: left;
+        .testimonial-card::before {
+            content: '“';
+            font-family: serif;
+            font-size: 6em; /* Larger quote mark */
+            color: #f39c12; /* Orange accent */
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+            opacity: 0.2; /* Slightly more visible */
+            z-index: 0;
+        }
+        .testimonial-text {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1.3rem; /* Larger text */
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 30px; /* More space */
+            padding-top: 40px; /* Space for the quote mark */
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .testimonial-author {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            font-weight: bold;
+            text-align: right;
+            margin-top: auto;
+        }
+        .stars {
+            color: gold;
+            font-size: 1.5rem; /* Larger stars */
+            margin-bottom: 1rem;
+            text-align: right;
+        }
+        .carousel-nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.7); /* Darker buttons */
+            color: white;
+            border: none;
+            padding: 18px; /* Larger buttons */
+            cursor: pointer;
+            font-size: 1.8rem; /* Larger arrows */
+            border-radius: 50%;
+            width: 60px; /* Larger buttons */
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .carousel-nav-button:hover {
+            background-color: rgba(0,0,0,0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .carousel-nav-button.prev {
+            left: 15px;
+        }
+        .carousel-nav-button.next {
+            right: 15px;
+        }
+        .carousel-indicators {
+            text-align: center;
+            margin-top: 30px;
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .carousel-dot {
+            height: 12px; /* Larger dots */
+            width: 12px;
+            margin: 0 7px; /* More spacing */
+            background-color: rgba(255,255,255,0.6); /* Slightly lighter default */
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .carousel-dot.active {
+            background-color: #f39c12; /* Orange accent */
+            transform: scale(1.4); /* More pronounced active state */
+            box-shadow: 0 0 8px rgba(243,156,18,0.7);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background-color: #ffffff;
+            padding: 80px 20px; /* More padding */
+            text-align: center;
+        }
+        .faq-section .section-title {
+            color: #2c3e50;
+        }
+        .faq-container {
+            max-width: 900px; /* Wider container */
+            margin: 40px auto 0;
+            text-align: left;
+        }
+        .faq-item {
+            margin-bottom: 1.5rem; /* More space */
+            border: 1px solid #ddd;
+            border-radius: 10px; /* More rounded */
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Subtle shadow */
+            transition: box-shadow 0.3s ease;
+        }
+        .faq-item:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+        .faq-question {
+            background-color: #ecf0f1; /* Light grey/blue */
+            padding: 1.2rem 1.8rem; /* More padding */
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            font-size: 1.3rem; /* Larger font */
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            color: #333;
+        }
+        .faq-question:hover {
+            background-color: #bdc3c7; /* Slightly darker grey/blue on hover */
+            color: #2c3e50;
+        }
+        .faq-question::after {
+            content: '+';
+            font-size: 1.8rem; /* Larger icon */
+            transition: transform 0.3s ease;
+            color: #f39c12; /* Orange plus/minus */
+            font-weight: 900; /* Bolder icon */
+        }
+        .faq-question.active::after {
+            content: '-';
+            transform: rotate(0deg); /* No rotation for minus */
+        }
+        .faq-answer {
+            padding: 1.2rem 1.8rem;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1.15rem;
+            background-color: #fff;
+            border-top: 1px solid #eee;
+            display: none;
+            overflow: hidden;
+            color: #555;
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Call to Action Section (New) */
+        .cta-banner {
+            background: linear-gradient(90deg, #2c3e50 0%, #34495e 100%); /* Gradient background */
+            color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
+        }
+        .cta-banner h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            animation: slideInLeft 1s ease-out;
+        }
+        .cta-banner p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideInRight 1s ease-out;
+        }
+        .cta-banner .cta-button {
+            padding: 18px 40px;
+            font-size: 1.6rem;
+            animation: pulse 1.5s infinite; /* Keep pulse animation */
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+
+        /* Contact Form Section */
+        #contact-form {
+            max-width: 800px; /* Wider form */
+            margin: 80px auto 100px; /* More margin */
+            padding: 50px; /* More padding */
+            background-color: #ffffff;
+            border-radius: 15px; /* More rounded */
+            box-shadow: 0 10px 35px rgba(0,0,0,0.18); /* Stronger shadow */
+        }
+        #contact-form .section-title {
+            color: #2c3e50;
+            margin-bottom: 35px;
+        }
+        #contact-form .quote-subtext {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        #contact-form form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px; /* More space between grid items */
+        }
+        #contact-form .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        #contact-form .full-width {
+            grid-column: 1 / -1;
+        }
+        #contact-form label {
+            font-weight: 700;
+            margin-bottom: 10px; /* More space */
+            font-size: 1.1rem; /* Larger label */
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #contact-form input,
+        #contact-form textarea,
+        #contact-form select {
+            padding: 14px 18px; /* More padding */
+            font-size: 1.15rem; /* Larger font */
+            border: 1px solid #ccc;
+            border-radius: 8px; /* More rounded */
+            font-family: 'Nunito Sans', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+        #contact-form textarea {
+            resize: vertical;
+            min-height: 150px; /* Taller textarea */
+        }
+        #contact-form input:focus,
+        #contact-form textarea:focus,
+        #contact-form select:focus {
+            border-color: #f39c12;
+            outline: none;
+            box-shadow: 0 0 10px rgba(243, 156, 18, 0.5); /* Stronger focus shadow */
+        }
+        #contact-form button {
+            grid-column: 1 / -1;
+            padding: 18px; /* Larger button */
+            font-size: 1.5rem;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 10px; /* More rounded */
+            cursor: pointer;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+            margin-top: 20px; /* More margin */
+        }
+        #contact-form button:hover,
+        #contact-form button:focus {
+            background-color: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 3rem 1.5rem; /* More padding */
+            text-align: center;
+            font-size: 1rem;
+            border-top: 6px solid #f39c12; /* Thicker accent line */
+        }
+        footer p {
+            margin-bottom: 0.8rem; /* More space */
+        }
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #e67e22; /* Darker orange on hover */
+            text-decoration: underline;
+        }
+        .social-icons {
+            margin-top: 1.5rem; /* More space */
+        }
+        .social-icons a {
+            display: inline-block;
+            margin: 0 12px; /* More margin */
+            color: #fff;
+            font-size: 1.8rem; /* Larger icons */
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        .social-icons a:hover {
+            color: #f39c12;
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* Scroll-triggered animations (utility class) */
+        .fade-in-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .slide-in-left-on-scroll {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .slide-in-left-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .slide-in-right-on-scroll {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .slide-in-right-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .scale-in-on-scroll {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scale-in-on-scroll.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Responsive: Tablets and smaller */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 0 20px;
+                height: 75vh; /* Shorter hero on mobile */
+            }
+            .hero h1 {
+                font-size: clamp(2.2rem, 9vw, 4rem);
+            }
+            .hero .subtext {
+                font-size: 1.4rem;
+            }
+            .cta-button {
+                font-size: 1.4rem;
+                padding: 16px 35px;
+            }
+            .marquee-container {
+                font-size: 1.1rem;
+                padding: 0.7rem 0;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 30px;
+            }
+            .why-choose-us-section {
+                padding: 60px 15px;
+            }
+            .why-choose-us-section p {
+                font-size: 1.15rem;
+            }
+            .why-choose-us-section .highlight {
+                font-size: 1.3rem;
+                margin: 30px 0;
+            }
+            .why-choose-us-section .punchline {
+                font-size: 1.7rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr; /* Stack features on mobile */
+                gap: 30px;
+                margin-top: 30px;
+            }
+            .feature-card {
+                padding: 30px;
+            }
+            .feature-card img {
+                width: 100px;
+                height: 100px;
+            }
+            .feature-card h3 {
+                font-size: 1.8rem;
+            }
+            .feature-card p {
+                font-size: 1.05rem;
+            }
+
+            .services-section {
+                padding: 70px 15px 80px;
+            }
+            .service-panel {
+                max-width: 90%;
+                padding: 30px 25px;
+            }
+            .service-panel h3 {
+                font-size: 1.8rem;
+            }
+            .service-panel p {
+                font-size: 1.05rem;
+            }
+            .service-panel .cta-button {
+                font-size: 1.1rem;
+                padding: 12px 25px;
+            }
+
+            .faq-section {
+                padding: 60px 15px;
+            }
+            .faq-question {
+                font-size: 1.2rem;
+                padding: 1rem 1.5rem;
+            }
+            .faq-answer {
+                font-size: 1.05rem;
+                padding: 1rem 1.5rem;
+            }
+
+            .testimonials-section {
+                padding: 80px 15px;
+            }
+            .testimonial-card {
+                padding: 3rem 2.5rem;
+                margin: 0 15px;
+            }
+            .testimonial-text {
+                font-size: 1.2rem;
+                padding-top: 30px;
+            }
+            .testimonial-author {
+                font-size: 1.1rem;
+            }
+            .carousel-nav-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                padding: 0;
+            }
+            .carousel-nav-button.prev {
+                left: 5px;
+            }
+            .carousel-nav-button.next {
+                right: 5px;
+            }
+            .carousel-indicators {
+                bottom: 15px;
+            }
+
+            .cta-banner {
+                padding: 50px 15px;
+            }
+            .cta-banner h2 {
+                font-size: 2.5rem;
+            }
+            .cta-banner p {
+                font-size: 1.15rem;
+            }
+            .cta-banner .cta-button {
+                font-size: 1.4rem;
+                padding: 16px 30px;
+            }
+
+            #contact-form {
+                padding: 40px 25px;
+                margin-bottom: 80px;
+            }
+            #contact-form .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 30px;
+            }
+            #contact-form form {
+                grid-template-columns: 1fr; /* Single column on mobile */
+                gap: 20px;
+            }
+            #contact-form input,
+            #contact-form textarea,
+            #contact-form select {
+                font-size: 1.05rem;
+                padding: 12px 15px;
+            }
+            #contact-form button {
+                font-size: 1.3rem;
+                padding: 16px;
+            }
+
+            /* Mobile specific header changes */
+            .hamburger-menu {
+                display: flex;
+            }
+            nav.desktop-nav {
+                display: none;
+            }
+            header {
+                padding: 0.8rem 1.5rem;
+            }
+            .logo {
+                font-size: 1.5rem;
+            }
+            .logo svg {
+                width: 28px;
+                height: 28px;
             }
         }
 
-        /* Styles for the new "Site Inclusions" section */
-        .inclusions-list li {
-            position: relative;
-            padding-left: 1.75rem; /* Space for the checkmark */
-            margin-bottom: 0.75rem;
-            font-size: 1.125rem; /* text-lg */
-            color: #333;
-        }
-
-        .inclusions-list li::before {
-            content: '✔'; /* Heavy Check Mark emoji */
-            position: absolute;
-            left: 0;
-            color: #f97316; /* Changed to your orange color */
-        }
-
-        .added-features-list li {
-            padding-left: 2rem; /* Indent for added features */
-            margin-bottom: 0.5rem;
-            font-size: 1rem; /* text-base */
-            color: #555;
-            position: relative;
-        }
-
-        .added-features-list li::before {
-            content: '+';
-            position: absolute;
-            left: 0.75rem;
-            color: #f97316;
-            font-weight: bold;
-        }
-
-        /* Modal styles for "Add More Features" */
-        .feature-modal {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.75);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            z-index: 60; /* Higher than quote modal */
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .feature-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .feature-modal-content {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            max-width: 28rem; /* Equivalent to max-w-md */
-            width: 100%;
-            position: relative;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        .feature-modal.active .feature-modal-content {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .feature-checkbox-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-checkbox-group label {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
-            font-size: 1rem;
-            color: #333;
-            cursor: pointer;
-        }
-
-        .feature-checkbox-group input[type="checkbox"] {
-            margin-right: 0.75rem;
-            width: 1.25rem;
-            height: 1.25rem;
-            accent-color: #f97316;
-            cursor: pointer;
-        }
-
-        /* Custom button style for the "View Site" buttons (now removed) */
-        .view-site-button {
-            background-color: #f97316; /* Your orange color */
-            color: white;
-            padding: 12px 32px; /* Replicates px-8 py-3 */
-            border-radius: 9999px; /* Replicates rounded-full */
-            font-size: 1.125rem; /* Replicates text-lg */
-            font-weight: 700; /* Replicates font-bold */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Replicates shadow-md */
-            transition: background-color 0.3s ease; /* For smooth hover */
-            display: inline-flex; /* Essential for padding and width, changed to flex for icon alignment */
-            align-items: center; /* Vertically align content */
-            gap: 0.5rem; /* Space between text and icon */
-        }
-
-        .view-site-button:hover {
-            background-color: #ea580c; /* Your darker orange for hover */
-        }
-
-        /* New styles for clickable title */
-        .site-title-link {
-            color: #f97316; /* Orange color for the title link */
-            text-decoration: none; /* Remove underline */
-            transition: color 0.3s ease;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .site-title-link:hover {
-            color: #ea580c; /* Darker orange on hover */
-        }
-        
-        .external-link-icon {
-            display: inline-block;
-            width: 1em;
-            height: 1em;
-            vertical-align: middle;
-            margin-left: 0.25em;
-        }
-
-        /* New styles for the "View site" text link */
-        .view-site-text-link {
-            display: block; /* Make it a block element to sit below the title */
-            color: #333; /* Black color */
-            font-weight: bold; /* Bold text */
-            text-decoration: underline; /* Underlined text */
-            font-size: 1rem; /* Same font size as paragraph text (text-base) */
-            margin-top: 0.5rem; /* Space below the title */
-            padding-left: 0.25rem; /* Adjust this value to align 'V' under 'E', 'J', 'P' */
-            cursor: pointer;
-            width: fit-content; /* Ensure the underline only covers the text */
-            transition: color 0.3s ease;
-        }
-
-        .view-site-text-link:hover {
-            color: #f97316; /* Optional: Change color on hover for better UX */
-        }
-
-        /* Styles for the plus/minus icon */
-        .accordion-icon {
-            font-size: 1.5rem; /* Adjust size as needed */
-            font-weight: bold;
-            color: #f97316; /* Orange color */
-            margin-left: 1rem; /* Space between text and icon */
-            display: inline-block; /* Ensure it respects transform */
-            width: 1em; /* Make it square to center the + / - */
-            text-align: center;
-            transition: transform 0.3s ease; /* Add transition for smoothness if needed */
+        /* Responsive: Small phones */
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: clamp(1.8rem, 11vw, 2.5rem);
+            }
+            .hero .subtext {
+                font-size: 1.2rem;
+            }
+            .cta-button {
+                font-size: 1.2rem;
+                padding: 14px 25px;
+            }
+            .marquee-container {
+                font-size: 0.95rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .why-choose-us-section p {
+                font-size: 1rem;
+            }
+            .feature-card h3 {
+                font-size: 1.6rem;
+            }
+            .feature-card p {
+                font-size: 0.95rem;
+            }
+            .service-panel {
+                padding: 25px 20px;
+            }
+            .service-panel h3 {
+                font-size: 1.6rem;
+            }
+            .service-panel p {
+                font-size: 0.95rem;
+            }
+            .testimonial-card {
+                padding: 2.5rem 2rem;
+            }
+            .testimonial-text {
+                font-size: 1.05rem;
+            }
+            .testimonial-author {
+                font-size: 0.95rem;
+            }
+            .cta-banner h2 {
+                font-size: 2rem;
+            }
+            .cta-banner p {
+                font-size: 1rem;
+            }
+            .cta-banner .cta-button {
+                font-size: 1.2rem;
+                padding: 14px 25px;
+            }
+            #contact-form {
+                padding: 30px 20px;
+            }
+            #contact-form .section-title {
+                font-size: 1.8rem;
+            }
+            #contact-form input,
+            #contact-form textarea,
+            #contact-form select {
+                font-size: 0.95rem;
+                padding: 10px 12px;
+            }
+            #contact-form button {
+                font-size: 1.15rem;
+                padding: 14px;
+            }
         }
     </style>
 </head>
 <body>
-
-    <header class="bg-white shadow-sm py-4">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold text-f97316">Creative<span class="text-gray-700">365.</span></a>
-            
-            <nav class="hidden md:block">
-                <ul class="flex space-x-6">
-                    <li><a href="#samples" class="text-gray-600 hover:text-f97316 font-medium">Site Examples</a></li>
-                    <li><a href="#site-inclusions" class="text-gray-600 hover:text-f97316 font-medium">Site Inclusions</a></li>
-                    <li><a href="#faq" class="text-gray-600 hover:text-f97316 font-medium">FAQs</a></li>
-                    <li><a href="#how-it-works" class="text-gray-600 hover:text-f97316 font-medium">How it Works</a></li>
-                    <li><a href="#about" class="text-gray-600 hover:text-f97316 font-medium">About Creative365</a></li>
-                    <li><a href="#" id="navGetQuote" class="text-gray-600 hover:text-f97316 font-medium">Get a Quote</a></li>
-                </ul>
-            </nav>
-
-            <button id="mobileMenuButton" class="md:hidden p-2 text-gray-700 hover:text-f97316 focus:outline-none">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
+    <header>
+        <a href="index.html" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-lightning-fill" viewBox="0 0 16 16">
+                <path d="M5.525 1.354A4 4 0 0 1 8 0a4 4 0 0 1 2.475 1.354L13.784 4H15a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-.615l-1.42 2.368a.5.5 0 0 1-.78.093l-3.232-3.232a.5.5 0 0 1-.161-.318V8.9a.5.5 0 0 0-.5-.5h-.97a.5.5 0 0 0-.485.602l.614 2.87a.5.5 0 0 1-.95.214l-2.923-4.872a.5.5 0 0 0-.78-.093L.854 4.146A4 4 0 0 1 3 0a4 4 0 0 1 2.525 1.354z"/>
+            </svg>
+            VoltWorks Electrical
+        </a>
+        <div class="hamburger-menu" onclick="toggleMobileMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
         </div>
-
-        <nav id="mobileMenu" class="mobile-menu md:hidden bg-white shadow-inner pt-2 pb-4">
-            <ul class="flex flex-col items-center space-y-4">
-                <li><a href="#samples" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">Site Examples</a></li>
-                <li><a href="#site-inclusions" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">Site Inclusions</a></li>
-                <li><a href="#faq" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">FAQs</a></li>
-                <li><a href="#how-it-works" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">How it Works</a></li>
-                <li><a href="#about" class="text-gray-700 hover:text-f97316 font-medium text-lg block py-2">About Creative365</a></li>
-                <li><a href="#" id="mobileGetQuote" class="text-f97316 hover:text-ea580c font-bold text-lg block py-2">Get a Quote</a></li>
-            </ul>
+        <nav class="desktop-nav">
+            <a href="#about">About Us</a>
+            <a href="#features">Why Us</a>
+            <a href="#services">Services</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact-form">Get a Quote</a>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="#about" onclick="toggleMobileMenu()">About Us</a>
+            <a href="#features" onclick="toggleMobileMenu()">Why Us</a>
+            <a href="#services" onclick="toggleMobileMenu()">Services</a>
+            <a href="#testimonials" onclick="toggleMobileMenu()">Testimonials</a>
+            <a href="#faq" onclick="toggleMobileMenu()">FAQ</a>
+            <a href="#contact-form" onclick="toggleMobileMenu()">Get a Quote</a>
         </nav>
     </header>
 
-    <section class="gradient-bg text-white py-20 md:py-32 rounded-b-3xl shadow-xl bounce-animation">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-                Websites That Turn Quotes Into Jobs. <br>Ready In Just 7 Days.
-            </h1>
-            <p class="text-xl md:text-2xl mb-10 opacity-90 max-w-3xl mx-auto">
-                <b>Sick of inconsistent punters?</b> <br><br>Get a high-converting website and start booking more jobs this week!
-            </p>
-            <button id="heroGetQuote" class="inline-block bg-white text-gray-900 px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300">
-                Get Your FREE Quote!
-            </button>
+    <section class="hero">
+        <h1>POWERING MELBOURNE HOMES, SAFELY & EFFICIENTLY.</h1>
+        <p class="subtext">Your trusted local residential electricians, delivering reliable solutions for every electrical need.</p>
+        <a href="#contact-form" class="cta-button">REQUEST YOUR FREE QUOTE NOW</a>
+    </section>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            24/7 Emergency Electrician Services • Licensed & Insured • All Residential Jobs • Call Us Today! • Fast & Reliable • Safety First • Local Melbourne Experts •
+        </div>
+    </div>
+
+    <section class="why-choose-us-section" id="about">
+        <h2 class="section-title fade-in-on-scroll">Melbourne's Trusted Residential Electricians</h2>
+        <p class="fade-in-on-scroll">From flickering lights and faulty outlets to complete home rewiring and smart home installations, electrical issues can be daunting and dangerous. You need a **reliable electrician** who understands residential systems, prioritizes safety, and delivers quality workmanship.</p>
+        <p class="fade-in-on-scroll highlight">Don't risk your home's safety with inexperienced hands or DIY solutions. Faulty electrical work can lead to fires, electrocution, and costly future repairs.</p>
+        <p class="punchline fade-in-on-scroll">Choose VoltWorks Electrical for **safety, expertise, and peace of mind!** ⚡</p>
+    </section>
+
+    ---
+
+    <section class="feature-lockup-section" id="features">
+        <h2 class="section-title fade-in-on-scroll">WHY HOMEOWNERS CHOOSE VOLTWORKS</h2>
+        <div class="feature-grid">
+            <div class="feature-card scale-in-on-scroll">
+                <img src="https://github.com/mmp03patane/ELECTRIC/blob/main/Local-Electricians.jpg?raw=true" alt="Local Melbourne Electrician">
+                <h3>Local & Responsive</h3>
+                <p>We're based right here in Melbourne, meaning faster response times for emergencies and scheduled appointments. You're supporting a local business that understands local needs.</p>
+            </div>
+            <div class="feature-card scale-in-on-scroll">
+                <img src="https://github.com/mmp03patane/ELECTRIC/blob/main/Electrician_Insurance.jpg?raw=true" alt="Licensed and Insured Electrician">
+                <h3>Licensed & Insured</h3>
+                <p>All our electricians are fully qualified, licensed, and comprehensively insured. Your property and peace of mind are always protected when you choose VoltWorks.</p>
+            </div>
+            <div class="feature-card scale-in-on-scroll">
+                <img src="https://github.com/mmp03patane/ELECTRIC/blob/main/istockphoto-2151912560-612x612.jpg?raw=true" alt="Residential Electrical Services">
+                <h3>Clear & Upfront Pricing</h3>
+                <p>No hidden fees, no surprises. We provide detailed, transparent quotes before any work begins, so you know exactly what to expect. Quality service at a fair price.</p>
+            </div>
+            <div class="feature-card scale-in-on-scroll">
+                <img src="https://github.com/mmp03patane/ELECTRIC/blob/main/How-Much-For-Electrical-Work-in-a-1750-sq-ft-House-2-1024x576.jpg?raw=true" alt="Expert Electrical Work">
+                <h3>Quality Workmanship</h3>
+                <p>We pride ourselves on meticulous attention to detail and adherence to the highest Australian safety standards. We don't just fix problems; we provide lasting solutions.</p>
+            </div>
         </div>
     </section>
 
-    <div class="max-w-4xl mx-auto"> <section id="samples" class="py-16 gray-50">
-            <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">Site Examples</h2>
+    ---
 
-                <div class="flex flex-col space-y-8"> 
-                    <div class="text-left"> 
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">
-                            <a href="https://mmp03patane.github.io/ELECTRIC/" class="site-title-link" data-url="https://mmp03patane.github.io/ELECTRIC/">
-                                Electrician Website
-                                <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            </a>
-                        </h3>
-                        <a href="https://mmp03patane.github.io/ELECTRIC/" class="view-site-text-link" data-url="https://mmp03patane.github.io/ELECTRIC/">
-                            View site
-                        </a>
-                    </div>
-
-                    <div class="text-left"> 
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">
-                            <a href="https://mmp03patane.github.io/JUNK/" class="site-title-link" data-url="https://mmp03patane.github.io/JUNK/">
-                                Junk Removal Website
-                                <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            </a>
-                        </h3>
-                        <a href="https://mmp03patane.github.io/JUNK/" class="view-site-text-link" data-url="https://mmp03patane.github.io/JUNK/">
-                            View site
-                        </a>
-                    </div>
-
-                    <div class="text-left"> 
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">
-                            <a href="https://mmp03patane.github.io/PLUMBING/" class="site-title-link" data-url="https://mmp03patane.github.io/PLUMBING/">
-                                Plumbing Website
-                                <svg class="external-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            </a>
-                        </h3>
-                        <a href="https://mmp03patane.github.io/PLUMBING/" class="view-site-text-link" data-url="https://mmp03patane.github.io/PLUMBING/">
-                            View site
-                        </a>
-                    </div>
-                </div>
+    <section class="services-section" id="services">
+        <h2 class="section-title fade-in-on-scroll">OUR RESIDENTIAL ELECTRICAL SERVICES</h2>
+        <div class="panels-container">
+            <div class="service-panel slide-in-left-on-scroll">
+                <h3>General Electrical Repairs</h3>
+                <p>Fixing faulty switches, power points, circuit breakers, and all common household electrical issues quickly and safely. We get your power back on track.</p>
+                <a href="#contact-form" class="cta-button">GET A REPAIR QUOTE</a>
             </div>
-        </section>
-
-        <section id="site-inclusions" class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">Website Inclusions</h2>
-                
-                <div class="max-w-2xl mx-auto bg-gray-100 p-8 rounded-lg shadow-md">
-                    <ul class="inclusions-list mb-6">
-                        <li>SEO Friendly On-Page Content</li>
-                        <li>FREE Hosting</li>
-                        <li>SSL Certificate and Securities</li>
-                        <li>Site Speed Optimized</li>
-                        <li>Custom Form Integration</li>
-                        <li>No Ongoing Costs</li>
-                    </ul>
-                    <a href="#" id="addMoreFeaturesLink" class="text-f97316 hover:text-ea580c font-bold inline-flex items-center text-lg">
-                        Add More Features <span class="ml-1 text-2xl font-bold">+</span>
-                    </a>
-                    <ul id="addedFeaturesDisplay" class="added-features-list mt-6 space-y-2 hidden">
-                        </ul>
-                    <div class="text-center mt-10">
-                        <button id="getPriceButton" class="btn-primary text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:transform hover:scale-105 transition duration-300">
-                            Get Price
-                        </button>
-                    </div>
-                </div>
+            <div class="service-panel scale-in-on-scroll">
+                <h3>Lighting Solutions</h3>
+                <p>Installation and repair of all types of lighting, including energy-efficient LED conversions, elegant downlights, robust security lighting, and modern decorative fixtures to brighten your home.</p>
+                <a href="#contact-form" class="cta-button">EXPLORE LIGHTING</a>
             </div>
-        </section>
-
-        <section id="faq" class="py-16 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-left mb-12 section-title mx-auto">FAQs.</h2>
-
-                <div class="max-w-3xl mx-auto space-y-4">
- <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
-                            <span>How do I accept quotes through my website?</span>
-                            <span class="accordion-icon">+</span>
-                        </button>
-                        <div class="accordion-content">
-                            <p>
-                                <br>
-                                It depends...
-                                <br><br> 
-                                You have a couple of options:
-                                <br><br>
-                                <b>Option 1:</b>
-                                <br>
-                                Link your existing FSM (like Jobber, Tradify, Servicem8 or wahtever you use) into the website and book directly. 
-                                <br><br>
-                                <b>Option 2:</b>
-                                <br>
-                                We can design a custom quote form the delivers quote requests to you via email. We can build anything you want into the form: A calendar, job site details, multiple clients, anything specific to the trade or service that you provide, there are literally no limitations whatsoever when you custom code a website. 
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
-                            <span>Do I own the website once it's done?</span>
-                            <span class="accordion-icon">+</span>
-                        </button>
-                        <div class="accordion-content">
-                            <p>
-                                <br>
-                                Absolutely, 100%! 
-                                <br><br> 
-                                When I build your website, it's <b>your</b> website. 
-                                <br><br>
-                                You own all the intellectual property, including the code, design, and content. I simply build it for you.
-                                <br><br>
-                                There are no ongoing licensing fees or proprietary systems locking you in. 
-                                <br><br>
-                                Complete transparency, complete ownership.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
-                            <span>Do you use a CMS or generic templates?</span>
-                            <span class="accordion-icon">+</span>
-                        </button>
-                        <div class="accordion-content">
-                            <p>
-                                <br>
-                                <b>Neither!</b> 
-                                <br><br>
-                                I craft unique, high-performance digital assets.
-                                <br><br>
-                                I don't use Content Management Systems (CMS) like WordPress, Wix, or Squarespace. 
-                                <br><br>
-                                Every single website I deliver is coded from the ground up and managed with Git (like GitHub) for version control and deployment. 
-                                <br><br>
-                                This means zero unnecessary code, ultimate flexibility, and blazing-fast speeds. 
-                                <br><br>
-                                No templates, no offshore team, just me and bespoke code.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
-                            <span>I've tried to build my own site on a CMS, can you save my DIY disaster?</span>
-                            <span class="accordion-icon">+</span>
-                        </button>
-                        <div class="accordion-content">
-                            <p>
-                                <br>
-                                You're not alone! 
-                                <br><br>
-                                Heaps of people attempt DIY websites only to find them slow, inflexible, or just not professional enough. 
-                                <br><br>
-                                I can absolutely help!
-                                <br><br>
-                                I'll assess what's salvageable from your existing efforts (content, branding assets etc.) and then use that as a foundation to build a completely new, high-performance, custom website from the ground up.
-                                <br><br>
-                                I'll turn your 'disaster' into a digital asset that works for you.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <button class="accordion-button w-full flex justify-between items-center p-6 text-xl font-semibold text-left text-gray-800 hover:bg-gray-100 focus:outline-none">
-                            <span>How much does it cost?</span>
-                            <span class="accordion-icon">+</span>
-                        </button>
-                        <div class="accordion-content">
-                            <p>
-                                <br>
-                                Everything is built from scratch and all prices are dependant on the website breif, functionality and number of pages. 
-                                <br><br>
-                                Reach out via the quote form and we can have a chat over the phone.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="service-panel slide-in-right-on-scroll">
+                <h3>Switchboard Upgrades</h3>
+                <p>Modernizing your home's electrical panel for enhanced safety, improved efficiency, and to reliably support new appliances and smart home technology. Don't risk an outdated system.</p>
+                <a href="#contact-form" class="cta-button">UPGRADE YOUR SWITCHBOARD</a>
             </div>
-        </section>
-
-        <section id="how-it-works" class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-left mb-12 section-title mx-auto">How It Works</h2>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="step-card">
-                        <div class="step-number">1</div>
-                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Your Initial Quote Request</h3>
-                        <p class="text-gray-700">Fill out the online form. Tell me a bit about your business and what you're looking for in a website.</p>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="step-number">2</div>
-                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Let's Have a Chat</h3>
-                        <p class="text-gray-700">We'll schedule a brief phone call to discuss your goals in detail. This is an open forum to discuss questions and ensure we're aligned with your vision.</p>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="step-number">3</div>
-                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Crafting Your Custom Site</h3>
-                        <p class="text-gray-700">Time to get to work! I will begin meticulously coding and designing your custom website. I focus focus on speed, user experience, and lead conversion.</p>
-                    </div>
-
-                    <div class="step-card">
-                        <div class="step-number">4</div>
-                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">Launch & Lead Generation</h3>
-                        <p class="text-gray-700">Once you're thrilled with the result, we launch your new website! Within days, you'll have a high-performing digital asset ready to attract more quotes and book more jobs.</p>
-                    </div>
-                </div>
-                <div class="text-center mt-12">
-                    <button id="howItWorksGetQuote" class="inline-block btn-primary text-white px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:transform hover:scale-105 transition duration-300">
-                        Get Your FREE Quote!
-                    </button>
-                </div>
+            <div class="service-panel slide-in-left-on-scroll">
+                <h3>Fault Finding & Diagnostics</h3>
+                <p>Our experts quickly identify and safely resolve complex electrical faults, persistent flickering lights, and inconvenient power outages. We'll pinpoint the problem fast.</p>
+                <a href="#contact-form" class="cta-button">DIAGNOSE MY FAULT</a>
             </div>
-        </section>
-
-        <section id="about" class="py-16 bg-gray-50">
-            <div class="container mx-auto px-4 text-center max-w-3xl">
-                <h2 class="text-4xl font-bold text-center mb-12 section-title mx-auto">About Creative365</h2>
-                <div class="bg-white rounded-lg shadow-md p-8">
-                    <img src="https://github.com/mmp03patane/creative/blob/main/PROFILE%20PHOTO%203.PNG?raw=true" alt="Michael Patane Photo" class="profile-photo" />
-                    <p class="mb-4">Hey everyone,</p>
-                    <p class="mb-4">I'm <b>Michael Patane</b>, founder of <b>Creative365</b>. I help tradies and residential service businesses grow with websites that attract leads, build trust, and turn visitors into paying customers.</p>
-                    <p class="mb-4">I’ve worked with some of Australia’s biggest names — <b>GLG</b>, <b>Jim's Group</b>, and <b>MYOB</b> — helping electricians, plumbers, gardeners, painters, cleaners and more streamline and scale with smart digital strategies.</p>
-                    <p>Now, I bring that big-brand experience to local businesses like yours. Whether you need a new website or a better way to win work online, I’ll help you build a system that brings in jobs — not just clicks.</p>
-                </div>
+            <div class="service-panel scale-in-on-scroll">
+                <h3>New Wiring & Rewiring</h3>
+                <p>Complete electrical wiring for new home constructions, extensions, and essential safety-focused rewiring for older properties. Ensuring your home's electrical backbone is safe and robust.</p>
+                <a href="#contact-form" class="cta-button">PLAN NEW WIRING</a>
             </div>
-        </section>
-
-    </div> <section id="contact" class="gradient-bg text-white py-20 rounded-t-3xl shadow-xl">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                Ready for a Website That Generates Leads?
-            </h2>
-            <p class="text-xl md:text-2xl mb-10 opacity-90 max-w-3xl mx-auto">
-                Let's build a website the turns clicks into quotes. 
-            </p>
-            <button id="openQuoteModal" class="inline-block bg-white text-black px-12 py-5 rounded-full text-xl font-bold shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300">
-                Get Your Custom Quote!
-            </button>
+            <div class="service-panel slide-in-right-on-scroll">
+                <h3>Smart Home Automation</h3>
+                <p>Seamless installation and integration of smart lighting, intelligent thermostats, advanced security systems, and other home automation devices for ultimate convenience and energy savings.</p>
+                <a href="#contact-form" class="cta-button">AUTOMATE MY HOME</a>
+            </div>
         </div>
     </section>
 
-    <div id="liveSiteModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
-        <div class="bg-white p-2 rounded-lg shadow-xl max-w-5xl w-full h-[90vh] relative transform transition-all duration-300 scale-95 opacity-0" id="liveSiteModalContent">
-            <button id="closeLiveSiteModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold leading-none z-10">&times;</button>
-            <iframe id="liveSiteIframe" src="" frameborder="0" class="w-full h-[calc(100%-10px)] mt-0 rounded-md" allowfullscreen></iframe>
-            <p id="iframeError" class="text-red-600 text-center mt-4 hidden">This website cannot be displayed directly here due to security restrictions.</p>
-        </div>
-    </div>
+    ---
 
-
-    <div id="quoteModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
-        <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full relative transform transition-all duration-300 scale-95 opacity-0" id="modalContent">
-            <button id="closeQuoteModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold leading-none">&times;</button>
-            <h3 class="text-3xl font-bold text-center text-f97316 mb-6">Let's Get You More Leads!</h3>
-            <p class="text-center text-gray-600 mb-6">Fill out the form below to schedule a call with Michael and discuss your project. We'll confirm the exact time via email.</p>
-
-            <form id="creative365ContactForm" method="POST" action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT_HERE" class="space-y-4">
-                <div class="form-group-creative">
-                    <label for="fullName">Your Full Name<span style="color:red;">*</span></label>
-                    <input type="text" id="fullName" name="Name" placeholder="John Smith" required>
-                    <span class="form-error-message" id="nameError" style="display: none;"></span>
+    <section class="testimonials-section" id="testimonials">
+        <h2 class="section-title fade-in-on-scroll">WHAT OUR MELBOURNE CUSTOMERS SAY</h2>
+        <div class="testimonials-carousel-container">
+            <div class="testimonials-carousel">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"VoltWorks was fantastic! Quick to respond to our electrical emergency and fixed the issue efficiently. Highly recommend their professional service, truly a lifesaver in Richmond!"</p>
+                    <p class="testimonial-author">- Sarah P., Richmond</p>
                 </div>
-
-                <div class="form-group-creative">
-                    <label for="emailAddress">Your Email Address<span style="color:red;">*</span></label>
-                    <input type="email" id="emailAddress" name="Email" placeholder="john.smith@example.com" required>
-                    <span class="form-error-message" id="emailError" style="display: none;"></span>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Had them upgrade our old switchboard. The team was punctual, tidy, and explained everything clearly. Our lights haven't flickered since! Excellent work in Hawthorn."</p>
+                    <p class="testimonial-author">- David M., Hawthorn</p>
                 </div>
-
-                <div class="form-group-creative">
-                    <label for="phoneNumber">Your Phone Number<span style="color:red;">*</span></label>
-                    <input type="tel" id="phoneNumber" name="Phone" placeholder="e.g., 04XX XXX XXX" required>
-                    <span class="form-error-message" id="phoneError" style="display: none;"></span>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Installed all the new lighting in our renovation. Absolutely brilliant job, the lighting looks amazing and the wiring is super neat. Great attention to detail, highly professional team in Brunswick."</p>
+                    <p class="testimonial-author">- Emily R., Brunswick</p>
                 </div>
-
-                <div class="form-group-creative">
-                    <label for="preferredDate">Preferred Date for a Call<span style="color:red;">*</span></label>
-                    <input type="date" id="preferredDate" name="Preferred_Date" required>
-                    <span class="form-error-message" id="dateError" style="display: none;"></span>
-                    <p style="font-size: 0.9rem; color: #555; margin-top: 0.5rem; text-align: left;">Please select a date at least 24 hours in the future.</p>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Professional, courteous, and solved a tricky fault we'd had for months. Finally, no more tripping circuits! A truly expert service that gave us peace of mind in St Kilda."</p>
+                    <p class="testimonial-author">- Michael S., St Kilda</p>
                 </div>
-
-                <div class="form-group-creative">
-                    <label for="preferredTimeSlot">Preferred Time Slot<span style="color:red;">*</span></label>
-                    <select id="preferredTimeSlot" name="Preferred_Time_Slot" required>
-                        <option value="">Select a time slot</option>
-                        <option value="Morning (9 AM - 12 PM AEST)">Morning (9 AM - 12 PM AEST)</option>
-                        <option value="Afternoon (1 PM - 4 PM AEST)">Afternoon (1 PM - 4 PM AEST)</option>
-                        <option value="Late Afternoon (4 PM - 5 PM AEST)">Late Afternoon (4 PM - 5 PM AEST)</option>
-                        <option value="Other">Other (Please specify in message)</option>
-                    </select>
-                    <span class="form-error-message" id="timeSlotError" style="display: none;"></span>
-                    <p style="font-size: 0.9rem; color: #555; margin-top: 0.5rem; text-align: left;">This is a request; we will confirm exact availability.</p>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"VoltWorks replaced our old, unsafe power points with modern, safe ones. The electrician was friendly, efficient, and left no mess. Very impressed with the service in Fitzroy."</p>
+                    <p class="testimonial-author">- Jessica L., Fitzroy</p>
                 </div>
-
-                <button type="submit" class="w-full btn-primary text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transform hover:scale-105 transition duration-300">
-                    Get My Custom Quote!
-                </button>
-                <p id="formMessage" class="text-center text-sm mt-4 text-gray-600"></p>
-            </form>
-        </div>
-    </div>
-
-    <div id="addFeaturesModal" class="feature-modal">
-        <div class="feature-modal-content">
-            <button id="closeFeaturesModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold leading-none">&times;</button>
-            <h3 class="text-2xl font-bold text-center text-f97316 mb-6">Add More Features</h3>
-            <p class="text-center text-gray-600 mb-6">Select additional features for your website:</p>
-            
-            <div class="feature-checkbox-group">
-                <label>
-                    <input type="checkbox" name="feature" value="Additional Revisions" data-display-text="Additional Revisions">
-                    Additional Revisions
-                </label>
-                <label>
-                    <input type="checkbox" name="feature" value="Additional Pages" data-display-text="Additional Pages">
-                    Additional Pages
-                </label>
-                <label>
-                    <input type="checkbox" name="feature" value="Special Functions (e.g., Calendar, Calculator)" data-display-text="Special Functions (Calendar, Calculator)">
-                    Special Functions (e.g., Calendar, Calculator)
-                </label>
-                <label>
-                    <input type="checkbox" name="feature" value="Link to Google Reviews" data-display-text="Link to Google Reviews">
-                    Link to Google Reviews
-                </label>
             </div>
-            
-            <button id="saveFeaturesButton" class="w-full btn-primary text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transform hover:scale-105 transition duration-300">
-                Save Features
-            </button>
+            <button class="carousel-nav-button prev" aria-label="Previous testimonial">&#10094;</button>
+            <button class="carousel-nav-button next" aria-label="Next testimonial">&#10095;</button>
+            <div class="carousel-indicators"></div>
         </div>
-    </div>
+    </section>
 
+    ---
 
-    <footer class="bg-gray-900 text-white py-10">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Creative365 Business Consultancy ABN: 77 956 342 498. All rights reserved. </p>
+    <section class="faq-section" id="faq">
+        <h2 class="section-title fade-in-on-scroll">FREQUENTLY ASKED QUESTIONS</h2>
+        <div class="faq-container">
+            <div class="faq-item fade-in-on-scroll">
+                <div class="faq-question">What areas in Melbourne do you service?</div>
+                <div class="faq-answer">We proudly serve all residential properties across Metro Melbourne, covering the CBD and all surrounding suburbs. From the inner city to the outer suburbs, we're your local electricians.</div>
+            </div>
+            <div class="faq-item fade-in-on-scroll">
+                <div class="faq-question">Do you offer emergency electrical services?</div>
+                <div class="faq-answer">Yes, we provide 24/7 emergency electrical services for urgent issues like sudden power outages, burning smells from outlets, sparking wires, or frequent circuit tripping. **For immediate assistance, call us directly!**</div>
+            </div>
+            <div class="faq-item fade-in-on-scroll">
+                <div class="faq-question">Are your electricians licensed and insured?</div>
+                <div class="faq-answer">Absolutely. All our electricians are **fully qualified, licensed (REC: 12345), and comprehensively insured** for your complete peace of mind. We adhere to all Australian safety standards and regulations.</div>
+            </div>
+            <div class="faq-item fade-in-on-scroll">
+                <div class="faq-question">How do I get a quote for electrical work?</div>
+                <div class="faq-answer">You can easily request a **free, no-obligation quote** by filling out the simple form at the bottom of this page. We aim to respond to all online inquiries within 2 business hours. Alternatively, feel free to give us a call!</div>
+            </div>
+            <div class="faq-item fade-in-on-scroll">
+                <div class="faq-question">What types of residential electrical jobs do you handle?</div>
+                <div class="faq-answer">We handle a wide range of residential services including general repairs, new lighting installation, switchboard upgrades, complex fault finding, full home rewiring, and cutting-edge smart home automation. No job is too big or too small for our expert team.</div>
+            </div>
+            <div class="faq-item fade-in-on-scroll">
+                <div class="faq-question">How quickly can you respond to a service request?</div>
+                <div class="faq-answer">For non-emergencies, we typically schedule appointments within 1-2 business days. For emergencies, our team is on standby 24/7 and we aim for the fastest possible response to ensure your safety.</div>
+            </div>
+            <div class="faq-item fade-in-on-scroll">
+                <div class="faq-question">Do you offer a warranty on your electrical work?</div>
+                <div class="faq-answer">Yes, absolutely! We stand by the quality of our work. All our services come with a **standard 12-month workmanship warranty**, providing you with additional confidence and protection.</div>
+            </div>
+        </div>
+    </section>
+
+    ---
+
+    <section class="cta-banner">
+        <h2 class="fade-in-on-scroll">READY FOR SAFE, RELIABLE ELECTRICITY?</h2>
+        <p class="fade-in-on-scroll">Don't wait for an electrical problem to become a crisis. Get a free, no-obligation quote today and let Melbourne's best electricians handle your needs.</p>
+        <a href="#contact-form" class="cta-button fade-in-on-scroll">GET YOUR FREE QUOTE NOW</a>
+    </section>
+
+    ---
+
+    <section id="contact-form">
+        <h2 class="section-title fade-in-on-scroll">GET YOUR FREE ELECTRICAL QUOTE TODAY</h2>
+        <p class="quote-subtext fade-in-on-scroll">Tell us about your electrical needs and we'll get back to you with a free, no-obligation quote. **Fast response guaranteed!**</p>
+        <form>
+            <div class="form-group slide-in-left-on-scroll">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Your full name" required />
+            </div>
+            <div class="form-group slide-in-right-on-scroll">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
+            </div>
+            <div class="form-group slide-in-left-on-scroll">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="+61 4XX XXX XXX" required />
+            </div>
+            <div class="form-group slide-in-right-on-scroll">
+                <label for="suburb">Suburb</label>
+                <input type="text" id="suburb" name="suburb" placeholder="Your Melbourne suburb" required />
+            </div>
+            <div class="form-group full-width scale-in-on-scroll">
+                <label for="serviceType">Type of Service Needed</label>
+                <select id="serviceType" name="serviceType" required>
+                    <option value="">-- Select a Service --</option>
+                    <option value="emergency">Emergency Service (URGENT)</option>
+                    <option value="general-repair">General Electrical Repair</option>
+                    <option value="lighting">Lighting Installation/Repair</option>
+                    <option value="switchboard-upgrade">Switchboard Upgrade</option>
+                    <option value="fault-finding">Fault Finding & Diagnostics</option>
+                    <option value="new-wiring">New Wiring / Rewiring</option>
+                    <option value="smart-home">Smart Home Automation</option>
+                    <option value="other">Other (please describe below)</option>
+                </select>
+            </div>
+            <div class="form-group full-width scale-in-on-scroll">
+                <label for="message">Describe Your Electrical Needs <span style="font-weight: normal; font-size: 0.9em;">(Be as detailed as possible for an accurate quote)</span></label>
+                <textarea id="message" name="message" rows="6" placeholder="E.g., lights flickering in the living room, need new power points installed in the kitchen, planning a bathroom renovation and need new wiring, emergency power outage."></textarea>
+            </div>
+            <button type="submit" class="scale-in-on-scroll">SUBMIT QUOTE REQUEST</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 VoltWorks Electrical. All rights reserved.</p>
+        <p>Servicing Residential Homes Across **Metro Melbourne, VIC.** ABN: XX XXX XXX XXX</p>
+        <p><strong>Call Us Today: <a href="tel:+61312345678">03 1234 5678</a></strong> | **Email: <a href="mailto:info@voltworkselectrical.com.au">info@voltworkselectrical.com.au</a>**</p>
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.5V6.275c0-2.015 1.192-3.11 3.064-3.11.875 0 1.76.155 1.76.155v1.98h-1.009c-.993 0-1.303.619-1.303 1.258V8.05h2.219l-.355 2.22H9.5V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16"><path d="M8 0C5.929 0 5.666.014 4.887.054A3.705 3.705 0 0 0 2.9.467 3.705 3.705 0 0 0 .467 2.9 3.705 3.705 0 0 0 .054 4.887C.014 5.666 0 5.929 0 8s.014 2.334.054 3.113a3.705 3.705 0 0 0 .413 1.987 3.705 3.705 0 0 0 2.433 2.433c.801.04 1.064.054 1.843.054s2.334-.014 3.113-.054a3.705 3.705 0 0 0 1.987-.413 3.705 3.705 0 0 0 2.433-2.433c.04-.801.054-1.064.054-1.843s-.014-2.334-.054-3.113a3.705 3.705 0 0 0-.413-1.987 3.705 3.705 0 0 0-2.433-2.433C10.334.014 10.071 0 8 0zm0 1.5c2.042 0 2.29.01 3.09.049.79.039 1.139.167 1.597.35.45.176.777.408 1.127.757.35.35.581.677.757 1.127.183.458.311.807.35 1.597.039.8.049 1.048.049 3.09s-.01 2.29-.049 3.09a2.203 2.203 0 0 1-.35 1.597c-.176.45-.408.777-.757 1.127-.35.35-.677.581-1.127.757-.458.183-.807.311-1.597.35-.8.039-1.048.049-3.09.049s-2.29-.01-3.09-.049a2.203 2.203 0 0 1-1.597-.35c-.45-.176-.777-.408-1.127-.757-.35-.35-.581-.677-.757-1.127-.183-.458-.311-.807-.35-1.597-.039-.8-.049-1.048-.049-3.09s.01-2.29.049-3.09a2.203 2.203 0 0 1 .35-1.597c.176-.45.408-.777.757-1.127.35-.35.677-.581 1.127-.757.458-.183.807-.311 1.597-.35.8-.039 1.048-.049 3.09-.049zm0 3.6A4.5 4.5 0 1 0 8 12.1A4.5 4.5 0 0 0 8 5.1zM8 6.6a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm5.1-.9a.9.9 0 1 1-1.8 0 .9.9 0 0 1 1.8 0z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.176 0h13.648c.65 0 1.176.513 1.176 1.146v13.708c0 .633-.526 1.146-1.176 1.146H1.176C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.607V13.39c0 .248-.2.449-.449.449h-.61c-.248 0-.449-.2-.449-.449V6.169H.795V3.97L.81 3.966c-.197-.101-.397-.215-.595-.331L0 3.513v.846zm11.233 0V6.169h-2.336c-.248 0-.449-.2-.449-.449v-.61c0-.248.2-.449.449-.449h2.336V3.97c0-.248-.2-.449-.449-.449h-2.336c-.248 0-.449-.2-.449-.449v-.61c0-.248.2-.449.449-.449h2.336V.97c0-.248-.2-.449-.449-.449h-2.336c-.248 0-.449-.2-.449-.449v-.61c0-.248.2-.449.449-.449h2.336V-.007c0-.248-.2-.449-.449-.449h-2.336c-.248 0-.449-.2-.449-.449v-.61c0-.248.2-.449.449-.449h2.336V-3.97c0-.248-.2-.449-.449-.449h-2.336c-.248 0-.449-.2-.449-.449v-.61c0-.248.2-.449.449-.449h2.336V-8.03c0-.248-.2-.449-.449-.449H.795c-.248 0-.449-.2-.449-.449V-8.689c0-.248.2-.449.449-.449h13.648c.65 0 1.176.513 1.176 1.146V13.39c0 .633-.526 1.146-1.176 1.146z"/></svg></a>
         </div>
     </footer>
 
     <script>
-        // Accordion Functionality
-        document.querySelectorAll('.accordion-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const accordionContent = button.nextElementSibling;
-                const icon = button.querySelector('.accordion-icon');
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById("mobileNav");
+            const hamburger = document.querySelector(".hamburger-menu");
+            mobileNav.classList.toggle("open");
+            hamburger.classList.toggle("active");
+        }
 
-                // Check if the clicked accordion is currently active
-                const isActive = accordionContent.classList.contains('active');
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.getElementById("mobileNav").classList.remove("open"); // Close mobile menu
+                document.querySelector(".hamburger-menu").classList.remove("active"); // Deactivate hamburger icon
 
-                // Close all other open accordion contents and reset their icons
-                document.querySelectorAll('.accordion-content').forEach(otherContent => {
-                    if (otherContent !== accordionContent && otherContent.classList.contains('active')) {
-                        otherContent.classList.remove('active');
-                        otherContent.previousElementSibling.classList.remove('bg-gray-100');
-                        otherContent.previousElementSibling.querySelector('.accordion-icon').textContent = '+';
-                    }
-                });
-
-                // Toggle the clicked accordion's content and icon
-                if (isActive) {
-                    accordionContent.classList.remove('active');
-                    button.classList.remove('bg-gray-100');
-                    icon.textContent = '+';
-                } else {
-                    accordionContent.classList.add('active');
-                    button.classList.add('bg-gray-100');
-                    icon.textContent = '-';
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - (window.innerWidth <= 768 ? 60 : 0), // Adjust scroll position for fixed header on mobile
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
 
-        // --- Mobile Menu Functionality ---
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuItems = mobileMenu.querySelectorAll('a'); 
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-
-        mobileMenuItems.forEach(item => {
-            item.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-            });
-        });
-        // --- END Mobile Menu Functionality ---
-
-
-        // Quote Modal Functionality
-        const getQuoteButtons = document.querySelectorAll('#openQuoteModal, #heroGetQuote, #howItWorksGetQuote, #navGetQuote, #mobileGetQuote, #getPriceButton');
-        const closeQuoteModalBtn = document.getElementById('closeQuoteModal');
-        const quoteModal = document.getElementById('quoteModal');
-        const modalContent = document.getElementById('modalContent');
-        const creative365ContactForm = document.getElementById('creative365ContactForm'); 
-        const formMessage = document.getElementById('formMessage');
-
-        getQuoteButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default link behavior for #contact and other buttons
-                quoteModal.classList.remove('hidden');
-                setTimeout(() => {
-                    modalContent.classList.remove('scale-95', 'opacity-0');
-                    modalContent.classList.add('scale-100', 'opacity-100');
-                }, 10);
-            });
-        });
-
-        closeQuoteModalBtn.addEventListener('click', () => {
-            modalContent.classList.remove('scale-100', 'opacity-100');
-            modalContent.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                quoteModal.classList.add('hidden');
-            }, 300);
-        });
-
-        quoteModal.addEventListener('click', (e) => {
-            if (e.target === quoteModal) {
-                modalContent.classList.remove('scale-100', 'opacity-100');
-                modalContent.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    quoteModal.classList.add('hidden');
-                }, 300);
-            }
-        });
-
-        // Form validation and submission for the new form
-        creative365ContactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            formMessage.textContent = 'Sending your request...';
-            formMessage.classList.remove('text-green-600', 'text-red-600');
-            formMessage.classList.add('text-gray-600');
-
-            let isValid = true;
-            const fullName = document.getElementById('fullName');
-            const emailAddress = document.getElementById('emailAddress');
-            const phoneNumber = document.getElementById('phoneNumber');
-            const preferredDate = document.getElementById('preferredDate');
-            const preferredTimeSlot = document.getElementById('preferredTimeSlot');
-
-            // Reset error messages
-            document.getElementById('nameError').style.display = 'none';
-            document.getElementById('emailError').style.display = 'none';
-            document.getElementById('phoneError').style.display = 'none';
-            document.getElementById('dateError').style.display = 'none';
-            document.getElementById('timeSlotError').style.display = 'none';
-
-            if (fullName.value.trim() === '') {
-                document.getElementById('nameError').textContent = 'Full Name is required.';
-                document.getElementById('nameError').style.display = 'block';
-                isValid = false;
-            }
-
-            if (emailAddress.value.trim() === '' || !emailAddress.value.includes('@')) {
-                document.getElementById('emailError').textContent = 'A valid Email Address is required.';
-                document.getElementById('emailError').style.display = 'block';
-                isValid = false;
-            }
-
-            if (phoneNumber.value.trim() === '') {
-                document.getElementById('phoneError').textContent = 'Phone Number is required.';
-                document.getElementById('phoneError').style.display = 'block';
-                isValid = false;
-            }
-
-            const selectedDate = new Date(preferredDate.value);
-            const now = new Date();
-            now.setHours(0, 0, 0, 0); 
-            const tomorrow = new Date(now);
-            tomorrow.setDate(now.getDate() + 1);
-
-            if (preferredDate.value === '' || selectedDate < tomorrow) {
-                document.getElementById('dateError').textContent = 'Please select a date at least 24 hours in the future.';
-                document.getElementById('dateError').style.display = 'block';
-                isValid = false;
-            }
-
-            if (preferredTimeSlot.value === '') {
-                document.getElementById('timeSlotError').textContent = 'Please select a preferred time slot.';
-                document.getElementById('timeSlotError').style.display = 'block';
-                isValid = false;
-            }
-
-            if (!isValid) {
-                formMessage.textContent = 'Please correct the errors in the form.';
-                formMessage.classList.remove('text-gray-600');
-                formMessage.classList.add('text-red-600');
-                return;
-            }
-
-            const formData = new FormData(creative365ContactForm); 
-            
-            // Removed appended features as per simplification request
-            // document.querySelectorAll('#addedFeaturesDisplay li').forEach(item => {
-            //     formData.append('Added_Feature[]', item.textContent.trim());
-            // });
-
-            try {
-                const response = await fetch(creative365ContactForm.action, {
-                    method: creative365ContactForm.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    formMessage.textContent = "Awesome! Your request has been sent. Michael will be in touch within 24-48 hours to discuss how we can get your quote-generating machine built!";
-                    formMessage.classList.remove('text-gray-600', 'text-red-600');
-                    formMessage.classList.add('text-green-600');
-                    creative365ContactForm.reset(); 
-                    // Optionally clear added features display after submission if it was still relevant
-                    // document.getElementById('addedFeaturesDisplay').innerHTML = '';
-                    // document.getElementById('addedFeaturesDisplay').classList.add('hidden');
-                } else {
-                    const data = await response.json();
-                    if (data.errors) {
-                        formMessage.textContent = data.errors.map(error => error.message).join(', ');
-                    } else {
-                        formMessage.textContent = 'There was an error sending your request. Please try again.';
-                    }
-                    formMessage.classList.remove('text-gray-600', 'text-green-600');
-                    formMessage.classList.add('text-red-600');
-                }
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                formMessage.textContent = 'There was an error sending your request. Please try again or contact us directly.';
-                formMessage.classList.remove('text-gray-600', 'text-green-600');
-                formMessage.classList.add('text-red-600');
-            }
-        });
-
-        // Initialize accordion state on load
+        // FAQ Toggle Functionality
         document.addEventListener('DOMContentLoaded', () => {
-            const heroSection = document.querySelector('.gradient-bg'); 
-            if (heroSection) {
-                heroSection.classList.add('bounce-animation');
-            }
-        });
+            const faqQuestions = document.querySelectorAll('.faq-question');
 
-        // Live Site iFrame Modal Functionality
-        const liveSiteModal = document.getElementById('liveSiteModal');
-        const liveSiteModalContent = document.getElementById('liveSiteModalContent');
-        const closeLiveSiteModalBtn = document.getElementById('closeLiveSiteModal');
-        const liveSiteIframe = document.getElementById('liveSiteIframe');
-        const iframeError = document.getElementById('iframeError');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const isActive = question.classList.contains('active');
 
-        // This event listener needs to be updated to target the new "View Site" links.
-        document.querySelectorAll('#samples .site-title-link, #samples .view-site-text-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault(); 
+                    // Close all other open answers
+                    document.querySelectorAll('.faq-question.active').forEach(openQuestion => {
+                        if (openQuestion !== question) {
+                            openQuestion.classList.remove('active');
+                            openQuestion.nextElementSibling.style.display = 'none';
+                        }
+                    });
 
-                const siteUrl = link.dataset.url; // Get URL from data-url attribute
+                    // Toggle current answer
+                    question.classList.toggle('active', !isActive);
+                    answer.style.display = isActive ? 'none' : 'block';
+                });
+            });
 
-                liveSiteIframe.src = siteUrl;
-                iframeError.style.display = 'none';
+            // Testimonials Carousel
+            const carousel = document.querySelector('.testimonials-carousel');
+            const testimonialCards = document.querySelectorAll('.testimonial-card');
+            const prevButton = document.querySelector('.carousel-nav-button.prev');
+            const nextButton = document.querySelector('.carousel-nav-button.next');
+            const indicatorsContainer = document.querySelector('.carousel-indicators');
 
-                liveSiteIframe.onload = function() {
-                    try {
-                        const iframeDoc = liveSiteIframe.contentWindow.document;
-                    } catch (e) {
-                        console.warn(`iFrame loading issue for ${siteUrl}, possibly security restrictions:`, e);
-                        iframeError.style.display = 'block'; 
-                        liveSiteIframe.src = 'about:blank'; 
+            let currentIndex = 0;
+            let autoSlideInterval;
+
+            function updateCarousel() {
+                // Calculate total width of a card including its horizontal margins
+                const cardMarginLeft = parseFloat(getComputedStyle(testimonialCards[0]).marginLeft);
+                const cardMarginRight = parseFloat(getComputedStyle(testimonialCards[0]).marginRight);
+                const totalCardWidth = testimonialCards[0].offsetWidth + cardMarginLeft + cardMarginRight; 
+                
+                const offset = -currentIndex * totalCardWidth;
+                carousel.style.transform = `translateX(${offset}px)`;
+
+                // Update active class for cards
+                testimonialCards.forEach((card, index) => {
+                    if (index === currentIndex) {
+                        card.classList.add('active-slide');
+                    } else {
+                        card.classList.remove('active-slide');
                     }
-                };
+                });
 
-                liveSiteModal.classList.remove('hidden');
-                setTimeout(() => {
-                    liveSiteModalContent.classList.remove('scale-95', 'opacity-0');
-                    liveSiteModalContent.classList.add('scale-100', 'opacity-100');
-                }, 10);
-            });
-        });
-
-        closeLiveSiteModalBtn.addEventListener('click', () => {
-            liveSiteModalContent.classList.remove('scale-100', 'opacity-100');
-            liveSiteModalContent.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                liveSiteModal.classList.add('hidden');
-                liveSiteIframe.src = ''; 
-                liveSiteIframe.onload = null; 
-            }, 300);
-        });
-
-        liveSiteModal.addEventListener('click', (e) => {
-            if (e.target === liveSiteModal) {
-                liveSiteModalContent.classList.remove('scale-100', 'opacity-100');
-                liveSiteModalContent.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    liveSiteModal.classList.add('hidden');
-                    liveSiteIframe.src = ''; 
-                    liveSiteIframe.onload = null; 
-                }, 300);
-            }
-        });
-
-        // New "Add More Features" Modal Functionality
-        const addMoreFeaturesLink = document.getElementById('addMoreFeaturesLink');
-        const addFeaturesModal = document.getElementById('addFeaturesModal');
-        const closeFeaturesModalBtn = document.getElementById('closeFeaturesModal');
-        const saveFeaturesButton = document.getElementById('saveFeaturesButton');
-        const addedFeaturesDisplay = document.getElementById('addedFeaturesDisplay');
-        const featureCheckboxes = document.querySelectorAll('#addFeaturesModal input[name="feature"]');
-
-        addMoreFeaturesLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            addFeaturesModal.classList.add('active');
-            // Reset checkboxes state when opening the modal
-            featureCheckboxes.forEach(checkbox => {
-                const featureText = checkbox.dataset.displayText;
-                checkbox.checked = Array.from(addedFeaturesDisplay.children).some(li => li.textContent.trim() === featureText);
-            });
-        });
-
-        closeFeaturesModalBtn.addEventListener('click', () => {
-            addFeaturesModal.classList.remove('active');
-        });
-
-        addFeaturesModal.addEventListener('click', (e) => {
-            if (e.target === addFeaturesModal) {
-                addFeaturesModal.classList.remove('active');
-            }
-        });
-
-        saveFeaturesButton.addEventListener('click', () => {
-            addedFeaturesDisplay.innerHTML = ''; // Clear previous selections
-            let hasAddedFeatures = false;
-            featureCheckboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = checkbox.dataset.displayText;
-                    addedFeaturesDisplay.appendChild(listItem);
-                    hasAddedFeatures = true;
-                }
-            });
-
-            if (hasAddedFeatures) {
-                addedFeaturesDisplay.classList.remove('hidden');
-            } else {
-                addedFeaturesDisplay.classList.add('hidden');
+                // Update indicators
+                updateIndicators();
             }
 
-            addFeaturesModal.classList.remove('active');
+            function showNext() {
+                currentIndex = (currentIndex + 1) % testimonialCards.length;
+                updateCarousel();
+            }
+
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + testimonialCards.length) % testimonialCards.length;
+                updateCarousel();
+            }
+
+            // Create indicators
+            testimonialCards.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('carousel-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                    resetAutoSlide();
+                });
+                indicatorsContainer.appendChild(dot);
+            });
+
+            function updateIndicators() {
+                document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            prevButton.addEventListener('click', () => {
+                showPrev();
+                resetAutoSlide();
+            });
+            nextButton.addEventListener('click', () => {
+                showNext();
+                resetAutoSlide();
+            });
+
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(showNext, 6000); // Change slide every 6 seconds
+            }
+
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+
+            // Intersection Observer for scroll animations
+            const animateOnScrollElements = document.querySelectorAll('.fade-in-on-scroll, .slide-in-left-on-scroll, .slide-in-right-on-scroll, .scale-in-on-scroll');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.2 // Trigger when 20% of the element is visible
+            });
+
+            animateOnScrollElements.forEach(element => {
+                observer.observe(element);
+            });
+
+
+            // Initial load and resize handling
+            window.addEventListener('load', () => {
+                updateCarousel();
+                startAutoSlide(); // Start auto-slide on load
+            });
+            window.addEventListener('resize', updateCarousel); // Recalculate on resize
         });
     </script>
 </body>
