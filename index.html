@@ -250,12 +250,13 @@
         }
         .marquee-content {
             display: inline-block;
-            padding-left: 50%; /* Start from the middle of the screen */
+            /* Start point changed to appear from roughly the middle */
+            transform: translateX(0%); 
             animation: marquee 20s linear infinite; /* Adjust duration for speed, longer for more text */
         }
         @keyframes marquee {
-            0%   { transform: translate(0, 0); }
-            100% { transform: translate(-100%, 0); }
+            0%   { transform: translateX(calc(50vw - 50%)); } /* Start from approximate screen middle minus half its width */
+            100% { transform: translateX(calc(-50vw - 50%)); } /* End far off screen left */
         }
         @keyframes borderPulse {
             0% { box-shadow: inset 0 3px 8px rgba(0,0,0,0.3), 0 0 0 rgba(243,156,18,0); }
@@ -292,21 +293,19 @@
             padding: 80px 20px; /* More padding */
             max-width: 1000px; /* Wider section */
             margin: 0 auto;
-            text-align: center;
+            text-align: center; /* Ensures text inside is centered */
             background-color: #fff;
         }
         .why-choose-us-section p {
             font-size: 1.35rem; /* Larger text */
             font-weight: 400;
-            margin: 20px 0; /* More margin */
+            margin: 20px auto; /* Centered with auto margins */
             color: #555;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 800px; /* Constrain paragraph width */
         }
         .why-choose-us-section .highlight {
             font-style: italic;
-            margin: 40px 0; /* More margin */
+            margin: 40px auto; /* Centered with auto margins */
             font-weight: 600; /* Bolder highlight */
             color: #333;
             font-size: 1.5rem;
@@ -716,6 +715,7 @@
             background-color: #ffffff;
             border-radius: 15px; /* More rounded */
             box-shadow: 0 10px 35px rgba(0,0,0,0.18); /* Stronger shadow */
+            /* Removed animations - form content will load statically */
         }
         #contact-form .section-title {
             color: #2c3e50;
@@ -1146,7 +1146,7 @@
     <section class="hero">
         <h1>POWERING MELBOURNE HOMES, SAFELY & EFFICIENTLY.</h1>
         <p class="subtext">Your <strong>trusted</strong> local residential electricians, delivering <strong>reliable</strong> solutions for every electrical need.</p>
-        <a href="#contact-form" class="cta-button">REQUEST YOUR FREE QUOTE NOW</a>
+        <a href="#contact-form" class="cta-button">REQUEST YOUR FREE QUOTE</a>
     </section>
 
     <div class="marquee-container">
@@ -1301,26 +1301,26 @@
     </section>
 
     <section id="contact-form">
-        <h2 class="section-title fade-in-on-scroll">GET YOUR FREE ELECTRICAL QUOTE TODAY</h2>
-        <p class="quote-subtext fade-in-on-scroll">Tell us about your electrical needs and we'll get back to you with a <strong>free, no-obligation quote</strong>. <strong>Fast response guaranteed!</strong></p>
+        <h2 class="section-title">GET YOUR FREE ELECTRICAL QUOTE TODAY</h2>
+        <p class="quote-subtext">Tell us about your electrical needs and we'll get back to you with a <strong>free, no-obligation quote</strong>. <strong>Fast response guaranteed!</strong></p>
         <form>
-            <div class="form-group slide-in-left-on-scroll">
+            <div class="form-group">
                 <label for="fullName">Full Name</label>
                 <input type="text" id="fullName" name="fullName" placeholder="Your full name" required />
             </div>
-            <div class="form-group slide-in-right-on-scroll">
+            <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
             </div>
-            <div class="form-group slide-in-left-on-scroll">
+            <div class="form-group">
                 <label for="phone">Phone</label>
                 <input type="tel" id="phone" name="phone" placeholder="+61 4XX XXX XXX" required />
             </div>
-            <div class="form-group slide-in-right-on-scroll">
+            <div class="form-group">
                 <label for="suburb">Suburb</label>
                 <input type="text" id="suburb" name="suburb" placeholder="Your Melbourne suburb" required />
             </div>
-            <div class="form-group full-width scale-in-on-scroll">
+            <div class="form-group full-width">
                 <label for="serviceType">Type of Service Needed</label>
                 <select id="serviceType" name="serviceType" required>
                     <option value="">-- Select a Service --</option>
@@ -1334,11 +1334,11 @@
                     <option value="other">Other (please describe below)</option>
                 </select>
             </div>
-            <div class="form-group full-width scale-in-on-scroll">
+            <div class="form-group full-width">
                 <label for="message">Describe Your Electrical Needs <span style="font-weight: normal; font-size: 0.9em;">(Be as detailed as possible for an accurate quote)</span></label>
                 <textarea id="message" name="message" rows="6" placeholder="E.g., lights flickering in the living room, need new power points installed in the kitchen, planning a bathroom renovation and need new wiring, emergency power outage."></textarea>
             </div>
-            <button type="submit" class="scale-in-on-scroll">SUBMIT QUOTE REQUEST</button>
+            <button type="submit">SUBMIT QUOTE REQUEST</button>
         </form>
     </section>
 
@@ -1492,7 +1492,8 @@
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
+                    // Only apply animation if it's NOT the contact form
+                    if (entry.isIntersecting && !entry.target.closest('#contact-form')) {
                         entry.target.classList.add('is-visible');
                         observer.unobserve(entry.target); // Stop observing once animated
                     }
