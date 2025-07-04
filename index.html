@@ -141,18 +141,7 @@
       justify-content: center;
       text-align: center;
       position: relative;
-      overflow: hidden; /* For image positioning */
-    }
-    .hero img {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 40%; /* Adjust as needed */
-      max-width: 500px; /* Max size for image */
-      height: auto;
-      opacity: 0.2; /* Subtle background image */
-      z-index: 1;
-      animation: fadeIn 1.5s ease-out forwards;
+      overflow: hidden; /* For animation */
     }
 
     .hero h1 {
@@ -161,7 +150,7 @@
       font-size: 3rem; /* Larger font for desktop */
       line-height: 1.2;
       margin-bottom: 1rem;
-      z-index: 2; /* Ensure text is above image */
+      z-index: 2; /* Ensure text is above any potential background */
       animation: slideInLeft 1s ease-out forwards;
     }
 
@@ -656,10 +645,7 @@
       .hero {
         padding: 3rem 1rem; /* Adjust padding for mobile hero */
       }
-      .hero img {
-        width: 80%; /* Larger image on mobile */
-        right: -20%; /* Adjust position to keep it subtle */
-      }
+      /* Removed hero image, so no specific mobile styles needed for it anymore */
 
       .hero h1 {
         font-size: 2.4rem; /* Smaller font for mobile heading */
@@ -807,26 +793,25 @@
       <input type="text" id="postcodeInput" class="postcode-input" placeholder="Enter Postcode">
       <ul id="postcodeSuggestions" class="postcode-suggestions"></ul>
     </div>
-    <img src="https://raw.githubusercontent.com/mmp03patane/JUNK/refs/heads/main/Residential-Junk-Removal_-dumping.webp" alt="Residential Junk Removal">
-  </section>
+    </section>
 
   <section class="rubbish-types-section">
     <h2>WHAT TYPE OF RUBBISH DO YOU HAVE?</h2>
     <div class="panels-container">
       <div class="rubbish-panel">
-        <img src="https://github.com/mmp03patane/JUNK/blob/main/garage-clean-out.jpeg.webp?raw=true" alt="General Waste">
+        <img src="https://github.com/mmp03patane/JUNK/blob/main/contractor-clean-up-portland.jpg?raw=true" alt="General Waste">
         <h3>General Waste</h3>
         <p>This includes common household and office waste, such as packaging, old furniture, and general junk. We ensure responsible disposal, sorting recyclables and non-recyclables.</p>
         <button class="panel-button" onclick="window.location.href='contact.html'">GET QUOTE</button>
       </div>
       <div class="rubbish-panel">
-        <img src="https://github.com/mmp03patane/JUNK/blob/main/xGarden-Rubbish-Clearance-Clearitwaste-scaled.jpg.pagespeed.ic.bTvoIyXxr9.jpg?raw=true" alt="Green Waste">
+        <img src="https://github.com/mmp03patane/JUNK/blob/main/green-waste-removal.jpg?raw=true" alt="Green Waste">
         <h3>Green Waste</h3>
         <p>Perfect for garden clear-outs! This covers organic materials like branches, leaves, grass clippings, and small stumps. All green waste is taken to a composting facility.</p>
         <button class="panel-button" onclick="window.location.href='contact.html'">GET QUOTE</button>
       </div>
       <div class="rubbish-panel">
-        <img src="https://github.com/mmp03patane/JUNK/blob/main/contractor-clean-up-portland.jpg?raw=true" alt="Construction & Demolition Waste">
+        <img src="https://github.com/mmp03patane/JUNK/blob/main/construction%20waste.jpg?raw=true" alt="Construction & Demolition Waste">
         <h3>Construction & Demolition</h3>
         <p>From renovation debris to building site waste, we handle concrete, bricks, timber, metals, and more. Our team is equipped for heavy lifting and efficient site clearance.</p>
         <button class="panel-button" onclick="window.location.href='contact.html'">GET QUOTE</button>
