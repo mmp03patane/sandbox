@@ -1,1076 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Creative365</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&family=Oswald:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet" />
-  <style>
-    /* Universal Box-sizing and Base Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Nunito Sans', sans-serif;
-      background-color: #f7f7f7;
-      color: #222;
-      line-height: 1.6;
-      font-size: 1.25rem;
-      text-align: center;
-      overflow-x: hidden; /* Prevent horizontal scroll due to animations */
-    }
-
-    /* Header Styles */
-    header {
-      background-color: #198754; /* Changed header color to #198754 */
-      color: #fff;
-      padding: 1rem 2rem; /* Original padding for desktop */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      animation: slideInDown 0.8s ease-out forwards; /* Animation for header */
-    }
-    /* Logo Styles */
-    .logo {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 2.2rem; /* Adjusted font size for logo */
-      color: #fff;
-      text-decoration: none;
-      letter-spacing: 1px;
-      position: relative;
-      overflow: hidden; /* For underline animation */
-    }
-
-    .logo span:first-child {
-      color: #efe2ae; /* Color for 'NK' */
-    }
-
-    /* Desktop Navigation */
-    nav.desktop-nav {
-      display: block; /* Default to block for desktop */
-    }
-    nav.desktop-nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 2rem;
-      font-family: 'Roboto', sans-serif;
-      text-transform: uppercase;
-      position: relative; /* For hover effect */
-    }
-    nav.desktop-nav a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background-color: #efe2ae;
-      transition: width 0.3s ease-out;
-    }
-    nav.desktop-nav a:hover::after {
-      width: 100%;
-    }
-
-    /* Hamburger Menu (Hidden by default on desktop) */
-    .hamburger-menu {
-      display: none; /* Hidden on desktop */
-      width: 30px;
-      height: 21px;
-      cursor: pointer;
-      flex-direction: column;
-      justify-content: space-between;
-      z-index: 20;
-    }
-    .hamburger-menu .bar {
-      height: 3px;
-      background-color: #fff;
-      width: 100%;
-      transition: all 0.3s ease-in-out;
-    }
-    .hamburger-menu.active .bar:nth-child(1) {
-      transform: translateY(9px) rotate(45deg);
-    }
-    .hamburger-menu.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger-menu.active .bar:nth-child(3) {
-      transform: translateY(-9px) rotate(-45deg);
-    }
-
-    /* Mobile Navigation (Hidden by default, shown with JS) */
-    nav.mobile-nav {
-      display: none; /* Hidden by default */
-      position: absolute;
-      top: 100%; /* Positions it right below the header */
-      left: 0;
-      width: 100%;
-      background-color: #198754; /* Ensured mobile nav background matches header */
-      z-index: 15;
-      text-align: right;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      animation: fadeIn 0.5s ease-out forwards;
-    }
-    nav.mobile-nav.open {
-      display: block; /* Toggled by JavaScript */
-    }
-    nav.mobile-nav a {
-      color: #fff;
-      display: block;
-      padding: 1rem;
-      text-transform: uppercase;
-      font-family: 'Roboto', sans-serif;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      transition: background-color 0.3s ease;
-    }
-    nav.mobile-nav a:hover {
-      background-color: #5fae60;
-    }
-
-    /* Hero Section Styles */
-    .hero {
-      background-color: #222; /* Dark background for the hero section */
-      color: #fff;
-      padding: 4rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden; /* For animation */
-    }
-
-    .hero h1 {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 3rem; /* Larger font for desktop */
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      z-index: 2; /* Ensure text is above any potential background */
-      animation: slideInLeft 1s ease-out forwards;
-    }
-
-    .hero-location-text { /* New style for "We service all of Melbourne!" */
-      font-family: 'Roboto', sans-serif;
-      font-size: 1.5rem; /* Larger font size */
-      margin-bottom: 1rem;
-      max-width: 600px;
-      z-index: 2;
-      animation: slideInRight 1s ease-out forwards;
-      animation-delay: 0.3s;
-    }
-
-    /* Styles for the new postcode input and dropdown */
-    .postcode-lookup {
-      position: relative;
-      margin-top: 1.5rem;
-      width: 100%;
-      max-width: 350px; /* Limit width of postcode input area */
-      z-index: 2;
-      animation: fadeInUp 1s ease-out forwards;
-      animation-delay: 0.6s;
-    }
-
-    .postcode-input {
-      width: 100%;
-      padding: 1rem;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 8px;
-      outline: none;
-      font-family: 'Roboto', sans-serif;
-      text-align: center; /* Center placeholder text */
-      transition: all 0.3s ease;
-    }
-    .postcode-input:focus {
-      box-shadow: 0 0 0 3px #efe2ae;
-    }
-
-    .postcode-suggestions {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      position: absolute;
-      width: 100%;
-      max-height: 200px;
-      overflow-y: auto;
-      z-index: 10; /* Ensure it's above other content */
-      text-align: left; /* Align suggestion text */
-      color: #222; /* Black text for suggestions */
-    }
-
-    .postcode-suggestions li {
-      padding: 0.8rem 1rem;
-      cursor: pointer;
-      font-size: 1rem;
-      font-family: 'Nunito Sans', sans-serif;
-      transition: background-color 0.2s ease;
-    }
-
-    .postcode-suggestions li:hover {
-      background-color: #f0f0f0;
-    }
-
-    /* Rubbish Types Section Styles */
-    .rubbish-types-section {
-      background-color: #efe2ae; /* Background color for the section */
-      padding: 4rem 1rem;
-      text-align: center;
-    }
-
-    .rubbish-types-section h2 {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 2.5rem;
-      color: #000000; /* Black heading color */
-      margin-bottom: 2.5rem;
-      animation: fadeInUp 1s ease-out forwards;
-    }
-
-    .panels-container {
-      display: flex;
-      flex-wrap: wrap; /* Allow panels to wrap to next line on smaller screens */
-      justify-content: center; /* Center panels horizontally */
-      gap: 2rem; /* Space between panels */
-      max-width: 1200px; /* Limit container width */
-      margin: 0 auto; /* Center the container */
-    }
-
-    .rubbish-panel {
-      background-color: #ffffff; /* Panel background */
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Floating panel shadow */
-      flex: 1; /* Allow panels to grow and shrink */
-      min-width: 280px; /* Minimum width for panels */
-      max-width: 350px; /* Maximum width for panels */
-      text-align: left; /* Text inside panel is left-aligned */
-      display: flex; /* Use flexbox for internal layout */
-      flex-direction: column; /* Stack content vertically */
-      justify-content: space-between; /* Push button to the bottom */
-      transform: translateY(20px);
-      opacity: 0;
-      animation: fadeInUp 1s ease-out forwards;
-    }
-    .rubbish-panel:nth-child(1) { animation-delay: 0.2s; }
-    .rubbish-panel:nth-child(2) { animation-delay: 0.4s; }
-    .rubbish-panel:nth-child(3) { animation-delay: 0.6s; }
-
-    .rubbish-panel h3 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.7rem; /* Larger font size for panel headings */
-      color: #333; /* A slightly darker color for heading inside panel */
-      margin-bottom: 1rem;
-      text-align: center; /* Center align H3 inside panel */
-    }
-    .rubbish-panel img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
-    }
-
-    .rubbish-panel p {
-      font-family: 'Nunito Sans', sans-serif;
-      font-size: 1.2rem; /* Larger paragraph font size inside panel */
-      color: #555;
-      line-height: 1.5;
-      margin-bottom: 1.5rem; /* Space before the button */
-      flex-grow: 1; /* Allow paragraph to take up available space */
-      text-align: center;
-    }
-
-    .panel-button {
-      background-color: #198754; /* Green button */
-      color: #fff;
-      border: none;
-      padding: 0.8rem 2rem;
-      font-size: 1rem; /* Slightly smaller font size for panel buttons */
-      font-family: 'Roboto', sans-serif;
-      text-transform: uppercase;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      font-weight: bold;
-      display: block; /* Make button a block element */
-      width: fit-content; /* Fit content width */
-      margin: 0 auto; /* Center the button */
-    }
-
-    .panel-button:hover {
-      background-color: #5fae60; /* Darker green on hover */
-      transform: translateY(-2px);
-    }
-
-    /* Guide Section Styles */
-    .guide-section {
-      background-color: #222; /* Dark background */
-      color: #fff;
-      padding: 4rem 1rem;
-      text-align: center;
-    }
-
-    .guide-section h2 {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 2.5rem;
-      color: #fff;
-      margin-bottom: 2.5rem;
-      animation: fadeInUp 1s ease-out forwards;
-    }
-
-    .guide-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 800px;
-      margin: 0 auto;
-      gap: 2rem;
-      animation: fadeIn 1.5s ease-out forwards;
-      animation-delay: 0.3s;
-    }
-
-    .guide-content p {
-      font-family: 'Nunito Sans', sans-serif;
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-
-    .guide-button {
-      background-color: #efe2ae; /* Accent color */
-      color: #222;
-      border: none;
-      padding: 1rem 2.5rem;
-      font-size: 1.2rem;
-      font-family: 'Roboto', sans-serif;
-      text-transform: uppercase;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      font-weight: bold;
-    }
-
-    .guide-button:hover {
-      background-color: #f7eec8;
-      transform: translateY(-2px);
-    }
-
-    /* FAQ Section Styles */
-    .faq-section {
-      background-color: #ffffff; /* White background for FAQ */
-      padding: 4rem 1rem;
-      text-align: center;
-    }
-
-    .faq-section h2 {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 2.5rem;
-      color: #000000;
-      margin-bottom: 2.5rem;
-      animation: fadeInUp 1s ease-out forwards;
-    }
-
-    .faq-container {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: left;
-    }
-
-    .faq-item {
-      margin-bottom: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      overflow: hidden;
-      transform: translateY(20px);
-      opacity: 0;
-      animation: fadeInUp 1s ease-out forwards;
-    }
-    .faq-item:nth-child(1) { animation-delay: 0.2s; }
-    .faq-item:nth-child(2) { animation-delay: 0.3s; }
-    .faq-item:nth-child(3) { animation-delay: 0.4s; }
-    .faq-item:nth-child(4) { animation-delay: 0.5s; }
-    .faq-item:nth-child(5) { animation-delay: 0.6s; }
-
-    .faq-question {
-      background-color: #f0f0f0;
-      padding: 1rem 1.5rem;
-      font-family: 'Roboto', sans-serif;
-      font-weight: bold;
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background-color 0.3s ease;
-    }
-
-    .faq-question:hover {
-      background-color: #e0e0e0;
-    }
-
-    .faq-question::after {
-      content: '+';
-      font-size: 1.5rem;
-      transition: transform 0.3s ease;
-    }
-
-    .faq-question.active::after {
-      content: '-';
-      transform: rotate(180deg);
-    }
-
-    .faq-answer {
-      padding: 1rem 1.5rem;
-      font-family: 'Nunito Sans', sans-serif;
-      font-size: 1.2rem;
-      background-color: #fff;
-      border-top: 1px solid #eee;
-      display: none; /* Hidden by default */
-      overflow: hidden;
-    }
-
-    /* Testimonials Section Styles */
-    .testimonials-section {
-      background-color: #f7f7f7; /* Light grey background */
-      padding: 4rem 1rem;
-      text-align: center;
-    }
-
-    .testimonials-section h2 {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 2.5rem;
-      color: #000000;
-      margin-bottom: 2.5rem;
-      animation: fadeInUp 1s ease-out forwards;
-    }
-
-    .testimonials-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .testimonial-card {
-      background-color: #ffffff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      flex: 1;
-      min-width: 280px;
-      max-width: 380px;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      transform: translateY(20px);
-      opacity: 0;
-      animation: fadeInUp 1s ease-out forwards;
-    }
-    .testimonial-card:nth-child(1) { animation-delay: 0.2s; }
-    .testimonial-card:nth-child(2) { animation-delay: 0.4s; }
-    .testimonial-card:nth-child(3) { animation-delay: 0.6s; }
-
-    .testimonial-card::before {
-      content: '“';
-      font-family: serif;
-      font-size: 4em;
-      color: #efe2ae; /* Matching the rubbish section background for a subtle touch */
-      position: absolute;
-      top: 10px;
-      left: 15px;
-      line-height: 1;
-    }
-
-    .testimonial-text {
-      font-family: 'Nunito Sans', sans-serif;
-      font-size: 1.1rem;
-      color: #333;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-      padding-top: 20px; /* Space for the quote mark */
-      font-style: italic;
-    }
-
-    .testimonial-author {
-      font-family: 'Roboto', sans-serif;
-      font-size: 1rem;
-      color: #198754; /* Green accent for the author name */
-      font-weight: bold;
-      text-align: right;
-    }
-
-    .stars {
-      color: gold;
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      text-align: right;
-    }
-
-    /* Quote Form Section Styles */
-    .quote-form-section {
-      background-color: #198754; /* Green background */
-      padding: 4rem 1rem;
-      text-align: center;
-    }
-
-    .quote-form-section h2 {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 2.5rem;
-      color: #ffffff; /* White heading */
-      margin-bottom: 2.5rem;
-      animation: fadeInUp 1s ease-out forwards;
-    }
-
-    .quote-form-panel {
-      background-color: #ffffff; /* White panel */
-      padding: 3rem 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: left;
-      color: #222; /* Black text */
-    }
-
-    .quote-form-panel label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-family: 'Roboto', sans-serif;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-
-    .quote-form-panel input[type="text"],
-    .quote-form-panel input[type="email"],
-    .quote-form-panel input[type="tel"],
-    .quote-form-panel textarea,
-    .quote-form-panel select {
-      width: 100%;
-      padding: 0.8rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-family: 'Nunito Sans', sans-serif;
-      font-size: 1rem;
-      color: #222;
-    }
-
-    .quote-form-panel textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .quote-form-panel button {
-      background-color: #198754;
-      color: #fff;
-      border: none;
-      padding: 1rem 2.5rem;
-      font-size: 1.2rem;
-      font-family: 'Roboto', sans-serif;
-      text-transform: uppercase;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      font-weight: bold;
-      display: block;
-      width: fit-content;
-      margin: 0 auto;
-    }
-
-    .quote-form-panel button:hover {
-      background-color: #5fae60;
-      transform: translateY(-2px);
-    }
-
-    /* Keyframe Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideInDown {
-      from { transform: translateY(-100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes slideInLeft {
-      from { transform: translateX(-100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    @keyframes slideInRight {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    @keyframes fadeInUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    /* --- MEDIA QUERIES FOR MOBILE (max-width: 767px) --- */
-    @media (max-width: 767px) {
-      /* Show hamburger menu and hide desktop nav on mobile */
-      .hamburger-menu {
-        display: flex; /* Show hamburger */
-      }
-      nav.desktop-nav {
-        display: none; /* Hide desktop nav */
-      }
-      /* Apply smaller header padding only on mobile */
-      header {
-        padding: 0.8rem 1.5rem; /* Reduced padding for a smaller mobile header */
-      }
-
-      .logo {
-        font-size: 1.8rem; /* Smaller logo for mobile */
-      }
-
-      .hero {
-        padding: 3rem 1rem; /* Adjust padding for mobile hero */
-      }
-      /* Removed hero image, so no specific mobile styles needed for it anymore */
-
-      .hero h1 {
-        font-size: 2.4rem; /* Smaller font for mobile heading */
-      }
-
-      .hero-location-text {
-        font-size: 1.3rem; /* Adjusted font size for mobile */
-      }
-
-      .hero-cta-text {
-        font-size: 1.3rem; /* Adjusted font size for mobile CTA text */
-      }
-
-      .postcode-input {
-        padding: 0.8rem;
-        font-size: 1rem;
-      }
-
-      .postcode-suggestions li {
-        font-size: 0.9rem;
-        padding: 0.6rem 0.8rem;
-      }
-
-      /* Rubbish Types Section Mobile Styles */
-      .rubbish-types-section h2,
-      .guide-section h2,
-      .faq-section h2,
-      .testimonials-section h2,
-      .quote-form-section h2 {
-        font-size: 1.8rem; /* Smaller H2 for mobile */
-        margin-bottom: 1.5rem;
-      }
-
-      .panels-container {
-        flex-direction: column; /* Stack panels vertically on mobile */
-        align-items: center; /* Center panels when stacked */
-      }
-
-      .rubbish-panel {
-        padding: 1.5rem;
-        min-width: unset; /* Remove min-width to allow better shrinking on very small screens */
-        max-width: 90%; /* Take up more width on small mobile screens */
-        margin-left: auto; /* Center individual panels */
-        margin-right: auto; /* Center individual panels */
-      }
-
-      .rubbish-panel h3 {
-        font-size: 1.5rem; /* Slightly larger H3 for mobile panels */
-      }
-
-      .rubbish-panel p {
-        font-size: 1.3rem; /* Slightly larger paragraph text for mobile panels */
-      }
-
-      .panel-button {
-        font-size: 0.9rem; /* Smaller font for panel buttons on mobile */
-        padding: 0.7rem 1.8rem;
-      }
-
-      /* Guide Section Mobile */
-      .guide-content p {
-        font-size: 1.1rem;
-      }
-      .guide-button {
-        padding: 0.8rem 2rem;
-        font-size: 1rem;
-      }
-
-      /* FAQ Section Mobile Styles */
-      .faq-question {
-        font-size: 1.2rem;
-        padding: 0.8rem 1rem;
-      }
-
-      .faq-answer {
-        font-size: 1.15rem;
-        padding: 0.8rem 1rem;
-      }
-
-      /* Testimonials Section Mobile Styles */
-      .testimonial-card {
-        padding: 1.5rem;
-        min-width: unset;
-        max-width: 90%;
-      }
-
-      .testimonial-text {
-        font-size: 1.15rem;
-      }
-
-      .testimonial-author {
-        font-size: 1.15rem;
-      }
-
-      /* Quote Form Section Mobile Styles */
-      .quote-form-panel {
-        padding: 2rem 1.5rem;
-        max-width: 90%;
-      }
-
-      .quote-form-panel label {
-        font-size: 0.9rem;
-      }
-
-      .quote-form-panel input[type="text"],
-      .quote-form-panel input[type="email"],
-      .quote-form-panel input[type="tel"],
-      .quote-form-panel textarea,
-      .quote-form-panel select {
-        padding: 0.6rem;
-        font-size: 1.15rem;
-        margin-bottom: 1rem;
-      }
-
-      .quote-form-panel button {
-        padding: 0.8rem 2rem;
-        font-size: 1rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Hero Section</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Ensure the hero section covers the full width and height for a good hero effect */
+        .hero-section {
+            /* Updated: Custom gradient background */
+            background: linear-gradient(to bottom, #534b4b, #493F6E, #f9dfd0);
+            background-size: cover; /* Cover the entire area */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            position: relative; /* Needed for absolute positioning of overlay */
+            overflow: hidden; /* Hide parts of the animated image that go off-screen */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom style for the logo image */
+        .header-logo {
+            height: 40px; /* Adjust height as needed for your desired size */
+            width: auto; /* Maintain aspect ratio */
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <a href="index.html" class="logo">
-      <span>NK</span> JUNK REMOVALS
-    </a>
-    <div class="hamburger-menu" onclick="toggleMobileMenu()">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <nav class="desktop-nav">
-      <a href="contact.html">Contact</a>
-    </nav>
-    <nav class="mobile-nav" id="mobileNav">
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+<body class="bg-gray-100 text-gray-900">
 
-  <section class="hero">
-    <h1>LOOKING FOR NO FUSS WASTE REMOVAL?</h1>
-    <p class="hero-location-text">We service all of Melbourne!</p>
-    <p class="hero-cta-text"><b>Enter your postcode to check availability</b> 👇</p>
-    <div class="postcode-lookup">
-      <input type="text" id="postcodeInput" class="postcode-input" placeholder="Enter Postcode">
-      <ul id="postcodeSuggestions" class="postcode-suggestions"></ul>
-    </div>
-    </section>
+    <header class="bg-white shadow-md p-4">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="https://github.com/mmp03patane/ZEUS/blob/main/zeuscrop.PNG?raw=true" alt="ZEUS Logo" class="header-logo">
+            </a>
+            <ul class="flex space-x-6">
+                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Home</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Product</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Solutions</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Features</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Pricing</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Get Started</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Login</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <section class="rubbish-types-section">
-    <h2>WHAT TYPE OF RUBBISH DO YOU HAVE?</h2>
-    <div class="panels-container">
-      <div class="rubbish-panel">
-        <img src="https://github.com/mmp03patane/JUNK/blob/main/contractor-clean-up-portland.jpg?raw=true" alt="General Waste">
-        <h3>General Waste</h3>
-        <p>This includes common household and office waste, such as packaging, old furniture, and general junk. We ensure responsible disposal, sorting recyclables and non-recyclables.</p>
-        <button class="panel-button" onclick="window.location.href='contact.html'">GET QUOTE</button>
-      </div>
-      <div class="rubbish-panel">
-        <img src="https://github.com/mmp03patane/JUNK/blob/main/green-waste-removal.jpg?raw=true" alt="Green Waste">
-        <h3>Green Waste</h3>
-        <p>Perfect for garden clear-outs! This covers organic materials like branches, leaves, grass clippings, and small stumps. All green waste is taken to a composting facility.</p>
-        <button class="panel-button" onclick="window.location.href='contact.html'">GET QUOTE</button>
-      </div>
-      <div class="rubbish-panel">
-        <img src="https://github.com/mmp03patane/JUNK/blob/main/construction%20waste.jpg?raw=true" alt="Construction & Demolition Waste">
-        <h3>Construction & Demolition</h3>
-        <p>From renovation debris to building site waste, we handle concrete, bricks, timber, metals, and more. Our team is equipped for heavy lifting and efficient site clearance.</p>
-        <button class="panel-button" onclick="window.location.href='contact.html'">GET QUOTE</button>
-      </div>
-    </div>
-  </section>
+    <main>
+        <section
+            class="hero-section relative h-screen flex items-center justify-center text-white"
+            >
+            <img
+                id="parallax-image"
+                src="https://github.com/mmp03patane/ZEUS/blob/main/Gemini_Generated_Image_23gdvh23gdvh23gd-removebg-preview.png?raw=true"
+                alt="Animated Overlay"
+                class="absolute left-0 w-full max-w-2xl"
+                style="bottom: -5%;" onerror="this.onerror=null;this.src='https://placehold.co/300x200/cccccc/333333?text=Image+Error';"
+            >
 
-  <section class="guide-section">
-    <h2>DOWNLOAD OUR FREE JUNK REMOVAL GUIDE</h2>
-    <div class="guide-content">
-      <p>Looking for tips on decluttering your home or preparing for a big clean-out? Download our comprehensive guide to efficient and eco-friendly junk removal. It's packed with useful advice and insider tips to make your life easier!</p>
-      <button class="guide-button" onclick="alert('Guide Download Initiated!');">DOWNLOAD GUIDE NOW</button>
-    </div>
-  </section>
+            <div class="text-center bg-black bg-opacity-50 p-8 rounded-lg shadow-lg max-w-2xl mx-4">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">More Reviews.<br>
+Less Hassle.</h1>
+                <p class="text-xl md:text-2xl mb-8">Let the power of ZEUS automate your Google review requests.</p>
 
-  <section class="faq-section">
-    <h2>FREQUENTLY ASKED QUESTIONS</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <div class="faq-question">What areas do you service?</div>
-        <div class="faq-answer">We proudly service all metro Melbourne areas. If you're unsure, please contact us with your location, and we'll confirm.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">How do I get a free quote?</div>
-        <div class="faq-answer">You can get a free, no-obligation quote by filling out our online form below, or by giving us a call. We'll ask a few questions about the type and volume of rubbish to provide an accurate estimate.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">What types of rubbish can you remove?</div>
-        <div class="faq-answer">We remove general waste, green waste, and construction & demolition debris. For specific items or hazardous materials, please contact us directly to discuss.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">How quickly can you remove my rubbish?</div>
-        <div class="faq-answer">We aim for fast and efficient service. Depending on our schedule and your location, we can often arrange same-day or next-day rubbish removal.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Do I need to be present during the rubbish removal?</div>
-        <div class="faq-answer">While it's not strictly necessary, it's often helpful if you're present to guide our team, especially for specific items or access instructions. If you can't be there, clear instructions beforehand are appreciated.</div>
-      </div>
-    </div>
-  </section>
+<p style="font-size: 1.75rem; font-weight: 600; margin-top: 1rem; margin-bottom: 1.5rem;">
+    Just $49.99/month <span style="font-size: 1rem; font-weight: 400;">— no lock-in contracts, CRM integration included.</span>
+</p>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                    Get Started
+                </button>
+    <button class="bg-white hover:bg-gray-100 text-black font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+    Login
+</button>
+            </div>
+        </section>
 
-  <section class="testimonials-section">
-    <h2>WHAT OUR CUSTOMERS SAY</h2>
-    <div class="testimonials-container">
-      <div class="testimonial-card">
-        <div class="stars">⭐⭐⭐⭐⭐</div>
-        <p class="testimonial-text">"Absolutely brilliant service! They were quick, professional, and left the area spotless. Highly recommend for any junk removal needs in Melbourne."</p>
-        <p class="testimonial-author">- Sarah L.</p>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">⭐⭐⭐⭐⭐</div>
-        <p class="testimonial-text">"Needed urgent green waste removal after a storm, and these guys delivered! Friendly, efficient, and great value. Couldn't be happier."</p>
-        <p class="testimonial-author">- David R.</p>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">⭐⭐⭐⭐⭐</div>
-        <p class="testimonial-text">"Seamless experience from quote to collection. They handled all the construction debris from our reno with ease. Professional and reliable."</p>
-        <p class="testimonial-author">- Emily P.</p>
-      </div>
-    </div>
-  </section>
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12">About Us</h2>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div class="md:w-1/2">
+                        <img src="https://placehold.co/600x400/cccccc/333333?text=About+Image" alt="About Us" class="rounded-lg shadow-md w-full h-auto">
+                    </div>
+                    <div class="md:w-1/2 text-lg text-gray-700">
+                        <p class="mb-4">
+                            We are a passionate team dedicated to delivering high-quality solutions that exceed expectations. Our mission is to innovate and provide exceptional value to our clients.
+                        </p>
+                        <p>
+                            With years of experience in the industry, we pride ourselves on our commitment to excellence and customer satisfaction. We believe in building strong relationships and fostering a collaborative environment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <section class="quote-form-section">
-    <h2>GET YOUR FREE QUOTE TODAY</h2>
-    <div class="quote-form-panel">
-      <form action="#" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12">Our Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-2xl font-semibold mb-4">Web Development</h3>
+                        <p class="text-gray-700">Building responsive and modern web applications tailored to your needs.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-2xl font-semibold mb-4">UI/UX Design</h3>
+                        <p class="text-gray-700">Creating intuitive and engaging user interfaces for optimal experience.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-2xl font-semibold mb-4">Digital Marketing</h3>
+                        <p class="text-gray-700">Strategies to boost your online presence and reach a wider audience.</p>
+                    </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 My Website. All rights reserved.</p>
+        </div>
+    </footer>
 
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone">
+    <script>
+        // Get the parallax image element
+        const parallaxImage = document.getElementById('parallax-image');
+        // Get the hero section element to calculate its offset
+        const heroSection = document.querySelector('.hero-section');
+        // Get the text content div to match its width
+        const textContentDiv = document.querySelector('.hero-section > div');
 
-        <label for="rubbish-type">Type of Rubbish:</label>
-        <select id="rubbish-type" name="rubbish_type" required>
-          <option value="">-- Please select --</option>
-          <option value="general">General Waste</option>
-          <option value="green">Green Waste</option>
-          <option value="construction">Construction & Demolition</option>
-          <option value="other">Other (please specify below)</option>
-        </select>
+        // Function to update the image position and width based on scroll and text content
+        function updateParallaxAndWidth() {
+            // Calculate the scroll position relative to the top of the hero section
+            const heroRect = heroSection.getBoundingClientRect();
+            const scrollAmount = -heroRect.top; // Positive value as we scroll down
 
-        <label for="message">Details of Rubbish / Message:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+            // Adjust the translation factor to control the speed of movement
+            const parallaxFactor = 0.2; // Adjust this value to make it move more or less
 
-        <button type="submit">GET MY FREE QUOTE</button>
-      </form>
-    </div>
-  </section>
+            // First, set the width of the image to match the text content div
+            // This ensures clientWidth is accurate for the initial offset calculation
+            parallaxImage.style.width = `${textContentDiv.clientWidth}px`;
 
-  <script>
-    function toggleMobileMenu() {
-      document.getElementById("mobileNav").classList.toggle("open");
-      document.querySelector(".hamburger-menu").classList.toggle("active");
-    }
+            // Define the percentage of the image to initially hide on the left
+            const hiddenPercentage = 0.15; // 15% of the image width
 
-    // FAQ Toggle Functionality
-    document.addEventListener('DOMContentLoaded', () => {
-      const faqQuestions = document.querySelectorAll('.faq-question');
+            // Calculate the initial negative offset to hide the specified percentage of the image
+            const initialHiddenOffset = -parallaxImage.clientWidth * hiddenPercentage;
 
-      faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-          const answer = question.nextElementSibling;
-          question.classList.toggle('active');
+            // Calculate the translateX value based on scroll, moving it to the right
+            const scrollTranslation = scrollAmount * parallaxFactor;
 
-          if (answer.style.display === 'block') {
-            answer.style.display = 'none';
-          } else {
-            answer.style.display = 'block';
-          }
-        });
-      });
+            // Combine the initial hidden offset with the scroll-based translation
+            const finalTranslateX = initialHiddenOffset + scrollTranslation;
 
-      // Postcode Lookup Functionality
-      const postcodeInput = document.getElementById('postcodeInput');
-      const postcodeSuggestions = document.getElementById('postcodeSuggestions');
-      const postcodeLookupDiv = document.querySelector('.postcode-lookup');
+            // Apply the transform to the image
+            parallaxImage.style.transform = `translateX(${finalTranslateX}px)`;
 
-      const serviceAreas = [
-        "Abbotsford 3067", "Aberfeldie 3040", "Airport West 3042", "Albert Park 3206",
-        "Alphington 3078", "Armadale 3143", "Ascot Vale 3032", "Ashburton 3147",
-        "Ashwood 3147", "Aspendale 3195", "Aspendale Gardens 3195", "Attwood 3049",
-        "Auburn 3123",
-        "Avondale Heights 3034", "Balaclava 3183", "Balwyn 3103",
-        "Balwyn North 3104", "Bayswater 3153", "Bayswater North 3153", "Beaumaris 3193",
-        "Bentleigh 3204", "Bentleigh East 3165", "Berwick 3806", "Blackburn 3130",
-        "Blackburn North 3130", "Blackburn South 3130", "Box Hill 3128", "Box Hill North 3129",
-        "Box Hill South 3128", "Braybrook 3019", "Brighton 3186", "Brighton East 3187",
-        "Broadmeadows 3047", "Brunswick 3056", "Brunswick East 3057", "Brunswick West 3055",
-        "Bundoora 3083", "Burwood 3125", "Burwood East 3151", "Camberwell 3124",
-        "Canterbury 3126", "Carlton 3053", "Carlton North 3054", "Carnegie 3163",
-        "Carrum 3197", "Carrum Downs 3201", "Caulfield 3162", "Caulfield North 3161",
-        "Caulfield South 3162", "Chadstone 3148", "Cheltenham 3192", "Chelsea 3196",
-        "Chelsea Heights 3196", "Cheltenham East 3192", "Chirnside Park 3116", "Clarinda 3169",
-        "Clayton 3168", "Clayton South 3169", "Clifton Hill 3068", "Coburg 3058",
-        "Coburg North 3058", "Collingwood 3066", "Craigieburn 3064", "Cranbourne 3977",
-        "Cranbourne East 3977", "Cranbourne North 3977", "Cranbourne South 3977", "Cranbourne West 3977",
-        "Croydon 3136", "Croydon Hills 3136", "Croydon North 3136", "Croydon South 3136",
-        "Dandenong 3175", "Dandenong North 3175", "Dandenong South 3175", "Deer Park 3023",
-        "Delahey 3037", "Derrimut 3026", "Diamond Creek 3089", "Doncaster 3108",
-        "Doncaster East 3109", "Donvale 3111", "Doreen 3754", "Elsternwick 3185",
-        "Eltham 3095", "Elwood 3184", "Endeavour Hills 3802", "Epping 3076",
-        "Essendon 3040", "Essendon North 3041", "Essendon West 3040", "Fairfield 3078",
-        "Ferntree Gully 3156", "Fitzroy 3065", "Fitzroy North 3068", "Footscray 3011",
-        "Forest Hill 3131", "Frankston 3199", "Frankston North 3200", "Frankston South 3199",
-        "Glen Huntly 3163", "Glen Iris 3146", "Glen Waverley 3150", "Greensborough 3088",
-        "Hallam 3803", "Hampton 3188", "Hampton East 3188", "Hawthorn 3122",
-        "Hawthorn East 3123", "Heidelberg 3084", "Heidelberg Heights 3081", "Heidelberg West 3081",
-        "Highett 3190", "Hoppers Crossing 3029", "Hughesdale 3166", "Huntingdale 3166",
-        "Ivanhoe 3079", "Ivanhoe East 3079", "Jacana 3047", "Keilor 3036",
-        "Keilor Downs 3038", "Keilor East 3033", "Keilor Lodge 3038", "Keilor North 3036",
-        "Keilor Park 3042", "Kensington 3031", "Kew 3101", "Kew East 3102",
-        "Keysborough 3173", "Kilsyth 3137", "Kilsyth South 3137", "Kingsbury 3083",
-        "Kingsville 3012", "Knoxfield 3180", "Kooyong 3144", "Lalor 3075",
-        "Langwarrin 3910", "Laverton 3028", "Lilydale 3140", "Lower Plenty 3093",
-        "Lynbrook 3975", "Lyndhurst 3975", "Lysterfield 3156", "Macleod 3085",
-        "Maidstone 3012", "Malvern 3144", "Malvern East 3145", "Maribyrnong 3032",
-        "McKinnon 3204", "Meadow Heights 3048", "Melbourne 3000", "Melbourne Airport 3045",
-        "Mentone 3194", "Mernda 3754", "Middle Park 3206", "Mill Park 3082",
-        "Mitcham 3132", "Mont Albert 3127", "Montmorency 3094", "Moonee Ponds 3039",
-        "Moorabbin 3189", "Mooroolbark 3138", "Mordialloc 3195", "Mount Eliza 3930",
-        "Mount Evelyn 3796", "Mount Waverley 3149", "Mulgrave 3170", "Murrumbeena 3163",
-        "Narre Warren 3805", "Narre Warren North 3804", "Narre Warren South 3805", "Newport 3015",
-        "Niddrie 3042", "Noble Park 3174", "Noble Park North 3174", "North Melbourne 3051",
-        "Northcote 3070", "Notting Hill 3168", "Nunawading 3131", "Oak Park 3046",
-        "Oakleigh 3166", "Oakleigh East 3166", "Oakleigh South 3167", "Ormond 3204",
-        "Pakenham 3810", "Parkdale 3195", "Parkville 3052", "Pascoe Vale 3044",
-        "Pascoe Vale South 3044", "Patterson Lakes 3197", "Point Cook 3030", "Port Melbourne 3207",
-        "Prahran 3181", "Preston 3072", "Reservoir 3073", "Richmond 3121",
-        "Ringwood 3134", "Ringwood East 3135", "Ringwood North 3134", "Ripponlea 3185",
-        "Rosanna 3084", "Rowville 3178", "Roxburgh Park 3064", "Sandringham 3191",
-        "Scoresby 3179", "Seaford 3198", "Seddon 3011", "Selby 3159",
-        "South Kingsville 3015", "South Melbourne 3205", "South Morang 3752", "South Yarra 3141",
-        "Southbank 3006", "Spotswood 3015", "Springvale 3171", "Springvale South 3172"
-      ];
-
-      // Function to redirect to contact page
-      const redirectToContact = () => {
-        window.location.href = "contact.html";
-      };
-
-      postcodeInput.addEventListener('input', function() {
-        const query = this.value.toLowerCase();
-        postcodeSuggestions.innerHTML = ''; // Clear previous suggestions
-
-        if (query.length === 0) {
-          return;
+            // The 'left-0' class on the image ensures it's anchored to the left of the hero section,
+            // and the 'overflow: hidden' on the hero section prevents the hidden part from being visible.
         }
 
-        const filteredAreas = serviceAreas.filter(area =>
-          area.toLowerCase().includes(query)
-        );
+        // Add a scroll event listener to update the parallax effect
+        window.addEventListener('scroll', updateParallaxAndWidth);
 
-        filteredAreas.forEach(area => {
-          const li = document.createElement('li');
-          li.textContent = area;
-          li.addEventListener('click', function() {
-            postcodeInput.value = this.textContent;
-            postcodeSuggestions.innerHTML = ''; // Hide suggestions
-            redirectToContact(); // Redirect immediately on selection
-          });
-          postcodeSuggestions.appendChild(li);
-        });
-      });
-
-      // Hide suggestions when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!postcodeLookupDiv.contains(event.target)) {
-          postcodeSuggestions.innerHTML = '';
-        }
-      });
-
-      // Redirect if a valid postcode is entered manually and input loses focus
-      postcodeInput.addEventListener('blur', function() {
-        const inputValue = this.value.trim();
-        const isValid = serviceAreas.some(area => area.toLowerCase() === inputValue.toLowerCase());
-        if (isValid) {
-          redirectToContact(); // Redirect immediately on valid blur
-        }
-      });
-
-      // Optional: Add a keypress listener for 'Enter' key
-      postcodeInput.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-          const inputValue = this.value.trim();
-          const isValid = serviceAreas.some(area => area.toLowerCase() === inputValue.toLowerCase());
-          if (isValid) {
-            redirectToContact(); // Redirect on Enter key if valid
-          }
-        }
-      });
-    });
-
-    // Intersection Observer for animations
-    const animateOnScroll = (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animationPlayState = 'running';
-          observer.unobserve(entry.target);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(animateOnScroll, {
-      root: null,
-      threshold: 0.1
-    });
-
-    // Observe elements for animation (excluding the quote form)
-    document.querySelectorAll('h2, .rubbish-panel, .faq-item, .testimonial-card').forEach(el => {
-      observer.observe(el);
-    });
-    // Specifically observe the guide content for animation
-    const guideContent = document.querySelector('.guide-content');
-    if (guideContent) {
-      observer.observe(guideContent);
-    }
-  </script>
+        // Call it once on load to set the initial position and width correctly
+        window.addEventListener('load', updateParallaxAndWidth);
+        // Also call on resize to ensure width and position adjust if viewport changes
+        window.addEventListener('resize', updateParallaxAndWidth);
+    </script>
 </body>
 </html>
