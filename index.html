@@ -35,17 +35,17 @@
             }
         }
 
-        /* NEW: Adjust header height specifically for mobile */
+        /* Your previous attempt to adjust header padding on mobile.
+           We will now primarily control this via the <nav> element's padding,
+           but keeping this here doesn't hurt. */
         @media (max-width: 767px) { /* Screens up to 767px wide (typical mobile) */
             header {
-                padding-top: 0.50rem;    /* Adjust top padding */
-                padding-bottom: 0.50rem; /* Adjust bottom padding */
-                /* You can also uncomment these and experiment if you want a fixed height: */
-                /* height: 60px; */
-                /* min-height: 60px; */
+                /* Tailwind's p-4 on the header (1rem) is being overridden by py-2 on the nav below */
+                /* If you want minimal padding on the header itself, you could set it to 0 here */
+                /* padding-top: 0;
+                padding-bottom: 0; */
             }
         }
-
 
         /* Styles for mobile menu - hidden by default */
         #mobile-menu {
@@ -94,13 +94,18 @@
             #mobile-menu {
                 display: none !important; /* Ensure mobile menu is hidden */
             }
+            /* Reset mobile-specific nav padding for desktop */
+            .mobile-nav-padding {
+                padding-top: 1rem !important; /* Revert to default p-4 vertical padding */
+                padding-bottom: 1rem !important; /* Revert to default p-4 vertical padding */
+            }
         }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
 
     <header class="bg-white shadow-md p-4 relative">
-        <nav class="container mx-auto flex justify-between items-center">
+        <nav class="container mx-auto flex justify-between items-center py-2 md:py-4">
             <a href="#" class="flex items-center">
                 <img src="https://github.com/mmp03patane/ZEUS/blob/main/zeuscrop.PNG?raw=true" alt="ZEUS Logo" class="header-logo">
             </a>
