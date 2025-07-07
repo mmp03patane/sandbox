@@ -22,10 +22,17 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* Custom style for the logo image */
+        /* Custom style for the logo image (default for desktop) */
         .header-logo {
-            height: 40px; /* Adjust height as needed for your desired size */
+            height: 40px; /* Default height for larger screens */
             width: auto; /* Maintain aspect ratio */
+        }
+
+        /* NEW: Adjust logo size specifically for mobile */
+        @media (max-width: 767px) { /* Screens up to 767px wide (typical mobile) */
+            .header-logo {
+                height: 30px; /* Smaller height for mobile logo */
+            }
         }
 
         /* NEW: Styles for mobile menu - hidden by default */
