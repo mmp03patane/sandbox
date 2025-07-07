@@ -27,16 +27,74 @@
             height: 40px; /* Adjust height as needed for your desired size */
             width: auto; /* Maintain aspect ratio */
         }
+
+        /* NEW: Styles for mobile menu - hidden by default */
+        #mobile-menu {
+            display: none;
+            flex-direction: column; /* Stack items vertically */
+            width: 100%; /* Take full width when open */
+            position: absolute; /* Position over content */
+            top: 100%; /* Below the header */
+            left: 0;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            z-index: 100; /* Ensure it's on top */
+        }
+
+        #mobile-menu a {
+            padding: 0.75rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #eee; /* Add separators */
+        }
+
+        #mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Show mobile menu when 'open' class is applied */
+        #mobile-menu.open {
+            display: flex;
+        }
+
+        /* Hide desktop menu on small screens and show hamburger icon */
+        @media (max-width: 767px) { /* Tailind CSS 'md' breakpoint is 768px */
+            .desktop-nav {
+                display: none;
+            }
+            .hamburger-button {
+                display: block; /* Show hamburger button */
+            }
+        }
+
+        /* Hide hamburger icon on larger screens and show desktop menu */
+        @media (min-width: 768px) {
+            .desktop-nav {
+                display: flex !important; /* Override 'hidden' if set by JS */
+            }
+            .hamburger-button {
+                display: none; /* Hide hamburger button */
+            }
+            #mobile-menu {
+                display: none !important; /* Ensure mobile menu is hidden on desktop */
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
 
-    <header class="bg-white shadow-md p-4">
-        <nav class="container mx-auto flex justify-between items-center">
+    <header class="bg-white shadow-md p-4 relative"> <nav class="container mx-auto flex justify-between items-center">
             <a href="#" class="flex items-center">
                 <img src="https://github.com/mmp03patane/ZEUS/blob/main/zeuscrop.PNG?raw=true" alt="ZEUS Logo" class="header-logo">
             </a>
-            <ul class="flex space-x-6">
+            
+            <button id="hamburger-button" class="hamburger-button text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 p-2 rounded md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <ul class="desktop-nav flex space-x-6">
                 <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Home</a></li>
                 <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Product</a></li>
                 <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Solutions</a></li>
@@ -47,6 +105,16 @@
                 <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Contact</a></li>
             </ul>
         </nav>
+
+        <ul id="mobile-menu" class="hidden md:hidden"> <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Home</a></li>
+            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Product</a></li>
+            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Solutions</a></li>
+            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Features</a></li>
+            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Pricing</a></li>
+            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Get Started</a></li>
+            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Login</a></li>
+            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Contact</a></li>
+        </ul>
     </header>
 
     <main>
@@ -62,31 +130,31 @@
             >
 
             <div class="text-center bg-black bg-opacity-50 p-8 rounded-lg shadow-lg max-w-2xl mx-4">
-                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">More Reviews.<br>
-Less Hassle.</h1>
-                <p class="text-xl md:text-2xl mb-8">Let the power of ZEUS automate your Google review requests.</p>
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight text-4xl sm:text-5xl md:text-6xl"> More Reviews.<br>
+                    Less Hassle.
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-base sm:text-lg md:text-xl"> Let the power of ZEUS automate your Google review requests.
+                </p>
 
-<p style="font-size: 1.75rem; font-weight: 600; margin-top: 1rem; margin-bottom: 1.5rem;">
-    Just $49.99/month <span style="font-size: 1rem; font-weight: 400;">— no lock-in contracts, CRM integration included.</span>
-</p>
-                <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
-                    Get Started
-                </button>
-    <button class="bg-white hover:bg-gray-100 text-black font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
-    Login
-</button>
+                <p style="font-size: 1.75rem; font-weight: 600; margin-top: 1rem; margin-bottom: 1.5rem;" class="text-lg sm:text-xl md:text-2xl"> Just $49.99/month <span style="font-size: 1rem; font-weight: 400;" class="text-sm sm:text-base">— no lock-in contracts, CRM integration included.</span>
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8"> <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                        Get Started
+                    </button>
+                    <button class="bg-white hover:bg-gray-100 text-black font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                        Login
+                    </button>
+                </div>
             </div>
         </section>
 
         <section class="py-16 bg-white">
             <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-12">About Us</h2>
-                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                <h2 class="text-4xl font-bold text-center mb-12 text-3xl sm:text-4xl">About Us</h2> <div class="flex flex-col md:flex-row items-center justify-center gap-8">
                     <div class="md:w-1/2">
                         <img src="https://placehold.co/600x400/cccccc/333333?text=About+Image" alt="About Us" class="rounded-lg shadow-md w-full h-auto">
                     </div>
-                    <div class="md:w-1/2 text-lg text-gray-700">
-                        <p class="mb-4">
+                    <div class="md:w-1/2 text-lg text-gray-700 text-base sm:text-lg"> <p class="mb-4">
                             We are a passionate team dedicated to delivering high-quality solutions that exceed expectations. Our mission is to innovate and provide exceptional value to our clients.
                         </p>
                         <p>
@@ -99,20 +167,15 @@ Less Hassle.</h1>
 
         <section class="py-16 bg-gray-100">
             <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-12">Our Services</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <h2 class="text-4xl font-bold text-center mb-12 text-3xl sm:text-4xl">Our Services</h2> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                        <h3 class="text-2xl font-semibold mb-4">Web Development</h3>
-                        <p class="text-gray-700">Building responsive and modern web applications tailored to your needs.</p>
+                        <h3 class="text-2xl font-semibold mb-4 text-xl sm:text-2xl">Web Development</h3> <p class="text-gray-700 text-base">Building responsive and modern web applications tailored to your needs.</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                        <h3 class="text-2xl font-semibold mb-4">UI/UX Design</h3>
-                        <p class="text-gray-700">Creating intuitive and engaging user interfaces for optimal experience.</p>
+                        <h3 class="text-2xl font-semibold mb-4 text-xl sm:text-2xl">UI/UX Design</h3> <p class="text-gray-700 text-base">Creating intuitive and engaging user interfaces for optimal experience.</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                        <h3 class="text-2xl font-semibold mb-4">Digital Marketing</h3>
-                        <p class="text-gray-700">Strategies to boost your online presence and reach a wider audience.</p>
-                    </p>
+                        <h3 class="text-2xl font-semibold mb-4 text-xl sm:text-2xl">Digital Marketing</h3> <p class="text-gray-700 text-base">Strategies to boost your online presence and reach a wider audience.</p>
                     </div>
                 </div>
             </div>
@@ -126,60 +189,73 @@ Less Hassle.</h1>
     </footer>
 
     <script>
-        // Get the parallax image element
+        // --- Mobile Navigation Toggle ---
+        const hamburgerButton = document.getElementById('hamburger-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        hamburgerButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open'); // Toggles the 'open' class
+        });
+
+        // Close mobile menu when a link is clicked (optional, but good UX)
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // --- Parallax Logic (with a mobile adjustment) ---
         const parallaxImage = document.getElementById('parallax-image');
-        // Get the hero section element to calculate its offset
         const heroSection = document.querySelector('.hero-section');
-        // Get the text content div to match its width
         const textContentDiv = document.querySelector('.hero-section > div');
 
-        // Function to update the image position and width based on scroll and text content
         function updateParallaxAndWidth() {
-            // Calculate the scroll position relative to the top of the hero section
-            const heroRect = heroSection.getBoundingClientRect();
-            // `scrollAmount` tracks how much the hero section has scrolled up past the viewport top.
-            // It will be 0 when the hero section is at the top of the viewport, and increase as you scroll down.
-            const scrollAmount = -heroRect.top; // Positive value as we scroll down
+            // Get viewport width
+            const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 
-            // Adjust the translation factor to control the speed of movement
+            // Adjust image width logic for smaller screens
+            if (viewportWidth < 768) { // Assuming 768px is the 'md' breakpoint for Tailwind
+                // On mobile, let the image take more width relative to its container,
+                // or have a fixed width/max-width to control its height more directly.
+                // We'll remove the `max-w-2xl` from the JS width calculation for mobile,
+                // and let the CSS `w-full` handle it, or set a fixed percentage of viewport width.
+                // For this example, let's just make it fill the container more.
+                parallaxImage.style.width = '120%'; // Make it slightly wider to ensure it covers, adjust as needed
+                // You might also consider adjusting the bottom offset for mobile
+                // parallaxImage.style.bottom = '-5%'; // Example: less cutoff on mobile
+            } else {
+                // Desktop behavior: match text content width, constrained by max-w-2xl
+                parallaxImage.style.width = `${textContentDiv.clientWidth}px`;
+            }
+
+
+            const heroRect = heroSection.getBoundingClientRect();
+            const scrollAmount = -heroRect.top;
+
             const parallaxFactor = 0.2; // Adjust this value to make it move more or less
 
-            // First, set the width of the image to match the text content div
-            // This ensures clientWidth is accurate for the initial offset calculation
-            parallaxImage.style.width = `${textContentDiv.clientWidth}px`;
-
-            // Define the percentage of the image to initially hide on the left
-            const hiddenPercentage = 0.15; // 15% of the image width
-
-            // Calculate the initial negative offset to hide the specified percentage of the image
+            // Calculate the initial negative offset based on the image's current clientWidth
+            const hiddenPercentage = 0.15;
             const initialHiddenOffset = -parallaxImage.clientWidth * hiddenPercentage;
 
-            // Calculate the translateX value based on scroll, moving it to the right
-            const scrollTranslation = scrollAmount * parallaxFactor;
+            let scrollTranslation = scrollAmount * parallaxFactor;
 
-            // Combine the initial hidden offset with the scroll-based translation
+            // For mobile, you might want a different scroll speed or even disable parallax
+            if (viewportWidth < 768) {
+                // Reduce parallax effect on mobile or disable it
+                scrollTranslation = scrollAmount * 0.1; // Slower parallax
+                // Or: scrollTranslation = 0; // No parallax on mobile
+            }
+
             let finalTranslateX = initialHiddenOffset + scrollTranslation;
+            finalTranslateX = Math.min(finalTranslateX, 0); // Cap at 0 to prevent over-revealing
 
-            // NEW LOGIC TO STOP THE SCROLLING
-            // Ensure the image doesn't scroll past being fully revealed (i.e., translateX = 0 or positive)
-            // The image is fully revealed when its left edge aligns with the container's left edge,
-            // which means its transform should not go beyond 0px.
-            finalTranslateX = Math.min(finalTranslateX, 0);
-
-            // Apply the transform to the image
             parallaxImage.style.transform = `translateX(${finalTranslateX}px)`;
-
-            // The 'left-0' class on the image ensures it's anchored to the left of the hero section,
-            // and the 'overflow: hidden' on the hero section prevents the hidden part from being visible.
         }
 
-        // Add a scroll event listener to update the parallax effect
         window.addEventListener('scroll', updateParallaxAndWidth);
-
-        // Call it once on load to set the initial position and width correctly
         window.addEventListener('load', updateParallaxAndWidth);
-        // Also call on resize to ensure width and position adjust if viewport changes
-        window.addEventListener('resize', updateParallaxAndWidth);
+        window.addEventListener('resize', updateParallaxAndWidth); // Re-run on resize for responsiveness
     </script>
 </body>
 </html>
