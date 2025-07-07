@@ -137,6 +137,8 @@ Less Hassle.</h1>
         function updateParallaxAndWidth() {
             // Calculate the scroll position relative to the top of the hero section
             const heroRect = heroSection.getBoundingClientRect();
+            // `scrollAmount` tracks how much the hero section has scrolled up past the viewport top.
+            // It will be 0 when the hero section is at the top of the viewport, and increase as you scroll down.
             const scrollAmount = -heroRect.top; // Positive value as we scroll down
 
             // Adjust the translation factor to control the speed of movement
@@ -156,7 +158,13 @@ Less Hassle.</h1>
             const scrollTranslation = scrollAmount * parallaxFactor;
 
             // Combine the initial hidden offset with the scroll-based translation
-            const finalTranslateX = initialHiddenOffset + scrollTranslation;
+            let finalTranslateX = initialHiddenOffset + scrollTranslation;
+
+            // NEW LOGIC TO STOP THE SCROLLING
+            // Ensure the image doesn't scroll past being fully revealed (i.e., translateX = 0 or positive)
+            // The image is fully revealed when its left edge aligns with the container's left edge,
+            // which means its transform should not go beyond 0px.
+            finalTranslateX = Math.min(finalTranslateX, 0);
 
             // Apply the transform to the image
             parallaxImage.style.transform = `translateX(${finalTranslateX}px)`;
