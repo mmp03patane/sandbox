@@ -22,15 +22,15 @@
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
-            padding-left: 1rem; /* px-4 */
-            padding-right: 1rem; /* px-4 */
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
 
         /* Header Styles */
         .header {
-            background-color: #ffffff; /* bg-white */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-md */
-            padding: 1rem; /* p-4 */
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
             position: relative;
         }
 
@@ -38,99 +38,112 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 0.5rem; /* py-2 */
-            padding-bottom: 0.5rem; /* py-2 */
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
         }
 
         @media (min-width: 768px) {
             .navbar {
-                padding-top: 1rem; /* md:py-4 */
-                padding-bottom: 1rem; /* md:py-4 */
+                padding-top: 1rem;
+                padding-bottom: 1rem;
             }
         }
 
         /* Logo Styling */
         .header-logo {
-            height: 40px; /* Default height for larger screens */
-            width: auto; /* Maintain aspect ratio */
-            display: flex; /* flex items-center */
+            height: 40px;
+            width: auto;
+            display: flex;
             align-items: center;
         }
 
         @media (max-width: 767px) {
             .header-logo {
-                height: 30px; /* Smaller height for mobile logo */
+                height: 30px;
             }
+        }
+
+        /* Hamburger Button and Login Button Container */
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem; /* Space between hamburger and login button */
         }
 
         /* Hamburger Button */
         .hamburger-button {
-            display: block; /* Shown by default (mobile-first) */
-            color: #4b5563; /* text-gray-700 */
+            display: block;
+            color: #4b5563;
             background: none;
             border: none;
-            padding: 0.5rem; /* p-2 */
-            border-radius: 0.25rem; /* rounded */
+            padding: 0.5rem;
+            border-radius: 0.25rem;
             cursor: pointer;
         }
         .hamburger-button:hover {
-            color: #2563eb; /* hover:text-blue-600 */
+            color: #2563eb;
         }
         .hamburger-button:focus {
             outline: none;
-            box-shadow: 0 0 0 2px #2563eb; /* focus:ring-2 focus:ring-blue-600 */
+            box-shadow: 0 0 0 2px #2563eb;
         }
         .hamburger-button svg {
-            width: 1.5rem; /* w-6 */
-            height: 1.5rem; /* h-6 */
+            width: 1.5rem;
+            height: 1.5rem;
         }
 
         /* Desktop Navigation */
         .desktop-nav {
-            display: none; /* Hidden by default (mobile-first) */
-            list-style: none; /* Remove bullet points */
+            display: none;
+            list-style: none;
             margin: 0;
             padding: 0;
         }
 
         .desktop-nav li {
-            display: inline-block; /* For horizontal layout */
-            margin-left: 1.5rem; /* space-x-6 (effectively) */
+            display: inline-block;
+            margin-left: 1.5rem;
         }
 
         .desktop-nav a {
-            color: #4b5563; /* text-gray-700 */
+            color: #4b5563;
             text-decoration: none;
-            transition: color 0.3s ease; /* transition duration-300 */
+            transition: color 0.3s ease;
         }
 
         .desktop-nav a:hover {
-            color: #2563eb; /* hover:text-blue-600 */
+            color: #2563eb;
         }
 
         @media (min-width: 768px) {
             .desktop-nav {
-                display: flex !important; /* Show desktop nav */
+                display: flex !important;
                 align-items: center;
             }
             .hamburger-button {
-                display: none !important; /* Hide hamburger */
+                display: none !important;
+            }
+            .nav-controls .btn-login-desktop {
+                display: block; /* Show desktop login button */
+            }
+             .nav-controls .btn-login-mobile {
+                display: none; /* Hide mobile login button */
             }
         }
 
         /* Mobile Menu */
         #mobile-menu {
-            display: none; /* Hidden by default */
-            flex-direction: column; /* Stack items vertically */
-            width: 100%; /* Take full width when open */
-            position: absolute; /* Position over content */
-            top: 100%; /* Below the header */
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            position: absolute;
+            top: 100%;
             left: 0;
             background-color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 1rem 0;
-            z-index: 100; /* Ensure it's on top */
-            list-style: none; /* Remove bullet points */
+            z-index: 100;
+            list-style: none;
             margin: 0;
         }
 
@@ -139,11 +152,11 @@
         }
 
         #mobile-menu a {
-            display: block; /* block */
+            display: block;
             padding: 0.75rem 1rem;
             text-align: center;
-            border-bottom: 1px solid #eee; /* Add separators */
-            color: #374151; /* Darker gray for mobile menu links */
+            border-bottom: 1px solid #eee;
+            color: #374151;
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -163,172 +176,212 @@
 
         @media (min-width: 768px) {
             #mobile-menu {
-                display: none !important; /* Ensure mobile menu is hidden on desktop */
+                display: none !important;
             }
         }
 
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(to bottom, #1E3A8A, #2563eb, #BFDBFE); /* Dark Blue, Blue-600, Light Blue */
+            background: linear-gradient(to bottom, #1E3A8A, #2563eb, #BFDBFE);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
             overflow: hidden;
-            height: 100vh; /* h-screen */
-            display: flex; /* flex */
-            align-items: center; /* items-center */
-            justify-content: center; /* justify-center */
-            color: #ffffff; /* text-white */
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
         }
 
         /* Parallax Image inside Hero */
         .hero-section .parallax-image {
-            position: absolute; /* absolute */
-            left: 0; /* left-0 */
-            width: 100%; /* w-full */
-            max-width: 40rem; /* max-w-2xl */
-            bottom: -12%; /* from inline style */
+            position: absolute;
+            left: 0;
+            width: 100%;
+            max-width: 40rem;
+            bottom: -12%;
         }
 
         /* Hero Text Content */
         .hero-content {
-            text-align: center; /* text-center */
-            background-color: rgba(0, 0, 0, 0.5); /* bg-black bg-opacity-50 */
-            padding: 2rem; /* p-8 */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-            max-width: 40rem; /* max-w-2xl */
-            margin-left: 1rem; /* mx-4 */
-            margin-right: 1rem; /* mx-4 */
-            position: relative; /* z-10 (to ensure it's on top of parallax) */
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            max-width: 40rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            position: relative;
             z-index: 10;
         }
 
         .hero-content h1 {
-            font-size: 2.25rem; /* text-4xl */
-            font-weight: 800; /* font-extrabold */
-            margin-bottom: 1rem; /* mb-4 */
-            line-height: 1.25; /* leading-tight */
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.25;
         }
 
-        @media (min-width: 640px) { /* sm breakpoint */
+        @media (min-width: 640px) {
             .hero-content h1 {
-                font-size: 3rem; /* sm:text-5xl */
+                font-size: 3rem;
             }
         }
 
-        @media (min-width: 768px) { /* md breakpoint */
+        @media (min-width: 768px) {
             .hero-content h1 {
-                font-size: 3.75rem; /* md:text-6xl */
+                font-size: 3.75rem;
             }
         }
 
         .hero-content p {
-            font-size: 1rem; /* text-base */
-            margin-bottom: 2rem; /* mb-8 */
+            font-size: 1rem;
+            margin-bottom: 2rem;
         }
 
-        @media (min-width: 640px) { /* sm breakpoint */
+        @media (min-width: 640px) {
             .hero-content p {
-                font-size: 1.125rem; /* sm:text-lg */
+                font-size: 1.125rem;
             }
         }
 
-        @media (min-width: 768px) { /* md breakpoint */
+        @media (min-width: 768px) {
             .hero-content p {
-                font-size: 1.25rem; /* md:text-xl */
+                font-size: 1.25rem;
             }
         }
 
         .hero-content .price-info {
-            font-size: 1.125rem; /* text-lg */
-            font-weight: 600; /* font-semibold */
-            margin-top: 1rem; /* mt-4 */
-            margin-bottom: 1.5rem; /* mb-6 */
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        @media (min-width: 640px) { /* sm breakpoint */
+        @media (min-width: 640px) {
             .hero-content .price-info {
-                font-size: 1.25rem; /* sm:text-xl */
+                font-size: 1.25rem;
             }
         }
 
-        @media (min-width: 768px) { /* md breakpoint */
+        @media (min-width: 768px) {
             .hero-content .price-info {
-                font-size: 1.5rem; /* md:text-2xl */
+                font-size: 1.5rem;
             }
         }
 
         .hero-content .price-info span {
-            font-size: 0.875rem; /* text-sm */
-            font-weight: 400; /* font-normal */
+            font-size: 0.875rem;
+            font-weight: 400;
         }
 
-        @media (min-width: 640px) { /* sm breakpoint */
+        @media (min-width: 640px) {
             .hero-content .price-info span {
-                font-size: 1rem; /* sm:text-base */
+                font-size: 1rem;
             }
         }
 
         .hero-buttons {
-            display: flex; /* flex */
-            flex-direction: column; /* flex-col */
-            justify-content: center; /* justify-center */
-            gap: 1rem; /* gap-4 */
-            margin-top: 2rem; /* mt-8 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        @media (min-width: 640px) { /* sm breakpoint */
+        @media (min-width: 640px) {
             .hero-buttons {
-                flex-direction: row; /* sm:flex-row */
+                flex-direction: row;
             }
         }
 
         /* Common Button Styles */
         .btn {
-            padding: 0.75rem 2rem; /* py-3 px-8 */
-            border-radius: 9999px; /* rounded-full */
-            font-weight: 700; /* font-bold */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-lg */
-            transition: all 0.3s ease-in-out; /* transition duration-300 ease-in-out */
-            transform: scale(1); /* initial scale for hover effect */
-            text-decoration: none; /* Remove underline from links */
-            display: flex; /* flex */
-            align-items: center; /* items-center */
-            justify-content: center; /* justify-center */
-            white-space: nowrap; /* Prevent text wrapping */
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            transform: scale(1);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            cursor: pointer; /* Add cursor pointer for buttons */
         }
 
         .btn:hover {
-            transform: scale(1.05); /* hover:scale-105 */
+            transform: scale(1.05);
         }
 
         /* Primary Button */
         .btn-primary {
-            background-color: #2563eb; /* bg-blue-600 */
-            color: #ffffff; /* text-white */
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none; /* Ensure no default border */
         }
 
         .btn-primary:hover {
-            background-color: #1d4ed8; /* hover:bg-blue-700 */
+            background-color: #1d4ed8;
         }
 
         /* Secondary Button */
         .btn-secondary {
-            background-color: #ffffff; /* bg-white */
-            color: #000000; /* text-black */
-            border: 1px solid #e5e7eb; /* Optional border for subtle look */
+            background-color: #ffffff;
+            color: #000000;
+            border: 1px solid #e5e7eb;
         }
 
         .btn-secondary:hover {
-            background-color: #f9fafb; /* hover:bg-gray-100 */
+            background-color: #f9fafb;
         }
+
+        /* Login Button specific styles */
+        .btn-login {
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem; /* Smaller padding for header button */
+            border-radius: 9999px;
+            font-weight: 600; /* Slightly less bold than primary CTA */
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-login:hover {
+            background-color: #1d4ed8;
+            transform: scale(1.05);
+        }
+
+        /* Hide desktop login button on mobile */
+        .btn-login-desktop {
+            display: none;
+        }
+
+        /* Show mobile login button on mobile, hide on desktop */
+        .btn-login-mobile {
+            display: block; /* Shown by default for mobile */
+        }
+
+        @media (min-width: 768px) {
+            .btn-login-desktop {
+                display: block; /* Show desktop login button */
+            }
+            .btn-login-mobile {
+                display: none; /* Hide mobile login button */
+            }
+        }
+
 
         /* Section Styling */
         .section-padding {
-            padding-top: 4rem; /* py-16 */
-            padding-bottom: 4rem; /* py-16 */
+            padding-top: 4rem;
+            padding-bottom: 4rem;
         }
 
         .bg-white {
@@ -336,25 +389,25 @@
         }
 
         .bg-gray-100 {
-            background-color: #f3f4f6; /* bg-gray-100 */
+            background-color: #f3f4f6;
         }
 
         .section-title {
             position: relative;
             display: inline-block;
-            padding-bottom: 8px; /* Space for the underline */
-            font-size: 1.875rem; /* text-3xl */
-            font-weight: 700; /* font-bold */
-            text-align: center; /* text-center */
-            margin-bottom: 3rem; /* mb-12 */
-            margin-left: auto; /* mx-auto */
-            margin-right: auto; /* mx-auto */
-            width: fit-content; /* w-fit */
+            padding-bottom: 8px;
+            font-size: 1.875rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
         }
 
-        @media (min-width: 640px) { /* sm breakpoint */
+        @media (min-width: 640px) {
             .section-title {
-                font-size: 2.25rem; /* sm:text-4xl */
+                font-size: 2.25rem;
             }
         }
 
@@ -365,127 +418,255 @@
             bottom: 0;
             width: 50px;
             height: 4px;
-            background-color: #2563eb; /* Blue-600, matching primary button color */
+            background-color: #2563eb;
             border-radius: 2px;
         }
 
-        /* About Section layout */
-        .about-content {
-            display: flex; /* flex */
-            flex-direction: column; /* flex-col */
-            align-items: center; /* items-center */
-            justify-content: center; /* justify-center */
-            gap: 2rem; /* gap-8 */
+        /* Product, Solutions, Features common styles */
+        .content-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            text-align: center; /* Center text for simpler layout */
         }
 
-        @media (min-width: 768px) { /* md breakpoint */
-            .about-content {
-                flex-direction: row; /* md:flex-row */
+        @media (min-width: 768px) {
+            .content-section {
+                flex-direction: row;
+                text-align: left; /* Align text left on desktop */
+            }
+            .content-section.reverse {
+                flex-direction: row-reverse; /* Reverse order for alternating sections */
             }
         }
 
-        .about-image-col {
-            width: 100%; /* w-full */
+        .content-image-col, .content-text-col {
+            width: 100%;
         }
 
-        @media (min-width: 768px) { /* md breakpoint */
-            .about-image-col {
-                width: 50%; /* md:w-1/2 */
+        @media (min-width: 768px) {
+            .content-image-col, .content-text-col {
+                width: 50%;
             }
         }
 
-        .about-image {
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-md */
-            width: 100%; /* w-full */
+        .content-image {
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            width: 100%;
             height: auto;
         }
 
-        .about-text-col {
-            width: 100%; /* w-full */
-            font-size: 1rem; /* text-base */
-            color: #4b5563; /* text-gray-700 */
+        .content-text-col h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1f2937;
         }
 
-        @media (min-width: 768px) { /* md breakpoint */
-            .about-text-col {
-                width: 50%; /* md:w-1/2 */
+        .content-text-col p {
+            font-size: 1rem;
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        .content-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .content-list li {
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+            font-size: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .content-list li::before {
+            content: '✔️'; /* Checkmark icon */
+            margin-right: 0.5rem;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        /* Solutions specific styles (grid for cards) */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        @media (min-width: 640px) {
+            .solutions-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
-        .about-text-col p {
-            margin-bottom: 1rem; /* mb-4 */
-        }
-
-        @media (min-width: 640px) { /* sm breakpoint */
-            .about-text-col {
-                font-size: 1.125rem; /* sm:text-lg */
+        @media (min-width: 1024px) {
+            .solutions-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
             }
         }
 
-        /* Services Grid */
-        .services-grid {
-            display: grid; /* grid */
-            grid-template-columns: repeat(1, minmax(0, 1fr)); /* grid-cols-1 */
-            gap: 2rem; /* gap-8 */
+        .solution-card {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            text-align: left; /* Align text left within cards */
+            border-top: 4px solid #2563eb; /* Accent border */
         }
 
-        @media (min-width: 768px) { /* md breakpoint */
-            .services-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr)); /* md:grid-cols-2 */
+        .solution-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1f2937;
+        }
+
+        .solution-card p {
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+
+        /* Features specific styles (similar to services grid) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .features-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
-        @media (min-width: 1024px) { /* lg breakpoint */
-            .services-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr)); /* lg:grid-cols-3 */
+        @media (min-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
             }
         }
 
-        .service-card {
-            background-color: #ffffff; /* bg-white */
-            padding: 1.5rem; /* p-6 */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1); /* shadow-md */
-            text-align: center; /* text-center */
+        .feature-item {
+            background-color: #ffffff;
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            text-align: left;
         }
 
-        .service-card h3 {
-            font-size: 1.25rem; /* text-xl */
-            font-weight: 600; /* font-semibold */
-            margin-bottom: 1rem; /* mb-4 */
+        .feature-item .icon {
+            color: #2563eb;
+            font-size: 1.5rem;
+            flex-shrink: 0; /* Prevent icon from shrinking */
         }
 
-        @media (min-width: 640px) { /* sm breakpoint */
-            .service-card h3 {
-                font-size: 1.5rem; /* sm:text-2xl */
-            }
+        .feature-item h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #1f2937;
         }
 
-        .service-card p {
-            font-size: 1rem; /* text-base */
-            color: #4b5563; /* text-gray-700 */
+        .feature-item p {
+            font-size: 0.9rem;
+            color: #4b5563;
         }
+
+        /* Pricing Section */
+        .pricing-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            max-width: 400px; /* Constrain width of pricing card */
+            width: 100%;
+            border: 2px solid #2563eb; /* Highlight pricing card */
+        }
+
+        .pricing-card h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .pricing-card .price span {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #4b5563;
+        }
+
+        .pricing-card .frequency {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .pricing-card ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            color: #4b5563;
+        }
+
+        .pricing-card ul li::before {
+            content: '✅';
+            margin-right: 0.75rem;
+            color: #10b981; /* Green checkmark */
+            font-size: 1.2rem;
+        }
+
 
         /* Footer Styles */
         .footer {
-            background-color: #1f2937; /* bg-gray-800 */
-            color: #ffffff; /* text-white */
-            padding-top: 2rem; /* py-8 */
-            padding-bottom: 2rem; /* py-8 */
+            background-color: #1f2937;
+            color: #ffffff;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
         }
 
         .footer .container {
-            text-align: center; /* text-center */
+            text-align: center;
         }
 
         /* Parallax Image Error Handling */
         img[onerror="this.onerror=null;this.src='https://placehold.co/300x200/cccccc/333333?text=Image+Error';"] {
-            /* Basic styling for error placeholder if original image fails */
             border: 1px dashed #ccc;
             background-color: #f0f0f0;
-            display: block; /* Ensure it takes up space */
-            margin: auto; /* Center it */
+            display: block;
+            margin: auto;
         }
     </style>
 </head>
@@ -496,33 +677,35 @@
             <a href="#" class="header-logo-link">
                 <img src="https://github.com/mmp03patane/ZEUS/blob/main/zeuscrop.PNG?raw=true" alt="ZEUS Logo" class="header-logo">
             </a>
-            
-            <button id="hamburger-button" class="hamburger-button">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
+
+            <div class="nav-controls">
+                <button id="hamburger-button" class="hamburger-button btn-login-mobile">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+                <a href="https://app.zeusreviews.com/login" class="btn btn-login btn-login-mobile">Login</a>
+            </div>
+
 
             <ul class="desktop-nav">
-                
-                <li><a href="#">Product</a></li>
-                <li><a href="#">Solutions</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Pricing</a></li>
+                <li><a href="#product">Product</a></li>
+                <li><a href="#solutions">Solutions</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#">FAQ</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><a href="https://app.zeusreviews.com/login">Login</a></li>
+                <li><a href="https://app.zeusreviews.com/login" class="btn btn-login btn-login-desktop">Login</a></li>
             </ul>
         </nav>
 
         <ul id="mobile-menu">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Product</a></li>
-            <li><a href="#">Solutions</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#">Get Started</a></li>
-            <li><a href="https://app.zeusreviews.com/login">Login</a></li>
+            <li><a href="#product">Product</a></li>
+            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#">FAQ</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
     </header>
@@ -560,40 +743,163 @@
             </div>
         </section>
 
-        <section class="section-padding bg-white">
+        ---
+
+        <section id="product" class="section-padding bg-white">
             <div class="container">
-                <h2 class="section-title">About Us</h2>
-                <div class="about-content">
-                    <div class="about-image-col">
-                        <img src="https://placehold.co/600x400/cccccc/333333?text=About+Image" alt="About Us" class="about-image">
+                <h2 class="section-title">Product</h2>
+                <div class="content-section">
+                    <div class="content-image-col">
+                        <img src="https://placehold.co/600x400/2563eb/ffffff?text=Product+Overview" alt="Product Overview" class="content-image">
                     </div>
-                    <div class="about-text-col">
-                        <p>
-                            We are a passionate team dedicated to delivering high-quality solutions that exceed expectations. Our mission is to innovate and provide exceptional value to our clients.
-                        </p>
-                        <p>
-                            With years of experience in the industry, we pride ourselves on our commitment to excellence and customer satisfaction. We believe in building strong relationships and fostering a collaborative environment.
-                        </p>
+                    <div class="content-text-col">
+                        <h3>All-In-One Google Review Automation for Local Businesses</h3>
+                        <p>ZEUS streamlines the process of collecting Google reviews, helping local businesses like yours effortlessly boost their online reputation and attract more customers. Our platform automates review requests, making it simple for your customers to leave feedback, and in turn, improving your SEO.</p>
+                        <h4>How it Works:</h4>
+                        <ul class="content-list">
+                            <li><strong>Seamless Customer Interaction:</strong> After a service or purchase, your customer receives an automated review request.</li>
+                            <li><strong>Instant Review Process:</strong> A single click takes them directly to your Google My Business review page.</li>
+                            <li><strong>Boost Your SEO:</strong> More positive reviews lead to higher local search rankings and increased visibility.</li>
+                        </ul>
+                        <img src="https://placehold.co/600x150/cccccc/333333?text=Workflow+Chart+(SMS/Email+>+Review+>+Boost+SEO)" alt="Workflow Chart" class="content-image" style="margin-top: 1.5rem;">
+                        <p style="margin-top: 1.5rem; font-weight: 600; color: #2563eb;">Results: Expect 30% more reviews in just 2 weeks!</p>
+                        <button class="btn btn-primary" style="margin-top: 2rem;">Get Started Now</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section-padding bg-gray-100">
+        ---
+
+        <section id="solutions" class="section-padding bg-gray-100">
             <div class="container">
-                <h2 class="section-title">Our Services</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <h3>Web Development</h3>
-                        <p>Building responsive and modern web applications tailored to your needs.</p>
+                <h2 class="section-title">Solutions</h2>
+                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem; color: #4b5563;">Discover how ZEUS can be tailored to fit your specific industry needs, helping you overcome unique challenges and grow your business.</p>
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <h3>For Trades & Services</h3>
+                        <p><strong>The Challenge:</strong> As a busy tradie, you're on the tools all day, leaving no time to chase crucial reviews.</p>
+                        <p><strong>How ZEUS Solves It:</strong> Our automated system sends review requests right after the job is done, capturing feedback while the experience is fresh. Seamlessly integrates with your existing job management software.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"ZEUS has transformed how we get reviews. We've seen a huge increase without lifting a finger!" - Local Electrician</p>
                     </div>
-                    <div class="service-card">
-                        <h3>UI/UX Design</h3>
-                        <p>Creating intuitive and engaging user interfaces for optimal experience.</p>
+                    <div class="solution-card">
+                        <h3>For Health & Wellness</h3>
+                        <p><strong>The Challenge:</strong> Building trust and reputation in healthcare is vital, but asking for reviews can feel awkward or time-consuming.</p>
+                        <p><strong>How ZEUS Solves It:</strong> Discreetly and professionally requests reviews via SMS or email, maintaining patient privacy and ensuring compliance. Boost your clinic's online visibility and attract new patients.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"Our dental practice now gets consistent reviews, which has really helped new patients find us." - Dr. Anya Sharma, Dentist</p>
                     </div>
-                    <div class="service-card">
-                        <h3>Digital Marketing</h3>
-                        <p>Strategies to boost your online presence and reach a wider audience.</p>
+                    <div class="solution-card">
+                        <h3>For Retail & Hospitality</h3>
+                        <p><strong>The Challenge:</strong> Competition is fierce, and positive reviews are key to standing out and attracting walk-in customers.</p>
+                        <p><strong>How ZEUS Solves It:</strong> Capture customer sentiment immediately after their visit. Perfect for cafes, restaurants, and shops looking to amplify their word-of-mouth marketing online.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"Our cafe's Google rating has soared since we started using ZEUS. It's so easy!" - Cafe Owner</p>
+                    </div>
+                    <div class="solution-card">
+                        <h3>For Agencies</h3>
+                        <p><strong>The Challenge:</strong> Managing client reviews manually for multiple businesses is a huge drain on resources and time.</p>
+                        <p><strong>How ZEUS Solves It:</strong> Offer review management as a service to your clients with ZEUS. Our multi-location dashboard allows you to oversee all campaigns from one place, providing tangible results and increasing client retention.</p>
+                        <p style="font-style: italic; margin-top: 1rem;">"ZEUS is an absolute game-changer for our agency. We can now scale our review services effortlessly." - Marketing Agency Director</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <section id="features" class="section-padding bg-white">
+            <div class="container">
+                <h2 class="section-title">Features</h2>
+                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem; color: #4b5563;">Explore the powerful capabilities of ZEUS that make review collection effortless and effective.</p>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="icon">✉️</span>
+                        <div>
+                            <h4>Automated Review Requests</h4>
+                            <p>Send professional review requests automatically via SMS and Email to your customers after their interaction.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">📱</span>
+                        <div>
+                            <h4>Mobile-Friendly Interface</h4>
+                            <p>Customers can easily leave reviews from any device, ensuring a smooth and quick process.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">📊</span>
+                        <div>
+                            <h4>Real-Time Review Tracking</h4>
+                            <p>Monitor your incoming Google reviews in real-time from a centralized dashboard.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🔗</span>
+                        <div>
+                            <h4>CRM/Job App Integrations</h4>
+                            <p>Seamlessly connect with popular CRM and job management apps like Tradify, ServiceM8, and more.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">✍️</span>
+                        <div>
+                            <h4>Customizable Message Templates</h4>
+                            <p>Personalize your review request messages to match your brand's voice and style.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🔄</span>
+                        <div>
+                            <h4>Auto-Follow-Ups for Non-Responders</h4>
+                            <p>Automatically send polite reminders to customers who haven't yet left a review, maximizing your response rate.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">📍</span>
+                        <div>
+                            <h4>Google My Business Integration</h4>
+                            <p>Directly links customers to your Google My Business profile for hassle-free review submission.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🏢</span>
+                        <div>
+                            <h4>Multi-Location Management</h4>
+                            <p>Manage review campaigns for multiple business locations from a single, intuitive platform.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">🔒</span>
+                        <div>
+                            <h4>Secure & GDPR-Compliant</h4>
+                            <p>Rest assured knowing your data and customer information are handled securely and in compliance with GDPR standards.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <section id="pricing" class="section-padding bg-gray-100">
+            <div class="container">
+                <h2 class="section-title">Pricing</h2>
+                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem; color: #4b5563;">Simple, transparent pricing to help your business grow without hidden fees.</p>
+                <div class="pricing-content">
+                    <div class="pricing-card">
+                        <h3>Growth Plan</h3>
+                        <div class="price">$49.99<span>/month</span></div>
+                        <p class="frequency">Billed monthly</p>
+                        <ul>
+                            <li>Automated SMS & Email Review Requests</li>
+                            <li>Real-Time Review Tracking</li>
+                            <li>CRM/Job App Integrations</li>
+                            <li>Customizable Message Templates</li>
+                            <li>Auto-Follow-Ups</li>
+                            <li>Google My Business Integration</li>
+                            <li>Dedicated Support</li>
+                            <li>No Lock-in Contracts</li>
+                        </ul>
+                        <button class="btn btn-primary">Get Started</button>
                     </div>
                 </div>
             </div>
@@ -612,10 +918,10 @@
         const mobileMenu = document.getElementById('mobile-menu');
 
         hamburgerButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open'); // Toggles the 'open' class
+            mobileMenu.classList.toggle('open');
         });
 
-        // Close mobile menu when a link is clicked (optional, but good UX)
+        // Close mobile menu when a link is clicked
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
@@ -625,7 +931,7 @@
         // --- Parallax Logic (with a mobile adjustment) ---
         const parallaxImage = document.getElementById('parallax-image');
         const heroSection = document.querySelector('.hero-section');
-        const textContentDiv = document.querySelector('.hero-content'); // Changed to hero-content
+        const textContentDiv = document.querySelector('.hero-content');
 
         function updateParallaxAndWidth() {
             const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
@@ -634,12 +940,10 @@
 
             let parallaxFactor = 0.2; // Default for desktop
 
-            // Adjust image width and parallax factor for smaller screens
-            if (viewportWidth < 768) { // Assuming 768px is the 'md' breakpoint for responsive styles
-                parallaxImage.style.width = '120%'; // Ensure it covers enough space on mobile
-                parallaxFactor = 0.1; // Slower parallax on mobile
+            if (viewportWidth < 768) {
+                parallaxImage.style.width = '120%';
+                parallaxFactor = 0.1;
             } else {
-                // Desktop behavior: match text content width, constrained by max-w-2xl
                 parallaxImage.style.width = `${textContentDiv.clientWidth}px`;
             }
 
@@ -649,7 +953,7 @@
             let scrollTranslation = scrollAmount * parallaxFactor;
 
             let finalTranslateX = initialHiddenOffset + scrollTranslation;
-            finalTranslateX = Math.min(finalTranslateX, 0); // Cap at 0 to prevent over-revealing
+            finalTranslateX = Math.min(finalTranslateX, 0);
 
             parallaxImage.style.transform = `translateX(${finalTranslateX}px)`;
         }
