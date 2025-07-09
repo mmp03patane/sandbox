@@ -3,51 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Animated Hero Section</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>ZEUS - Automate Your Google Reviews</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Ensure the hero section covers the full width and height for a good hero effect */
-        .hero-section {
-            /* Updated: Custom gradient background */
-            background: linear-gradient(to bottom, #534b4b, #493F6E, #f9dfd0);
-            background-size: cover; /* Cover the entire area */
-            background-position: center; /* Center the background image */
-            background-repeat: no-repeat; /* Do not repeat the background image */
-            position: relative; /* Needed for absolute positioning of overlay */
-            overflow: hidden; /* Hide parts of the animated image that go off-screen */
-        }
-
+        /* General Body Styles */
         body {
             font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f3f4f6; /* Consistent light gray background */
+            color: #1f2937; /* Dark gray for general text */
+            line-height: 1.5; /* Default line height */
         }
 
-        /* Custom style for the logo image (default for desktop) */
+        /* Container for content width */
+        .container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem; /* px-4 */
+            padding-right: 1rem; /* px-4 */
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #ffffff; /* bg-white */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-md */
+            padding: 1rem; /* p-4 */
+            position: relative;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.5rem; /* py-2 */
+            padding-bottom: 0.5rem; /* py-2 */
+        }
+
+        @media (min-width: 768px) {
+            .navbar {
+                padding-top: 1rem; /* md:py-4 */
+                padding-bottom: 1rem; /* md:py-4 */
+            }
+        }
+
+        /* Logo Styling */
         .header-logo {
             height: 40px; /* Default height for larger screens */
             width: auto; /* Maintain aspect ratio */
+            display: flex; /* flex items-center */
+            align-items: center;
         }
 
-        /* Adjust logo size specifically for mobile */
-        @media (max-width: 767px) { /* Screens up to 767px wide (typical mobile) */
+        @media (max-width: 767px) {
             .header-logo {
                 height: 30px; /* Smaller height for mobile logo */
             }
         }
 
-        /* Your previous attempt to adjust header padding on mobile.
-           We will now primarily control this via the <nav> element's padding,
-           but keeping this here doesn't hurt. */
-        @media (max-width: 767px) { /* Screens up to 767px wide (typical mobile) */
-            header {
-                /* Tailwind's p-4 on the header (1rem) is being overridden by py-2 on the nav below */
-                /* If you want minimal padding on the header itself, you could set it to 0 here */
-                /* padding-top: 0;
-                padding-bottom: 0; */
+        /* Hamburger Button */
+        .hamburger-button {
+            display: block; /* Shown by default (mobile-first) */
+            color: #4b5563; /* text-gray-700 */
+            background: none;
+            border: none;
+            padding: 0.5rem; /* p-2 */
+            border-radius: 0.25rem; /* rounded */
+            cursor: pointer;
+        }
+        .hamburger-button:hover {
+            color: #2563eb; /* hover:text-blue-600 */
+        }
+        .hamburger-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #2563eb; /* focus:ring-2 focus:ring-blue-600 */
+        }
+        .hamburger-button svg {
+            width: 1.5rem; /* w-6 */
+            height: 1.5rem; /* h-6 */
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: none; /* Hidden by default (mobile-first) */
+            list-style: none; /* Remove bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        .desktop-nav li {
+            display: inline-block; /* For horizontal layout */
+            margin-left: 1.5rem; /* space-x-6 (effectively) */
+        }
+
+        .desktop-nav a {
+            color: #4b5563; /* text-gray-700 */
+            text-decoration: none;
+            transition: color 0.3s ease; /* transition duration-300 */
+        }
+
+        .desktop-nav a:hover {
+            color: #2563eb; /* hover:text-blue-600 */
+        }
+
+        @media (min-width: 768px) {
+            .desktop-nav {
+                display: flex !important; /* Show desktop nav */
+                align-items: center;
+            }
+            .hamburger-button {
+                display: none !important; /* Hide hamburger */
             }
         }
 
-        /* Styles for mobile menu - hidden by default */
+        /* Mobile Menu */
         #mobile-menu {
             display: none; /* Hidden by default */
             flex-direction: column; /* Stack items vertically */
@@ -59,15 +130,29 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 1rem 0;
             z-index: 100; /* Ensure it's on top */
+            list-style: none; /* Remove bullet points */
+            margin: 0;
+        }
+
+        #mobile-menu li {
+            width: 100%;
         }
 
         #mobile-menu a {
+            display: block; /* block */
             padding: 0.75rem 1rem;
             text-align: center;
             border-bottom: 1px solid #eee; /* Add separators */
+            color: #374151; /* Darker gray for mobile menu links */
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        #mobile-menu a:last-child {
+        #mobile-menu a:hover {
+            color: #2563eb;
+        }
+
+        #mobile-menu li:last-child a {
             border-bottom: none;
         }
 
@@ -76,114 +161,414 @@
             display: flex;
         }
 
-        /* Hide desktop nav on mobile and show hamburger. Display desktop nav on md and up. */
-        .desktop-nav {
-            display: none; /* Hidden by default (mobile-first) */
-        }
-        .hamburger-button {
-            display: block; /* Shown by default (mobile-first) */
+        @media (min-width: 768px) {
+            #mobile-menu {
+                display: none !important; /* Ensure mobile menu is hidden on desktop */
+            }
         }
 
-        @media (min-width: 768px) { /* On medium screens (md) and up */
-            .desktop-nav {
-                display: flex !important; /* Show desktop nav */
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(to bottom, #1E3A8A, #2563eb, #BFDBFE); /* Dark Blue, Blue-600, Light Blue */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+            height: 100vh; /* h-screen */
+            display: flex; /* flex */
+            align-items: center; /* items-center */
+            justify-content: center; /* justify-center */
+            color: #ffffff; /* text-white */
+        }
+
+        /* Parallax Image inside Hero */
+        .hero-section .parallax-image {
+            position: absolute; /* absolute */
+            left: 0; /* left-0 */
+            width: 100%; /* w-full */
+            max-width: 40rem; /* max-w-2xl */
+            bottom: -12%; /* from inline style */
+        }
+
+        /* Hero Text Content */
+        .hero-content {
+            text-align: center; /* text-center */
+            background-color: rgba(0, 0, 0, 0.5); /* bg-black bg-opacity-50 */
+            padding: 2rem; /* p-8 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            max-width: 40rem; /* max-w-2xl */
+            margin-left: 1rem; /* mx-4 */
+            margin-right: 1rem; /* mx-4 */
+            position: relative; /* z-10 (to ensure it's on top of parallax) */
+            z-index: 10;
+        }
+
+        .hero-content h1 {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 800; /* font-extrabold */
+            margin-bottom: 1rem; /* mb-4 */
+            line-height: 1.25; /* leading-tight */
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .hero-content h1 {
+                font-size: 3rem; /* sm:text-5xl */
             }
-            .hamburger-button {
-                display: none !important; /* Hide hamburger */
+        }
+
+        @media (min-width: 768px) { /* md breakpoint */
+            .hero-content h1 {
+                font-size: 3.75rem; /* md:text-6xl */
             }
-            #mobile-menu {
-                display: none !important; /* Ensure mobile menu is hidden */
+        }
+
+        .hero-content p {
+            font-size: 1rem; /* text-base */
+            margin-bottom: 2rem; /* mb-8 */
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .hero-content p {
+                font-size: 1.125rem; /* sm:text-lg */
             }
-            /* Reset mobile-specific nav padding for desktop */
-            .mobile-nav-padding {
-                padding-top: 1rem !important; /* Revert to default p-4 vertical padding */
-                padding-bottom: 1rem !important; /* Revert to default p-4 vertical padding */
+        }
+
+        @media (min-width: 768px) { /* md breakpoint */
+            .hero-content p {
+                font-size: 1.25rem; /* md:text-xl */
             }
+        }
+
+        .hero-content .price-info {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            margin-top: 1rem; /* mt-4 */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .hero-content .price-info {
+                font-size: 1.25rem; /* sm:text-xl */
+            }
+        }
+
+        @media (min-width: 768px) { /* md breakpoint */
+            .hero-content .price-info {
+                font-size: 1.5rem; /* md:text-2xl */
+            }
+        }
+
+        .hero-content .price-info span {
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 400; /* font-normal */
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .hero-content .price-info span {
+                font-size: 1rem; /* sm:text-base */
+            }
+        }
+
+        .hero-buttons {
+            display: flex; /* flex */
+            flex-direction: column; /* flex-col */
+            justify-content: center; /* justify-center */
+            gap: 1rem; /* gap-4 */
+            margin-top: 2rem; /* mt-8 */
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .hero-buttons {
+                flex-direction: row; /* sm:flex-row */
+            }
+        }
+
+        /* Common Button Styles */
+        .btn {
+            padding: 0.75rem 2rem; /* py-3 px-8 */
+            border-radius: 9999px; /* rounded-full */
+            font-weight: 700; /* font-bold */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            transition: all 0.3s ease-in-out; /* transition duration-300 ease-in-out */
+            transform: scale(1); /* initial scale for hover effect */
+            text-decoration: none; /* Remove underline from links */
+            display: flex; /* flex */
+            align-items: center; /* items-center */
+            justify-content: center; /* justify-center */
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .btn:hover {
+            transform: scale(1.05); /* hover:scale-105 */
+        }
+
+        /* Primary Button */
+        .btn-primary {
+            background-color: #2563eb; /* bg-blue-600 */
+            color: #ffffff; /* text-white */
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8; /* hover:bg-blue-700 */
+        }
+
+        /* Secondary Button */
+        .btn-secondary {
+            background-color: #ffffff; /* bg-white */
+            color: #000000; /* text-black */
+            border: 1px solid #e5e7eb; /* Optional border for subtle look */
+        }
+
+        .btn-secondary:hover {
+            background-color: #f9fafb; /* hover:bg-gray-100 */
+        }
+
+        /* Section Styling */
+        .section-padding {
+            padding-top: 4rem; /* py-16 */
+            padding-bottom: 4rem; /* py-16 */
+        }
+
+        .bg-white {
+            background-color: #ffffff;
+        }
+
+        .bg-gray-100 {
+            background-color: #f3f4f6; /* bg-gray-100 */
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px; /* Space for the underline */
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            text-align: center; /* text-center */
+            margin-bottom: 3rem; /* mb-12 */
+            margin-left: auto; /* mx-auto */
+            margin-right: auto; /* mx-auto */
+            width: fit-content; /* w-fit */
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .section-title {
+                font-size: 2.25rem; /* sm:text-4xl */
+            }
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            background-color: #2563eb; /* Blue-600, matching primary button color */
+            border-radius: 2px;
+        }
+
+        /* About Section layout */
+        .about-content {
+            display: flex; /* flex */
+            flex-direction: column; /* flex-col */
+            align-items: center; /* items-center */
+            justify-content: center; /* justify-center */
+            gap: 2rem; /* gap-8 */
+        }
+
+        @media (min-width: 768px) { /* md breakpoint */
+            .about-content {
+                flex-direction: row; /* md:flex-row */
+            }
+        }
+
+        .about-image-col {
+            width: 100%; /* w-full */
+        }
+
+        @media (min-width: 768px) { /* md breakpoint */
+            .about-image-col {
+                width: 50%; /* md:w-1/2 */
+            }
+        }
+
+        .about-image {
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-md */
+            width: 100%; /* w-full */
+            height: auto;
+        }
+
+        .about-text-col {
+            width: 100%; /* w-full */
+            font-size: 1rem; /* text-base */
+            color: #4b5563; /* text-gray-700 */
+        }
+
+        @media (min-width: 768px) { /* md breakpoint */
+            .about-text-col {
+                width: 50%; /* md:w-1/2 */
+            }
+        }
+
+        .about-text-col p {
+            margin-bottom: 1rem; /* mb-4 */
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .about-text-col {
+                font-size: 1.125rem; /* sm:text-lg */
+            }
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid; /* grid */
+            grid-template-columns: repeat(1, minmax(0, 1fr)); /* grid-cols-1 */
+            gap: 2rem; /* gap-8 */
+        }
+
+        @media (min-width: 768px) { /* md breakpoint */
+            .services-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr)); /* md:grid-cols-2 */
+            }
+        }
+
+        @media (min-width: 1024px) { /* lg breakpoint */
+            .services-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr)); /* lg:grid-cols-3 */
+            }
+        }
+
+        .service-card {
+            background-color: #ffffff; /* bg-white */
+            padding: 1.5rem; /* p-6 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1); /* shadow-md */
+            text-align: center; /* text-center */
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+
+        @media (min-width: 640px) { /* sm breakpoint */
+            .service-card h3 {
+                font-size: 1.5rem; /* sm:text-2xl */
+            }
+        }
+
+        .service-card p {
+            font-size: 1rem; /* text-base */
+            color: #4b5563; /* text-gray-700 */
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #1f2937; /* bg-gray-800 */
+            color: #ffffff; /* text-white */
+            padding-top: 2rem; /* py-8 */
+            padding-bottom: 2rem; /* py-8 */
+        }
+
+        .footer .container {
+            text-align: center; /* text-center */
+        }
+
+        /* Parallax Image Error Handling */
+        img[onerror="this.onerror=null;this.src='https://placehold.co/300x200/cccccc/333333?text=Image+Error';"] {
+            /* Basic styling for error placeholder if original image fails */
+            border: 1px dashed #ccc;
+            background-color: #f0f0f0;
+            display: block; /* Ensure it takes up space */
+            margin: auto; /* Center it */
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body>
 
-    <header class="bg-white shadow-md p-4 relative">
-        <nav class="container mx-auto flex justify-between items-center py-2 md:py-4">
-            <a href="#" class="flex items-center">
+    <header class="header">
+        <nav class="navbar container">
+            <a href="#" class="header-logo-link">
                 <img src="https://github.com/mmp03patane/ZEUS/blob/main/zeuscrop.PNG?raw=true" alt="ZEUS Logo" class="header-logo">
             </a>
             
-            <button id="hamburger-button" class="hamburger-button text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 p-2 rounded">
+            <button id="hamburger-button" class="hamburger-button">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
             </button>
 
-            <ul class="desktop-nav space-x-6">
-                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Home</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Product</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Solutions</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Features</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Pricing</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Get Started</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Login</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-blue-600 transition duration-300">Contact</a></li>
+            <ul class="desktop-nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Product</a></li>
+                <li><a href="#">Solutions</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Get Started</a></li>
+                <li><a href="https://app.zeusreviews.com/login">Login</a></li>
+                <li><a href="#">Contact</a></li>
             </ul>
         </nav>
 
         <ul id="mobile-menu">
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Home</a></li>
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Product</a></li>
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Solutions</a></li>
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Features</a></li>
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Pricing</a></li>
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Get Started</a></li>
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Login</a></li>
-            <li><a href="#" class="block text-gray-700 hover:text-blue-600 transition duration-300">Contact</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Product</a></li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Get Started</a></li>
+            <li><a href="https://app.zeusreviews.com/login">Login</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
     </header>
 
     <main>
-        <section
-            class="hero-section relative h-screen flex items-center justify-center text-white"
-            >
+        <section class="hero-section">
             <img
                 id="parallax-image"
                 src="https://github.com/mmp03patane/ZEUS/blob/main/Gemini_Generated_Image_23gdvh23gdvh23gd-removebg-preview.png?raw=true"
                 alt="Animated Overlay"
-                class="absolute left-0 w-full max-w-2xl"
+                class="parallax-image"
                 style="bottom: -12%;" onerror="this.onerror=null;this.src='https://placehold.co/300x200/cccccc/333333?text=Image+Error';"
             >
 
-            <div class="text-center bg-black bg-opacity-50 p-8 rounded-lg shadow-lg max-w-2xl mx-4">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+            <div class="hero-content">
+                <h1>
                     More Reviews.<br>
                     Less Hassle.
                 </h1>
-                <p class="text-base sm:text-lg md:text-xl mb-8">
+                <p>
                     Let the power of ZEUS automate your Google review requests.
                 </p>
 
-                <p class="text-lg sm:text-xl md:text-2xl font-semibold mt-4 mb-6">
-                    Just $49.99/month <span class="text-sm sm:text-base font-normal">— no lock-in contracts, CRM integration included.</span>
+                <p class="price-info">
+                    Just $49.99/month <span>— no lock-in contracts, CRM integration included.</span>
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">
                         Get Started
                     </button>
-                    <button class="bg-white hover:bg-gray-100 text-black font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                    <a href="https://app.zeusreviews.com/login" class="btn btn-secondary">
                         Login
-                    </button>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">About Us</h2>
-                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-                    <div class="md:w-1/2">
-                        <img src="https://placehold.co/600x400/cccccc/333333?text=About+Image" alt="About Us" class="rounded-lg shadow-md w-full h-auto">
+        <section class="section-padding bg-white">
+            <div class="container">
+                <h2 class="section-title">About Us</h2>
+                <div class="about-content">
+                    <div class="about-image-col">
+                        <img src="https://placehold.co/600x400/cccccc/333333?text=About+Image" alt="About Us" class="about-image">
                     </div>
-                    <div class="md:w-1/2 text-base sm:text-lg text-gray-700">
-                        <p class="mb-4">
+                    <div class="about-text-col">
+                        <p>
                             We are a passionate team dedicated to delivering high-quality solutions that exceed expectations. Our mission is to innovate and provide exceptional value to our clients.
                         </p>
                         <p>
@@ -194,30 +579,30 @@
             </div>
         </section>
 
-        <section class="py-16 bg-gray-100">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Our Services</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-4">Web Development</h3>
-                        <p class="text-base text-gray-700">Building responsive and modern web applications tailored to your needs.</p>
+        <section class="section-padding bg-gray-100">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Web Development</h3>
+                        <p>Building responsive and modern web applications tailored to your needs.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-4">UI/UX Design</h3>
-                        <p class="text-base text-gray-700">Creating intuitive and engaging user interfaces for optimal experience.</p>
+                    <div class="service-card">
+                        <h3>UI/UX Design</h3>
+                        <p>Creating intuitive and engaging user interfaces for optimal experience.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-4">Digital Marketing</h3>
-                        <p class="text-base text-gray-700">Strategies to boost your online presence and reach a wider audience.</p>
+                    <div class="service-card">
+                        <h3>Digital Marketing</h3>
+                        <p>Strategies to boost your online presence and reach a wider audience.</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2025 My Website. All rights reserved.</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 ZEUS. All rights reserved.</p>
         </div>
     </footer>
 
@@ -240,7 +625,7 @@
         // --- Parallax Logic (with a mobile adjustment) ---
         const parallaxImage = document.getElementById('parallax-image');
         const heroSection = document.querySelector('.hero-section');
-        const textContentDiv = document.querySelector('.hero-section > div');
+        const textContentDiv = document.querySelector('.hero-content'); // Changed to hero-content
 
         function updateParallaxAndWidth() {
             const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
@@ -250,17 +635,12 @@
             let parallaxFactor = 0.2; // Default for desktop
 
             // Adjust image width and parallax factor for smaller screens
-            if (viewportWidth < 768) { // Assuming 768px is the 'md' breakpoint for Tailwind
+            if (viewportWidth < 768) { // Assuming 768px is the 'md' breakpoint for responsive styles
                 parallaxImage.style.width = '120%'; // Ensure it covers enough space on mobile
                 parallaxFactor = 0.1; // Slower parallax on mobile
-                // Adjust bottom offset if needed for mobile appearance
-                // parallaxImage.style.bottom = '-5%'; 
             } else {
                 // Desktop behavior: match text content width, constrained by max-w-2xl
-                // We'll revert to default here to ensure it scales correctly after resize from mobile
-                // And remove any mobile-specific bottom offset.
                 parallaxImage.style.width = `${textContentDiv.clientWidth}px`;
-                // parallaxImage.style.bottom = '-12%'; // Reset to desktop value
             }
 
             const hiddenPercentage = 0.15;
