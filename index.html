@@ -30,8 +30,8 @@
         .header {
             background-color: #ffffff;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-            /* Adjust this padding to control the header's height */
-            padding: 0.75rem; /* Smaller padding for a smaller header */
+            /* Keep header padding for smaller overall header */
+            padding: 0.75rem;
             position: fixed; /* Lock the header */
             top: 0;
             left: 0;
@@ -41,32 +41,31 @@
 
         /* Add padding to body to prevent content from being hidden by fixed header */
         body {
-            /* Adjust this padding-top to match the new header height (e.g., if header padding is 0.75rem,
-               and content is centered, total height might be around 50px-55px depending on logo height etc.) */
-            padding-top: 55px; /* Adjusted from 60px to accommodate a smaller header */
+            /* Adjust this padding-top to match the new header height */
+            padding-top: 55px;
         }
 
         .navbar {
             display: flex;
             justify-content: space-between; /* This handles logo far left and controls far right */
             align-items: center;
-            /* Adjust this padding to control the internal spacing of the navbar */
-            padding-top: 0.25rem; /* Smaller padding for internal elements */
-            padding-bottom: 0.25rem; /* Smaller padding for internal elements */
+            /* Revert navbar internal padding to original */
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
         }
 
         @media (min-width: 768px) {
             .navbar {
-                /* Adjust this padding for desktop navbar internal spacing */
-                padding-top: 0.75rem; /* Smaller padding for desktop internal elements */
-                padding-bottom: 0.75rem; /* Smaller padding for desktop internal elements */
+                /* Revert desktop navbar internal padding to original */
+                padding-top: 1rem;
+                padding-bottom: 1rem;
             }
         }
 
         /* Logo Styling */
         .header-logo {
-            /* Adjust this height to control the logo size on desktop */
-            height: 35px; /* Smaller logo height */
+            /* Revert logo size to original */
+            height: 40px;
             width: auto;
             display: flex;
             align-items: center;
@@ -74,8 +73,8 @@
 
         @media (max-width: 767px) {
             .header-logo {
-                /* Adjust this height to control the logo size on mobile */
-                height: 25px; /* Even smaller logo height for mobile */
+                /* Revert mobile logo size to original */
+                height: 30px;
             }
             /* Remove margin-right: auto from header-logo-link on mobile.
                 justify-content: space-between on .navbar will push it left. */
@@ -106,8 +105,8 @@
             color: #4b5563;
             background: none;
             border: none;
-            /* Adjust padding for hamburger button */
-            padding: 0.3rem; /* Smaller padding */
+            /* Revert padding for hamburger button to original */
+            padding: 0.5rem;
             border-radius: 0.25rem;
             cursor: pointer;
         }
@@ -119,9 +118,9 @@
             box-shadow: 0 0 0 2px #2563eb;
         }
         .hamburger-button svg {
-            /* Adjust size of hamburger icon */
-            width: 1.25rem; /* Smaller icon size */
-            height: 1.25rem; /* Smaller icon size */
+            /* Revert size of hamburger icon to original */
+            width: 1.5rem;
+            height: 1.5rem;
         }
 
         /* Desktop Navigation */
@@ -134,13 +133,15 @@
 
         .desktop-nav li {
             display: inline-block;
-            margin-left: 1rem; /* Slightly reduced margin */
+            /* Revert margin to original */
+            margin-left: 1.5rem;
         }
 
         .desktop-nav a {
             color: #4b5563;
             text-decoration: none;
-            font-size: 0.95rem; /* Slightly smaller font size */
+            /* Revert font size to original */
+            font-size: 1rem; /* Assumed original default based on body, explicitly set for clarity */
             transition: color 0.3s ease;
         }
 
@@ -170,8 +171,8 @@
             flex-direction: column;
             width: 100%;
             position: absolute;
-            /* Update top based on the new header height */
-            top: 55px; /* Adjusted to match new header height */
+            /* Keep top updated based on the new header height */
+            top: 55px;
             left: 0;
             background-color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -388,6 +389,7 @@
             background-color: #2563eb;
             color: #ffffff;
             border: none;
+            /* Revert padding to original */
             padding: 0.5rem 1rem;
             border-radius: 9999px;
             font-weight: 600;
@@ -399,8 +401,9 @@
         /* Smaller login button for mobile */
         @media (max-width: 767px) {
             .btn-login-mobile {
-                padding: 0.3rem 0.6rem; /* Even smaller padding */
-                font-size: 0.8rem; /* Even smaller font size */
+                /* Revert padding and font-size to original */
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
             }
         }
 
