@@ -30,7 +30,8 @@
         .header {
             background-color: #ffffff;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-            padding: 1rem;
+            /* Adjust this padding to control the header's height */
+            padding: 0.75rem; /* Smaller padding for a smaller header */
             position: fixed; /* Lock the header */
             top: 0;
             left: 0;
@@ -40,27 +41,32 @@
 
         /* Add padding to body to prevent content from being hidden by fixed header */
         body {
-            padding-top: 60px; /* Adjust based on your header's actual height */
+            /* Adjust this padding-top to match the new header height (e.g., if header padding is 0.75rem,
+               and content is centered, total height might be around 50px-55px depending on logo height etc.) */
+            padding-top: 55px; /* Adjusted from 60px to accommodate a smaller header */
         }
 
         .navbar {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* This handles logo far left and controls far right */
             align-items: center;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
+            /* Adjust this padding to control the internal spacing of the navbar */
+            padding-top: 0.25rem; /* Smaller padding for internal elements */
+            padding-bottom: 0.25rem; /* Smaller padding for internal elements */
         }
 
         @media (min-width: 768px) {
             .navbar {
-                padding-top: 1rem;
-                padding-bottom: 1rem;
+                /* Adjust this padding for desktop navbar internal spacing */
+                padding-top: 0.75rem; /* Smaller padding for desktop internal elements */
+                padding-bottom: 0.75rem; /* Smaller padding for desktop internal elements */
             }
         }
 
         /* Logo Styling */
         .header-logo {
-            height: 40px;
+            /* Adjust this height to control the logo size on desktop */
+            height: 35px; /* Smaller logo height */
             width: auto;
             display: flex;
             align-items: center;
@@ -68,7 +74,13 @@
 
         @media (max-width: 767px) {
             .header-logo {
-                height: 30px;
+                /* Adjust this height to control the logo size on mobile */
+                height: 25px; /* Even smaller logo height for mobile */
+            }
+            /* Remove margin-right: auto from header-logo-link on mobile.
+                justify-content: space-between on .navbar will push it left. */
+            .header-logo-link {
+                margin-right: 0; /* Ensures it's not pushed too far, let navbar handle spacing */
             }
         }
 
@@ -76,7 +88,16 @@
         .nav-controls {
             display: flex;
             align-items: center;
-            gap: 1rem; /* Space between hamburger and login button */
+            gap: 1rem; /* Space between login and hamburger button */
+        }
+
+        /* Mobile specific order for login and hamburger */
+        @media (max-width: 767px) {
+            .nav-controls {
+                /* No flex-direction: row-reverse needed here if HTML order is correct
+                    and we want login then hamburger. The HTML order handles this now. */
+                /* flex-direction: row-reverse; */ /* Removed as per new requirement */
+            }
         }
 
         /* Hamburger Button */
@@ -85,7 +106,8 @@
             color: #4b5563;
             background: none;
             border: none;
-            padding: 0.5rem;
+            /* Adjust padding for hamburger button */
+            padding: 0.3rem; /* Smaller padding */
             border-radius: 0.25rem;
             cursor: pointer;
         }
@@ -97,8 +119,9 @@
             box-shadow: 0 0 0 2px #2563eb;
         }
         .hamburger-button svg {
-            width: 1.5rem;
-            height: 1.5rem;
+            /* Adjust size of hamburger icon */
+            width: 1.25rem; /* Smaller icon size */
+            height: 1.25rem; /* Smaller icon size */
         }
 
         /* Desktop Navigation */
@@ -111,12 +134,13 @@
 
         .desktop-nav li {
             display: inline-block;
-            margin-left: 1.5rem;
+            margin-left: 1rem; /* Slightly reduced margin */
         }
 
         .desktop-nav a {
             color: #4b5563;
             text-decoration: none;
+            font-size: 0.95rem; /* Slightly smaller font size */
             transition: color 0.3s ease;
         }
 
@@ -135,7 +159,7 @@
             .nav-controls .btn-login-desktop {
                 display: block; /* Show desktop login button */
             }
-             .nav-controls .btn-login-mobile {
+            .nav-controls .btn-login-mobile {
                 display: none; /* Hide mobile login button */
             }
         }
@@ -146,7 +170,8 @@
             flex-direction: column;
             width: 100%;
             position: absolute;
-            top: 100%;
+            /* Update top based on the new header height */
+            top: 55px; /* Adjusted to match new header height */
             left: 0;
             background-color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -191,7 +216,7 @@
 
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(to bottom, #1E3A8A, #2563eb, #BFDBFE);
+            background: linear-gradient(to bottom, #3a3458, #f3d8c3); /* Updated gradient */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -203,8 +228,8 @@
             justify-content: center;
             color: #ffffff;
             /* Adjust top margin to account for fixed header */
-            margin-top: -60px; /* Negative margin equal to header height */
-            padding-top: 60px; /* Add padding equal to header height to push content down */
+            margin-top: -55px; /* Negative margin equal to new header height */
+            padding-top: 55px; /* Add padding equal to new header height to push content down */
             box-sizing: border-box; /* Include padding in height calculation */
         }
 
@@ -214,7 +239,12 @@
             left: 0;
             width: 100%;
             max-width: 40rem;
-            bottom: -12%;
+            bottom: -0%;
+            /* Ensure the image background is transparent */
+            background-color: transparent;
+            /* Explicitly remove any default borders */
+            border: none;
+            outline: none;
         }
 
         /* Hero Text Content */
@@ -364,6 +394,14 @@
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.3s ease;
             white-space: nowrap;
+        }
+
+        /* Smaller login button for mobile */
+        @media (max-width: 767px) {
+            .btn-login-mobile {
+                padding: 0.3rem 0.6rem; /* Even smaller padding */
+                font-size: 0.8rem; /* Even smaller font size */
+            }
         }
 
         .btn-login:hover {
@@ -723,6 +761,7 @@
 
         /* Parallax Image Error Handling */
         img[onerror="this.onerror=null;this.src='https://placehold.co/300x200/cccccc/333333?text=Image+Error';"] {
+            /* This rule will no longer apply to the parallax image once onerror is removed */
             border: 1px dashed #ccc;
             background-color: #f0f0f0;
             display: block;
@@ -739,12 +778,12 @@
             </a>
 
             <div class="nav-controls">
+                <a href="https://app.zeusreviews.com/login" class="btn btn-login btn-login-mobile">Login</a>
                 <button id="hamburger-button" class="hamburger-button btn-login-mobile">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
                 </button>
-                <a href="https://app.zeusreviews.com/login" class="btn btn-login btn-login-mobile">Login</a>
             </div>
 
 
@@ -774,16 +813,16 @@
         <section class="hero-section">
             <img
                 id="parallax-image"
-                src="https://github.com/mmp03patane/ZEUS/blob/main/Gemini_Generated_Image_23gdvh23gdvh23gd-removebg-preview.png?raw=true"
+                src="https://github.com/mmp03patane/ZEUS/blob/main/Zeus%20Animated.PNG?raw=true"
                 alt="Animated Overlay"
                 class="parallax-image"
-                style="bottom: -12%;" onerror="this.onerror=null;this.src='https://placehold.co/300x200/cccccc/333333?text=Image+Error';"
+                style="bottom: -0%;"
             >
 
             <div class="hero-content">
                 <h1>
-                    More Reviews.<br>
-                    Less Hassle.
+                    Automate Your<br>
+                    Google Reviews
                 </h1>
                 <p>
                     Let the power of ZEUS automate your Google review requests.
@@ -802,8 +841,6 @@
                 </div>
             </div>
         </section>
-
-        ---
 
         <section id="product" class="section-padding bg-white">
             <div class="container">
@@ -828,8 +865,6 @@
                 </div>
             </div>
         </section>
-
-        ---
 
         <section id="solutions" class="section-padding bg-gray-100">
             <div class="container">
@@ -863,8 +898,6 @@
                 </div>
             </div>
         </section>
-
-        ---
 
         <section id="features" class="section-padding bg-white">
             <div class="container">
@@ -938,8 +971,6 @@
             </div>
         </section>
 
-        ---
-
         <section id="pricing" class="section-padding bg-gray-100">
             <div class="container">
                 <h2 class="section-title">Pricing</h2>
@@ -964,8 +995,6 @@
                 </div>
             </div>
         </section>
-
-        ---
 
         <section id="faq" class="section-padding bg-white">
             <div class="container">
@@ -1024,8 +1053,6 @@
             </div>
         </section>
 
-        ---
-
         <section id="contact" class="section-padding bg-gray-100">
             <div class="container" style="text-align: center;">
                 <h2 class="section-title">Contact Us</h2>
@@ -1079,7 +1106,6 @@
                 }
             });
         });
-
 
         // --- Parallax Logic (with a mobile adjustment) ---
         const parallaxImage = document.getElementById('parallax-image');
