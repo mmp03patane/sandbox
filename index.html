@@ -238,14 +238,16 @@
         .hero-section .parallax-image {
             position: absolute;
             left: 0;
-            width: 100%;
-            max-width: 40rem;
+            /* width: 100%; Removed this from CSS as it's now handled by JS for more dynamic control */
+            max-width: 40rem; /* Kept for larger screens if image is larger */
             bottom: -0%;
             /* Ensure the image background is transparent */
             background-color: transparent;
             /* Explicitly remove any default borders */
             border: none;
             outline: none;
+            /* Ensure image does not collapse its aspect ratio */
+            height: auto; 
         }
 
         /* Hero Text Content */
@@ -1135,28 +1137,30 @@
             const heroRect = heroSection.getBoundingClientRect();
             const scrollAmount = -heroRect.top; // How much the hero section has scrolled up
 
-            // Define different parallax factors and hidden percentages for mobile vs. desktop
             let parallaxFactor;
-            let hiddenPercentage; // How much of the image is initially hidden on the left
+            let initialLeftOffset; // Defines how far left the image starts, in vw
 
             if (viewportWidth < 768) { // Mobile devices
-                parallaxImage.style.width = '120%'; // Keep a slightly larger width for the image on mobile
-                parallaxFactor = 0.3; // Make the image move faster (more drastic effect)
-                hiddenPercentage = 0.3; // Start with more of the image hidden (e.g., 30%)
+                // Set image width to cover more than the screen, e.g., 150% of viewport width
+                parallaxImage.style.width = '150vw'; 
+                parallaxFactor = 0.2; // Adjusted parallax speed
+                // Start the image further left to fill the screen on the right
+                initialLeftOffset = -30vw; // Start 30vw to the left of the viewport edge
             } else { // Desktop and larger tablets
                 parallaxImage.style.width = `${textContentDiv.clientWidth}px`; // Match text content width
                 parallaxFactor = 0.2; // Original desktop parallax speed
-                hiddenPercentage = 0.15; // Original desktop hidden amount
+                initialLeftOffset = 0; // On desktop, we'll let `left: 0` handle it, or adjust if needed.
+                                        // For now, it matches textContentDiv.clientWidth, so it won't overflow right.
             }
 
-            const initialHiddenOffset = -parallaxImage.clientWidth * hiddenPercentage;
-            
             // Calculate translation based on scroll amount and parallax factor
             let scrollTranslation = scrollAmount * parallaxFactor;
 
-            // Ensure the image doesn't move past its final, fully-revealed position (translateX = 0)
-            let finalTranslateX = initialHiddenOffset + scrollTranslation;
-            finalTranslateX = Math.min(finalTranslateX, 0); // Cap the movement at 0 (fully visible)
+            // Apply the initial offset and then the scroll translation
+            let finalTranslateX = initialLeftOffset + scrollTranslation;
+            
+            // Ensure the image doesn't move past its desired final visible position (e.g., left edge aligned with viewport left)
+            finalTranslateX = Math.min(finalTranslateX, 0); // Cap the movement at 0 (fully visible without negative offset)
 
             parallaxImage.style.transform = `translateX(${finalTranslateX}px)`;
         }
