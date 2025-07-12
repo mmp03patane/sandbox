@@ -15,8 +15,6 @@
             background-color: #f3f4f6; /* Consistent light gray background */
             color: #1f2937; /* Dark gray for general text */
             line-height: 1.5; /* Default line height */
-            /* FIX: Prevent horizontal scrolling */
-            overflow-x: hidden;
         }
 
         /* Container for content width */
@@ -80,6 +78,8 @@
             .header-logo {
                 height: 30px;
             }
+            /* Remove margin-right: auto from header-logo-link on mobile.
+                justify-content: space-between on .navbar will push it left. */
             .header-logo-link {
                 margin-right: 0; /* Ensures it's not pushed too far, let navbar handle spacing */
             }
@@ -92,10 +92,12 @@
             gap: 1rem;
         }
 
+        /* Mobile specific order for login and hamburger */
         @media (max-width: 767px) {
             .nav-controls {
                 /* No flex-direction: row-reverse needed here if HTML order is correct
-                   and we want login then hamburger. The HTML order handles this now. */
+                    and we want login then hamburger. The HTML order handles this now. */
+                /* flex-direction: row-reverse; */ /* Removed as per new requirement */
             }
         }
 
@@ -153,7 +155,9 @@
             }
             .nav-controls .btn-login-desktop {
                 display: block;
+
                 color: #ffffff !important;
+
             }
             .nav-controls .btn-login-mobile {
                 display: none;
@@ -178,7 +182,6 @@
 
         #mobile-menu li {
             width: 100%;
-            display: block; /* Ensure links inside mobile menu are always visible when mobile menu is open */
         }
 
         #mobile-menu a {
@@ -233,18 +236,14 @@
         .hero-section .parallax-image {
             position: absolute;
             left: 0;
-            bottom: 0%; /* Ensure it's correctly positioned at the bottom */
+            width: 100%;
+            max-width: 40rem;
+            bottom: -0%;
             /* Ensure the image background is transparent */
             background-color: transparent;
             /* Explicitly remove any default borders */
             border: none;
             outline: none;
-            /* Ensure image does not collapse its aspect ratio */
-            height: auto; 
-            
-            /* Only transition transform, opacity is always 1 */
-            transition: transform 0.05s ease-out; 
-            opacity: 1; /* Keep opacity always at 1 */
         }
 
         /* Hero Text Content */
@@ -430,11 +429,7 @@
             }
         }
 
-        ---
-        ## Hero Section Buttons Height Consistency (Mobile Only)
-        To ensure the "Get Started" and "Login" buttons in the hero section have the exact same height on mobile, we need to make sure their total height (content + padding + border) is identical.
-        Since `.btn-secondary` has a `1px` border that `.btn-primary` does not, we'll adjust the padding of the `.btn-primary` on mobile to account for this.
-        ---
+        /* Hero Section Buttons Height Consistency (Mobile Only) */
         @media (max-width: 639px) { /* Targeting mobile devices below 640px */
             .hero-buttons .btn-primary {
                 padding-top: calc(0.75rem - 1px); /* Reduce padding by border width */
@@ -561,26 +556,27 @@
             font-weight: bold;
         }
 
-        /* Solutions specific styles (grid for cards) */
-        .solutions-grid {
+        /* Solutions specific styles (grid for cards) - Renamed for clarity in combined section */
+        .how-it-works-cards {
             display: grid;
             grid-template-columns: repeat(1, minmax(0, 1fr));
             gap: 2rem;
+            margin-top: 3rem; /* Added margin to separate from the top content */
         }
 
         @media (min-width: 640px) {
-            .solutions-grid {
+            .how-it-works-cards {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
         @media (min-width: 1024px) {
-            .solutions-grid {
+            .how-it-works-cards {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
             }
         }
 
-        .solution-card {
+        .how-it-works-card {
             background-color: #ffffff;
             padding: 1.5rem;
             border-radius: 0.5rem;
@@ -589,14 +585,14 @@
             border-top: 4px solid #2563eb;
         }
 
-        .solution-card h3 {
+        .how-it-works-card h3 {
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
             color: #1f2937;
         }
 
-        .solution-card p {
+        .how-it-works-card p {
             font-size: 0.95rem;
             color: #4b5563;
         }
@@ -806,8 +802,7 @@
 
 
             <ul class="desktop-nav">
-                <li><a href="#product">Product</a></li>
-                <li><a href="#solutions">Solutions</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#faq">FAQ</a></li>
@@ -817,8 +812,7 @@
         </nav>
 
         <ul id="mobile-menu">
-            <li><a href="#product">Product</a></li>
-            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="#faq">FAQ</a></li>
@@ -833,7 +827,7 @@
                 src="https://github.com/mmp03patane/ZEUS/blob/main/Zeus%20Animated.PNG?raw=true"
                 alt="Animated Overlay"
                 class="parallax-image"
-                style="bottom: 0%;"
+                style="bottom: -0%;"
             >
 
             <div class="hero-content">
@@ -859,54 +853,52 @@
             </div>
         </section>
 
-        <section id="product" class="section-padding bg-white">
+        <section id="how-it-works" class="section-padding bg-white">
             <div class="container">
-                <h2 class="section-title">Product</h2>
+                <h2 class="section-title">How It Works</h2>
                 <div class="content-section">
                     <div class="content-image-col">
-                        <img src="https://placehold.co/600x400/2563eb/ffffff?text=Product+Overview" alt="Product Overview" class="content-image">
+                        <img src="https://placehold.co/600x400/2563eb/ffffff?text=ZEUS+Integration+Diagram" alt="ZEUS Integration Diagram" class="content-image">
                     </div>
                     <div class="content-text-col">
-                        <h3>All-In-One Google Review Automation for Local Businesses</h3>
-                        <p>ZEUS streamlines the process of collecting Google reviews, helping local businesses like yours effortlessly boost their online reputation and attract more customers. Our platform automates review requests, making it simple for your customers to leave feedback, and in turn, improving your SEO.</p>
-                        <h4>How it Works:</h4>
+                        <h3>Seamlessly Integrate ZEUS with Your Business Software to Boost Reviews</h3>
+                        <p>ZEUS acts as the intelligent bridge between your existing business software (like CRM, job management, or accounting platforms) and your Google Business Profile. This integration allows for a powerful automation that drives more authentic Google reviews for your local business.</p>
+                        <h4>Here’s how the magic happens:</h4>
                         <ul class="content-list">
-                            <li><strong>Seamless Customer Interaction:</strong> After a service or purchase, your customer receives an automated review request.</li>
-                            <li><strong>Instant Review Process:</strong> A single click takes them directly to your Google My Business review page.</li>
-                            <li><strong>Boost Your SEO:</strong> More positive reviews lead to higher local search rankings and increased visibility.</li>
+                            <li><strong>Connect Your Tools:</strong> ZEUS seamlessly integrates with popular platforms such as Tradify, ServiceM8, Xero, HubSpot, and many more.</li>
+                            <li><strong>Automated Triggers:</strong> When key events occur in your business software (e.g., a deal is won, an invoice is paid, or a job is completed), ZEUS is automatically triggered.</li>
+                            <li><strong>Instant Review Requests:</strong> A personalized review request, via SMS or email, is sent directly to your customer at the perfect moment – when their positive experience is fresh in their mind.</li>
+                            <li><strong>Direct to Google:</strong> With a single click, your customer is taken straight to your Google My Business review page, making the process incredibly easy and increasing completion rates.</li>
+                            <li><strong>Boost Your Online Presence:</strong> More positive reviews directly improve your local SEO, making your business more visible to potential customers searching for your services.</li>
                         </ul>
-                        <img src="https://placehold.co/600x150/cccccc/333333?text=Workflow+Chart+(SMS/Email+>+Review+>+Boost+SEO)" alt="Workflow Chart" class="content-image" style="margin-top: 1.5rem;">
-                        <p style="margin-top: 1.5rem; font-weight: 600; color: #2563eb;">Results: Expect 30% more reviews in just 2 weeks!</p>
+                        <img src="https://placehold.co/600x150/cccccc/333333?text=Your+Software+>+ZEUS+>+Review+Request+>+Google+Review" alt="Workflow Chart" class="content-image" style="margin-top: 1.5rem;">
+                        <p style="margin-top: 1.5rem; font-weight: 600; color: #2563eb;">Experience up to 30% more Google reviews in just two weeks!</p>
                         <button class="btn btn-primary" style="margin-top: 2rem;">Get Started Now</button>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="solutions" class="section-padding bg-gray-100">
-            <div class="container">
-                <h2 class="section-title">Solutions</h2>
-                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem; color: #4b5563;">Discover how ZEUS can be tailored to fit your specific industry needs, helping you overcome unique challenges and grow your business.</p>
-                <div class="solutions-grid">
-                    <div class="solution-card">
+                
+                <h2 class="section-title" style="margin-top: 5rem;">Tailored for Your Industry</h2>
+                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem; color: #4b5563;">ZEUS adapts to the unique needs of various industries, helping you overcome specific challenges and amplify your reputation.</p>
+                <div class="how-it-works-cards">
+                    <div class="how-it-works-card">
                         <h3>For Trades & Services</h3>
                         <p><strong>The Challenge:</strong> As a busy tradie, you're on the tools all day, leaving no time to chase crucial reviews.</p>
                         <p><strong>How ZEUS Solves It:</strong> Our automated system sends review requests right after the job is done, capturing feedback while the experience is fresh. Seamlessly integrates with your existing job management software.</p>
                         <p style="font-style: italic; margin-top: 1rem;">"ZEUS has transformed how we get reviews. We've seen a huge increase without lifting a finger!" - Local Electrician</p>
                     </div>
-                    <div class="solution-card">
+                    <div class="how-it-works-card">
                         <h3>For Health & Wellness</h3>
                         <p><strong>The Challenge:</strong> Building trust and reputation in healthcare is vital, but asking for reviews can feel awkward or time-consuming.</p>
                         <p><strong>How ZEUS Solves It:</strong> Discreetly and professionally requests reviews via SMS or email, maintaining patient privacy and ensuring compliance. Boost your clinic's online visibility and attract new patients.</p>
                         <p style="font-style: italic; margin-top: 1rem;">"Our dental practice now gets consistent reviews, which has really helped new patients find us." - Dr. Anya Sharma, Dentist</p>
                     </div>
-                    <div class="solution-card">
+                    <div class="how-it-works-card">
                         <h3>For Retail & Hospitality</h3>
                         <p><strong>The Challenge:</strong> Competition is fierce, and positive reviews are key to standing out and attracting walk-in customers.</p>
                         <p><strong>How ZEUS Solves It:</strong> Capture customer sentiment immediately after their visit. Perfect for cafes, restaurants, and shops looking to amplify their word-of-mouth marketing online.</p>
                         <p style="font-style: italic; margin-top: 1rem;">"Our cafe's Google rating has soared since we started using ZEUS. It's so easy!" - Cafe Owner</p>
                     </div>
-                    <div class="solution-card">
+                    <div class="how-it-works-card">
                         <h3>For Agencies</h3>
                         <p><strong>The Challenge:</strong> Managing client reviews manually for multiple businesses is a huge drain on resources and time.</p>
                         <p><strong>How ZEUS Solves It:</strong> Offer review management as a service to your clients with ZEUS. Our multi-location dashboard allows you to oversee all campaigns from one place, providing tangible results and increasing client retention.</p>
@@ -916,7 +908,7 @@
             </div>
         </section>
 
-        <section id="features" class="section-padding bg-white">
+        <section id="features" class="section-padding bg-gray-100">
             <div class="container">
                 <h2 class="section-title">Features</h2>
                 <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem; color: #4b5563;">Explore the powerful capabilities of ZEUS that make review collection effortless and effective.</p>
@@ -1106,12 +1098,6 @@
         // --- Smooth Scrolling for Navigation Links ---
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                // For the main nav links, we want smooth scroll, but for the logo, it's a full jump.
-                // The logo's href is just '#', so this condition ensures we don't apply smooth scroll to it.
-                if (this.getAttribute('href') === '#') {
-                    return; // Let the default '#' behavior handle the logo click (jumps to top immediately)
-                }
-                
                 e.preventDefault();
 
                 const targetId = this.getAttribute('href').substring(1);
@@ -1130,76 +1116,65 @@
             });
         });
 
-        // --- Scroll-triggered Parallax Image Movement (with partial hide and limited right movement) ---
+        // --- Parallax Logic (with enhanced mobile adjustment) ---
         const parallaxImage = document.getElementById('parallax-image');
         const heroSection = document.querySelector('.hero-section');
+        const textContentDiv = document.querySelector('.hero-content');
 
-        function updateParallaxOnScroll() {
+        function updateParallaxAndWidth() {
             const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
             const heroRect = heroSection.getBoundingClientRect();
-            
-            // Calculate how far the top of the hero section is from the top of the viewport
-            // When heroRect.top is 0, user is at the very top of the hero section.
-            // As user scrolls down, heroRect.top becomes negative.
-            let scrollAmount = -heroRect.top; 
+            const scrollAmount = -heroRect.top; // How much the hero section has scrolled up
 
+            // Define different parallax factors and hidden percentages for mobile vs. desktop
             let parallaxFactor;
-            const initialTranslateXRatio = 0.20; // Hide 20% of the image initially
-            let maxTranslateXAmount = 0; // The max amount of movement *beyond* its initial hidden state
+            let hiddenPercentage; // How much of the image is initially hidden on the left
 
             if (viewportWidth < 768) { // Mobile devices
-                // On mobile, the image needs to be wider than the viewport to avoid white space
-                // and allow for the slide-in effect. Let's make it 120vw to ensure coverage.
-                parallaxImage.style.width = '120vw'; 
-                parallaxFactor = 0.3; // Controls how fast it moves with scroll (higher = faster)
-                // We want it to move from -20% of its width to slightly past 0.
-                // Let's say it moves its initial 20% + an additional 5% (of viewport width) for the full reveal.
-                maxTranslateXAmount = viewportWidth * 0.05; // Moves 5% of viewport width beyond initial reveal
+                parallaxImage.style.width = '120%'; // Keep a slightly larger width for the image on mobile
+                parallaxFactor = 0.3; // Make the image move faster (more drastic effect)
+                hiddenPercentage = 0.3; // Start with more of the image hidden (e.g., 30%)
             } else { // Desktop and larger tablets
-                // On desktop, it should match the text content or be slightly larger for parallax
-                const textContentWidth = document.querySelector('.hero-content').clientWidth;
-                // Make it wider than the content for the parallax effect when sliding in
-                parallaxImage.style.width = `${textContentWidth * 1.1}px`; 
-                parallaxFactor = 0.2; // Desktop parallax speed
-                // Allow it to move an additional 50px from its initial partially-revealed position
-                maxTranslateXAmount = 50; // pixels
+                parallaxImage.style.width = `${textContentDiv.clientWidth}px`; // Match text content width
+                parallaxFactor = 0.2; // Original desktop parallax speed
+                hiddenPercentage = 0.15; // Original desktop hidden amount
             }
 
-            // Get the actual computed width of the parallax image after style.width is set
-            // This is crucial for accurate pixel-based calculations.
-            const actualImageWidth = parallaxImage.clientWidth;
-
-            // Calculate the actual initial offset based on the image's computed width
-            // This is where 20% of the image is hidden to the left.
-            const initialTranslateValue = -actualImageWidth * initialTranslateXRatio;
-
-            // Calculate the target position based on scroll.
-            // Starts at `initialTranslateValue` (negative, partially hidden) and moves towards more positive.
-            let currentTranslateX = initialTranslateValue + (scrollAmount * parallaxFactor);
+            const initialHiddenOffset = -parallaxImage.clientWidth * hiddenPercentage;
             
-            // --- Clamping the movement ---
-            // 1. Ensure it doesn't move further left than its initial partially-hidden state.
-            currentTranslateX = Math.max(currentTranslateX, initialTranslateValue); 
-            
-            // 2. Limit how far it moves to the right.
-            // The absolute maximum position it should reach (e.g., initial position + allowed extra movement)
-            const absoluteMaxRightPosition = initialTranslateValue + maxTranslateXAmount;
-            
-            // We also need to make sure it doesn't go beyond the left edge of its container (which is 0px transform).
-            // So, the final right limit is the *minimum* of 0 (aligned with container left edge)
-            // AND the calculated `absoluteMaxRightPosition`.
-            const finalRightLimit = Math.min(0, absoluteMaxRightPosition); 
+            // Calculate translation based on scroll amount and parallax factor
+            let scrollTranslation = scrollAmount * parallaxFactor;
 
-            currentTranslateX = Math.min(currentTranslateX, finalRightLimit); 
+            // Ensure the image doesn't move past its final, fully-revealed position (translateX = 0)
+            let finalTranslateX = initialHiddenOffset + scrollTranslation;
+            finalTranslateX = Math.min(finalTranslateX, 0); // Cap the movement at 0 (fully visible)
 
-            // Apply the transform. Opacity is not controlled by JS; it's always 1 via CSS.
-            parallaxImage.style.transform = `translateX(${currentTranslateX}px)`;
+            parallaxImage.style.transform = `translateX(${finalTranslateX}px)`;
         }
 
-        // Call the function once on load and resize to set the initial state correctly
-        window.addEventListener('load', updateParallaxOnScroll);
-        window.addEventListener('resize', updateParallaxOnScroll);
-        window.addEventListener('scroll', updateParallaxOnScroll); // Keep this for the actual parallax effect
+        window.addEventListener('scroll', updateParallaxAndWidth);
+        window.addEventListener('load', updateParallaxAndWidth);
+        window.addEventListener('resize', updateParallaxAndWidth);
+
+        // --- FAQ Accordion Logic ---
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const arrow = question.querySelector('.arrow');
+
+                // Close other open answers
+                document.querySelectorAll('.faq-answer.open').forEach(openAnswer => {
+                    if (openAnswer !== answer) {
+                        openAnswer.classList.remove('open');
+                        openAnswer.previousElementSibling.classList.remove('active');
+                    }
+                });
+
+                // Toggle current answer
+                answer.classList.toggle('open');
+                question.classList.toggle('active');
+            });
+        });
     </script>
 </body>
 </html>
