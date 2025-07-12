@@ -242,9 +242,9 @@
             /* Ensure image does not collapse its aspect ratio */
             height: auto; 
             
-            /* Transition for smooth movement, now controlled by JS */
+            /* Only transition transform, opacity is always 1 */
             transition: transform 0.05s ease-out; 
-            /* Opacity is handled by JS for a smooth fade-in from 0 to 1 as it becomes visible */
+            opacity: 1; /* Keep opacity always at 1 */
         }
 
         /* Hero Text Content */
@@ -1145,26 +1145,24 @@
 
             let parallaxFactor;
             const initialTranslateXRatio = 0.20; // Hide 20% of the image initially
-            let maxTranslateXOffset = 0; // The max distance to move to the right (relative to left edge)
+            let maxTranslateXAmount = 0; // The max amount of movement *beyond* its initial hidden state
 
             if (viewportWidth < 768) { // Mobile devices
                 // On mobile, the image needs to be wider than the viewport to avoid white space
                 // and allow for the slide-in effect. Let's make it 120vw to ensure coverage.
                 parallaxImage.style.width = '120vw'; 
                 parallaxFactor = 0.3; // Controls how fast it moves with scroll (higher = faster)
-                // Determine a limit for how far right it can move. 0vw means its left edge aligns with viewport left.
-                // We want to limit it to, for example, not move more than 5vw to the right of its initial partially-hidden state.
-                // This means its maximum transformX would be `initialTranslateValue + (some small positive value)`
-                // Let's say, it should not move more than 10vw from its *starting position*.
-                maxTranslateXOffset = 5; // Allow it to move an additional 5vw from its initial 20% hidden state
+                // We want it to move from -20% of its width to slightly past 0.
+                // Let's say it moves its initial 20% + an additional 5% (of viewport width) for the full reveal.
+                maxTranslateXAmount = viewportWidth * 0.05; // Moves 5% of viewport width beyond initial reveal
             } else { // Desktop and larger tablets
                 // On desktop, it should match the text content or be slightly larger for parallax
                 const textContentWidth = document.querySelector('.hero-content').clientWidth;
                 // Make it wider than the content for the parallax effect when sliding in
                 parallaxImage.style.width = `${textContentWidth * 1.1}px`; 
                 parallaxFactor = 0.2; // Desktop parallax speed
-                // For desktop, let's allow it to move, for example, 50px further right than its initial reveal.
-                maxTranslateXOffset = 50; // pixels
+                // Allow it to move an additional 50px from its initial partially-revealed position
+                maxTranslateXAmount = 50; // pixels
             }
 
             // Get the actual computed width of the parallax image after style.width is set
@@ -1172,6 +1170,7 @@
             const actualImageWidth = parallaxImage.clientWidth;
 
             // Calculate the actual initial offset based on the image's computed width
+            // This is where 20% of the image is hidden to the left.
             const initialTranslateValue = -actualImageWidth * initialTranslateXRatio;
 
             // Calculate the target position based on scroll.
@@ -1183,19 +1182,18 @@
             currentTranslateX = Math.max(currentTranslateX, initialTranslateValue); 
             
             // 2. Limit how far it moves to the right.
-            // The maximum position it should reach is initialTranslateValue + maxTranslateXOffset
-            const rightLimit = Math.min(0, initialTranslateValue + maxTranslateXOffset); 
-            currentTranslateX = Math.min(currentTranslateX, rightLimit); 
+            // The absolute maximum position it should reach (e.g., initial position + allowed extra movement)
+            const absoluteMaxRightPosition = initialTranslateValue + maxTranslateXAmount;
+            
+            // We also need to make sure it doesn't go beyond the left edge of its container (which is 0px transform).
+            // So, the final right limit is the *minimum* of 0 (aligned with container left edge)
+            // AND the calculated `absoluteMaxRightPosition`.
+            const finalRightLimit = Math.min(0, absoluteMaxRightPosition); 
 
-            // Apply the transform and opacity
+            currentTranslateX = Math.min(currentTranslateX, finalRightLimit); 
+
+            // Apply the transform. Opacity is not controlled by JS; it's always 1 via CSS.
             parallaxImage.style.transform = `translateX(${currentTranslateX}px)`;
-
-            // Opacity management: Fade in from 0 to 1 over the initial 20% reveal.
-            // Calculate progress from initialTranslateValue to 0 (fully revealed)
-            const revealDistance = 0 - initialTranslateValue;
-            let opacityProgress = (currentTranslateX - initialTranslateValue) / revealDistance;
-            opacityProgress = Math.max(0, Math.min(opacityProgress, 1)); // Clamp between 0 and 1
-            parallaxImage.style.opacity = opacityProgress;
         }
 
         // Call the function once on load and resize to set the initial state correctly
