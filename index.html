@@ -296,35 +296,61 @@
             }
         }
 
-        .hero-content .price-info {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-top: 1rem;
+        /* New styles for the pricing text in hero section */
+        .hero-price-display {
+            font-size: 3rem; /* Matches pricing card .price */
+            font-weight: 800; /* Matches pricing card .price */
+            color: #ffffff; /* Explicitly set to white for visibility on hero background */
+            margin-bottom: 0.5rem; /* Consistent spacing */
+            line-height: 1; /* Consistent line height */
+            display: block; /* Ensures it takes its own line */
+        }
+
+        .hero-price-display span {
+            font-size: 1.25rem; /* Matches pricing card .price span */
+            font-weight: 400; /* Matches pricing card .price span */
+            color: rgba(255, 255, 255, 0.8); /* Slightly lighter white for the "/month" part */
+        }
+
+        .hero-frequency-info {
+            font-size: 1.125rem; /* Matches pricing card .frequency */
+            color: rgba(255, 255, 255, 0.7); /* Lighter white for visibility */
+            margin-bottom: 1.5rem; /* Consistent spacing */
+            display: block; /* Ensures it takes its own line */
+        }
+
+        .hero-additional-info {
+            font-size: 1rem; /* Adjust if needed, or keep original price-info p size */
+            font-weight: 400;
+            color: #ffffff;
+            margin-top: 1rem; /* Adjust margin as needed after the price */
             margin-bottom: 1.5rem;
         }
 
         @media (min-width: 640px) {
-            .hero-content .price-info {
+            .hero-price-display {
+                font-size: 3.5rem;
+            }
+            .hero-price-display span {
+                font-size: 1.5rem;
+            }
+            .hero-frequency-info {
                 font-size: 1.25rem;
             }
         }
 
         @media (min-width: 768px) {
-            .hero-content .price-info {
+            .hero-price-display {
+                font-size: 4rem;
+            }
+            .hero-price-display span {
+                font-size: 1.75rem;
+            }
+            .hero-frequency-info {
                 font-size: 1.5rem;
             }
         }
 
-        .hero-content .price-info span {
-            font-size: 0.875rem;
-            font-weight: 400;
-        }
-
-        @media (min-width: 640px) {
-            .hero-content .price-info span {
-                font-size: 1rem;
-            }
-        }
 
         .hero-buttons {
             display: flex;
@@ -839,8 +865,14 @@
                     Let the power of ZEUS automate your Google review requests.
                 </p>
 
-                <p class="price-info">
-                    Just $49.99/month <span>— no lock-in contracts, CRM integration included.</span>
+                <div class="hero-price-display">
+                    $49.99<span>/month</span>
+                </div>
+                <p class="hero-frequency-info">
+                    Billed monthly
+                </p>
+                <p class="hero-additional-info">
+                    — no lock-in contracts, CRM integration included.
                 </p>
                 <div class="hero-buttons">
                     <button class="btn btn-primary">
