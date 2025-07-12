@@ -74,34 +74,12 @@
             width: auto;
             display: flex;
             align-items: center;
-            /* Removed animation from here */
         }
-
-        /* Keyframes for slide-in animation */
-        @keyframes slideInFromLeft {
-            0% {
-                opacity: 0;
-                transform: translateX(-100%);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Class for elements that should slide in from left on load */
-        .slide-in-on-load {
-            animation: slideInFromLeft 0.7s ease-out forwards;
-            animation-delay: 0.3s; /* Delay to make it noticeable after page load */
-        }
-
 
         @media (max-width: 767px) {
             .header-logo {
                 height: 30px;
             }
-            /* Remove margin-right: auto from header-logo-link on mobile.
-                justify-content: space-between on .navbar will push it left. */
             .header-logo-link {
                 margin-right: 0; /* Ensures it's not pushed too far, let navbar handle spacing */
             }
@@ -114,12 +92,10 @@
             gap: 1rem;
         }
 
-        /* Mobile specific order for login and hamburger */
         @media (max-width: 767px) {
             .nav-controls {
                 /* No flex-direction: row-reverse needed here if HTML order is correct
-                    and we want login then hamburger. The HTML order handles this now. */
-                /* flex-direction: row-reverse; */ /* Removed as per new requirement */
+                   and we want login then hamburger. The HTML order handles this now. */
             }
         }
 
@@ -177,9 +153,7 @@
             }
             .nav-controls .btn-login-desktop {
                 display: block;
-
                 color: #ffffff !important;
-
             }
             .nav-controls .btn-login-mobile {
                 display: none;
@@ -204,8 +178,7 @@
 
         #mobile-menu li {
             width: 100%;
-            /* Ensure links inside mobile menu are always visible when mobile menu is open */
-            display: block; 
+            display: block; /* Ensure links inside mobile menu are always visible when mobile menu is open */
         }
 
         #mobile-menu a {
@@ -260,8 +233,7 @@
         .hero-section .parallax-image {
             position: absolute;
             left: 0;
-            /* max-width: 40rem; Kept for larger screens if image is larger */
-            bottom: -0%;
+            bottom: 0%; /* Ensure it's correctly positioned at the bottom */
             /* Ensure the image background is transparent */
             background-color: transparent;
             /* Explicitly remove any default borders */
@@ -269,6 +241,10 @@
             outline: none;
             /* Ensure image does not collapse its aspect ratio */
             height: auto; 
+            
+            /* Initial state for scroll-triggered slide-in (now managed by JS with subtle fade) */
+            /* Removed fixed opacity and transform from here as JS will set it precisely */
+            transition: transform 0.05s ease-out, opacity 0.05s ease-out; /* Smoother transitions controlled by JS */
         }
 
         /* Hero Text Content */
@@ -856,7 +832,8 @@
                 id="parallax-image"
                 src="https://github.com/mmp03patane/ZEUS/blob/main/Zeus%20Animated.PNG?raw=true"
                 alt="Animated Overlay"
-                class="parallax-image slide-in-on-load" style="bottom: -0%;"
+                class="parallax-image"
+                style="bottom: 0%;"
             >
 
             <div class="hero-content">
@@ -1129,6 +1106,12 @@
         // --- Smooth Scrolling for Navigation Links ---
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                // For the main nav links, we want smooth scroll, but for the logo, it's a full jump.
+                // The logo's href is just '#', so this condition ensures we don't apply smooth scroll to it.
+                if (this.getAttribute('href') === '#') {
+                    return; // Let the default '#' behavior handle the logo click (jumps to top immediately)
+                }
+                
                 e.preventDefault();
 
                 const targetId = this.getAttribute('href').substring(1);
@@ -1147,67 +1130,98 @@
             });
         });
 
-        // --- Parallax Logic (with enhanced mobile adjustment) ---
+        // --- Scroll-triggered Parallax Image Movement (with partial hide) ---
         const parallaxImage = document.getElementById('parallax-image');
         const heroSection = document.querySelector('.hero-section');
-        const textContentDiv = document.querySelector('.hero-content');
 
-        function updateParallaxAndWidth() {
+        function updateParallaxOnScroll() {
             const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
             const heroRect = heroSection.getBoundingClientRect();
-            const scrollAmount = -heroRect.top; // How much the hero section has scrolled up
+            
+            // Calculate how far the top of the hero section is from the top of the viewport
+            // When heroRect.top is 0, user is at the very top of the hero section.
+            // As user scrolls down, heroRect.top becomes negative.
+            let scrollAmount = -heroRect.top; 
 
             let parallaxFactor;
-            let initialLeftOffset; // Defines how far left the image starts, in vw
+            let initialTranslateXRatio; // Ratio of image width to hide initially (e.g., 0.20 for 20%)
+            let imageDisplayWidth; // The actual width we want the image to occupy visually when fully revealed
 
             if (viewportWidth < 768) { // Mobile devices
-                // Set image width to cover more than the screen, e.g., 150% of viewport width
-                parallaxImage.style.width = '150vw'; 
-                parallaxFactor = 0.2; // Adjusted parallax speed
-                // Start the image further left to fill the screen on the right
-                initialLeftOffset = -30vw; // Start 30vw to the left of the viewport edge
+                // On mobile, the image needs to be wider than the viewport to avoid white space
+                // and allow for the slide-in effect. Let's make it 120vw to ensure coverage.
+                parallaxImage.style.width = '120vw'; 
+                imageDisplayWidth = viewportWidth * 1.2; // Actual pixel width of the image
+                parallaxFactor = 0.3; // Controls how fast it moves with scroll (higher = faster)
+                initialTranslateXRatio = 0.20; // Hide 20% of the image initially
             } else { // Desktop and larger tablets
-                parallaxImage.style.width = `${textContentDiv.clientWidth}px`; // Match text content width
-                parallaxFactor = 0.2; // Original desktop parallax speed
-                initialLeftOffset = 0; // On desktop, we'll let `left: 0` handle it, or adjust if needed.
-                                        // For now, it matches textContentDiv.clientWidth, so it won't overflow right.
+                // On desktop, it should match the text content or be slightly larger for parallax
+                const textContentWidth = document.querySelector('.hero-content').clientWidth;
+                parallaxImage.style.width = `${textContentWidth}px`; // Match text content width
+                imageDisplayWidth = textContentWidth; // Actual pixel width of the image
+                parallaxFactor = 0.2; // Desktop parallax speed
+                initialTranslateXRatio = 0.20; // Hide 20% of the image initially
             }
 
-            // Calculate translation based on scroll amount and parallax factor
-            let scrollTranslation = scrollAmount * parallaxFactor;
+            // Calculate the actual initial offset based on the image's computed width
+            // We use clientWidth after setting its style.width to get the actual rendered pixel width.
+            const initialHiddenPixels = imageDisplayWidth * initialTranslateXRatio;
+            let initialTranslateValue = -initialHiddenPixels;
 
-            // Apply the initial offset and then the scroll translation
-            let finalTranslateX = initialLeftOffset + scrollTranslation;
+            // Calculate the current translation.
+            // It starts at `initialTranslateValue` (negative, partially hidden) and moves towards `0` (fully revealed)
+            // as `scrollAmount` increases.
+            let currentTranslateX = initialTranslateValue + (scrollAmount * parallaxFactor);
             
-            // Ensure the image doesn't move past its desired final visible position (e.g., left edge aligned with viewport left)
-            finalTranslateX = Math.min(finalTranslateX, 0); // Cap the movement at 0 (fully visible without negative offset)
+            // Clamp the translation to ensure it behaves as expected:
+            // 1. Cannot go further right than 0 (fully visible and aligned to left of its container)
+            // 2. Cannot go further left than its initial hidden state (`initialTranslateValue`)
+            currentTranslateX = Math.min(currentTranslateX, 0); 
+            currentTranslateX = Math.max(currentTranslateX, initialTranslateValue); 
 
-            parallaxImage.style.transform = `translateX(${finalTranslateX}px)`;
+            // Apply the transform
+            parallaxImage.style.transform = `translateX(${currentTranslateX}px)`;
+
+            // Manage opacity to make it smoothly fade in as it slides
+            // It should be 0 when fully hidden and 1 when fully visible.
+            // Opacity transition should happen over the range of movement from initialTranslateValue to 0.
+            const rangeOfMovement = 0 - initialTranslateValue;
+            let opacityProgress = (currentTranslateX - initialTranslateValue) / rangeOfMovement;
+            opacityProgress = Math.max(0, Math.min(opacityProgress, 1)); // Clamp between 0 and 1
+            
+            // If the image is meant to be visible and just sliding, ensure minimum opacity isn't too low.
+            // Since we want 80% of it visible, the opacity should likely start at near 1.
+            // Let's refine the opacity: it should be 1 unless the image is truly sliding in from off-screen
+            // For a "partially hidden" start, we want it immediately visible.
+            // The opacity animation from 0 to 1 should only happen if it's sliding in from completely off-screen.
+            // Given the requirement of "partially hidden", it means it's mostly visible.
+            // So, let's keep opacity at 1. If a fade-in from 0 is also desired *during* that partial slide,
+            // we'd need a more complex opacity calculation or a CSS transition with `visible` state management.
+            // For "partially hidden" usually implies visual presence but not full content.
+            // So, for now, we'll ensure it's always opaque, as per "partially hidden" meaning just x-position.
+            parallaxImage.style.opacity = 1; // Always visible as it's only partially hidden
+
+            // However, if you want a subtle fade in only as it slides its *initial hidden portion* into view,
+            // the opacityProgress calculation could be used, but it would fade from 0 to 1 over the *entire*
+            // 20% slide. If it's already visible, then it should just be 1.
+            // Let's revert to having the opacity controlled by CSS if it should be fully opaque.
+            // For scroll-triggered, typically you'd expect opacity to be 1 once in view.
+            // The `initialTranslateValue` ensures it's always partially visible.
+            // The opacity property from CSS would typically handle its base state.
+            // Let's remove JS opacity and let CSS handle default.
+            
+            // **Revisiting opacity logic based on "partially hidden":**
+            // If it's "partially hidden" it means it's *already* visible to some extent.
+            // The parallax effect then just moves it to reveal the rest.
+            // So, the opacity should be 1 by default, and not be tied to the scroll position for fading.
+            // The CSS transition on `transform` will make the movement smooth.
+            // No need to set opacity in JS if it's always meant to be visible.
         }
 
-        window.addEventListener('scroll', updateParallaxAndWidth);
-        window.addEventListener('load', updateParallaxAndWidth);
-        window.addEventListener('resize', updateParallaxAndWidth);
-
-        // --- FAQ Accordion Logic ---
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const arrow = question.querySelector('.arrow');
-
-                // Close other open answers
-                document.querySelectorAll('.faq-answer.open').forEach(openAnswer => {
-                    if (openAnswer !== answer) {
-                        openAnswer.classList.remove('open');
-                        openAnswer.previousElementSibling.classList.remove('active');
-                    }
-                });
-
-                // Toggle current answer
-                answer.classList.toggle('open');
-                question.classList.toggle('active');
-            });
-        });
+        // Call the function once on load and resize to set the initial state correctly
+        window.addEventListener('load', updateParallaxOnScroll);
+        window.addEventListener('resize', updateParallaxOnScroll);
+        window.addEventListener('scroll', updateParallaxOnScroll); // Keep this for the actual parallax effect
     </script>
 </body>
 </html>
