@@ -74,7 +74,27 @@
             width: auto;
             display: flex;
             align-items: center;
+            /* Removed animation from here */
         }
+
+        /* Keyframes for slide-in animation */
+        @keyframes slideInFromLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Class for elements that should slide in from left on load */
+        .slide-in-on-load {
+            animation: slideInFromLeft 0.7s ease-out forwards;
+            animation-delay: 0.3s; /* Delay to make it noticeable after page load */
+        }
+
 
         @media (max-width: 767px) {
             .header-logo {
@@ -184,6 +204,8 @@
 
         #mobile-menu li {
             width: 100%;
+            /* Ensure links inside mobile menu are always visible when mobile menu is open */
+            display: block; 
         }
 
         #mobile-menu a {
@@ -238,8 +260,7 @@
         .hero-section .parallax-image {
             position: absolute;
             left: 0;
-            /* width: 100%; Removed this from CSS as it's now handled by JS for more dynamic control */
-            max-width: 40rem; /* Kept for larger screens if image is larger */
+            /* max-width: 40rem; Kept for larger screens if image is larger */
             bottom: -0%;
             /* Ensure the image background is transparent */
             background-color: transparent;
@@ -835,8 +856,7 @@
                 id="parallax-image"
                 src="https://github.com/mmp03patane/ZEUS/blob/main/Zeus%20Animated.PNG?raw=true"
                 alt="Animated Overlay"
-                class="parallax-image"
-                style="bottom: -0%;"
+                class="parallax-image slide-in-on-load" style="bottom: -0%;"
             >
 
             <div class="hero-content">
